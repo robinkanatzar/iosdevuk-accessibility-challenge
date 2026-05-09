@@ -23,7 +23,7 @@ struct SpeakerRowView: View {
                     .accessibilityAddTraits(.isHeader)
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
-                        .font(.subheadline)
+                        .font(.body)
                         .foregroundStyle(.secondary)
                         .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 }

@@ -18,7 +18,7 @@ struct LocationsView: View {
                             .bold()
                             .accessibilityAddTraits(.isHeader)
                         Text(location.placeDescription)
-                            .font(.subheadline)
+                            .font(.body)
                             .foregroundStyle(.secondary)
                             .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     }
