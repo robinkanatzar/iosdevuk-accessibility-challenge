@@ -40,7 +40,7 @@ struct ParallelTalkCardView: View {
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
+        ZStack(alignment: .bottomTrailing) {
             NavigationLink(value: TalkReference(talkID: talkID, session: session)) {
                 cardContent
             }
@@ -50,9 +50,13 @@ struct ParallelTalkCardView: View {
             .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
                 toggleFavourite()
             }
+            .accessibilitySortPriority(1)
             .buttonStyle(.plain)
 
             FavouriteButtonView(talk: talk)
+                .padding(.trailing, 14)
+                .padding(.bottom, 14)
+                .accessibilitySortPriority(0)
         }
     }
 
@@ -81,7 +85,10 @@ struct ParallelTalkCardView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
             }
-            .padding()
+            .padding(.leading, 16)
+            .padding(.top, 16)
+            .padding(.trailing, 72)
+            .padding(.bottom, 52)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(cardBackground, in: .rect(cornerRadius: 10))

@@ -32,6 +32,7 @@ struct FavouriteButtonView: View {
             talk.talkTitle
         ])
         .accessibilityAddTraits(isFavourite ? .isSelected : [])
+        .buttonStyle(.plain)
     }
 
     private func toggleFavourite() {
