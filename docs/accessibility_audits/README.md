@@ -33,6 +33,7 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Improved Dynamic Type behavior for speaker summaries by allowing full text at accessibility sizes.
 - Added contextual social link labels, for example links that include the speaker name.
 - Added heading traits on detail sections where the text functions as a real heading.
+- Added a contextual accessibility label to the speaker detail sessions heading so VoiceOver announces "Sessions by [speaker name]" instead of only "Sessions".
 - Added an empty search result state for speaker search.
 
 ### Locations
@@ -87,6 +88,7 @@ These items need manual review because static tools cannot fully validate real a
 - Favourite toggle sounds on a physical device, including silent-mode and volume behavior.
 - My Schedule card appearance after favouriting sessions, especially with long titles.
 - VoiceOver behavior for speaker photos in list rows and speaker detail screens.
+- VoiceOver announcement for the speaker detail sessions heading, which should identify the speaker context.
 - Voice Control command names for session cards, favourite buttons, social links, and map links.
 - Dynamic Type layout at the largest accessibility sizes.
 - Reduce Transparency and Increase Contrast appearance on device or simulator.
