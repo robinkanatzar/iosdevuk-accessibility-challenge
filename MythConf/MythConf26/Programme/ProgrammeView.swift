@@ -27,6 +27,7 @@ struct ProgrammeView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .accessibilityIdentifier("programme.dayPicker")
                 .padding(.horizontal)
                 .padding(.vertical, 8)
 

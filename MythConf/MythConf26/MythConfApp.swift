@@ -11,6 +11,13 @@ import SwiftUI
 struct MythConf: App {
     @State private var viewModel = ViewModel()
 
+    init() {
+        if CommandLine.arguments.contains("-UITestingResetFavourites") {
+            let favouritesURL = urlToFileInDocuments("favourites.json")
+            try? FileManager.default.removeItem(at: favouritesURL)
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             HomeView()

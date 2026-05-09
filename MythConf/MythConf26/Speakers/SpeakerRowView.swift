@@ -12,6 +12,9 @@ struct SpeakerRowView: View {
     let speakerID: String
 
     private var speaker: Speaker { viewModel.speakerFrom(speakerID: speakerID) }
+    private var speakerSummary: String {
+        speaker.speakerInfo.components(separatedBy: "\n\n").first ?? speaker.speakerInfo
+    }
 
     var body: some View {
         HStack(alignment: .top) {
@@ -20,15 +23,19 @@ struct SpeakerRowView: View {
             VStack(alignment: .leading) {
                 Text(speaker.name)
                     .bold()
+                    .foregroundStyle(Color(.label))
                     .accessibilityAddTraits(.isHeader)
-                if !speaker.speakerInfo.isEmpty {
-                    Text(speaker.speakerInfo)
+                if !speakerSummary.isEmpty {
+                    Text(speakerSummary)
                         .font(.body)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(.label))
                         .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 }
             }
         }
+        .padding(.vertical, 4)
+        .background(Color(.systemBackground))
         .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("speakers.rowContent.\(speaker.id)")
     }
 }

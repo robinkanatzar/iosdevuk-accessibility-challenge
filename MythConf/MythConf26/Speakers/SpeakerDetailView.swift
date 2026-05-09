@@ -47,6 +47,7 @@ struct SpeakerDetailView: View {
                     Text("Sessions")
                         .font(.headline)
                         .accessibilityLabel("Sessions by \(speaker.name)")
+                        .accessibilityIdentifier("speakerDetail.sessionsHeading")
                         .accessibilityAddTraits(.isHeader)
 
                     ForEach(speakerTalks, id: \.talkID) { item in
@@ -59,6 +60,7 @@ struct SpeakerDetailView: View {
             }
             .padding()
         }
+        .accessibilityIdentifier("speakerDetail.root.\(speaker.id)")
         .navigationTitle(speaker.name)
         .navigationBarTitleDisplayMode(.inline)
     }

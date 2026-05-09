@@ -44,6 +44,7 @@ struct ParallelTalkCardView: View {
             NavigationLink(value: TalkReference(talkID: talkID, session: session)) {
                 cardContent
             }
+            .accessibilityIdentifier("programme.card.\(talk.id.uuidString)")
             .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
             .accessibilityValue("\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")")
             .accessibilityHint("Shows session details")
@@ -54,6 +55,7 @@ struct ParallelTalkCardView: View {
             .buttonStyle(.plain)
 
             FavouriteButtonView(talk: talk)
+                .accessibilityIdentifier("programme.favourite.\(talk.id.uuidString)")
                 .padding(.trailing, 14)
                 .padding(.bottom, 14)
                 .accessibilitySortPriority(0)

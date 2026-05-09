@@ -22,5 +22,6 @@ struct DayScheduleView: View {
                 }
             }
         }
+        .accessibilityIdentifier("programme.schedule")
     }
 }

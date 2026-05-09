@@ -22,6 +22,7 @@ struct MyScheduleView: View {
                         systemImage: "star",
                         description: Text("Tap the star on any session in the Programme to save it here.")
                     )
+                    .accessibilityIdentifier("mySchedule.empty")
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
@@ -47,6 +48,7 @@ struct MyScheduleView: View {
                             }
                         }
                     }
+                    .accessibilityIdentifier("mySchedule.schedule")
                 }
             }
             .navigationTitle("My Schedule")

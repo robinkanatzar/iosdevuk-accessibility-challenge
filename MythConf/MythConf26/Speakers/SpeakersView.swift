@@ -29,8 +29,11 @@ struct SpeakersView: View {
                         NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
                             SpeakerRowView(speakerID: speaker.id)
                         }
+                        .listRowBackground(Color(.systemBackground))
+                        .accessibilityIdentifier("speakers.row.\(speaker.id)")
                         .accessibilityHint("Shows speaker details")
                     }
+                    .accessibilityIdentifier("speakers.list")
                 }
             }
             .searchable(text: $searchText, prompt: "Search speakers")

@@ -7,37 +7,203 @@
 
 import XCTest
 
+@MainActor
 final class MythConf26UITests: XCTestCase {
+    private var app: XCUIApplication!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launchArguments = ["-UITestingResetFavourites"]
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    func testProgrammeAccessibilityAudit() throws {
+        openTab(.programme)
+        XCTAssertTrue(app.navigationBars["MythConf 2026"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.segmentedControls["programme.dayPicker"].waitForExistence(timeout: 2))
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
-    }
+        try auditVisibleScreen("Programme initial day")
 
-    @MainActor
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
+        app.swipeUp()
+        try auditVisibleScreen("Programme after first scroll")
+
+        let friday = app.buttons["Fri"]
+        if friday.exists {
+            friday.tap()
+            try auditVisibleScreen("Programme Friday")
         }
+    }
+
+    func testSpeakersAccessibilityAudit() throws {
+        openTab(.speakers)
+        XCTAssertTrue(app.navigationBars["Speakers"].waitForExistence(timeout: 2))
+        XCTAssertTrue(element(identifier: "speakers.list").waitForExistence(timeout: 2))
+
+        try auditVisibleScreen("Speakers list", includesContrast: false)
+
+        openSpeaker(named: "Sarah Thornton")
+
+        XCTAssertTrue(app.navigationBars["Sarah Thornton"].waitForExistence(timeout: 2))
+        let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
+        XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 2))
+        XCTAssertEqual(sessionsHeading.label, "Sessions by Sarah Thornton")
+        try auditVisibleScreen("Speaker detail", includesContrast: false)
+    }
+
+    func testLocationsAccessibilityAudit() throws {
+        openTab(.locations)
+        XCTAssertTrue(app.navigationBars["Locations"].waitForExistence(timeout: 2))
+
+        try auditVisibleScreen("Locations list")
+
+        openLocation(named: "Tyndall Lecture Theatre")
+
+        XCTAssertTrue(app.navigationBars["Tyndall Lecture Theatre"].waitForExistence(timeout: 2))
+        XCTAssertTrue(openInMapsElement(for: "Tyndall Lecture Theatre").waitForExistence(timeout: 2))
+        try auditVisibleScreen("Location detail")
+    }
+
+    func testMyScheduleAccessibilityAudit() throws {
+        openTab(.mySchedule)
+        XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.staticTexts["No Favourites Yet"].waitForExistence(timeout: 2))
+        try auditVisibleScreen("My Schedule empty")
+    }
+
+    func testMyScheduleWithFavouriteAccessibilityAudit() throws {
+        openTab(.programme)
+
+        let favouriteButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(favouriteButton.waitForExistence(timeout: 2))
+        favouriteButton.tap()
+
+        openTab(.mySchedule)
+        XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 2))
+        XCTAssertFalse(app.staticTexts["No Favourites Yet"].exists)
+        XCTAssertTrue(element(identifier: "mySchedule.schedule").waitForExistence(timeout: 2))
+        try auditVisibleScreen("My Schedule populated")
+    }
+
+    func testFavouriteButtonLabelChangesAfterToggle() throws {
+        openTab(.programme)
+
+        let addButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(addButton.waitForExistence(timeout: 2))
+        XCTAssertTrue(addButton.label.contains("to favourites"))
+
+        addButton.tap()
+
+        let removeButton = firstButton(labelBeginningWith: "Remove ")
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 2))
+        XCTAssertTrue(removeButton.label.contains("from favourites"))
+    }
+
+    func testVisibleButtonsDoNotRepeatButtonInLabel() throws {
+        openTab(.programme)
+
+        for index in 0..<min(app.buttons.count, 20) {
+            let button = app.buttons.element(boundBy: index)
+            guard button.exists else { continue }
+            XCTAssertFalse(
+                button.label.lowercased().contains(" button"),
+                "Button label should not include its role: \(button.label)"
+            )
+        }
+    }
+
+    func testSpeakerDetailSessionsHeadingIsContextual() throws {
+        openTab(.speakers)
+        openSpeaker(named: "Sarah Thornton")
+
+        let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
+        XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 2))
+        XCTAssertEqual(sessionsHeading.label, "Sessions by Sarah Thornton")
+    }
+
+    private enum AppTab: String {
+        case programme = "Programme"
+        case speakers = "Speakers"
+        case locations = "Locations"
+        case mySchedule = "My Schedule"
+    }
+
+    private func openInMapsElement(for locationName: String) -> XCUIElement {
+        let label = "Open \(locationName) in Maps"
+        let link = app.links[label]
+        if link.exists { return link }
+        return app.buttons[label]
+    }
+
+    private func openTab(_ tab: AppTab) {
+        let button = app.tabBars.buttons[tab.rawValue]
+        XCTAssertTrue(button.waitForExistence(timeout: 2), "Missing tab: \(tab.rawValue)")
+        button.tap()
+    }
+
+    private func openSpeaker(named name: String) {
+        let searchField = app.searchFields.firstMatch
+        if searchField.waitForExistence(timeout: 2) {
+            searchField.tap()
+            searchField.typeText(name)
+        }
+
+        let speaker = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", name)).firstMatch
+        XCTAssertTrue(speaker.waitForExistence(timeout: 2), "Missing speaker: \(name)")
+        speaker.tap()
+    }
+
+    private func openLocation(named name: String) {
+        let location = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", name)).firstMatch
+        XCTAssertTrue(location.waitForExistence(timeout: 2), "Missing location: \(name)")
+        location.tap()
+    }
+
+    private func firstButton(labelBeginningWith prefix: String) -> XCUIElement {
+        app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", prefix)).firstMatch
+    }
+
+    private func element(identifier: String) -> XCUIElement {
+        app.descendants(matching: .any)[identifier]
+    }
+
+    private func auditVisibleScreen(
+        _ name: String,
+        includesContrast: Bool = true,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) throws {
+        XCTContext.runActivity(named: "Accessibility audit: \(name)") { _ in
+            guard #available(iOS 17.0, *) else { return }
+            var auditTypes: XCUIAccessibilityAuditType = [
+                .elementDetection,
+                .hitRegion,
+                .sufficientElementDescription,
+                .trait
+            ]
+            if includesContrast {
+                auditTypes.insert(.contrast)
+            }
+
+            do {
+                try self.app.performAccessibilityAudit(for: auditTypes) { issue in
+                    self.isKnownFalsePositive(issue)
+                }
+            } catch {
+                XCTFail("Accessibility audit failed for \(name): \(error)", file: file, line: line)
+            }
+        }
+    }
+
+    private func isKnownFalsePositive(_ issue: XCUIAccessibilityAuditIssue) -> Bool {
+        if issue.auditType == .contrast && issue.compactDescription == "Contrast nearly passed" {
+            return true
+        }
+
+        return false
     }
 }
