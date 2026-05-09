@@ -98,8 +98,10 @@ struct ParallelTalkCardView: View {
     private func toggleFavourite() {
         if isFavourite {
             viewModel.removeFavourite(talk: talk)
+            FavouriteToggleFeedback.removed()
         } else {
             viewModel.addFavourite(talk: talk)
+            FavouriteToggleFeedback.added()
         }
     }
 }
