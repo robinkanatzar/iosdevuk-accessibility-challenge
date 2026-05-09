@@ -41,6 +41,13 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Added a visible "Open in Maps" link so map navigation is available outside the embedded map.
 - Improved location row grouping and Dynamic Type behavior.
 
+### Images
+
+- Kept redundant speaker thumbnails decorative in speaker list rows because the adjacent row text already identifies the speaker.
+- Exposed larger speaker detail photos with contextual labels such as "Photo of Sarah Thornton".
+- Avoided raw asset names being announced by VoiceOver by using explicit labels for meaningful images and hidden semantics for decorative images.
+- Confirmed SF Symbol icons are either part of labelled controls or paired with visible text through `Label`.
+
 ### App Shell and Visual Semantics
 
 - Kept tab labels accessible by using standard `Label`-based tab items.
@@ -79,6 +86,7 @@ These items need manual review because static tools cannot fully validate real a
 - Favourite toggle haptic patterns on a physical device; simulator builds cannot prove real tactile output.
 - Favourite toggle sounds on a physical device, including silent-mode and volume behavior.
 - My Schedule card appearance after favouriting sessions, especially with long titles.
+- VoiceOver behavior for speaker photos in list rows and speaker detail screens.
 - Voice Control command names for session cards, favourite buttons, social links, and map links.
 - Dynamic Type layout at the largest accessibility sizes.
 - Reduce Transparency and Increase Contrast appearance on device or simulator.
