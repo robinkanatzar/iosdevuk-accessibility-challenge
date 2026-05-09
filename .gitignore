@@ -33,3 +33,14 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Accessibility Audits
+docs/accessibility_audits/
+
+# Agent and Skill related files
+.agent/
+.agents/
+.superpowers/
+.a11y-scores.json
+skills-lock.json
+AGENTS.md
