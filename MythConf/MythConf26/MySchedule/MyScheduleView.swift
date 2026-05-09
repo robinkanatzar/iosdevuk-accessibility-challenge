@@ -6,7 +6,12 @@
 import SwiftUI
 
 struct MyScheduleView: View {
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(ViewModel.self) private var viewModel
+
+    private var headerBackground: AnyShapeStyle {
+        reduceTransparency ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(.regularMaterial)
+    }
 
     var body: some View {
         NavigationStack {
@@ -35,7 +40,8 @@ struct MyScheduleView: View {
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                             .padding(.horizontal)
                                             .padding(.vertical, 8)
-                                            .background(.regularMaterial)
+                                            .background(headerBackground)
+                                            .accessibilityAddTraits(.isHeader)
                                     }
                                 }
                             }

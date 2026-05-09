@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct LocationsView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(ViewModel.self) private var viewModel
 
     var body: some View {
@@ -15,12 +16,15 @@ struct LocationsView: View {
                     VStack(alignment: .leading) {
                         Text(location.name)
                             .bold()
+                            .accessibilityAddTraits(.isHeader)
                         Text(location.placeDescription)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
-                            .lineLimit(2)
+                            .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     }
+                    .accessibilityElement(children: .combine)
                 }
+                .accessibilityHint("Shows location details")
             }
             .navigationTitle("Locations")
             .conferenceNavigationDestinations()

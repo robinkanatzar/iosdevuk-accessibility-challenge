@@ -10,18 +10,25 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         TabView {
-            Tab("Programme", systemImage: "calendar") {
-                ProgrammeView()
-            }
-            Tab("Speakers", systemImage: "person.2") {
-                SpeakersView()
-            }
-            Tab("Locations", systemImage: "map") {
-                LocationsView()
-            }
-            Tab("My Schedule", systemImage: "star") {
-                MyScheduleView()
-            }
+            ProgrammeView()
+                .tabItem {
+                    Label("Programme", systemImage: "calendar")
+                }
+
+            SpeakersView()
+                .tabItem {
+                    Label("Speakers", systemImage: "person.2")
+                }
+
+            LocationsView()
+                .tabItem {
+                    Label("Locations", systemImage: "map")
+                }
+
+            MyScheduleView()
+                .tabItem {
+                    Label("My Schedule", systemImage: "star")
+                }
         }
     }
 

@@ -22,6 +22,7 @@ struct SessionDetailView: View {
                     NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
                         Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")
                     }
+                    .accessibilityHint("Shows location details")
                 }
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
@@ -33,6 +34,7 @@ struct SessionDetailView: View {
                         SpeakerRowView(speakerID: speakerID)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityHint("Shows speaker details")
                 }
 
                 Divider()

@@ -17,9 +17,20 @@ struct SpeakersView: View {
 
     var body: some View {
         NavigationStack {
-            List(filteredSpeakers) { speaker in
-                NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
-                    SpeakerRowView(speakerID: speaker.id)
+            Group {
+                if filteredSpeakers.isEmpty && !searchText.isEmpty {
+                    ContentUnavailableView(
+                        "No Speakers Found",
+                        systemImage: "person.crop.circle.badge.questionmark",
+                        description: Text("No speakers match \(searchText).")
+                    )
+                } else {
+                    List(filteredSpeakers) { speaker in
+                        NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
+                            SpeakerRowView(speakerID: speaker.id)
+                        }
+                        .accessibilityHint("Shows speaker details")
+                    }
                 }
             }
             .searchable(text: $searchText, prompt: "Search speakers")

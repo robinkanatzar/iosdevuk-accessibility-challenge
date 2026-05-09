@@ -8,6 +8,7 @@ import SwiftUI
 /// A horizontal row of tappable social/web links for a speaker.
 struct SocialLinksView: View {
     let social: [SocialItem]
+    let speakerName: String
 
     var body: some View {
         HStack {
@@ -16,10 +17,14 @@ struct SocialLinksView: View {
                     Link(destination: url) {
                         Label(item.socialType.capitalized, systemImage: iconName(for: item.socialType))
                             .font(.subheadline)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 4)
+                            .frame(minWidth: 44, minHeight: 44)
                     }
                     .contentShape(.rect)
+                    .accessibilityLabel("Open \(speakerName) on \(item.socialType.capitalized)")
+                    .accessibilityInputLabels([
+                        item.socialType.capitalized,
+                        "\(speakerName) \(item.socialType.capitalized)"
+                    ])
                 }
             }
         }

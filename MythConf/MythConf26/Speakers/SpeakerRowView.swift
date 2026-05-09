@@ -7,6 +7,7 @@ import SwiftUI
 
 /// A row showing a speaker's photo, name, and bio excerpt.
 struct SpeakerRowView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(ViewModel.self) private var viewModel
     let speakerID: String
 
@@ -19,13 +20,15 @@ struct SpeakerRowView: View {
             VStack(alignment: .leading) {
                 Text(speaker.name)
                     .bold()
+                    .accessibilityAddTraits(.isHeader)
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 }
             }
         }
+        .accessibilityElement(children: .combine)
     }
 }

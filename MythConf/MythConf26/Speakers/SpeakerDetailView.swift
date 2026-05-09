@@ -22,8 +22,9 @@ struct SpeakerDetailView: View {
                         Text(speaker.name)
                             .font(.title2)
                             .bold()
+                            .accessibilityAddTraits(.isHeader)
                         if !speaker.social.isEmpty {
-                            SocialLinksView(social: speaker.social)
+                            SocialLinksView(social: speaker.social, speakerName: speaker.name)
                         }
                     }
 
@@ -45,6 +46,7 @@ struct SpeakerDetailView: View {
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
                         .font(.headline)
+                        .accessibilityAddTraits(.isHeader)
 
                     ForEach(speakerTalks, id: \.talkID) { item in
                         NavigationLink(value: TalkReference(talkID: item.talkID, session: item.session)) {

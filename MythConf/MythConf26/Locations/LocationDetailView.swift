@@ -16,6 +16,11 @@ struct LocationDetailView: View {
         CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
     }
 
+    private var mapsURL: URL? {
+        let query = location.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? location.name
+        return URL(string: "http://maps.apple.com/?ll=\(location.latitude),\(location.longitude)&q=\(query)")
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -31,10 +36,20 @@ struct LocationDetailView: View {
                 .frame(height: 400)
                 .clipShape(.rect(cornerRadius: 12))
                 .padding(.horizontal)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Map showing \(location.name)")
+                .accessibilityValue(location.placeDescription)
+                .accessibilityHint("Shows the venue area")
 
                 Text(location.placeDescription)
                     .foregroundStyle(.secondary)
                     .padding()
+
+                if let mapsURL {
+                    Link("Open \(location.name) in Maps", destination: mapsURL)
+                        .padding(.horizontal)
+                        .padding(.bottom)
+                }
             }
         }
         .navigationTitle(location.name)
