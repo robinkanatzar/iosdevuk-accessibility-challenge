@@ -24,6 +24,7 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Added contextual labels such as "Add [talk title] to favourites" and "Remove [talk title] from favourites".
 - Added selected state, accessibility value, hint, and input labels for Voice Control.
 - Added differentiated haptic feedback: success feedback when adding a favourite, light impact feedback when removing one.
+- Added differentiated sound feedback: `bell.mp3` when adding a favourite, `pop.mp3` when removing one.
 
 ### Speakers
 
@@ -76,6 +77,7 @@ These items need manual review because static tools cannot fully validate real a
 - VoiceOver reading order across Programme, Speakers, Locations, My Schedule, and Favourites.
 - Favourite toggling with VoiceOver rotor actions and direct touch.
 - Favourite toggle haptic patterns on a physical device; simulator builds cannot prove real tactile output.
+- Favourite toggle sounds on a physical device, including silent-mode and volume behavior.
 - My Schedule card appearance after favouriting sessions, especially with long titles.
 - Voice Control command names for session cards, favourite buttons, social links, and map links.
 - Dynamic Type layout at the largest accessibility sizes.
