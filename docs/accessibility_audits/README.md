@@ -68,6 +68,16 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Disabled the XCTest contrast audit only for the Speakers flow after reviewing repeated false positives against full-contrast system label text. Speaker contrast remains covered by `a11y-check` and human review; Programme, Locations, and My Schedule still run contrast in XCTest.
 - Added one narrow XCTest audit ignore for Apple's `Contrast nearly passed` result. Full contrast failures still fail the test suite where contrast auditing is enabled.
 
+### Disabled XCTest Audit Checks To Investigate
+
+These checks are not fully enabled in automated XCTest audits yet. Revisit them when the simulator/test runner is stable enough to distinguish real failures from tool noise.
+
+- `dynamicType` is disabled because it was too slow and noisy in simulator UI tests. It caused timeouts instead of reliable, actionable failures. Dynamic Type remains a manual verification item.
+- `textClipped` is disabled because it produced noisy or false-positive results during audit runs. Text clipping remains covered by manual review, especially at large accessibility text sizes.
+- `contrast` is disabled only for the Speakers flow because XCTest repeatedly reported false contrast failures on normal system label text in the Speakers list/detail flow, even after row adjustments and passing static accessibility analysis. The Speakers flow still runs `elementDetection`, `hitRegion`, `sufficientElementDescription`, and `trait` audits.
+- `contrast` remains enabled in XCTest for Programme, Locations, and My Schedule.
+- `Contrast nearly passed` is ignored as a narrow XCTest false positive because Apple's audit can emit this borderline result for SwiftUI/system rendering. Full contrast failures still fail where contrast auditing is enabled.
+
 ## Automated Verification
 
 Run from the repository root:
