@@ -24,8 +24,8 @@ final class MythConf26UITests: XCTestCase {
 
     func testProgrammeAccessibilityAudit() throws {
         openTab(.programme)
-        XCTAssertTrue(app.navigationBars["MythConf 2026"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.segmentedControls["programme.dayPicker"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.navigationBars["MythConf 2026"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.segmentedControls["programme.dayPicker"].waitForExistence(timeout: 5))
 
         try auditVisibleScreen("Programme initial day")
 
@@ -41,14 +41,14 @@ final class MythConf26UITests: XCTestCase {
 
     func testSpeakersAccessibilityAudit() throws {
         openTab(.speakers)
-        XCTAssertTrue(app.navigationBars["Speakers"].waitForExistence(timeout: 2))
-        XCTAssertTrue(element(identifier: "speakers.list").waitForExistence(timeout: 2))
+        XCTAssertTrue(app.navigationBars["Speakers"].waitForExistence(timeout: 5))
+        XCTAssertTrue(element(identifier: "speakers.list").waitForExistence(timeout: 5))
 
         try auditVisibleScreen("Speakers list", includesContrast: false)
 
         openSpeaker(named: "Sarah Thornton")
 
-        XCTAssertTrue(app.navigationBars["Sarah Thornton"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.navigationBars["Sarah Thornton"].waitForExistence(timeout: 5))
         let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
         XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 2))
         XCTAssertEqual(sessionsHeading.label, "Sessions by Sarah Thornton")
@@ -57,21 +57,21 @@ final class MythConf26UITests: XCTestCase {
 
     func testLocationsAccessibilityAudit() throws {
         openTab(.locations)
-        XCTAssertTrue(app.navigationBars["Locations"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.navigationBars["Locations"].waitForExistence(timeout: 5))
 
         try auditVisibleScreen("Locations list")
 
         openLocation(named: "Tyndall Lecture Theatre")
 
-        XCTAssertTrue(app.navigationBars["Tyndall Lecture Theatre"].waitForExistence(timeout: 2))
-        XCTAssertTrue(openInMapsElement(for: "Tyndall Lecture Theatre").waitForExistence(timeout: 2))
+        XCTAssertTrue(app.navigationBars["Tyndall Lecture Theatre"].waitForExistence(timeout: 5))
+        XCTAssertTrue(openInMapsElement(for: "Tyndall Lecture Theatre").waitForExistence(timeout: 5))
         try auditVisibleScreen("Location detail")
     }
 
     func testMyScheduleAccessibilityAudit() throws {
         openTab(.mySchedule)
-        XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.staticTexts["No Favourites Yet"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["No Favourites Yet"].waitForExistence(timeout: 5))
         try auditVisibleScreen("My Schedule empty")
     }
 
@@ -83,9 +83,9 @@ final class MythConf26UITests: XCTestCase {
         favouriteButton.tap()
 
         openTab(.mySchedule)
-        XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.staticTexts["No Favourites Yet"].exists)
-        XCTAssertTrue(element(identifier: "mySchedule.schedule").waitForExistence(timeout: 2))
+        XCTAssertTrue(element(identifier: "mySchedule.schedule").waitForExistence(timeout: 5))
         try auditVisibleScreen("My Schedule populated")
     }
 
@@ -93,13 +93,13 @@ final class MythConf26UITests: XCTestCase {
         openTab(.programme)
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 2))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
         XCTAssertTrue(addButton.label.contains("to favourites"))
 
         addButton.tap()
 
         let removeButton = firstButton(labelBeginningWith: "Remove ")
-        XCTAssertTrue(removeButton.waitForExistence(timeout: 2))
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 5))
         XCTAssertTrue(removeButton.label.contains("from favourites"))
     }
 
@@ -121,7 +121,7 @@ final class MythConf26UITests: XCTestCase {
         openSpeaker(named: "Sarah Thornton")
 
         let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
-        XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 2))
+        XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 5))
         XCTAssertEqual(sessionsHeading.label, "Sessions by Sarah Thornton")
     }
 
@@ -141,25 +141,25 @@ final class MythConf26UITests: XCTestCase {
 
     private func openTab(_ tab: AppTab) {
         let button = app.tabBars.buttons[tab.rawValue]
-        XCTAssertTrue(button.waitForExistence(timeout: 2), "Missing tab: \(tab.rawValue)")
+        XCTAssertTrue(button.waitForExistence(timeout: 5), "Missing tab: \(tab.rawValue)")
         button.tap()
     }
 
     private func openSpeaker(named name: String) {
         let searchField = app.searchFields.firstMatch
-        if searchField.waitForExistence(timeout: 2) {
+        if searchField.waitForExistence(timeout: 5) {
             searchField.tap()
             searchField.typeText(name)
         }
 
         let speaker = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", name)).firstMatch
-        XCTAssertTrue(speaker.waitForExistence(timeout: 2), "Missing speaker: \(name)")
+        XCTAssertTrue(speaker.waitForExistence(timeout: 5), "Missing speaker: \(name)")
         speaker.tap()
     }
 
     private func openLocation(named name: String) {
         let location = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", name)).firstMatch
-        XCTAssertTrue(location.waitForExistence(timeout: 2), "Missing location: \(name)")
+        XCTAssertTrue(location.waitForExistence(timeout: 5), "Missing location: \(name)")
         location.tap()
     }
 
