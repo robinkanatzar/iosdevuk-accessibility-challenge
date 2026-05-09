@@ -16,7 +16,7 @@ struct SpeakerDetailView: View {
             VStack(alignment: .leading) {
                 // Header
                 HStack(alignment: .top) {
-                    SpeakerPhotoView(speaker: speaker, size: 80)
+                    SpeakerPhotoView(speaker: speaker, size: 80, accessibilityMode: .labelled)
 
                     VStack(alignment: .leading) {
                         Text(speaker.name)
