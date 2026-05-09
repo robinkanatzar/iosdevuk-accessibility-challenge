@@ -46,12 +46,12 @@ final class MythConf26UITests: XCTestCase {
 
         try auditVisibleScreen("Speakers list", includesContrast: false)
 
-        openSpeaker(named: "Sarah Thornton")
+        let speakerName = openFirstSpeaker()
 
-        XCTAssertTrue(app.navigationBars["Sarah Thornton"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars[speakerName].waitForExistence(timeout: 5))
         let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
         XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 2))
-        XCTAssertEqual(sessionsHeading.label, "Sessions by Sarah Thornton")
+        XCTAssertEqual(sessionsHeading.label, "Sessions by \(speakerName)")
         try auditVisibleScreen("Speaker detail", includesContrast: false)
     }
 
@@ -61,10 +61,10 @@ final class MythConf26UITests: XCTestCase {
 
         try auditVisibleScreen("Locations list")
 
-        openLocation(named: "Tyndall Lecture Theatre")
+        let locationName = openFirstLocation()
 
-        XCTAssertTrue(app.navigationBars["Tyndall Lecture Theatre"].waitForExistence(timeout: 5))
-        XCTAssertTrue(openInMapsElement(for: "Tyndall Lecture Theatre").waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars[locationName].waitForExistence(timeout: 5))
+        XCTAssertTrue(openInMapsElement(for: locationName).waitForExistence(timeout: 5))
         try auditVisibleScreen("Location detail")
     }
 
@@ -118,11 +118,11 @@ final class MythConf26UITests: XCTestCase {
 
     func testSpeakerDetailSessionsHeadingIsContextual() throws {
         openTab(.speakers)
-        openSpeaker(named: "Sarah Thornton")
+        let speakerName = openFirstSpeaker()
 
         let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
         XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 5))
-        XCTAssertEqual(sessionsHeading.label, "Sessions by Sarah Thornton")
+        XCTAssertEqual(sessionsHeading.label, "Sessions by \(speakerName)")
     }
 
     private enum AppTab: String {
@@ -143,6 +143,40 @@ final class MythConf26UITests: XCTestCase {
         let button = app.tabBars.buttons[tab.rawValue]
         XCTAssertTrue(button.waitForExistence(timeout: 5), "Missing tab: \(tab.rawValue)")
         button.tap()
+    }
+
+    @discardableResult
+    private func openFirstSpeaker() -> String {
+        let list = element(identifier: "speakers.list")
+        XCTAssertTrue(list.waitForExistence(timeout: 5))
+        
+        let firstRow = list.buttons.element(boundBy: 0)
+        XCTAssertTrue(firstRow.waitForExistence(timeout: 5))
+        
+        // Rows in SpeakersView use SpeakerRowView which combines children.
+        // The label will be "Name, Bio excerpt" or just "Name".
+        let fullLabel = firstRow.label
+        let speakerName = fullLabel.components(separatedBy: ",").first ?? fullLabel
+        
+        firstRow.tap()
+        return speakerName
+    }
+
+    @discardableResult
+    private func openFirstLocation() -> String {
+        let list = element(identifier: "locations.list")
+        XCTAssertTrue(list.waitForExistence(timeout: 5))
+        
+        let firstRow = list.buttons.element(boundBy: 0)
+        XCTAssertTrue(firstRow.waitForExistence(timeout: 5))
+        
+        // Rows in LocationsView use a VStack with name and description.
+        // accessibilityElement(children: .combine) means the label is "Name, Description".
+        let fullLabel = firstRow.label
+        let locationName = fullLabel.components(separatedBy: ",").first ?? fullLabel
+        
+        firstRow.tap()
+        return locationName
     }
 
     private func openSpeaker(named name: String) {

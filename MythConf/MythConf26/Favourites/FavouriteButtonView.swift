@@ -33,6 +33,7 @@ struct FavouriteButtonView: View {
         ])
         .accessibilityAddTraits(isFavourite ? .isSelected : [])
         .buttonStyle(.plain)
+        .symbolEffect(.bounce.down, value: isFavourite)
     }
 
     private func toggleFavourite() {
