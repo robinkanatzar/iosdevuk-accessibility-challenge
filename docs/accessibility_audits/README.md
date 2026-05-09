@@ -8,9 +8,11 @@ This folder contains the accessibility audit inputs and the remediation plan for
 
 ### Programme and Session Cards
 
-- Split the session card navigation target from the favourite button so each control has a clear, separate accessibility action.
+- Restored full-width session cards while keeping the favourite star as a separate 44 x 44 point target inside the card area.
+- Kept the card itself as the navigation target and retained a custom accessibility action for toggling favourites from the focused card.
 - Added richer VoiceOver labels, values, hints, and input labels for talk cards.
-- Added a custom accessibility action for toggling favourites from a talk card.
+- Added explicit accessibility reading order for the card and favourite target.
+- Stacked compact-width parallel sessions vertically so long titles are not squeezed into narrow columns.
 - Made programme rows reflow vertically at accessibility Dynamic Type sizes.
 - Improved time column sizing so time labels keep a stable, readable touch and VoiceOver area.
 - Added visible session type text so the category is not conveyed only through color.
@@ -64,12 +66,15 @@ Result on 2026-05-09:
 - Errors: 0
 - Warnings: 0
 
+Simulator visual verification was also performed for the compact Programme card layout after the option C card redesign. The shared `ParallelSessionsRowView` and `ParallelTalkCardView` components are used by Programme and My Schedule.
+
 ## Human Verification Still Recommended
 
 These items need manual review because static tools cannot fully validate real assistive technology behavior:
 
 - VoiceOver reading order across Programme, Speakers, Locations, My Schedule, and Favourites.
 - Favourite toggling with VoiceOver rotor actions and direct touch.
+- My Schedule card appearance after favouriting sessions, especially with long titles.
 - Voice Control command names for session cards, favourite buttons, social links, and map links.
 - Dynamic Type layout at the largest accessibility sizes.
 - Reduce Transparency and Increase Contrast appearance on device or simulator.
