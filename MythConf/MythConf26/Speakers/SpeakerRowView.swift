@@ -39,3 +39,9 @@ struct SpeakerRowView: View {
         .accessibilityIdentifier("speakers.rowContent.\(speaker.id)")
     }
 }
+
+#Preview {
+    SpeakerRowView(speakerID: "SarahThornton")
+        .environment(ViewModel())
+        .padding()
+}

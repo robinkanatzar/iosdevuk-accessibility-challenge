@@ -59,3 +59,10 @@ struct BreakRowView: View {
         .accessibilityLabel(rowAccessibilityLabel)
     }
 }
+
+#Preview {
+    let viewModel = ViewModel()
+    let session = viewModel.confData.sessions[1][4]
+    BreakRowView(session: session)
+        .environment(viewModel)
+}

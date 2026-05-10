@@ -44,3 +44,11 @@ struct SpeakerPhotoView: View {
         Text("Photo of \(speaker.name)")
     }
 }
+
+#Preview {
+    let speaker = ViewModel().speakerFrom(speakerID: "SarahThornton")
+    VStack(spacing: 20) {
+        SpeakerPhotoView(speaker: speaker, size: 100, accessibilityMode: .labelled)
+        SpeakerPhotoView(speaker: speaker, size: 60, accessibilityMode: .decorative)
+    }
+}

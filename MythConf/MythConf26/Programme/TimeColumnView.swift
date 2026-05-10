@@ -27,3 +27,8 @@ struct TimeColumnView: View {
         .accessibilityAddTraits(.isStaticText)
     }
 }
+
+#Preview {
+    TimeColumnView(startTime: "09:00", endTime: "10:30")
+        .padding()
+}

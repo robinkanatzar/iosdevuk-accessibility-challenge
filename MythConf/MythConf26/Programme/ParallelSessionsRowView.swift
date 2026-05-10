@@ -65,3 +65,10 @@ struct ParallelSessionsRowView: View {
         }
     }
 }
+
+#Preview {
+    let viewModel = ViewModel()
+    let session = viewModel.confData.sessions[1][2]
+    ParallelSessionsRowView(session: session)
+        .environment(viewModel)
+}

@@ -81,7 +81,7 @@ struct SpeakerDetailView: View {
 
 #Preview {
     NavigationStack {
-        SpeakerDetailView(speakerID: "")
+        SpeakerDetailView(speakerID: "SarahThornton")
     }
     .environment(ViewModel())
 }

@@ -52,7 +52,7 @@ struct ParallelTalkCardView: View {
     }
 
     private var titleFont: Font {
-        dynamicTypeSize.isAccessibilitySize ? .title3 : .headline
+        dynamicTypeSize.isAccessibilitySize ? .body : .headline
     }
 
     private var metadataLayoutSpacing: CGFloat {
@@ -180,4 +180,14 @@ struct ParallelTalkCardView: View {
             FavouriteToggleFeedback.added()
         }
     }
+}
+
+#Preview {
+    let viewModel = ViewModel()
+    let talkID = UUID(uuidString: "C1001006-C100-4100-8100-100000000006")!
+    let session = viewModel.confData.sessions[1][2]
+    
+    ParallelTalkCardView(talkID: talkID, session: session)
+        .environment(viewModel)
+        .padding()
 }

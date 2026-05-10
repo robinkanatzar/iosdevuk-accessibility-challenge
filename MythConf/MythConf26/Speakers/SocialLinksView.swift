@@ -41,3 +41,15 @@ struct SocialLinksView: View {
         }
     }
 }
+
+#Preview {
+    SocialLinksView(
+        social: [
+            SocialItem(socialType: "Twitter", socialLink: "https://twitter.com/apple"),
+            SocialItem(socialType: "GitHub", socialLink: "https://github.com/apple"),
+            SocialItem(socialType: "LinkedIn", socialLink: "https://linkedin.com")
+        ],
+        speakerName: "Sample Speaker"
+    )
+    .padding()
+}

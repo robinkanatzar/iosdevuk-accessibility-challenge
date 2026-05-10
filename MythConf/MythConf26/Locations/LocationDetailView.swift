@@ -113,3 +113,10 @@ struct LocationDetailView: View {
         .contentShape(.rect)
     }
 }
+
+#Preview {
+    NavigationStack {
+        LocationDetailView(locationID: "tyndallLecture")
+            .environment(ViewModel())
+    }
+}

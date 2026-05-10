@@ -25,3 +25,9 @@ struct DayScheduleView: View {
         .accessibilityIdentifier("programme.schedule")
     }
 }
+
+#Preview {
+    let viewModel = ViewModel()
+    DayScheduleView(sessions: viewModel.confData.sessions[1])
+        .environment(viewModel)
+}

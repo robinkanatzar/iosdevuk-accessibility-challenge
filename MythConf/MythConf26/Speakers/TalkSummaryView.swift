@@ -95,3 +95,13 @@ struct TalkSummaryView: View {
         Label(viewModel.locationNameFrom(talkID: talkID), systemImage: "mappin")
     }
 }
+
+#Preview {
+    let viewModel = ViewModel()
+    let talkID = UUID(uuidString: "C1001006-C100-4100-8100-100000000006")!
+    let session = viewModel.confData.sessions[1][2]
+    
+    TalkSummaryView(talkID: talkID, session: session)
+        .environment(viewModel)
+        .padding()
+}

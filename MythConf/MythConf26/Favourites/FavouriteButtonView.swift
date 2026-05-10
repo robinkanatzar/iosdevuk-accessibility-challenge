@@ -51,3 +51,12 @@ struct FavouriteButtonView: View {
         }
     }
 }
+
+#Preview {
+    let viewModel = ViewModel()
+    let talkID = UUID(uuidString: "C1001006-C100-4100-8100-100000000006")!
+    let talk = viewModel.talkFrom(talkID: talkID)
+    
+    FavouriteButtonView(talk: talk)
+        .environment(viewModel)
+}
