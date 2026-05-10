@@ -14,15 +14,28 @@ struct MythConf: App {
     @State private var viewModel = ViewModel()
 
     init() {
-        try? Tips.configure([
-            .datastoreLocation(.applicationDefault),
-            .displayFrequency(.daily)
-        ])
+        setupTips()
 
         if CommandLine.arguments.contains("-UITestingResetFavourites") {
-            Tips.hideAllTipsForTesting()
             let favouritesURL = urlToFileInDocuments("favourites.json")
             try? FileManager.default.removeItem(at: favouritesURL)
+        }
+    }
+
+    // Configure tips in the app.
+    func setupTips() {
+        do {
+            #if DEBUG
+            Tips.hideAllTipsForTesting()
+            #endif
+
+            try Tips.configure([
+                .datastoreLocation(.applicationDefault),
+                .displayFrequency(.daily)
+            ])
+        }
+        catch {
+            print("Error initializing TipKit \(error.localizedDescription)")
         }
     }
 
