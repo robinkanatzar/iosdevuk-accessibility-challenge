@@ -10,6 +10,7 @@ import TipKit
 
 @main
 struct MythConf: App {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var viewModel = ViewModel()
 
     init() {
@@ -30,6 +31,10 @@ struct MythConf: App {
             HomeView()
                 .environment(viewModel)
                 .foregroundStyle(.primary, .secondary, .tertiary)
+                .onChange(of: scenePhase) { _, newPhase in
+                    guard newPhase == .active else { return }
+                    viewModel.loadFavourites()
+                }
         }
     }
 }

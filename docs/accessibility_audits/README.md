@@ -56,6 +56,16 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Replaced decorative foreground styling with semantic foreground styles.
 - Improved reduced-transparency behavior in schedule header areas.
 
+### Siri and Voice-First Shortcuts
+
+- Added App Intents so users can perform existing schedule actions without navigating the visual UI.
+- Exposed conference sessions as Siri-resolvable entities using session title, speaker names, location, day, and time so voice input can find the right session.
+- Added Siri actions to hear session details, add a session to the user's schedule, remove a session from the user's schedule, and hear a short summary of saved sessions.
+- Returned spoken `IntentDialog` responses for voice-only use, including clear confirmations, already-saved states, empty-schedule states, and update errors.
+- Used user-facing Siri wording such as "your schedule" in spoken prompts and confirmations so responses sound natural when Siri is addressing the user.
+- Kept the Siri actions aligned with existing app functionality: they mirror the session detail screen, favourite toggle, and My Schedule tab rather than adding a new workflow.
+- Reloaded favourites when the app becomes active so changes made through Siri are reflected when the user returns to the visual app.
+
 ### TipKit Feature Discovery
 
 - Added contextual TipKit guidance for existing app features that can be missed visually or non-visually.
@@ -132,6 +142,8 @@ These items need manual review because static tools cannot fully validate real a
 - VoiceOver behavior for speaker photos in list rows and speaker detail screens.
 - VoiceOver announcement for the speaker detail sessions heading, which should identify the speaker context.
 - Voice Control command names for session cards, favourite buttons, social links, and map links.
+- Siri and Shortcuts spoken responses for session details, add/remove schedule actions, empty schedule, duplicate add, and missing/remove-not-saved states.
+- Siri entity disambiguation when the spoken session phrase matches more than one session.
 - TipKit timing, placement, and dismissal behavior with VoiceOver, Voice Control, Switch Control, and large Dynamic Type.
 - Dynamic Type layout at the largest accessibility sizes.
 - Text clipping across Programme, Speakers, Locations, and My Schedule, especially after large Dynamic Type or localization changes.
