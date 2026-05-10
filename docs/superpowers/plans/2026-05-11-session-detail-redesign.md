@@ -23,7 +23,8 @@ Move from the current simple layout:
 
 To a richer detail layout:
 
-- Custom top bar with back button, centered "Session Details" label, and favourite star.
+- Standard inline navigation title set to "Session Details".
+- Favourite star remains in the trailing toolbar using the existing `FavouriteButtonView`.
 - Large session title in the content body.
 - Time and location presented as two clear information rows with icon tiles and labels.
 - Speaker section with uppercase heading and a card-style speaker row.
@@ -33,9 +34,9 @@ To a richer detail layout:
 ## Accessibility Requirements
 
 - Keep the screen usable with VoiceOver, Voice Control, Switch Control, Full Keyboard Access, and Dynamic Type.
-- The back button must remain a real navigation/back control with an accessible label.
+- The default system back button must remain in place so navigation behavior and accessibility stay standard.
 - The favourite action must be available both visually and accessibly:
-  - Top trailing star keeps the existing `FavouriteButtonView` semantics.
+  - Toolbar star keeps the existing `FavouriteButtonView` semantics.
   - Bottom primary button must not create confusing duplicate VoiceOver actions if both controls are visible.
 - Time and location rows must expose meaningful labels and values:
   - Time: label "Time", value from `session.timeRange`.
@@ -82,15 +83,13 @@ Do not modify:
   - `scheduleActionSection`
 - [ ] Keep the content in a `ScrollView` so landscape and Dynamic Type remain safe.
 
-## Task 2: Custom Top Bar
+## Task 2: Navigation Bar and Toolbar
 
-- [ ] Hide the default navigation bar back button only if a custom accessible back button is implemented safely.
-- [ ] Add a top bar matching the reference:
-  - leading back chevron
-  - centered uppercase "Session Details"
-  - trailing favourite star using `FavouriteButtonView`
-- [ ] Preserve navigation behavior with `@Environment(\.dismiss)`.
-- [ ] Ensure the top bar controls are 44 x 44 points minimum.
+- [ ] Keep the default navigation back button and do not hide the system navigation bar.
+- [ ] Set `.navigationTitle("Session Details")`.
+- [ ] Use `.navigationBarTitleDisplayMode(.inline)`.
+- [ ] Keep the existing trailing toolbar item with `FavouriteButtonView(talk: talk)`.
+- [ ] Ensure the toolbar favourite keeps its existing accessibility label, value, hint, and 44 x 44 point target.
 
 ## Task 3: Time and Location Rows
 
@@ -157,5 +156,5 @@ Expected:
 
 ## Open Decisions Before Implementation
 
-- Whether to fully hide the default navigation bar and own the custom top bar, or keep the system navigation bar and style the content below it. Recommendation: own the custom top bar because the reference layout depends on it, but only if the custom back button is fully accessible.
-- Whether the bottom schedule button should coexist with the top star in all size classes. Recommendation: keep both; they serve different users and mirror common detail-screen patterns.
+- The top bar decision is resolved: use the standard system navigation bar with inline title "Session Details" and keep the favourite star in the trailing toolbar.
+- Whether the bottom schedule button should coexist with the toolbar star in all size classes. Recommendation: keep both; they serve different users and mirror common detail-screen patterns.
