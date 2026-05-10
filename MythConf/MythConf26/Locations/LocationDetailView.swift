@@ -27,55 +27,70 @@ struct LocationDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Map(initialPosition: .region(
-                    MKCoordinateRegion(
-                        center: coordinate,
-                        latitudinalMeters: 500,
-                        longitudinalMeters: 500
-                    )
-                )) {
-                    Marker(location.name, coordinate: coordinate)
+        GeometryReader { proxy in
+            if shouldScroll(in: proxy.size) {
+                ScrollView {
+                    locationContent
+                        .padding(.horizontal, 16.0)
                 }
-                .frame(height: 300)
-                .clipShape(.rect(cornerRadius: 12))
-                .padding(.horizontal)
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Map showing \(location.name)")
-                .accessibilityValue(location.placeDescription)
-                .accessibilityHint("Shows the venue area")
-
-                Text(location.placeDescription)
-                    .foregroundStyle(.secondary)
-                    .padding()
-
-                Spacer()
-
-                if let mapsURL {
-                    Button {
-                        OpenInMapsTip.hasOpenedMaps = true
-                        openInMapsTip.invalidate(reason: .actionPerformed)
-                        openURL(mapsURL)
-                    } label: {
-                        mapsButtonLabel
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel("Open \(location.name) in Maps for directions")
-                    .accessibilityHint("Opens this location in Apple Maps for directions")
-                    .accessibilityIdentifier("location.openInMaps")
-                    .padding(.horizontal)
-                    .padding(.bottom)
-                    .popoverTip(openInMapsTip, arrowEdge: .bottom)
-                }
-
-                Spacer()
+            } else {
+                locationContent
             }
         }
         .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.automatic)
         .onAppear {
             OpenInMapsTip.hasViewedLocationDetail = true
+        }
+    }
+
+    private func shouldScroll(in size: CGSize) -> Bool {
+        size.width > size.height || dynamicTypeSize.isAccessibilitySize
+    }
+
+    private var locationContent: some View {
+        VStack(alignment: .leading) {
+            Map(initialPosition: .region(
+                MKCoordinateRegion(
+                    center: coordinate,
+                    latitudinalMeters: 500,
+                    longitudinalMeters: 500
+                )
+            )) {
+                Marker(location.name, coordinate: coordinate)
+            }
+            .frame(height: 300)
+            .clipShape(.rect(cornerRadius: 12))
+            .padding(.horizontal)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Map showing \(location.name)")
+            .accessibilityValue(location.placeDescription)
+            .accessibilityHint("Shows the venue area")
+
+            Text(location.placeDescription)
+                .foregroundStyle(.secondary)
+                .padding()
+
+            Spacer()
+
+            if let mapsURL {
+                Button {
+                    OpenInMapsTip.hasOpenedMaps = true
+                    openInMapsTip.invalidate(reason: .actionPerformed)
+                    openURL(mapsURL)
+                } label: {
+                    mapsButtonLabel
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Open \(location.name) in Maps for directions")
+                .accessibilityHint("Opens this location in Apple Maps for directions")
+                .accessibilityIdentifier("location.openInMaps")
+                .padding(.horizontal)
+                .padding(.bottom)
+                .popoverTip(openInMapsTip, arrowEdge: .bottom)
+            }
+
+            Spacer()
         }
     }
 
