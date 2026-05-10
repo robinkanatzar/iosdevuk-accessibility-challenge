@@ -71,72 +71,71 @@ Do not modify:
 
 ## Task 1: Refactor Session Detail Layout
 
-- [ ] Extract repeated data into private computed properties:
+- [x] Extract repeated data into private computed properties:
   - `locationName`
-  - `speakerIDs`
   - `isFavourite`
-- [ ] Replace the current plain `ScrollView` content with sectioned content:
+- [x] Replace the current plain `ScrollView` content with sectioned content:
   - `sessionTitleSection`
   - `sessionInfoSection`
   - `speakerSection`
   - `aboutSection`
   - `scheduleActionSection`
-- [ ] Keep the content in a `ScrollView` so landscape and Dynamic Type remain safe.
+- [x] Keep the content in a `ScrollView` so landscape and Dynamic Type remain safe.
 
 ## Task 2: Navigation Bar and Toolbar
 
-- [ ] Keep the default navigation back button and do not hide the system navigation bar.
-- [ ] Set `.navigationTitle("Session Details")`.
-- [ ] Use `.navigationBarTitleDisplayMode(.inline)`.
-- [ ] Keep the existing trailing toolbar item with `FavouriteButtonView(talk: talk)`.
-- [ ] Ensure the toolbar favourite keeps its existing accessibility label, value, hint, and 44 x 44 point target.
+- [x] Keep the default navigation back button and do not hide the system navigation bar.
+- [x] Set `.navigationTitle("Session Details")`.
+- [x] Use `.navigationBarTitleDisplayMode(.inline)`.
+- [x] Keep the existing trailing toolbar item with `FavouriteButtonView(talk: talk)`.
+- [x] Ensure the toolbar favourite keeps its existing accessibility label, value, hint, and 44 x 44 point target.
 
 ## Task 3: Time and Location Rows
 
-- [ ] Replace the current single `HStack` with two `SessionInfoRow` style rows.
-- [ ] Use icon tiles, label text, and value text:
+- [x] Replace the current single `HStack` with two `SessionInfoRow` style rows.
+- [x] Use icon tiles, label text, and value text:
   - clock icon for time
   - map pin icon for location
-- [ ] Make the location row a `NavigationLink` to `LocationNavigationID`.
-- [ ] Add stable identifiers:
+- [x] Make the location row a `NavigationLink` to `LocationNavigationID`.
+- [x] Add stable identifiers:
   - `sessionDetail.time`
   - `sessionDetail.location`
 
 ## Task 4: Speaker Card Section
 
-- [ ] Add uppercase heading "Speaker" or "Speakers" depending on speaker count.
-- [ ] Present each speaker in a card-style `NavigationLink`.
-- [ ] Reuse `SpeakerRowView` where possible, or create a private speaker card if the current row styling does not match the reference.
-- [ ] Preserve speaker detail navigation and hint.
-- [ ] Add identifier `sessionDetail.speaker.<speakerID>`.
+- [x] Add uppercase heading "Speaker" or "Speakers" depending on speaker count.
+- [x] Present each speaker in a card-style `NavigationLink`.
+- [x] Reuse `SpeakerRowView` where possible, or create a private speaker card if the current row styling does not match the reference.
+- [x] Preserve speaker detail navigation and hint.
+- [x] Add identifier `sessionDetail.speaker.<speakerID>`.
 
 ## Task 5: About Section
 
-- [ ] Add uppercase heading "About This Session".
-- [ ] Present `talk.talkDescription` with readable body text.
-- [ ] Ensure text grows naturally for accessibility Dynamic Type.
-- [ ] Add identifier `sessionDetail.about`.
+- [x] Add uppercase heading "About This Session".
+- [x] Present `talk.talkDescription` with readable body text.
+- [x] Ensure text grows naturally for accessibility Dynamic Type.
+- [x] Add identifier `sessionDetail.about`.
 
 ## Task 6: Bottom Schedule Action
 
-- [ ] Add a prominent full-width button:
+- [x] Add a prominent full-width button:
   - "Add to Schedule" when not favourite.
   - "Remove from Schedule" when favourite.
-- [ ] Use the same underlying model operations and feedback as the favourite star.
-- [ ] Avoid inaccessible duplication:
+- [x] Use the same underlying model operations and feedback as the favourite star.
+- [x] Avoid inaccessible duplication:
   - The top star can remain the quick icon control.
   - The bottom button should have a clear visible label and `accessibilityInputLabels`.
-- [ ] Add identifier `sessionDetail.scheduleAction`.
+- [x] Add identifier `sessionDetail.scheduleAction`.
 
 ## Task 7: Tests and Docs
 
-- [ ] Update or add UI test assertions for:
+- [x] Update or add UI test assertions for:
   - `sessionDetail.time`
   - `sessionDetail.location`
   - `sessionDetail.about`
   - `sessionDetail.scheduleAction`
-- [ ] Keep existing audit tests passing where the simulator allows.
-- [ ] Update `docs/accessibility_audits/README.md` with:
+- [x] Keep existing audit tests passing where the simulator allows.
+- [x] Update `docs/accessibility_audits/README.md` with:
   - redesigned session detail layout
   - duplicate favourite controls and why both are accessible
   - manual checks for VoiceOver, Voice Control, Dynamic Type, dark mode, Increase Contrast, and Reduce Transparency
@@ -153,6 +152,11 @@ Expected:
 
 - Build/run succeeds on the configured iPhone 17 simulator.
 - UI tests either pass or, if the known simulator UI-test timeout recurs, the timeout is documented separately from compile/build status.
+
+Result on 2026-05-11:
+
+- `build_run_sim` succeeded on the configured iPhone 17 simulator.
+- Focused UI test `MythConf26UITests/testSessionDetailUsesAccessibleDetailSections` passed.
 
 ## Open Decisions Before Implementation
 

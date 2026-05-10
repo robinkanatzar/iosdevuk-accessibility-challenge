@@ -103,6 +103,21 @@ final class MythConf26UITests: XCTestCase {
         XCTAssertTrue(removeButton.label.contains("from favourites"))
     }
 
+    func testSessionDetailUsesAccessibleDetailSections() throws {
+        openTab(.programme)
+
+        let sessionCard = firstElement(identifierBeginningWith: "programme.card.")
+        XCTAssertTrue(sessionCard.waitForExistence(timeout: 5))
+        sessionCard.tap()
+
+        XCTAssertTrue(app.navigationBars["Session Details"].waitForExistence(timeout: 5))
+        XCTAssertTrue(element(identifier: "sessionDetail.title").waitForExistence(timeout: 5))
+        XCTAssertTrue(element(identifier: "sessionDetail.time").waitForExistence(timeout: 5))
+        XCTAssertTrue(element(identifier: "sessionDetail.location").waitForExistence(timeout: 5))
+        XCTAssertTrue(element(identifier: "sessionDetail.about").waitForExistence(timeout: 5))
+        XCTAssertTrue(element(identifier: "sessionDetail.scheduleAction").waitForExistence(timeout: 5))
+    }
+
     func testVisibleButtonsDoNotRepeatButtonInLabel() throws {
         openTab(.programme)
 
@@ -199,6 +214,12 @@ final class MythConf26UITests: XCTestCase {
 
     private func firstButton(labelBeginningWith prefix: String) -> XCUIElement {
         app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", prefix)).firstMatch
+    }
+
+    private func firstElement(identifierBeginningWith prefix: String) -> XCUIElement {
+        app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@", prefix))
+            .firstMatch
     }
 
     private func element(identifier: String) -> XCUIElement {
