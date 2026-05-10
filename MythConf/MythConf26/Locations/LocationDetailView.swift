@@ -38,7 +38,7 @@ struct LocationDetailView: View {
                 )) {
                     Marker(location.name, coordinate: coordinate)
                 }
-                .frame(height: 400)
+                .frame(height: 300)
                 .clipShape(.rect(cornerRadius: 12))
                 .padding(.horizontal)
                 .accessibilityElement(children: .ignore)
@@ -50,6 +50,8 @@ struct LocationDetailView: View {
                     .foregroundStyle(.secondary)
                     .padding()
 
+                Spacer()
+
                 if let mapsURL {
                     Button {
                         OpenInMapsTip.hasOpenedMaps = true
@@ -59,17 +61,19 @@ struct LocationDetailView: View {
                         mapsButtonLabel
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Open \(location.name) in Maps")
-                    .accessibilityHint("Opens this location in Apple Maps")
+                    .accessibilityLabel("Open \(location.name) in Maps for directions")
+                    .accessibilityHint("Opens this location in Apple Maps for directions")
                     .accessibilityIdentifier("location.openInMaps")
                     .padding(.horizontal)
                     .padding(.bottom)
                     .popoverTip(openInMapsTip, arrowEdge: .bottom)
                 }
+
+                Spacer()
             }
         }
         .navigationTitle(location.name)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.automatic)
         .onAppear {
             OpenInMapsTip.hasViewedLocationDetail = true
         }
