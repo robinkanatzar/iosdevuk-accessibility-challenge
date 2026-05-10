@@ -14,7 +14,7 @@ final class MythConf26UITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
-        app.launchArguments = ["-UITestingResetFavourites"]
+        app.launchArguments = ["-UITesting", "-UITestingResetFavourites"]
         app.launch()
     }
 

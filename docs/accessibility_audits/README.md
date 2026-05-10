@@ -76,7 +76,7 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Added a "Find a Speaker" inline tip on the Speakers screen so users discover speaker search.
 - Added an "Open in Maps" tip on location detail screens so users discover the external Maps handoff.
 - Invalidated tips when the taught action is performed, reducing repeated guidance after the user has learned the control.
-- Hid tips during automated UI accessibility audit launches so TipKit popovers do not create unstable screenshots or element-detection results.
+- Hid tips during all UI test launches so TipKit popovers do not create unstable screenshots or element-detection results.
 
 ### Automated UI Audits
 

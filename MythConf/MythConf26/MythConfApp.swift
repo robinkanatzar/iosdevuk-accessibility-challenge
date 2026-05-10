@@ -25,10 +25,10 @@ struct MythConf: App {
     // Configure tips in the app.
     func setupTips() {
         do {
-            #if DEBUG
-            Tips.hideAllTipsForTesting()
-            #endif
-
+            if CommandLine.arguments.contains("-UITesting") ||
+                CommandLine.arguments.contains("-UITestingResetFavourites") {
+                Tips.hideAllTipsForTesting()
+            }
 
             try Tips.configure()
         }
