@@ -47,6 +47,9 @@ struct SessionDetailView: View {
         }
         .navigationTitle(talk.talkTitle)
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            SaveSessionTip.hasViewedSaveContext = true
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 FavouriteButtonView(talk: talk)

@@ -5,10 +5,13 @@
 
 import SwiftUI
 import MapKit
+import TipKit
 
 struct LocationDetailView: View {
     @Environment(ViewModel.self) private var viewModel
+    @Environment(\.openURL) private var openURL
     let locationID: String
+    private let openInMapsTip = OpenInMapsTip()
 
     private var location: Location { viewModel.locationFrom(locationID: locationID) }
 
@@ -46,13 +49,24 @@ struct LocationDetailView: View {
                     .padding()
 
                 if let mapsURL {
-                    Link("Open \(location.name) in Maps", destination: mapsURL)
+                    Button {
+                        OpenInMapsTip.hasOpenedMaps = true
+                        openInMapsTip.invalidate(reason: .actionPerformed)
+                        openURL(mapsURL)
+                    } label: {
+                        Label("Open \(location.name) in Maps", systemImage: "map")
+                    }
+                    .buttonStyle(.borderedProminent)
                         .padding(.horizontal)
                         .padding(.bottom)
+                        .popoverTip(openInMapsTip, arrowEdge: .bottom)
                 }
             }
         }
         .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            OpenInMapsTip.hasViewedLocationDetail = true
+        }
     }
 }

@@ -56,6 +56,16 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Replaced decorative foreground styling with semantic foreground styles.
 - Improved reduced-transparency behavior in schedule header areas.
 
+### TipKit Feature Discovery
+
+- Added contextual TipKit guidance for existing app features that can be missed visually or non-visually.
+- Added a "Save Sessions" tip on the favourite star so users learn that the control saves sessions into My Schedule.
+- Added a "Switch Days" tip on the Programme day picker so users discover the multi-day schedule.
+- Added a "Find a Speaker" inline tip on the Speakers screen so users discover speaker search.
+- Added an "Open in Maps" tip on location detail screens so users discover the external Maps handoff.
+- Invalidated tips when the taught action is performed, reducing repeated guidance after the user has learned the control.
+- Hid tips during automated UI accessibility audit launches so TipKit popovers do not create unstable screenshots or element-detection results.
+
 ### Automated UI Audits
 
 - Added a `MythConf26UITests` accessibility audit suite using Apple's XCTest `performAccessibilityAudit` API.
@@ -86,7 +96,7 @@ Run from the repository root:
 xcodebuild -project MythConf/MythConf26.xcodeproj -scheme MythConf26 -destination 'platform=iOS Simulator,name=iPhone 17' build
 ```
 
-Result on 2026-05-09: build succeeded.
+Result on 2026-05-10: build succeeded.
 
 Run the UI accessibility audits from the repository root:
 
@@ -122,6 +132,7 @@ These items need manual review because static tools cannot fully validate real a
 - VoiceOver behavior for speaker photos in list rows and speaker detail screens.
 - VoiceOver announcement for the speaker detail sessions heading, which should identify the speaker context.
 - Voice Control command names for session cards, favourite buttons, social links, and map links.
+- TipKit timing, placement, and dismissal behavior with VoiceOver, Voice Control, Switch Control, and large Dynamic Type.
 - Dynamic Type layout at the largest accessibility sizes.
 - Text clipping across Programme, Speakers, Locations, and My Schedule, especially after large Dynamic Type or localization changes.
 - Reduce Transparency and Increase Contrast appearance on device or simulator.

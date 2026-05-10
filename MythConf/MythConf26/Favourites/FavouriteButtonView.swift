@@ -4,11 +4,13 @@
 //
 
 import SwiftUI
+import TipKit
 
 /// A button that toggles a talk as a favourite.
 struct FavouriteButtonView: View {
     @Environment(ViewModel.self) private var viewModel
     let talk: Talk
+    private let saveSessionTip = SaveSessionTip()
 
     private var isFavourite: Bool {
         viewModel.isFavourite(talk: talk)
@@ -34,6 +36,7 @@ struct FavouriteButtonView: View {
         .accessibilityAddTraits(isFavourite ? .isSelected : [])
         .buttonStyle(.plain)
         .symbolEffect(.bounce.down, value: isFavourite)
+        .popoverTip(saveSessionTip, arrowEdge: .bottom)
     }
 
     private func toggleFavourite() {
@@ -42,6 +45,8 @@ struct FavouriteButtonView: View {
             FavouriteToggleFeedback.removed()
         } else {
             viewModel.addFavourite(talk: talk)
+            SaveSessionTip.hasSavedFavourite = true
+            saveSessionTip.invalidate(reason: .actionPerformed)
             FavouriteToggleFeedback.added()
         }
     }

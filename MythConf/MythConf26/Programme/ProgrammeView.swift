@@ -4,10 +4,12 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct ProgrammeView: View {
     @Environment(ViewModel.self) private var viewModel
     @State private var selectedDayIndex = 0
+    private let dayPickerTip = ConferenceDayPickerTip()
 
     private var days: [[Session]] { viewModel.confData.sessions }
 
@@ -30,6 +32,7 @@ struct ProgrammeView: View {
                 .accessibilityIdentifier("programme.dayPicker")
                 .padding(.horizontal)
                 .padding(.vertical, 8)
+                .popoverTip(dayPickerTip, arrowEdge: .top)
 
                 if !days.isEmpty {
                     DayScheduleView(sessions: days[selectedDayIndex])
@@ -38,6 +41,10 @@ struct ProgrammeView: View {
             .navigationTitle("MythConf 2026")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
+                SaveSessionTip.hasViewedSaveContext = true
+                ConferenceDayPickerTip.hasViewedProgramme = true
+                ConferenceDayPickerTip.hasMultipleConferenceDays = days.count > 1
+
                 let confTimeType = viewModel.confData.whereInConf()
                 guard confTimeType != .beforeConf, confTimeType != .afterConf else { return }
                 if let todayIndex = days.firstIndex(where: { sessions in
@@ -46,6 +53,10 @@ struct ProgrammeView: View {
                 }) {
                     selectedDayIndex = todayIndex
                 }
+            }
+            .onChange(of: selectedDayIndex) { _, _ in
+                ConferenceDayPickerTip.hasChangedProgrammeDay = true
+                dayPickerTip.invalidate(reason: .actionPerformed)
             }
             .conferenceNavigationDestinations()
         }

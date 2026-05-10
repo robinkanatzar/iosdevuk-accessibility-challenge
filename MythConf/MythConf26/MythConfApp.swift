@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import TipKit
 
 @main
 struct MythConf: App {
     @State private var viewModel = ViewModel()
 
     init() {
+        try? Tips.configure([
+            .datastoreLocation(.applicationDefault),
+            .displayFrequency(.daily)
+        ])
+
         if CommandLine.arguments.contains("-UITestingResetFavourites") {
+            Tips.hideAllTipsForTesting()
             let favouritesURL = urlToFileInDocuments("favourites.json")
             try? FileManager.default.removeItem(at: favouritesURL)
         }
