@@ -29,10 +29,8 @@ struct MythConf: App {
             Tips.hideAllTipsForTesting()
             #endif
 
-            try Tips.configure([
-                .datastoreLocation(.applicationDefault),
-                .displayFrequency(.daily)
-            ])
+
+            try Tips.configure()
         }
         catch {
             print("Error initializing TipKit \(error.localizedDescription)")
