@@ -14,24 +14,28 @@ struct HomeView: View {
                 .accessibilityIdentifier("tab.programme")
                 .tabItem {
                     Label("Programme", systemImage: "calendar")
+                        .symbolRenderingMode(.monochrome)
                 }
 
             SpeakersView()
                 .accessibilityIdentifier("tab.speakers")
                 .tabItem {
                     Label("Speakers", systemImage: "person.2")
+                        .symbolRenderingMode(.monochrome)
                 }
 
             LocationsView()
                 .accessibilityIdentifier("tab.locations")
                 .tabItem {
                     Label("Locations", systemImage: "map")
+                        .symbolRenderingMode(.monochrome)
                 }
 
             MyScheduleView()
                 .accessibilityIdentifier("tab.mySchedule")
                 .tabItem {
                     Label("My Schedule", systemImage: "star")
+                        .symbolRenderingMode(.monochrome)
                 }
         }
     }
