@@ -9,6 +9,7 @@ This folder contains the accessibility audit inputs and the remediation plan for
 ### Programme and Session Cards
 
 - Restored full-width session cards while keeping the favourite star as a separate 44 x 44 point target inside the card area.
+- Restyled session cards toward the supplied reference card with a pale adaptive surface, blue top accent, visible session type chip, stronger title hierarchy, and icon-backed speaker/location metadata.
 - Kept the card itself as the navigation target and retained a custom accessibility action for toggling favourites from the focused card.
 - Added richer VoiceOver labels, values, hints, and input labels for talk cards.
 - Added explicit accessibility reading order for the card and favourite target.
@@ -41,6 +42,7 @@ This folder contains the accessibility audit inputs and the remediation plan for
 
 - Summarized the map as a single accessible element with label, value, and hint.
 - Added a visible "Open in Maps" link so map navigation is available outside the embedded map.
+- Restyled the Maps handoff as a compact full-width button while preserving the explicit "Open [location] in Maps" accessibility label.
 - Improved location row grouping and Dynamic Type behavior.
 
 ### Images
@@ -139,6 +141,7 @@ These items need manual review because static tools cannot fully validate real a
 - Favourite toggle haptic patterns on a physical device; simulator builds cannot prove real tactile output.
 - Favourite toggle sounds on a physical device, including silent-mode and volume behavior.
 - My Schedule card appearance after favouriting sessions, especially with long titles.
+- Reference-style session card appearance in Programme and My Schedule, including dark mode, Increase Contrast, Reduce Transparency, and largest accessibility Dynamic Type sizes.
 - VoiceOver behavior for speaker photos in list rows and speaker detail screens.
 - VoiceOver announcement for the speaker detail sessions heading, which should identify the speaker context.
 - Voice Control command names for session cards, favourite buttons, social links, and map links.
@@ -149,7 +152,7 @@ These items need manual review because static tools cannot fully validate real a
 - Text clipping across Programme, Speakers, Locations, and My Schedule, especially after large Dynamic Type or localization changes.
 - Reduce Transparency and Increase Contrast appearance on device or simulator.
 - Switch Control focus order for list rows and nested controls.
-- External Maps handoff from location detail screens.
+- External Maps handoff from location detail screens, including the compact Maps button's touch target, VoiceOver label, and TipKit popover placement.
 
 ## Future Improvements
 

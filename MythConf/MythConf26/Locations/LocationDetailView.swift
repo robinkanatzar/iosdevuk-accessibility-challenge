@@ -10,6 +10,8 @@ import TipKit
 struct LocationDetailView: View {
     @Environment(ViewModel.self) private var viewModel
     @Environment(\.openURL) private var openURL
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let locationID: String
     private let openInMapsTip = OpenInMapsTip()
 
@@ -54,12 +56,15 @@ struct LocationDetailView: View {
                         openInMapsTip.invalidate(reason: .actionPerformed)
                         openURL(mapsURL)
                     } label: {
-                        Label("Open \(location.name) in Maps", systemImage: "map")
+                        mapsButtonLabel
                     }
-                    .buttonStyle(.borderedProminent)
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                        .popoverTip(openInMapsTip, arrowEdge: .bottom)
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Open \(location.name) in Maps")
+                    .accessibilityHint("Opens this location in Apple Maps")
+                    .accessibilityIdentifier("location.openInMaps")
+                    .padding(.horizontal)
+                    .padding(.bottom)
+                    .popoverTip(openInMapsTip, arrowEdge: .bottom)
                 }
             }
         }
@@ -68,5 +73,43 @@ struct LocationDetailView: View {
         .onAppear {
             OpenInMapsTip.hasViewedLocationDetail = true
         }
+    }
+
+    private var mapsButtonLabel: some View {
+        HStack(alignment: dynamicTypeSize.isAccessibilitySize ? .top : .center, spacing: 14) {
+            Image(systemName: "map")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 44, height: 44)
+                .background(Circle().fill(Color.accentColor))
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Open in Maps")
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+
+                Text("Use Apple Maps for directions")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+            }
+
+            Spacer(minLength: 8)
+
+            Image(systemName: "arrow.up.forward")
+                .font(.headline.weight(.bold))
+                .foregroundStyle(Color.accentColor)
+                .accessibilityHidden(true)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
+        .overlay {
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(Color(.separator), lineWidth: colorSchemeContrast == .increased ? 1.5 : 0.5)
+        }
+        .contentShape(.rect)
     }
 }
