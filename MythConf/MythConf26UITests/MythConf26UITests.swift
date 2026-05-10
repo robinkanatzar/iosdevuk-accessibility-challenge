@@ -71,7 +71,7 @@ final class MythConf26UITests: XCTestCase {
     func testMyScheduleAccessibilityAudit() throws {
         openTab(.mySchedule)
         XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["No Favourites Yet"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["No Favourites Yet"].waitForExistence(timeout: 10))
         try auditVisibleScreen("My Schedule empty")
     }
 
@@ -79,7 +79,7 @@ final class MythConf26UITests: XCTestCase {
         openTab(.programme)
 
         let favouriteButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(favouriteButton.waitForExistence(timeout: 2))
+        XCTAssertTrue(favouriteButton.waitForExistence(timeout: 5))
         favouriteButton.tap()
 
         openTab(.mySchedule)

@@ -20,6 +20,7 @@ struct ProgrammeView: View {
                     ForEach(days.indices, id: \.self) { index in
                         Text(dayLabel(for: days[index]))
                             .tag(index)
+                            .frame(minHeight: 44)
                             .accessibilityLabel("Day \(index + 1), \(fullDayLabel(for: days[index]))")
                             .accessibilityInputLabels([
                                 dayLabel(for: days[index]),

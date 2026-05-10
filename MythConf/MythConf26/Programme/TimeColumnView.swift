@@ -24,5 +24,6 @@ struct TimeColumnView: View {
         .fixedSize(horizontal: true, vertical: false)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(startTime) to \(endTime)")
+        .accessibilityAddTraits(.isStaticText)
     }
 }
