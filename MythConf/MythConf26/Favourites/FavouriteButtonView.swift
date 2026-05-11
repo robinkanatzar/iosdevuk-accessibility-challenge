@@ -29,7 +29,7 @@ struct FavouriteButtonView: View {
         .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
         .accessibilityHint(isFavourite ? "Removes this session from My Schedule" : "Adds this session to My Schedule")
         .accessibilityInputLabels([
-            isFavourite ? "Remove from favourites" : "Add to favourites",
+            isFavourite ? "Remove from schedule" : "Add to schedule",
             "Favourite",
             talk.talkTitle
         ])

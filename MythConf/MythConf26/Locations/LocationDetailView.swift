@@ -82,20 +82,31 @@ struct LocationDetailView: View {
             Spacer()
 
             if let mapsURL {
-                Button {
-                    OpenInMapsTip.hasOpenedMaps = true
-                    openInMapsTip.invalidate(reason: .actionPerformed)
-                    openURL(mapsURL)
-                } label: {
+                Link(destination: mapsURL) {
                     mapsButtonLabel
                 }
-                .buttonStyle(.plain)
+                .contentShape(.rect)
                 .accessibilityLabel("Open \(location.name) in Maps for directions")
                 .accessibilityHint("Opens Apple Maps App for directions")
                 .accessibilityIdentifier("location.openInMaps")
                 .padding(.horizontal)
                 .padding(.bottom)
                 .popoverTip(openInMapsTip, arrowEdge: .bottom)
+
+//                Button {
+//                    OpenInMapsTip.hasOpenedMaps = true
+//                    openInMapsTip.invalidate(reason: .actionPerformed)
+//                    openURL(mapsURL)
+//                } label: {
+//                    mapsButtonLabel
+//                }
+//                .buttonStyle(.plain)
+//                .accessibilityLabel("Open \(location.name) in Maps for directions")
+//                .accessibilityHint("Opens Apple Maps App for directions")
+//                .accessibilityIdentifier("location.openInMaps")
+//                .padding(.horizontal)
+//                .padding(.bottom)
+//                .popoverTip(openInMapsTip, arrowEdge: .bottom)
             }
 
             Spacer()
@@ -106,7 +117,7 @@ struct LocationDetailView: View {
         HStack(alignment: dynamicTypeSize.isAccessibilitySize ? .top : .center, spacing: 14) {
             Image(systemName: "map")
                 .font(.title2.weight(.semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.myWhite)
                 .frame(width: 44, height: 44)
                 .background(Circle().fill(Color.accentColor))
                 .accessibilityHidden(true)
@@ -116,9 +127,10 @@ struct LocationDetailView: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text("Use Apple Maps for directions")
-                    .font(.subheadline)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
             }
@@ -147,3 +159,10 @@ struct LocationDetailView: View {
             .environment(ViewModel())
     }
 }
+
+
+//:todo
+//
+//    .accessibilityAction(.magicTap) {
+//        openURL(mapsURL)
+//    }

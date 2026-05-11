@@ -22,7 +22,7 @@ struct SaveSessionTip: Tip {
     }
 
     var image: Image? {
-        Image(systemName: "star")
+        Image(decorative: "star")
     }
 
     var rules: [Rule] {
@@ -54,7 +54,7 @@ struct ConferenceDayPickerTip: Tip {
     }
 
     var image: Image? {
-        Image(systemName: "calendar")
+        Image(decorative: "calendar")
     }
 
     var rules: [Rule] {
@@ -84,7 +84,7 @@ struct SpeakerSearchTip: Tip {
     }
 
     var image: Image? {
-        Image(systemName: "magnifyingglass")
+        Image(decorative: "magnifyingglass")
     }
 
     var rules: [Rule] {
@@ -113,7 +113,7 @@ struct OpenInMapsTip: Tip {
     }
 
     var image: Image? {
-        Image(systemName: "map")
+        Image(decorative: "map")
     }
 
     var rules: [Rule] {

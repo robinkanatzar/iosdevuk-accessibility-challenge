@@ -21,7 +21,7 @@ struct ProgrammeView: View {
                         Text(dayLabel(for: days[index]))
                             .tag(index)
                             .frame(minHeight: 44)
-                            .accessibilityLabel("Day \(index + 1), \(fullDayLabel(for: days[index]))")
+                            .accessibilityLabel("Day \(index + 1), \(fullDayLabel(for: days[index]))") //:Todo can we make 1st Day  2nd day ETC
                             .accessibilityInputLabels([
                                 dayLabel(for: days[index]),
                                 "Day \(index + 1)",

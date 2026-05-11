@@ -56,7 +56,7 @@ struct SessionDetailView: View {
                         .accessibilityIdentifier("sessionDetail.aboutHeading")
 
                     Text(talk.talkDescription)
-                        .font(.title3)
+                        .font(.body)
                         .lineSpacing(5)
                         .foregroundStyle(Color(.label))
                         .fixedSize(horizontal: false, vertical: true)
@@ -158,9 +158,10 @@ struct SessionDetailView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text(value)
-                    .font(.headline)
+                    .font(.body)
                     .foregroundStyle(Color(.label))
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -175,7 +176,7 @@ struct SessionDetailView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(speaker.name)
-                    .font(.headline)
+                    .font(.body)
                     .foregroundStyle(Color(.label))
                     .fixedSize(horizontal: false, vertical: true)
 
@@ -231,3 +232,9 @@ struct SessionDetailView: View {
             .environment(viewModel)
     }
 }
+
+//:todo
+//
+//    .accessibilityAction(.magicTap) {
+//       isFavourite ? "Removes this session from My Schedule" : "Adds this session to My Schedule"
+//    }

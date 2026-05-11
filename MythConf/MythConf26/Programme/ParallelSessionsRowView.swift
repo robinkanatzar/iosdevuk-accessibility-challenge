@@ -9,14 +9,27 @@ import SwiftUI
 struct ParallelSessionsRowView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     let session: Session
+
+    //Todo: check if this is right and make sence ?????
 
     var body: some View {
         Group {
             if dynamicTypeSize.isAccessibilitySize {
                 accessibilityLayout
-            } else if shouldStackParallelCards {
+            } else if verticalSizeClass == .regular && horizontalSizeClass == .compact {
+                // iPhone Portrait or iPad 1/3 split view for Multitasking for instance
                 compactParallelLayout
+            } else if verticalSizeClass == .compact && horizontalSizeClass == .compact  && session.contentIDs.count > 1{
+                // some "standard" iPhone Landscape (iPhone SE, X, XS, 7, 8, ...)
+                horizontalLayout
+            } else if verticalSizeClass == .compact && horizontalSizeClass == .regular  && session.contentIDs.count > 1{
+                // some "bigger" iPhone Landscape (iPhone Xs Max, 6s Plus, 7 Plus, 8 Plus, ...)
+                horizontalLayout
+            } else if verticalSizeClass == .regular && horizontalSizeClass == .regular  && session.contentIDs.count > 1{
+                // macOS or iPad without split view - no Multitasking
+                horizontalLayout
             } else {
                 horizontalLayout
             }

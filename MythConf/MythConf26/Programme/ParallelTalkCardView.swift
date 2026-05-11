@@ -68,7 +68,7 @@ struct ParallelTalkCardView: View {
             .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
             .accessibilityValue("\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")")
             .accessibilityHint("Shows session details")
-            .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
+            .accessibilityAction(named: isFavourite ? "Remove from schedule" : "Add to schedule") {
                 toggleFavourite()
             }
             .accessibilitySortPriority(1)
@@ -132,7 +132,7 @@ struct ParallelTalkCardView: View {
             .fontWeight(.black)
             .tracking(1.8)
             .foregroundStyle(session.sessionType.color)
-            .lineLimit(1)
+//            .lineLimit(1)
             .minimumScaleFactor(0.85)
             .padding(.horizontal, 12)
             .padding(.vertical, 7)
@@ -157,7 +157,7 @@ struct ParallelTalkCardView: View {
     private func metadataRow(systemImage: String, text: String, isPrimary: Bool) -> some View {
         Label {
             Text(text)
-                .font(isPrimary ? .subheadline : .caption)
+                .font(isPrimary ? .body : .caption)
                 .fontWeight(isPrimary ? .semibold : .regular)
                 .foregroundStyle(isPrimary ? .primary : .secondary)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)

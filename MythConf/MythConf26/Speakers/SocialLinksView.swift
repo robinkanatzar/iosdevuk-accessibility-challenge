@@ -20,6 +20,7 @@ struct SocialLinksView: View {
                             .frame(minWidth: 44, minHeight: 44)
                     }
                     .contentShape(.rect)
+                    .accessibilityRemoveTraits(.isButton)
                     .accessibilityLabel("Open \(speakerName) on \(item.socialType.capitalized)")
                     .accessibilityInputLabels([
                         item.socialType.capitalized,
