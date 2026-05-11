@@ -188,7 +188,7 @@ struct SessionDetailView: View {
 
             Spacer(minLength: 8)
 
-            Image(systemName: "person.crop.circle")
+            Image(systemName: "info.circle")
                 .font(.title3)
                 .foregroundStyle(.tint)
                 .frame(width: 44, height: 44)

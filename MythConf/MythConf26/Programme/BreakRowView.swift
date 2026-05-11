@@ -8,6 +8,7 @@ import SwiftUI
 /// A full-width row for non-session slots such as breaks, lunch, and social events.
 struct BreakRowView: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(ViewModel.self) private var viewModel
     let session: Session
@@ -36,27 +37,56 @@ struct BreakRowView: View {
     }
 
     var body: some View {
-        HStack {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
 
-            VStack(alignment: .leading) {
-                Text(session.sessionType.displayName)
-                    .italic()
-                    .foregroundStyle(.primary)
-                if let locationName {
-                    Text(locationName)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                accessibilityLayout
+            } else {
+                compactParallelLayout
             }
-
-            Spacer()
         }
         .padding()
         .frame(maxWidth: .infinity)
         .background(rowBackground)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(rowAccessibilityLabel)
+    }
+
+    private var accessibilityLayout: some View {
+        VStack {
+
+            HStack {
+                TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+                Spacer()
+            }
+
+            nonTalkStack
+
+            Spacer()
+        }
+    }
+
+    private var compactParallelLayout: some View {
+        HStack {
+            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+
+            nonTalkStack
+
+            Spacer()
+        }
+    }
+
+    private var nonTalkStack: some View {
+        VStack(alignment: .leading) {
+            Text(session.sessionType.displayName)
+                .italic()
+                .foregroundStyle(.primary)
+            if let locationName {
+                Text(locationName)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
     }
 }
 
