@@ -23,6 +23,7 @@ struct SpeakerDetailView: View {
                             .font(.title2)
                             .bold()
                             .accessibilityAddTraits(.isHeader)
+                            .accessibilityLabel("Speaker Name \(speaker.name)")
                         if !speaker.social.isEmpty {
                             SocialLinksView(social: speaker.social, speakerName: speaker.name)
                         }
@@ -37,6 +38,7 @@ struct SpeakerDetailView: View {
                 // Bio
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
+                        .accessibilityLabel("Biography of \(speaker.name). \(speaker.speakerInfo)")
                     Divider()
                         .padding(.vertical)
                 }
@@ -61,7 +63,7 @@ struct SpeakerDetailView: View {
             .padding()
         }
         .accessibilityIdentifier("speakerDetail.root.\(speaker.id)")
-        .navigationTitle(speaker.name)
+        .navigationTitle("Speaker Details")
         .navigationBarTitleDisplayMode(.inline)
     }
 

@@ -37,8 +37,8 @@ struct LocationDetailView: View {
                 locationContent
             }
         }
-        .navigationTitle(location.name)
-        .navigationBarTitleDisplayMode(.automatic)
+        .navigationTitle("Location Details")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             OpenInMapsTip.hasViewedLocationDetail = true
         }
@@ -49,7 +49,15 @@ struct LocationDetailView: View {
     }
 
     private var locationContent: some View {
-        VStack(alignment: .leading) {
+        VStack {
+            Text(location.name)
+                .font(.title)
+                .fontWeight(.heavy)
+                .foregroundStyle(Color(.label))
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("sessionDetail.title")
+
             Map(initialPosition: .region(
                 MKCoordinateRegion(
                     center: coordinate,
@@ -64,12 +72,12 @@ struct LocationDetailView: View {
             .padding(.horizontal)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Map showing \(location.name)")
-            .accessibilityValue(location.placeDescription)
             .accessibilityHint("Shows the venue area")
 
             Text(location.placeDescription)
                 .foregroundStyle(.secondary)
                 .padding()
+                .accessibilityHint("Location Description")
 
             Spacer()
 
@@ -83,7 +91,7 @@ struct LocationDetailView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel("Open \(location.name) in Maps for directions")
-                .accessibilityHint("Opens this location in Apple Maps for directions")
+                .accessibilityHint("Opens Apple Maps App for directions")
                 .accessibilityIdentifier("location.openInMaps")
                 .padding(.horizontal)
                 .padding(.bottom)
