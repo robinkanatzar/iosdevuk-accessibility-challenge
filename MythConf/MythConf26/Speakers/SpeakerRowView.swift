@@ -4,6 +4,8 @@
 //
 
 import SwiftUI
+import NaturalLanguage
+
 
 /// A row showing a speaker's photo, name, and bio excerpt.
 struct SpeakerRowView: View {
@@ -12,9 +14,22 @@ struct SpeakerRowView: View {
     let speakerID: String
 
     private var speaker: Speaker { viewModel.speakerFrom(speakerID: speakerID) }
+//    private var speakerSummary: String {
+//        //:Todo findo out how to split strings
+//        speaker.speakerInfo.components(separatedBy: "\n\n").first ?? speaker.speakerInfo
+//    }
+
     private var speakerSummary: String {
-        //:Todo findo out how to split strings
-        speaker.speakerInfo.components(separatedBy: "\n\n").first ?? speaker.speakerInfo
+        let tokenizer = NLTokenizer(unit: .sentence)
+        tokenizer.string = speaker.speakerInfo
+
+        if let firstSentenceRange = tokenizer.tokens(for: speaker.speakerInfo.startIndex..<speaker.speakerInfo.endIndex).first {
+            print("Franklin")
+            return String(speaker.speakerInfo[firstSentenceRange])
+        }
+
+        print("Jranklin")
+        return speaker.speakerInfo
     }
 
     var body: some View {

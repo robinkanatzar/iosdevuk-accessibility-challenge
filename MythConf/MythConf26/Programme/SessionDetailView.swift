@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import NaturalLanguage
 
 struct SessionDetailView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -210,7 +211,16 @@ struct SessionDetailView: View {
 
     private func speakerSummary(for speakerID: String) -> String {
         let speaker = viewModel.speakerFrom(speakerID: speakerID)
-        return speaker.speakerInfo.components(separatedBy: "\n\n").first ?? speaker.speakerInfo
+        let tokenizer = NLTokenizer(unit: .sentence)
+        tokenizer.string = speaker.speakerInfo
+
+        if let firstSentenceRange = tokenizer.tokens(for: speaker.speakerInfo.startIndex..<speaker.speakerInfo.endIndex).first {
+            print("Franklin")
+            return String(speaker.speakerInfo[firstSentenceRange])
+        }
+
+        print("Jranklin")
+        return speaker.speakerInfo
     }
 
     private func toggleFavourite() {
@@ -235,9 +245,3 @@ struct SessionDetailView: View {
             .environment(viewModel)
     }
 }
-
-//:todo
-//
-//    .accessibilityAction(.magicTap) {
-//       isFavourite ? "Removes this session from My Schedule" : "Adds this session to My Schedule"
-//    }
