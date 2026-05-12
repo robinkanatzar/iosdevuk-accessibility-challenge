@@ -67,8 +67,8 @@ struct ParallelTalkCardView: View {
             .accessibilityIdentifier("programme.card.\(talk.id.uuidString)")
             .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
             .accessibilityValue("\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")")
-            .accessibilityHint("Shows session details")
-            .accessibilityAction(named: isFavourite ? "Remove from schedule" : "Add to schedule") {
+            .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
+
                 toggleFavourite()
             }
             .accessibilitySortPriority(1)

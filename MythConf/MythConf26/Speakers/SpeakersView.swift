@@ -39,7 +39,6 @@ struct SpeakersView: View {
                             }
                             .listRowBackground(Color(.systemBackground))
                             .accessibilityIdentifier("speakers.row.\(speaker.id)")
-                            .accessibilityHint("Shows speaker details")
                         }
                     }
                     .accessibilityIdentifier("speakers.list")

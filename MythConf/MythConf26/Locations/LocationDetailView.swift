@@ -71,7 +71,6 @@ struct LocationDetailView: View {
             .padding(.horizontal)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Map showing \(location.name)")
-            .accessibilityHint("Shows the venue area")
 
             Text(location.placeDescription)
                 .foregroundStyle(.secondary)

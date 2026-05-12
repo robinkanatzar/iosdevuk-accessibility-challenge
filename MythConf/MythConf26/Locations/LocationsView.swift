@@ -24,7 +24,6 @@ struct LocationsView: View {
                     .accessibilityElement(children: .combine)
                 }
                 .accessibilityIdentifier("locations.row.\(location.id)")
-                .accessibilityHint("Shows location details")
             }
             .accessibilityIdentifier("locations.list")
             .navigationTitle("Locations")

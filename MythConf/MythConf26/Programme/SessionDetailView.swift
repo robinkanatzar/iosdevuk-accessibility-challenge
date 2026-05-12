@@ -46,7 +46,6 @@ struct SessionDetailView: View {
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Location")
                     .accessibilityValue(locationName)
-                    .accessibilityHint("Shows location details")
                     .accessibilityIdentifier("sessionDetail.location")
                 }
 
@@ -111,7 +110,6 @@ struct SessionDetailView: View {
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(viewModel.speakerNameFrom(speakerID: speakerID))
                 .accessibilityValue(speakerSummary(for: speakerID))
-                .accessibilityHint("Shows speaker details")
                 .accessibilityIdentifier("sessionDetail.speaker.\(speakerID)")
             }
         }

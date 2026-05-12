@@ -52,7 +52,6 @@ struct TalkSummaryView: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Session Title. \(viewModel.talkTitleFrom(talkID: talkID))")
         .accessibilityValue("\(session.timeRange), \(viewModel.locationNameFrom(talkID: talkID))")
-        .accessibilityHint("Shows session details")
     }
 
     private var accessibilityLayout: some View {
@@ -77,7 +76,6 @@ struct TalkSummaryView: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(viewModel.talkTitleFrom(talkID: talkID))
         .accessibilityValue("\(session.timeRange), \(viewModel.locationNameFrom(talkID: talkID))")
-        .accessibilityHint("Shows session details")
     }
 
     private var titleText: some View {
