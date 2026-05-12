@@ -235,7 +235,7 @@ final class MythConf26UITests: XCTestCase {
             guard #available(iOS 17.0, *) else { return }
             var auditTypes: XCUIAccessibilityAuditType = [
 //                .contrast,
-//                .dynamicType,
+                .dynamicType,
                 .textClipped,
                 .elementDetection,
                 .hitRegion,
