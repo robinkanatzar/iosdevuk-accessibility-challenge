@@ -132,7 +132,6 @@ struct ParallelTalkCardView: View {
             .fontWeight(.black)
             .tracking(1.8)
             .foregroundStyle(session.sessionType.color)
-//            .lineLimit(1)
             .minimumScaleFactor(0.85)
             .padding(.horizontal, 12)
             .padding(.vertical, 7)
