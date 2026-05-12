@@ -9,18 +9,18 @@ import SwiftUI
 struct TimeColumnView: View {
     let startTime: String
     let endTime: String
-
+    
     var body: some View {
-        VStack(alignment: .trailing) {
+        HStack {
             Text(startTime)
                 .bold()
                 .monospacedDigit()
             Text(endTime)
                 .foregroundStyle(.secondary)
                 .monospacedDigit()
+            Spacer()
         }
         .font(.caption)
-        .frame(width: 44, alignment: .trailing)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
     }
