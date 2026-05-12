@@ -219,7 +219,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif ! which a11y-check > /dev/null; then\n  echo \"warning: a11y-check not installed. Install via Homebrew: git clone https://github.com/cvs-health/ios-swiftui-accessibility-techniques.git && cd ios-swiftui-accessibility-techniques && brew tap cvs-health/ios-swiftui-accessibility-techniques file://\\$PWD && brew install --HEAD cvs-health/ios-swiftui-accessibility-techniques/a11y-check\"\n  exit 0\nfi\n\nCURRENT_FILE=\"\"\nEXIT_CODE=0\n\nA11Y_OUTPUT=$(a11y-check \"${SRCROOT}\" 2>&1)\nEXIT_CODE=$?\n\necho \"$A11Y_OUTPUT\" | sed 's/\\x1b\\[[0-9;]*m//g' | while IFS= read -r line; do\n  if echo \"$line\" | grep -qE '^[^ ].+\\.swift$'; then\n    CURRENT_FILE=\"${SRCROOT}/${line}\"\n  elif echo \"$line\" | grep -qE '[0-9]+:[0-9]+.*warning|[0-9]+:[0-9]+.*error'; then\n    ROW=$(echo \"$line\" | grep -oE '[0-9]+:[0-9]+' | head -1 | cut -d: -f1)\n    COL=$(echo \"$line\" | grep -oE '[0-9]+:[0-9]+' | head -1 | cut -d: -f2)\n    if echo \"$line\" | grep -q ' error'; then SEV=\"error\"; else SEV=\"warning\"; fi\n    MSG=$(echo \"$line\" | sed 's/.*\\]: //')\n    echo \"${CURRENT_FILE}:${ROW}:${COL}: ${SEV}: ${MSG}\"\n  fi\ndone\n\nexit $EXIT_CODE\n";
+			shellScript = "if [[ \"$(uname -m)\" == \"arm64\" ]]; then\n  export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\n# Check if running in a SwiftUI preview\nif [[ \"$XCODE_RUNNING_FOR_PREVIEWS\" != \"1\" ]]; then\n  if command -v a11y-check > /dev/null; then\n    a11y-check . --format xcode\n  else\n    printf 'warning: a11y-check not installed. Install via Homebrew:\\n\\nbrew tap cvs-health/ios-swiftui-accessibility-techniques https://github.com/cvs-health/ios-swiftui-accessibility-techniques.git\\n\\nbrew install --HEAD cvs-health/ios-swiftui-accessibility-techniques/a11y-check\\n\\n'\n  fi\nfi\n\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
