@@ -32,8 +32,8 @@ struct LocationDetailView: View {
                 .padding(.horizontal, 16.0)
         }
         .defaultScrollAnchor(.center, for: .alignment)
-        .accessibilityActions {
-            Button("Open in Maps") {
+        .accessibilityActions { // SwiftUI limitation have to use Button rather than Link
+            Button("Open in Maps") { // a11y-check:disable button-used-as-link
                 if let mapsURL {
                     openURL(mapsURL)
                 }
@@ -143,10 +143,3 @@ struct LocationDetailView: View {
             .environment(ViewModel())
     }
 }
-
-
-//:todo
-//
-//    .accessibilityAction(.magicTap) {
-//        openURL(mapsURL)
-//    }
