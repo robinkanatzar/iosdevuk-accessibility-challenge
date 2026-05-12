@@ -83,6 +83,9 @@ struct SessionDetailView: View {
             .padding(.top, 24)
             .padding(.bottom, 40)
         }
+        .accessibilityAction(.magicTap) {
+            toggleFavourite()
+        }
         .navigationTitle("Session Details")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
