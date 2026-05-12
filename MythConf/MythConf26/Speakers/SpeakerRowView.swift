@@ -36,7 +36,6 @@ struct SpeakerRowView: View {
                 Text(speaker.name)
                     .bold()
                     .foregroundStyle(Color(.label))
-                    .accessibilityAddTraits(.isHeader)
                 if !speakerSummary.isEmpty {
                     Text(speakerSummary)
                         .font(.body)

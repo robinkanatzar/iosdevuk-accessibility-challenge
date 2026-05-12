@@ -16,7 +16,6 @@ struct LocationsView: View {
                     VStack(alignment: .leading) {
                         Text(location.name)
                             .bold()
-                            .accessibilityAddTraits(.isHeader)
                         Text(location.placeDescription)
                             .font(.body)
                             .foregroundStyle(.secondary)

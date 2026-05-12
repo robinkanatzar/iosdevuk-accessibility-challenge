@@ -76,7 +76,7 @@ struct LocationDetailView: View {
             Text(location.placeDescription)
                 .foregroundStyle(.secondary)
                 .padding()
-                .accessibilityHint("Location Description")
+                .accessibilityLabel("Location description. \(location.placeDescription)")
 
             Spacer()
 
