@@ -14,10 +14,6 @@ struct SpeakerRowView: View {
     let speakerID: String
 
     private var speaker: Speaker { viewModel.speakerFrom(speakerID: speakerID) }
-//    private var speakerSummary: String {
-//        //:Todo findo out how to split strings
-//        speaker.speakerInfo.components(separatedBy: "\n\n").first ?? speaker.speakerInfo
-//    }
 
     private var speakerSummary: String {
         let tokenizer = NLTokenizer(unit: .sentence)
@@ -46,7 +42,7 @@ struct SpeakerRowView: View {
                         .font(.body)
                         .foregroundStyle(Color(.label))
                         .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
-                        .accessibilityLabel("Biography of \(speaker.name). \(speaker.speakerInfo)") //: todo come up with somehting better than Biography
+                        .accessibilityLabel("About \(speaker.name). \(speakerSummary)")
                 }
             }
         }

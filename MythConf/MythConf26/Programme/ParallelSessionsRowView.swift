@@ -12,8 +12,6 @@ struct ParallelSessionsRowView: View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     let session: Session
 
-    //Todo: check if this is right and make sence ?????
-
     var body: some View {
         Group {
             if dynamicTypeSize.isAccessibilitySize {

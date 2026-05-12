@@ -21,10 +21,11 @@ struct ProgrammeView: View {
                         Text(dayLabel(for: days[index]))
                             .tag(index)
                             .frame(minHeight: 44)
-                            .accessibilityLabel("Day \(index + 1), \(fullDayLabel(for: days[index]))") //:Todo can we make 1st Day  2nd day ETC
+                            .accessibilityLabel("\(ordinalDayLabel(for: index)), \(fullDayLabel(for: days[index]))")
                             .accessibilityInputLabels([
                                 dayLabel(for: days[index]),
-                                "Day \(index + 1)",
+                                ordinalDayLabel(for: index),
+                                "day \(index + 1)",
                                 fullDayLabel(for: days[index])
                             ])
                     }
@@ -71,6 +72,16 @@ struct ProgrammeView: View {
     private func fullDayLabel(for sessions: [Session]) -> String {
         guard let first = sessions.first else { return "" }
         return first.startTime.formatted(.dateTime.weekday(.wide).day().month(.wide))
+    }
+
+    private func ordinalDayLabel(for index: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+
+        let number = NSNumber(value: index + 1)
+        let ordinal = formatter.string(from: number) ?? "\(index + 1)"
+
+        return "\(ordinal) day"
     }
 }
 
