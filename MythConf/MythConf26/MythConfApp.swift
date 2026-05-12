@@ -12,6 +12,7 @@ import TipKit
 struct MythConf: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var viewModel = MythConf.makeViewModel()
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
 
     init() {
         setupTips()
@@ -31,8 +32,11 @@ struct MythConf: App {
     func setupTips() {
         do {
             if CommandLine.arguments.contains("-UITesting") ||
-                CommandLine.arguments.contains("-UITestingResetFavourites") {
+                CommandLine.arguments.contains("-UITestingResetFavourites") ||
+                !voiceOverEnabled {
+
                 Tips.hideAllTipsForTesting()
+
             }
 
             try Tips.configure()
