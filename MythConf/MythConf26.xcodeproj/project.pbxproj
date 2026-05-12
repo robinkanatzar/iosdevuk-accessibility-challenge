@@ -104,6 +104,7 @@
 				1B2918B32F73EA8B008A369D /* Frameworks */,
 				1B2918B42F73EA8B008A369D /* Resources */,
 				1B2919CA2F74454F008A369D /* Embed Foundation Extensions */,
+				C808CFE72FB34796008C8478 /* A11Y Check */,
 			);
 			buildRules = (
 			);
@@ -199,6 +200,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C808CFE72FB34796008C8478 /* A11Y Check */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "A11Y Check";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif ! which a11y-check > /dev/null; then\n  echo \"warning: a11y-check not installed. Install via Homebrew: git clone https://github.com/cvs-health/ios-swiftui-accessibility-techniques.git && cd ios-swiftui-accessibility-techniques && brew tap cvs-health/ios-swiftui-accessibility-techniques file://\\$PWD && brew install --HEAD cvs-health/ios-swiftui-accessibility-techniques/a11y-check\"\n  exit 0\nfi\n\nCURRENT_FILE=\"\"\nEXIT_CODE=0\n\nA11Y_OUTPUT=$(a11y-check \"${SRCROOT}\" 2>&1)\nEXIT_CODE=$?\n\necho \"$A11Y_OUTPUT\" | sed 's/\\x1b\\[[0-9;]*m//g' | while IFS= read -r line; do\n  if echo \"$line\" | grep -qE '^[^ ].+\\.swift$'; then\n    CURRENT_FILE=\"${SRCROOT}/${line}\"\n  elif echo \"$line\" | grep -qE '[0-9]+:[0-9]+.*warning|[0-9]+:[0-9]+.*error'; then\n    ROW=$(echo \"$line\" | grep -oE '[0-9]+:[0-9]+' | head -1 | cut -d: -f1)\n    COL=$(echo \"$line\" | grep -oE '[0-9]+:[0-9]+' | head -1 | cut -d: -f2)\n    if echo \"$line\" | grep -q ' error'; then SEV=\"error\"; else SEV=\"warning\"; fi\n    MSG=$(echo \"$line\" | sed 's/.*\\]: //')\n    echo \"${CURRENT_FILE}:${ROW}:${COL}: ${SEV}: ${MSG}\"\n  fi\ndone\n\nexit $EXIT_CODE\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1B2918B22F73EA8B008A369D /* Sources */ = {
@@ -358,6 +381,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y48AZMY2V2;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -393,6 +417,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y48AZMY2V2;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
