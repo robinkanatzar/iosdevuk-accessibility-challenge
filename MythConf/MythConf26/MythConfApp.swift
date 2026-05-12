@@ -11,16 +11,21 @@ import TipKit
 @main
 struct MythConf: App {
     @Environment(\.scenePhase) private var scenePhase
-    @State private var viewModel = ViewModel()
+    @State private var viewModel = MythConf.makeViewModel()
 
     init() {
         setupTips()
+    }
 
+    private static func makeViewModel() -> ViewModel {
         if CommandLine.arguments.contains("-UITestingResetFavourites") {
             let favouritesURL = urlToFileInDocuments("favourites.json")
             try? FileManager.default.removeItem(at: favouritesURL)
+            print("favourites Removed")
         }
+        return ViewModel() // now loads from an already-deleted file
     }
+
 
     // Configure tips in the app.
     func setupTips() {

@@ -24,7 +24,7 @@ struct TalkSummaryView: View {
         HStack(alignment: .center, spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
                 titleText
-                    .lineLimit(2)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
 
                 HStack(spacing: 10) {
                     timeLabel
@@ -58,7 +58,6 @@ struct TalkSummaryView: View {
     private var accessibilityLayout: some View {
         VStack(alignment: .leading, spacing: 16) {
             titleText
-                .lineLimit(nil)
 
             VStack(alignment: .leading, spacing: 10) {
                 timeLabel

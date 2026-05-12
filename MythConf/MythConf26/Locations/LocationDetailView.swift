@@ -27,15 +27,9 @@ struct LocationDetailView: View {
     }
 
     var body: some View {
-        GeometryReader { proxy in
-            if shouldScroll(in: proxy.size) {
-                ScrollView {
-                    locationContent
-                        .padding(.horizontal, 16.0)
-                }
-            } else {
-                locationContent
-            }
+        ScrollView {
+            locationContent
+                .padding(.horizontal, 16.0)
         }
         .navigationTitle("Location Details")
         .navigationBarTitleDisplayMode(.inline)
@@ -44,9 +38,6 @@ struct LocationDetailView: View {
         }
     }
 
-    private func shouldScroll(in size: CGSize) -> Bool {
-        size.width > size.height || dynamicTypeSize.isAccessibilitySize
-    }
 
     private var locationContent: some View {
         VStack {
@@ -92,21 +83,6 @@ struct LocationDetailView: View {
                 .padding(.horizontal)
                 .padding(.bottom)
                 .popoverTip(openInMapsTip, arrowEdge: .bottom)
-
-//                Button {
-//                    OpenInMapsTip.hasOpenedMaps = true
-//                    openInMapsTip.invalidate(reason: .actionPerformed)
-//                    openURL(mapsURL)
-//                } label: {
-//                    mapsButtonLabel
-//                }
-//                .buttonStyle(.plain)
-//                .accessibilityLabel("Open \(location.name) in Maps for directions")
-//                .accessibilityHint("Opens Apple Maps App for directions")
-//                .accessibilityIdentifier("location.openInMaps")
-//                .padding(.horizontal)
-//                .padding(.bottom)
-//                .popoverTip(openInMapsTip, arrowEdge: .bottom)
             }
 
             Spacer()

@@ -17,12 +17,14 @@ struct MyScheduleView: View {
         NavigationStack {
             Group {
                 if viewModel.favouriteIds.isEmpty {
-                    ContentUnavailableView(
-                        "No Favourites Yet",
-                        systemImage: "star",
-                        description: Text("Tap the star on any session in the Programme to save it here.")
-                    )
-                    .accessibilityIdentifier("mySchedule.empty")
+                    ScrollView {
+                        ContentUnavailableView(
+                            "No Favourites Yet",
+                            systemImage: "star",
+                            description: Text("Tap the star on any session in the Programme to save it here.")
+                        )
+                        .accessibilityIdentifier("mySchedule.empty")
+                    }
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {

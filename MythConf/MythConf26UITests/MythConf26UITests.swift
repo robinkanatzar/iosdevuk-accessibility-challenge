@@ -190,7 +190,6 @@ final class MythConf26UITests: XCTestCase {
         let locationName = fullLabel.components(separatedBy: ",").first ?? fullLabel
         
         firstRow.tap()
-        print("Franklin \(locationName)")
         return locationName
     }
 
@@ -235,6 +234,9 @@ final class MythConf26UITests: XCTestCase {
         XCTContext.runActivity(named: "Accessibility audit: \(name)") { _ in
             guard #available(iOS 17.0, *) else { return }
             var auditTypes: XCUIAccessibilityAuditType = [
+//                .contrast,
+//                .dynamicType,
+                .textClipped,
                 .elementDetection,
                 .hitRegion,
                 .sufficientElementDescription,
@@ -255,6 +257,9 @@ final class MythConf26UITests: XCTestCase {
     }
 
     private func isKnownFalsePositive(_ issue: XCUIAccessibilityAuditIssue) -> Bool {
+        // Temporary: print all audit issues to identify the clipped element
+         print("AUDIT ISSUE: \(issue.auditType) | \(issue.compactDescription) | element: \(issue.element?.debugDescription ?? "nil")")
+
         if issue.auditType == .contrast && issue.compactDescription == "Contrast nearly passed" {
             return true
         }
