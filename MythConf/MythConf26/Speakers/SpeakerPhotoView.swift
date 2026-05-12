@@ -34,6 +34,7 @@ struct SpeakerPhotoView: View {
         Image(imageName)
             .resizable()
             .scaledToFill()
+            .accessibilityIgnoresInvertColors(true)
             .frame(width: size, height: size)
             .clipShape(.circle)
             .accessibilityHidden(accessibilityMode == .decorative)

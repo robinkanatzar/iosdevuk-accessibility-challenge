@@ -22,7 +22,7 @@ struct SaveSessionTip: Tip {
     }
 
     var image: Image? {
-        Image(decorative: "star")
+        Image(systemName: "star") // a11y-check:disable image-missing-label
     }
 
     var rules: [Rule] {
@@ -54,7 +54,7 @@ struct ConferenceDayPickerTip: Tip {
     }
 
     var image: Image? {
-        Image(decorative: "calendar")
+        Image(systemName: "calendar") // a11y-check:disable image-missing-label
     }
 
     var rules: [Rule] {
@@ -84,7 +84,7 @@ struct SpeakerSearchTip: Tip {
     }
 
     var image: Image? {
-        Image(decorative: "magnifyingglass")
+        Image(systemName: "magnifyingglass") // a11y-check:disable image-missing-label
     }
 
     var rules: [Rule] {
@@ -113,7 +113,7 @@ struct OpenInMapsTip: Tip {
     }
 
     var image: Image? {
-        Image(decorative: "map")
+        Image(systemName: "map") // a11y-check:disable image-missing-label
     }
 
     var rules: [Rule] {

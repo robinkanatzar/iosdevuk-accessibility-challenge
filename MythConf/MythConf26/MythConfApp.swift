@@ -12,9 +12,9 @@ import TipKit
 struct MythConf: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var viewModel = MythConf.makeViewModel()
-    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
 
     init() {
+        UIImageView.appearance().accessibilityIgnoresInvertColors = true
         setupTips()
     }
 
