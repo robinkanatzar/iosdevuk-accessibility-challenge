@@ -21,6 +21,7 @@ struct FavouriteButtonView: View {
             toggleFavourite()
         } label: {
             Image(systemName: isFavourite ? "star.fill" : "star")
+                .symbolVariant(isFavourite ? .fill : .none)
                 .foregroundStyle(isFavourite ? .yellow : .secondary)
                 .frame(minWidth: 44, minHeight: 44)
                 .contentShape(.rect)

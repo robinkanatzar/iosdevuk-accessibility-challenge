@@ -35,7 +35,7 @@ google-services.json
 *.hprof
 
 # Accessibility Audits
-docs/accessibility_audits/
+docs/
 
 # Agent and Skill related files
 .agent/
