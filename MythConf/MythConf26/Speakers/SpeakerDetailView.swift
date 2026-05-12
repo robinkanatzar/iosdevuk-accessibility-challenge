@@ -38,7 +38,7 @@ struct SpeakerDetailView: View {
                 // Bio
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
-                        .accessibilityLabel("Biography of \(speaker.name). \(speaker.speakerInfo)")
+                        .accessibilityLabel("Biography. \(speaker.speakerInfo)")
                     Divider()
                         .padding(.vertical)
                 }

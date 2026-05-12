@@ -20,7 +20,6 @@ struct SpeakerRowView: View {
         tokenizer.string = speaker.speakerInfo
 
         if let firstSentenceRange = tokenizer.tokens(for: speaker.speakerInfo.startIndex..<speaker.speakerInfo.endIndex).first {
-            print("Franklin")
             return String(speaker.speakerInfo[firstSentenceRange])
         }
 
@@ -41,7 +40,7 @@ struct SpeakerRowView: View {
                         .font(.body)
                         .foregroundStyle(Color(.label))
                         .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
-                        .accessibilityLabel("About \(speaker.name). \(speakerSummary)")
+                        .accessibilityLabel("Biography. \(speakerSummary)")
                 }
             }
         }

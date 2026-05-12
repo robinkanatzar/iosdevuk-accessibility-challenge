@@ -215,7 +215,6 @@ struct SessionDetailView: View {
         tokenizer.string = speaker.speakerInfo
 
         if let firstSentenceRange = tokenizer.tokens(for: speaker.speakerInfo.startIndex..<speaker.speakerInfo.endIndex).first {
-            print("Franklin")
             return String(speaker.speakerInfo[firstSentenceRange])
         }
 

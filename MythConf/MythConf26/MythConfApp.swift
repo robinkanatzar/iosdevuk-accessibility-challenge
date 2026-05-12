@@ -30,10 +30,11 @@ struct MythConf: App {
 
     // Configure tips in the app.
     func setupTips() {
+        let accessibilityEnabled = UIAccessibility.isVoiceOverRunning
         do {
             if CommandLine.arguments.contains("-UITesting") ||
                 CommandLine.arguments.contains("-UITestingResetFavourites") ||
-                !voiceOverEnabled {
+                accessibilityEnabled {
 
                 Tips.hideAllTipsForTesting()
 
