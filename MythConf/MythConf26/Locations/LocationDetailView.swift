@@ -31,6 +31,14 @@ struct LocationDetailView: View {
             locationContent
                 .padding(.horizontal, 16.0)
         }
+        .defaultScrollAnchor(.center, for: .alignment)
+        .accessibilityActions {
+            Button("Open in Maps") {
+                if let mapsURL {
+                    openURL(mapsURL)
+                }
+            }
+        }
         .navigationTitle("Location Details")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
