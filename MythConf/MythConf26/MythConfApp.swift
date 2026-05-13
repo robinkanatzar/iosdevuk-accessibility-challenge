@@ -7,6 +7,7 @@
 
 import SwiftUI
 import TipKit
+import Dependencies
 
 @main
 struct MythConf: App {
@@ -24,7 +25,27 @@ struct MythConf: App {
             try? FileManager.default.removeItem(at: favouritesURL)
             print("favourites Removed")
         }
-        return ViewModel() // now loads from an already-deleted file
+        
+        let timestamp = CommandLine.arguments.firstIndex(of: "-TestingDate")
+            .flatMap { index in
+                CommandLine.arguments.indices.contains(index + 1) ? Double(CommandLine.arguments[index + 1]) : nil
+            }
+
+        if let timestamp {
+            let customDate = Date(timeIntervalSinceReferenceDate: timestamp)
+            let offset = customDate.timeIntervalSince(Date())
+            print("Injecting Testing Date: \(customDate) (Offset: \(Int(offset))s)")
+            
+            return withDependencies {
+                $0.date = .constant(Date().addingTimeInterval(offset))
+                // Note: Using a closure to ensure the clock ticks relative to the real system clock
+                $0.date = DateGenerator { Date().addingTimeInterval(offset) }
+            } operation: {
+                ViewModel()
+            }
+        } else {
+            return ViewModel()
+        }
     }
 
 

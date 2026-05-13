@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C8726CEF2FB3F0FF0087713F /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = C8726CEE2FB3F0FF0087713F /* Dependencies */; };
+		C8726CF12FB3F0FF0087713F /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = C8726CF02FB3F0FF0087713F /* DependenciesMacros */; };
+		C8726CF32FB3F0FF0087713F /* DependenciesTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C8726CF22FB3F0FF0087713F /* DependenciesTestSupport */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C8D6171D2FAF5EE500CDFC39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -53,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8726CF12FB3F0FF0087713F /* DependenciesMacros in Frameworks */,
+				C8726CEF2FB3F0FF0087713F /* Dependencies in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8726CF32FB3F0FF0087713F /* DependenciesTestSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +124,8 @@
 			);
 			name = MythConf26;
 			packageProductDependencies = (
+				C8726CEE2FB3F0FF0087713F /* Dependencies */,
+				C8726CF02FB3F0FF0087713F /* DependenciesMacros */,
 			);
 			productName = IOSDevuk26;
 			productReference = 1B2918B62F73EA8B008A369D /* MythConf26.app */;
@@ -138,6 +149,7 @@
 			);
 			name = MythConf26UITests;
 			packageProductDependencies = (
+				C8726CF22FB3F0FF0087713F /* DependenciesTestSupport */,
 			);
 			productName = MythConf26UITests;
 			productReference = C8D617172FAF5EE500CDFC39 /* MythConf26UITests.xctest */;
@@ -172,6 +184,7 @@
 			mainGroup = 1B2918AD2F73EA8B008A369D;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1B2918B72F73EA8B008A369D /* Products */;
@@ -399,6 +412,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -439,6 +453,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -524,6 +539,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C8726CEE2FB3F0FF0087713F /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		C8726CF02FB3F0FF0087713F /* DependenciesMacros */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = DependenciesMacros;
+		};
+		C8726CF22FB3F0FF0087713F /* DependenciesTestSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = DependenciesTestSupport;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1B2918AE2F73EA8B008A369D /* Project object */;
 }

@@ -6,18 +6,85 @@
 //
 
 import Foundation
+import SwiftUI
+import Accessibility
+import Dependencies
 
 @Observable
 class ViewModel {
+    @ObservationIgnored
+    @Dependency(\.date) private var date
     var confData: ConfData
     var favouritesBySession: [[Session]] = []
     var check = "Not done"
     
     var favouriteIds: [UUID] = []  // The talk IDs for each favourite
+    private var announcedTalkIDs: Set<UUID> = []
     
     init() {
         confData = loadConfData()
         loadFavourites()
+        startSessionMonitoring()
+    }
+
+    private func startSessionMonitoring() {
+        Task {
+            while true {
+                checkForStartingSessions()
+                try? await Task.sleep(for: .seconds(30))
+            }
+        }
+    }
+
+    private func checkForStartingSessions() {
+        let now = self.date()
+        print("--- Session Monitoring Check [\(now.formatted(date: .omitted, time: .complete))] ---")
+        print("Checking \(favouriteIds.count) favourites...")
+        
+        var sessionsToAnnounce: [Talk] = []
+        
+        for faveID in favouriteIds {
+            guard !announcedTalkIDs.contains(faveID) else { continue }
+            
+            let talk = talkFrom(talkID: faveID)
+            
+            for day in confData.sessions {
+                for session in day {
+                    if session.contentIDs.contains(faveID) {
+                        let timeDiff = session.startTime.timeIntervalSince(now)
+                        
+                        // If starting within the next 30 seconds or started in the last 30 seconds
+                        if abs(timeDiff) <= 30 {
+                            sessionsToAnnounce.append(talk)
+                            announcedTalkIDs.insert(faveID)
+                        }
+                    }
+                }
+            }
+        }
+        
+        if !sessionsToAnnounce.isEmpty {
+            postGroupedSessionAnnouncement(talks: sessionsToAnnounce)
+        }
+    }
+
+    private func postGroupedSessionAnnouncement(talks: [Talk]) {
+        let message: String
+        if talks.count == 1 {
+            let talk = talks[0]
+            let locationName = locationNameFrom(locationID: talk.locationID)
+            let speakers = speakersFrom(talkID: talk.id)
+            message = "Exciting! Your session '\(talk.talkTitle)' by \(speakers) is starting now in \(locationName). I hope you have a great time!"
+        } else {
+            let infoList = talks.map { talk in
+                "'\(talk.talkTitle)' by \(speakersFrom(talkID: talk.id))"
+            }.formatted(.list(type: .and))
+            message = "Exciting! You have \(talks.count) sessions starting now: \(infoList). I hope you enjoy them!"
+        }
+        
+        print("!!! TRIGGERING GROUPED ANNOUNCEMENT: \(message)")
+        let announcement = AccessibilityNotification.Announcement(message)
+        announcement.post()
     }
     
     func saveConference(){

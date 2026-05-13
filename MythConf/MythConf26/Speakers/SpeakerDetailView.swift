@@ -23,7 +23,7 @@ struct SpeakerDetailView: View {
                             .font(.title2)
                             .bold()
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityLabel("Speaker Name \(speaker.name)")
+                            .accessibilityLabel("Speaker: \(speaker.name)")
                         if !speaker.social.isEmpty {
                             SocialLinksView(social: speaker.social, speakerName: speaker.name)
                         }

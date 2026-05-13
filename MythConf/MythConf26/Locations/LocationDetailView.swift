@@ -6,6 +6,7 @@
 import SwiftUI
 import MapKit
 import TipKit
+import Accessibility
 
 struct LocationDetailView: View {
     @Environment(ViewModel.self) private var viewModel
@@ -70,17 +71,21 @@ struct LocationDetailView: View {
             .clipShape(.rect(cornerRadius: 12))
             .padding(.horizontal)
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Map showing \(location.name)")
+            .accessibilityLabel("Map showing the location of \(location.name)")
 
             Text(location.placeDescription)
                 .foregroundStyle(.secondary)
                 .padding()
-                .accessibilityLabel("Location description. \(location.placeDescription)")
+                .accessibilityLabel("Details about the venue: \(location.placeDescription)")
 
             Spacer()
 
             if let mapsURL {
-                Link(destination: mapsURL) {
+                Button { // a11y-check:disable button-used-as-link
+                    let message = "One moment, opening Apple Maps for directions to \(location.name)"
+                    AccessibilityNotification.Announcement(message).post()
+                    openURL(mapsURL)
+                } label: {
                     mapsButtonLabel
                 }
                 .contentShape(.rect)
