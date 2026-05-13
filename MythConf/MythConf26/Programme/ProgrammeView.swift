@@ -48,7 +48,7 @@ struct ProgrammeView: View {
 
     private func dayLabel(for sessions: [Session]) -> String {
         guard let first = sessions.first else { return "" }
-        return first.startTime.formatted(.dateTime.weekday(.abbreviated))
+        return first.startTime.formatted(.dateTime.weekday(.wide))
     }
 }
 
