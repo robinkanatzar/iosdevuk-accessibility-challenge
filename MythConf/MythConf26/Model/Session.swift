@@ -66,21 +66,35 @@ extension Session {
         }
     }
 
-    var liveStatus: LiveStatus {
-        let now = Date()
+//    var liveStatus: LiveStatus {
+//        let now = Date()
+//
+//        if now >= startTime && now <= endTime {
+//            return .live
+//        }
+//
+//        if now < startTime {
+//            return .upcoming
+//        }
+//
+//        return .ended
+//    }
 
+    func liveStatus(now: Date) -> LiveStatus {
         if now >= startTime && now <= endTime {
             return .live
         }
-
         if now < startTime {
             return .upcoming
         }
-
         return .ended
     }
 
+//    var isLive: Bool {
+//        liveStatus == .live
+//    }
+
     var isLive: Bool {
-        liveStatus == .live
+        liveStatus(now: Date()) == .live
     }
 }

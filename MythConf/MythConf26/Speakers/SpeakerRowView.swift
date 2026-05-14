@@ -23,24 +23,20 @@ struct SpeakerRowView: View {
             return String(speaker.speakerInfo[firstSentenceRange])
         }
 
-        print("Jranklin")
         return speaker.speakerInfo
     }
 
     var body: some View {
-        HStack(alignment: .top) {
-            SpeakerPhotoView(speaker: speaker, size: 56)
-
-            VStack(alignment: .leading) {
-                Text(speaker.name)
-                    .bold()
-                    .foregroundStyle(Color(.label))
-                if !speakerSummary.isEmpty {
-                    Text(speakerSummary)
-                        .font(.body)
-                        .foregroundStyle(Color(.label))
-                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
-                        .accessibilityLabel("Biography. \(speakerSummary)")
+        Group {
+            if dynamicTypeSize > .large {
+                VStack(alignment: .leading, spacing: 8) {
+                    SpeakerPhotoView(speaker: speaker, size: 56)
+                    speakerContent
+                }
+            } else {
+                HStack(alignment: .top, spacing: 12) {
+                    SpeakerPhotoView(speaker: speaker, size: 56)
+                    speakerContent
                 }
             }
         }
@@ -48,6 +44,23 @@ struct SpeakerRowView: View {
         .background(Color(.systemBackground))
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("speakers.rowContent.\(speaker.id)")
+    }
+
+    @ViewBuilder
+    private var speakerContent: some View {
+        VStack(alignment: .leading) {
+            Text(speaker.name)
+                .bold()
+                .foregroundStyle(Color(.label))
+
+            if !speakerSummary.isEmpty {
+                Text(speakerSummary)
+                    .font(.body)
+                    .foregroundStyle(Color(.label))
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+                    .accessibilityLabel("Biography. \(speakerSummary)")
+            }
+        }
     }
 }
 

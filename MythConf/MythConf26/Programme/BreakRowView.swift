@@ -20,17 +20,18 @@ struct BreakRowView: View {
 
 //    private var rowAccessibilityLabel: String {
 //        if let locationName {
-//            return "\(session.sessionType.displayName), \(session.timeRange), \(locationName)"
+//            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange), \(locationName)"
 //        } else {
-//            return "\(session.sessionType.displayName), \(session.timeRange)"
+//            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange)"
 //        }
 //    }
 
     private var rowAccessibilityLabel: String {
+        let status = session.liveStatus(now: Date())
         if let locationName {
-            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange), \(locationName)"
+            return "\(session.sessionType.displayName), \(status.title), \(session.timeRange), \(locationName)"
         } else {
-            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange)"
+            return "\(session.sessionType.displayName), \(status.title), \(session.timeRange)"
         }
     }
 
@@ -47,7 +48,7 @@ struct BreakRowView: View {
     var body: some View {
 
         Group {
-            if dynamicTypeSize.isAccessibilitySize {
+            if dynamicTypeSize > .large  {
                 accessibilityLayout
             } else {
                 compactParallelLayout
@@ -64,7 +65,11 @@ struct BreakRowView: View {
         VStack {
 
             HStack {
-                TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+                VStack(alignment: .leading) {
+                    TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+                    Spacer()
+                    SessionStatusBadge(session: session)
+                }
                 Spacer()
             }
 
@@ -81,6 +86,8 @@ struct BreakRowView: View {
             nonTalkStack
 
             Spacer()
+
+            SessionStatusBadge(session: session).padding(.trailing, 18)
         }
     }
 
@@ -89,7 +96,6 @@ struct BreakRowView: View {
             Text(session.sessionType.displayName)
                 .italic()
                 .foregroundStyle(.primary)
-            SessionStatusBadge(session: session)
             if let locationName {
                 Text(locationName)
                     .font(.caption)

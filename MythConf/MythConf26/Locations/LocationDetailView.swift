@@ -105,34 +105,102 @@ struct LocationDetailView: View {
         }
     }
     
+//    private var mapsButtonLabel: some View {
+//        HStack(alignment: dynamicTypeSize.isAccessibilitySize ? .top : .center, spacing: 14) {
+//            Image(systemName: "map")
+//                .font(.title2.weight(.semibold))
+//                .foregroundStyle(Color.myWhite)
+//                .frame(width: 44, height: 44)
+//                .background(Circle().fill(Color.accentColor))
+//                .accessibilityHidden(true)
+//            
+//            VStack(alignment: .leading, spacing: 4) {
+//                Text("Open in Maps")
+//                    .font(.headline)
+//                    .foregroundStyle(.primary)
+//                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+//                    .accessibilityAddTraits(.isHeader)
+//                
+//                Text("Use Apple Maps for directions")
+//                    .font(.caption)
+//                    .foregroundStyle(.secondary)
+//                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+//            }
+//            
+//            Spacer(minLength: 8)
+//            
+//            Image(systemName: "arrow.up.forward")
+//                .font(.headline.weight(.bold))
+//                .foregroundStyle(Color.accentColor)
+//                .accessibilityHidden(true)
+//        }
+//        .padding()
+//        .frame(maxWidth: .infinity, alignment: .leading)
+//        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
+//        .overlay {
+//            RoundedRectangle(cornerRadius: 14)
+//                .stroke(Color(.separator), lineWidth: colorSchemeContrast == .increased ? 1.5 : 0.5)
+//        }
+//        .contentShape(.rect)
+//    }
+
     private var mapsButtonLabel: some View {
-        HStack(alignment: dynamicTypeSize.isAccessibilitySize ? .top : .center, spacing: 14) {
-            Image(systemName: "map")
-                .font(.title2.weight(.semibold))
-                .foregroundStyle(Color.myWhite)
-                .frame(width: 44, height: 44)
-                .background(Circle().fill(Color.accentColor))
-                .accessibilityHidden(true)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Open in Maps")
-                    .font(.headline)
-                    .foregroundStyle(.primary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
-                    .accessibilityAddTraits(.isHeader)
-                
-                Text("Use Apple Maps for directions")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(alignment: .top) {
+                        Image(systemName: "map")
+                            .font(.title2.weight(.semibold))
+                            .foregroundStyle(Color.myWhite)
+                            .frame(width: 44, height: 44)
+                            .background(Circle().fill(Color.accentColor))
+                            .accessibilityHidden(true)
+
+                        Spacer()
+
+                        Image(systemName: "arrow.up.forward")
+                            .font(.headline.weight(.bold))
+                            .foregroundStyle(Color.accentColor)
+                            .accessibilityHidden(true)
+                    }
+
+                    Text("Open in Maps")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                        .accessibilityAddTraits(.isHeader)
+
+                    Text("Use Apple Maps for directions")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            } else {
+                HStack(alignment: .center) {
+                    Image(systemName: "map")
+                        .font(.title2.weight(.semibold))
+                        .foregroundStyle(Color.myWhite)
+                        .frame(width: 44, height: 44)
+                        .background(Circle().fill(Color.accentColor))
+                        .accessibilityHidden(true)
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Open in Maps")
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                            .lineLimit(2)
+                            .accessibilityAddTraits(.isHeader)
+
+                        Text("Use Apple Maps for directions")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
+
+                    Image(systemName: "arrow.up.forward")
+                        .font(.headline.weight(.bold))
+                        .foregroundStyle(Color.accentColor)
+                        .accessibilityHidden(true)
+                }
             }
-            
-            Spacer(minLength: 8)
-            
-            Image(systemName: "arrow.up.forward")
-                .font(.headline.weight(.bold))
-                .foregroundStyle(Color.accentColor)
-                .accessibilityHidden(true)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)

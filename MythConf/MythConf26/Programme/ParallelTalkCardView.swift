@@ -81,8 +81,11 @@ struct ParallelTalkCardView: View {
             .accessibilityIdentifier("programme.card.\(talk.id.uuidString)")
             .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
 //            .accessibilityValue("\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")")
+//            .accessibilityValue(
+//                "\(session.liveStatus.title), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
+//            )
             .accessibilityValue(
-                "\(session.liveStatus.title), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
+                "\(session.liveStatus(now: Date()).title), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
             )
             .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
 
@@ -120,7 +123,8 @@ struct ParallelTalkCardView: View {
 
                     SessionStatusBadge(session: session)
                 }
-                .padding(18)
+                .padding(.horizontal, 18)
+                .padding(.top, 18)
 
             } else {
                 HStack {
@@ -128,7 +132,8 @@ struct ParallelTalkCardView: View {
                     Spacer()
                     SessionStatusBadge(session: session)
                 }
-                .padding(18)
+                .padding(.horizontal, 18)
+                .padding(.top, 18)
 
             }
 
@@ -196,7 +201,7 @@ struct ParallelTalkCardView: View {
     private func metadataRow(systemImage: String, text: String, isPrimary: Bool) -> some View {
         Label {
             Text(text)
-                .font(isPrimary ? .body : .caption)
+                .font(isPrimary ? .callout : .caption)
                 .fontWeight(isPrimary ? .semibold : .regular)
                 .foregroundStyle(isPrimary ? .primary : .secondary)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)

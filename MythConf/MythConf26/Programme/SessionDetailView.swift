@@ -63,13 +63,31 @@ struct SessionDetailView: View {
                         .accessibilityIdentifier("sessionDetail.about")
                 }
 
+//                Button {
+//                    toggleFavourite()
+//                } label: {
+//                    Label(scheduleActionTitle, systemImage: isFavourite ? "checkmark" : "plus")
+//                        .font(.headline)
+//                        .frame(maxWidth: .infinity)
+//                        .padding(.vertical, 16)
+//                }
                 Button {
                     toggleFavourite()
                 } label: {
-                    Label(scheduleActionTitle, systemImage: isFavourite ? "checkmark" : "plus")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
+                    Group {
+                        if dynamicTypeSize.isAccessibilitySize {
+                            Text(scheduleActionTitle)
+                                .font(.headline)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                        } else {
+                            Label(scheduleActionTitle, systemImage: isFavourite ? "checkmark" : "plus")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                        }
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
@@ -173,9 +191,8 @@ struct SessionDetailView: View {
     private func speakerCard(speakerID: String) -> some View {
         let speaker = viewModel.speakerFrom(speakerID: speakerID)
 
-        return HStack(alignment: .center, spacing: 14) {
-            SpeakerPhotoView(speaker: speaker, size: dynamicTypeSize.isAccessibilitySize ? 48 : 64)
-
+        @ViewBuilder
+        var speakerDetails: some View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(speaker.name)
                     .font(.body)
@@ -187,10 +204,10 @@ struct SessionDetailView: View {
                     .foregroundStyle(.secondary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     .fixedSize(horizontal: false, vertical: true)
-            }
+            }.fixedSize(horizontal: false, vertical: true)
+        }
 
-            Spacer(minLength: 8)
-
+        var infoIcon: some View {
             Image(systemName: "info.circle")
                 .font(.title3)
                 .foregroundStyle(.tint)
@@ -198,8 +215,40 @@ struct SessionDetailView: View {
                 .background(Color.accentColor.opacity(0.08), in: Circle())
                 .accessibilityHidden(true)
         }
+
+        return Group {
+            if dynamicTypeSize > .large {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        SpeakerPhotoView(
+                            speaker: speaker,
+                            size: dynamicTypeSize.isAccessibilitySize ? 48 : 64
+                        )
+                        Spacer()
+                        infoIcon
+                    }
+                    speakerDetails
+                }
+            } else {
+                HStack(alignment: .center, spacing: 14) {
+                    SpeakerPhotoView(
+                        speaker: speaker,
+                        size: dynamicTypeSize.isAccessibilitySize ? 48 : 64
+                    )
+
+                    speakerDetails
+
+                    Spacer(minLength: 8)
+
+                    infoIcon
+                }
+            }
+        }
         .padding(dynamicTypeSize.isAccessibilitySize ? 12 : 14)
-        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 18))
+        .background(
+            Color(.secondarySystemBackground),
+            in: RoundedRectangle(cornerRadius: 18)
+        )
         .overlay {
             RoundedRectangle(cornerRadius: 18)
                 .stroke(Color(.separator), lineWidth: 0.5)
