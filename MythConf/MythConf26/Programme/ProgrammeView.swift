@@ -9,12 +9,13 @@ import TipKit
 struct ProgrammeView: View {
     @Environment(ViewModel.self) private var viewModel
     @State private var selectedDayIndex = 0
+    @State private var path: [TalkReference] = []   // ← new
     private let dayPickerTip = ConferenceDayPickerTip()
 
     private var days: [[Session]] { viewModel.confData.sessions }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             VStack(spacing: 0) {
                 Picker("Conference day", selection: $selectedDayIndex) {
                     ForEach(days.indices, id: \.self) { index in
@@ -61,6 +62,29 @@ struct ProgrammeView: View {
                 dayPickerTip.invalidate(reason: .actionPerformed)
             }
             .conferenceNavigationDestinations()
+        }.onChange(of: viewModel.pendingDeepLinkTalkID) { _, talkID in
+            print("📍 [DeepLink] onChange(pendingDeepLinkTalkID) fired — value: \(talkID?.uuidString ?? "nil")")
+
+            guard let talkID else {
+                print("📍 [DeepLink] talkID is nil, ignoring")
+                return
+            }
+            guard let session = viewModel.sessionFor(talkID: talkID) else {
+                print("📍 [DeepLink] ❌ No session found for talkID: \(talkID)")
+                return
+            }
+
+            print("📍 [DeepLink] ✅ Found session starting \(session.startTime) — pushing TalkReference")
+            if let dayIndex = days.firstIndex(where: { $0.contains(session) }) {
+                print("📍 [DeepLink] Switching day picker to index \(dayIndex)")
+                selectedDayIndex = dayIndex
+            } else {
+                print("📍 [DeepLink] ⚠️ Session not found in any day — day picker not changed")
+            }
+
+            path = [TalkReference(talkID: talkID, session: session)]
+            viewModel.pendingDeepLinkTalkID = nil
+            print("📍 [DeepLink] path set, pendingDeepLinkTalkID cleared")
         }
     }
 

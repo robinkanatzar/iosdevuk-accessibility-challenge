@@ -17,16 +17,17 @@ class ViewModel {
     var confData: ConfData
     var favouritesBySession: [[Session]] = []
     var check = "Not done"
-    
+    var pendingDeepLinkTalkID: UUID? = nil
     var favouriteIds: [UUID] = []  // The talk IDs for each favourite
     private var announcedTalkIDs: Set<UUID> = []
-    
+
     init() {
         confData = loadConfData()
         loadFavourites()
     }
 
-    private func sessionFor(talkID: UUID) -> Session? {
+    // Change private → internal
+    func sessionFor(talkID: UUID) -> Session? {
         for day in confData.sessions {
             for session in day {
                 if session.contentIDs.contains(talkID) {

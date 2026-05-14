@@ -5,6 +5,7 @@
 
 import Foundation
 import UserNotifications
+import SwiftUI
 
 @MainActor
 class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
@@ -72,5 +73,29 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("!!! FOREGROUND NOTIFICATION PRESENTING: \(notification.request.content.body)")
         completionHandler([.banner, .list, .sound])
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse
+    ) async {
+        print("🔔 [DeepLink] didReceive fired")
+        print("🔔 [DeepLink] userInfo: \(response.notification.request.content.userInfo)")
+
+        guard
+            let urlString = response.notification.request.content.userInfo["url"] as? String
+        else {
+            print("🔔 [DeepLink] ❌ No 'url' key in userInfo")
+            return
+        }
+        print("🔔 [DeepLink] urlString: \(urlString)")
+
+        guard let url = URL(string: urlString) else {
+            print("🔔 [DeepLink] ❌ Could not form URL from: \(urlString)")
+            return
+        }
+        print("🔔 [DeepLink] Opening URL: \(url)")
+        await UIApplication.shared.open(url)
+        print("🔔 [DeepLink] UIApplication.open returned")
     }
 }
