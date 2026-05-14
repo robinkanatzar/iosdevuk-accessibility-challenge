@@ -15,18 +15,18 @@ struct LocationDetailView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let locationID: String
     private let openInMapsTip = OpenInMapsTip()
-
+    
     private var location: Location { viewModel.locationFrom(locationID: locationID) }
-
+    
     private var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
     }
-
+    
     private var mapsURL: URL? {
         let query = location.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? location.name
         return URL(string: "http://maps.apple.com/?ll=\(location.latitude),\(location.longitude)&q=\(query)")
     }
-
+    
     var body: some View {
         ScrollView {
             locationContent
@@ -46,8 +46,8 @@ struct LocationDetailView: View {
             OpenInMapsTip.hasViewedLocationDetail = true
         }
     }
-
-
+    
+    
     private var locationContent: some View {
         VStack {
             Text(location.name)
@@ -57,7 +57,7 @@ struct LocationDetailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityIdentifier("sessionDetail.title")
-
+            
             Map(initialPosition: .region(
                 MKCoordinateRegion(
                     center: coordinate,
@@ -72,14 +72,18 @@ struct LocationDetailView: View {
             .padding(.horizontal)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Map showing the location of \(location.name)")
-
+            
             Text(location.placeDescription)
                 .foregroundStyle(.secondary)
                 .padding()
-                .accessibilityLabel("Details about the venue: \(location.placeDescription)")
-
+                .accessibilityLabel { label in
+                    Text("About the venue:")
+                    label
+                }
+            
+            
             Spacer()
-
+            
             if let mapsURL {
                 Button { // a11y-check:disable button-used-as-link
                     let message = "One moment, opening Apple Maps for directions to \(location.name)"
@@ -96,11 +100,11 @@ struct LocationDetailView: View {
                 .padding(.bottom)
                 .popoverTip(openInMapsTip, arrowEdge: .bottom)
             }
-
+            
             Spacer()
         }
     }
-
+    
     private var mapsButtonLabel: some View {
         HStack(alignment: dynamicTypeSize.isAccessibilitySize ? .top : .center, spacing: 14) {
             Image(systemName: "map")
@@ -109,22 +113,22 @@ struct LocationDetailView: View {
                 .frame(width: 44, height: 44)
                 .background(Circle().fill(Color.accentColor))
                 .accessibilityHidden(true)
-
+            
             VStack(alignment: .leading, spacing: 4) {
                 Text("Open in Maps")
                     .font(.headline)
                     .foregroundStyle(.primary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
                     .accessibilityAddTraits(.isHeader)
-
+                
                 Text("Use Apple Maps for directions")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
             }
-
+            
             Spacer(minLength: 8)
-
+            
             Image(systemName: "arrow.up.forward")
                 .font(.headline.weight(.bold))
                 .foregroundStyle(Color.accentColor)

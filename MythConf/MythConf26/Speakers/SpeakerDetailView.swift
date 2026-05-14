@@ -23,7 +23,10 @@ struct SpeakerDetailView: View {
                             .font(.title2)
                             .bold()
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityLabel("Speaker: \(speaker.name)")
+                            .accessibilityLabel { label in
+                                Text("Speaker:")
+                                label
+                            }
                         if !speaker.social.isEmpty {
                             SocialLinksView(social: speaker.social, speakerName: speaker.name)
                         }
@@ -38,7 +41,10 @@ struct SpeakerDetailView: View {
                 // Bio
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
-                        .accessibilityLabel("Biography. \(speaker.speakerInfo)")
+                        .accessibilityLabel { label in
+                            Text("Biography:")
+                            label
+                        }
                     Divider()
                         .padding(.vertical)
                 }
@@ -48,9 +54,13 @@ struct SpeakerDetailView: View {
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
                         .font(.headline)
-                        .accessibilityLabel("Sessions by \(speaker.name)")
+                        .accessibilityLabel { label in
+                            Text("Sessions by")
+                            label
+                        }
                         .accessibilityIdentifier("speakerDetail.sessionsHeading")
                         .accessibilityAddTraits(.isHeader)
+
 
                     ForEach(speakerTalks, id: \.talkID) { item in
                         NavigationLink(value: TalkReference(talkID: item.talkID, session: item.session)) {

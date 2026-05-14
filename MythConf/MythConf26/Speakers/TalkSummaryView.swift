@@ -50,9 +50,13 @@ struct TalkSummaryView: View {
         }
         .padding(.top, 4)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Session Title. \(viewModel.talkTitleFrom(talkID: talkID))")
+        .accessibilityLabel { label in
+            Text("Session:")
+            label
+        }
         .accessibilityValue("\(session.timeRange), \(viewModel.locationNameFrom(talkID: talkID))")
     }
+
 
     private var accessibilityLayout: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -74,9 +78,13 @@ struct TalkSummaryView: View {
         }
         .padding(.top, 4)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Session Title. \(viewModel.talkTitleFrom(talkID: talkID))")
+        .accessibilityLabel { label in
+            Text("Session:")
+            label
+        }
         .accessibilityValue("\(session.timeRange), \(viewModel.locationNameFrom(talkID: talkID))")
     }
+
 
     private var titleText: some View {
         Text(viewModel.talkTitleFrom(talkID: talkID))
@@ -97,7 +105,7 @@ struct TalkSummaryView: View {
     let viewModel = ViewModel()
     let talkID = UUID(uuidString: "C1001006-C100-4100-8100-100000000006")!
     let session = viewModel.confData.sessions[1][2]
-    
+
     TalkSummaryView(talkID: talkID, session: session)
         .environment(viewModel)
         .padding()
