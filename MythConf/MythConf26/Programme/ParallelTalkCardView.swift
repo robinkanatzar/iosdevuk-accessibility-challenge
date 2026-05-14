@@ -44,11 +44,25 @@ struct ParallelTalkCardView: View {
         }
     }
 
+//    private var cardBorderColor: Color {
+//        if colorSchemeContrast == .increased {
+//            return session.sessionType.color
+//        }
+//        return colorScheme == .dark ? Color(.separator) : session.sessionType.color.opacity(0.18)
+//    }
+
     private var cardBorderColor: Color {
+        if session.isLive {
+            return .red.opacity(colorSchemeContrast == .increased ? 1 : 0.7)
+        }
+
         if colorSchemeContrast == .increased {
             return session.sessionType.color
         }
-        return colorScheme == .dark ? Color(.separator) : session.sessionType.color.opacity(0.18)
+
+        return colorScheme == .dark
+            ? Color(.separator)
+            : session.sessionType.color.opacity(0.18)
     }
 
     private var titleFont: Font {
@@ -66,7 +80,10 @@ struct ParallelTalkCardView: View {
             }
             .accessibilityIdentifier("programme.card.\(talk.id.uuidString)")
             .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
-            .accessibilityValue("\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")")
+//            .accessibilityValue("\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")")
+            .accessibilityValue(
+                "\(session.liveStatus.title), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
+            )
             .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
 
                 toggleFavourite()
@@ -74,16 +91,19 @@ struct ParallelTalkCardView: View {
             .accessibilitySortPriority(1)
             .buttonStyle(.plain)
 
-            FavouriteButtonView(talk: talk)
-                .accessibilityIdentifier("programme.favourite.\(talk.id.uuidString)")
-                .background(
-                    Circle()
-                        .fill(Color(.systemBackground))
-                        .shadow(color: Color.black.opacity(colorScheme == .dark ? 0 : 0.12), radius: 8, y: 3)
-                )
-                .padding(.top, 16)
-                .padding(.trailing, 16)
-                .accessibilitySortPriority(0)
+            VStack {
+                Spacer()
+                FavouriteButtonView(talk: talk)
+                    .accessibilityIdentifier("programme.favourite.\(talk.id.uuidString)")
+                    .background(
+                        Circle()
+                            .fill(Color(.systemBackground))
+                            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0 : 0.12), radius: 8, y: 3)
+                    )
+                    .padding(.bottom, 16)
+                    .padding(.trailing, 16)
+                    .accessibilitySortPriority(0)
+            }
         }
     }
 
@@ -93,8 +113,27 @@ struct ParallelTalkCardView: View {
                 .frame(height: 5)
                 .accessibilityHidden(true)
 
+
+            if dynamicTypeSize > .large  {
+                VStack(alignment: .leading, spacing: 10) {
+                    sessionTypeChip
+
+                    SessionStatusBadge(session: session)
+                }
+                .padding(18)
+
+            } else {
+                HStack {
+                    sessionTypeChip
+                    Spacer()
+                    SessionStatusBadge(session: session)
+                }
+                .padding(18)
+
+            }
+
             VStack(alignment: .leading, spacing: dynamicTypeSize.isAccessibilitySize ? 18 : 16) {
-                sessionTypeChip
+
 
                 Text(talk.talkTitle)
                     .font(titleFont)
@@ -109,7 +148,7 @@ struct ParallelTalkCardView: View {
             }
             .padding(.leading, 18)
             .padding(.top, 18)
-            .padding(.trailing, 78)
+            .padding(.trailing, 18)
             .padding(.bottom, 22)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -150,6 +189,7 @@ struct ParallelTalkCardView: View {
         VStack(alignment: .leading, spacing: metadataLayoutSpacing) {
             metadataRow(systemImage: "person", text: speakers, isPrimary: true)
             metadataRow(systemImage: "mappin.circle", text: locationName, isPrimary: false)
+                .padding(.trailing, dynamicTypeSize > .xxLarge ? 60 : 0)
         }
     }
 

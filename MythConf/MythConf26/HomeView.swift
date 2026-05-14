@@ -7,43 +7,6 @@
 
 import SwiftUI
 
-//struct HomeView: View {
-//    @Environment(ViewModel.self) private var viewModel
-//
-//    var body: some View {
-//            TabView {
-//                ProgrammeView()
-//                    .accessibilityIdentifier("tab.programme")
-//                    .tabItem {
-//                        Label("Programme", systemImage: "calendar")
-//                            .symbolRenderingMode(.monochrome)
-//                    }
-//
-//                SpeakersView()
-//                    .accessibilityIdentifier("tab.speakers")
-//                    .tabItem {
-//                        Label("Speakers", systemImage: "person.2")
-//                            .symbolRenderingMode(.monochrome)
-//                    }
-//
-//                LocationsView()
-//                    .accessibilityIdentifier("tab.locations")
-//                    .tabItem {
-//                        Label("Locations", systemImage: "map")
-//                            .symbolRenderingMode(.monochrome)
-//                    }
-//
-//                MyScheduleView()
-//                    .accessibilityIdentifier("tab.mySchedule")
-//                    .tabItem {
-//                        Label("My Schedule", systemImage: "star")
-//                            .symbolRenderingMode(.monochrome)
-//                    }
-//            }
-//    }
-//
-//}
-
 struct HomeView: View {
     @Environment(ViewModel.self) private var viewModel
     @State private var selectedTab = 0

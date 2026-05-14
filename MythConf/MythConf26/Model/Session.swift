@@ -34,3 +34,53 @@ struct Session: Codable, Identifiable, Hashable {
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
 }
 
+// MARK: - Live Status
+
+extension Session {
+
+    enum LiveStatus {
+        case upcoming
+        case live
+        case ended
+
+        var title: String {
+            switch self {
+            case .upcoming:
+                return "Starting Soon"
+            case .live:
+                return "Live Now"
+            case .ended:
+                return "Ended"
+            }
+        }
+
+        var symbolName: String {
+            switch self {
+            case .upcoming:
+                return "clock.badge"
+            case .live:
+                return "dot.radiowaves.left.and.right"
+            case .ended:
+                return "checkmark.circle"
+            }
+        }
+    }
+
+    var liveStatus: LiveStatus {
+        let now = Date()
+
+        if now >= startTime && now <= endTime {
+            return .live
+        }
+
+        if now < startTime {
+            return .upcoming
+        }
+
+        return .ended
+    }
+
+    var isLive: Bool {
+        liveStatus == .live
+    }
+}

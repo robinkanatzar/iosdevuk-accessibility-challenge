@@ -18,11 +18,19 @@ struct BreakRowView: View {
         return viewModel.locationNameFrom(talkID: talkID)
     }
 
+//    private var rowAccessibilityLabel: String {
+//        if let locationName {
+//            return "\(session.sessionType.displayName), \(session.timeRange), \(locationName)"
+//        } else {
+//            return "\(session.sessionType.displayName), \(session.timeRange)"
+//        }
+//    }
+
     private var rowAccessibilityLabel: String {
         if let locationName {
-            return "\(session.sessionType.displayName), \(session.timeRange), \(locationName)"
+            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange), \(locationName)"
         } else {
-            return "\(session.sessionType.displayName), \(session.timeRange)"
+            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange)"
         }
     }
 
@@ -81,6 +89,7 @@ struct BreakRowView: View {
             Text(session.sessionType.displayName)
                 .italic()
                 .foregroundStyle(.primary)
+            SessionStatusBadge(session: session)
             if let locationName {
                 Text(locationName)
                     .font(.caption)
