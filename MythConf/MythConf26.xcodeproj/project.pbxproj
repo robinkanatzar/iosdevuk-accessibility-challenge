@@ -41,9 +41,22 @@
 		C8D617172FAF5EE500CDFC39 /* MythConf26UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C8C5AE442FB5F4A3000E1F08 /* Exceptions for "MythConf26" folder in "MythConf26" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1B2918B82F73EA8B008A369D /* MythConf26 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C8C5AE442FB5F4A3000E1F08 /* Exceptions for "MythConf26" folder in "MythConf26" target */,
+			);
 			path = MythConf26;
 			sourceTree = "<group>";
 		};
@@ -398,6 +411,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MythConf26/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -440,6 +454,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MythConf26/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
