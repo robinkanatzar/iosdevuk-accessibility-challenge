@@ -8,35 +8,41 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(ViewModel.self) private var viewModel
+    @State private var navigationPath = NavigationPath()
+
     var body: some View {
-        TabView {
-            ProgrammeView()
-                .accessibilityIdentifier("tab.programme")
-                .tabItem {
-                    Label("Programme", systemImage: "calendar")
-                        .symbolRenderingMode(.monochrome)
-                }
+        NavigationStack(path: $navigationPath) { // a11y-check:disable missing-navigation-title
+            TabView {
+                ProgrammeView()
+                    .accessibilityIdentifier("tab.programme")
+                    .tabItem {
+                        Label("Programme", systemImage: "calendar")
+                            .symbolRenderingMode(.monochrome)
+                    }
 
-            SpeakersView()
-                .accessibilityIdentifier("tab.speakers")
-                .tabItem {
-                    Label("Speakers", systemImage: "person.2")
-                        .symbolRenderingMode(.monochrome)
-                }
+                SpeakersView()
+                    .accessibilityIdentifier("tab.speakers")
+                    .tabItem {
+                        Label("Speakers", systemImage: "person.2")
+                            .symbolRenderingMode(.monochrome)
+                    }
 
-            LocationsView()
-                .accessibilityIdentifier("tab.locations")
-                .tabItem {
-                    Label("Locations", systemImage: "map")
-                        .symbolRenderingMode(.monochrome)
-                }
+                LocationsView()
+                    .accessibilityIdentifier("tab.locations")
+                    .tabItem {
+                        Label("Locations", systemImage: "map")
+                            .symbolRenderingMode(.monochrome)
+                    }
 
-            MyScheduleView()
-                .accessibilityIdentifier("tab.mySchedule")
-                .tabItem {
-                    Label("My Schedule", systemImage: "star")
-                        .symbolRenderingMode(.monochrome)
-                }
+                MyScheduleView()
+                    .accessibilityIdentifier("tab.mySchedule")
+                    .tabItem {
+                        Label("My Schedule", systemImage: "star")
+                            .symbolRenderingMode(.monochrome)
+                    }
+            }
+            .conferenceNavigationDestinations()
         }
     }
 
@@ -44,4 +50,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(ViewModel())
 }

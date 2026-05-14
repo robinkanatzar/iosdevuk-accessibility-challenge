@@ -24,69 +24,19 @@ class ViewModel {
     init() {
         confData = loadConfData()
         loadFavourites()
-        startSessionMonitoring()
     }
 
-    private func startSessionMonitoring() {
-        Task {
-            while true {
-                checkForStartingSessions()
-                try? await Task.sleep(for: .seconds(30))
-            }
-        }
-    }
-
-    private func checkForStartingSessions() {
-        let now = self.date()
-        print("--- Session Monitoring Check [\(now.formatted(date: .omitted, time: .complete))] ---")
-        print("Checking \(favouriteIds.count) favourites...")
-        
-        var sessionsToAnnounce: [Talk] = []
-        
-        for faveID in favouriteIds {
-            guard !announcedTalkIDs.contains(faveID) else { continue }
-            
-            let talk = talkFrom(talkID: faveID)
-            
-            for day in confData.sessions {
-                for session in day {
-                    if session.contentIDs.contains(faveID) {
-                        let timeDiff = session.startTime.timeIntervalSince(now)
-                        
-                        // If starting within the next 30 seconds or started in the last 30 seconds
-                        if abs(timeDiff) <= 30 {
-                            sessionsToAnnounce.append(talk)
-                            announcedTalkIDs.insert(faveID)
-                        }
-                    }
+    private func sessionFor(talkID: UUID) -> Session? {
+        for day in confData.sessions {
+            for session in day {
+                if session.contentIDs.contains(talkID) {
+                    return session
                 }
             }
         }
-        
-        if !sessionsToAnnounce.isEmpty {
-            postGroupedSessionAnnouncement(talks: sessionsToAnnounce)
-        }
+        return nil
     }
 
-    private func postGroupedSessionAnnouncement(talks: [Talk]) {
-        let message: String
-        if talks.count == 1 {
-            let talk = talks[0]
-            let locationName = locationNameFrom(locationID: talk.locationID)
-            let speakers = speakersFrom(talkID: talk.id)
-            message = "Exciting! Your session '\(talk.talkTitle)' by \(speakers) is starting now in \(locationName). I hope you have a great time!"
-        } else {
-            let infoList = talks.map { talk in
-                "'\(talk.talkTitle)' by \(speakersFrom(talkID: talk.id))"
-            }.formatted(.list(type: .and))
-            message = "Exciting! You have \(talks.count) sessions starting now: \(infoList). I hope you enjoy them!"
-        }
-        
-        print("!!! TRIGGERING GROUPED ANNOUNCEMENT: \(message)")
-        let announcement = AccessibilityNotification.Announcement(message)
-        announcement.post()
-    }
-    
     func saveConference(){
         let readListURL =  urlToFileInDocuments("conf.json")
         let encoder = JSONEncoder()
@@ -218,12 +168,31 @@ class ViewModel {
         favouriteIds = favouriteIds.filter{$0 != talk.id}
         saveFavourites()
         loadFavourites()
+        
+        NotificationManager.shared.scheduleNotifications(
+            for: confData.sessions,
+            allTalks: confData.talks,
+            viewModel: self,
+            simulatedNow: self.date()
+        )
     }
     
     func addFavourite(talk: Talk) {
+        // Request authorization only if this is the very first favourite
+        if favouriteIds.isEmpty {
+            NotificationManager.shared.requestAuthorization()
+        }
+
         favouriteIds.append(talk.id)
         saveFavourites()
         loadFavourites()
+        
+        NotificationManager.shared.scheduleNotifications(
+            for: confData.sessions,
+            allTalks: confData.talks,
+            viewModel: self,
+            simulatedNow: self.date()
+        )
     }
     
     func isFavourite(talk: Talk) -> Bool {
