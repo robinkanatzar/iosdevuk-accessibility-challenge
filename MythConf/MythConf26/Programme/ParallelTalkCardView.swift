@@ -130,9 +130,9 @@ struct ParallelTalkCardView: View {
         Text(session.sessionType.displayName.uppercased())
             .font(.caption)
             .fontWeight(.black)
+            .dynamicTypeSize(...DynamicTypeSize.accessibility3)
             .tracking(1.8)
             .foregroundStyle(session.sessionType.color)
-            .minimumScaleFactor(0.85)
             .padding(.horizontal, 12)
             .padding(.vertical, 7)
             .background(
