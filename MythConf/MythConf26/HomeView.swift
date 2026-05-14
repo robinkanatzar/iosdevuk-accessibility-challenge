@@ -9,10 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(ViewModel.self) private var viewModel
-    @State private var navigationPath = NavigationPath()
 
     var body: some View {
-        NavigationStack(path: $navigationPath) { // a11y-check:disable missing-navigation-title
             TabView {
                 ProgrammeView()
                     .accessibilityIdentifier("tab.programme")
@@ -42,8 +40,6 @@ struct HomeView: View {
                             .symbolRenderingMode(.monochrome)
                     }
             }
-            .conferenceNavigationDestinations()
-        }
     }
 
 }

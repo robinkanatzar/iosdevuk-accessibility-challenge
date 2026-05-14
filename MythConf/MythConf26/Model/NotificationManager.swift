@@ -25,36 +25,39 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         }
     }
 
-    func scheduleNotifications(for sessions: [[Session]], allTalks: [Talk], viewModel: ViewModel, simulatedNow: Date) {
-        // 1. Clear existing reminders to avoid duplicates/ghosts
+    func scheduleNotifications(for sessions: [[Session]], allTalks: [Talk], viewModel: ViewModel, now: Date) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
-        // 2. Schedule each favourite individually
+
         for day in sessions {
             for session in day {
                 for talkID in session.contentIDs {
-                    if viewModel.favouriteIds.contains(talkID), let talk = allTalks.first(where: { $0.id == talkID }) {
-                        let content = UNMutableNotificationContent()
-                        content.title = "Session Starting Soon"
-                        let speakers = viewModel.speakersFrom(talkID: talk.id)
-                        let location = viewModel.locationNameFrom(locationID: talk.locationID)
-                        content.body = "'\(talk.talkTitle)' by \(speakers) is starting in 10 minutes in \(location)."
-                        content.sound = .default
-                        
-                        let triggerDate = session.startTime.addingTimeInterval(-600)
-                        let delay = triggerDate.timeIntervalSince(simulatedNow)
-                        let finalInterval = delay > 0 ? delay : 5
-                        
-                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: finalInterval, repeats: false)
-                        let request = UNNotificationRequest(
-                            identifier: talk.id.uuidString,
-                            content: content,
-                            trigger: trigger
-                        )
-                        
-                        UNUserNotificationCenter.current().add(request)
-                        print("Scheduled individual notification for \(talk.talkTitle) (Delay: \(Int(finalInterval))s)")
-                    }
+                    guard viewModel.favouriteIds.contains(talkID),
+                          let talk = allTalks.first(where: { $0.id == talkID })
+                    else { continue }
+
+                    let content = UNMutableNotificationContent()
+                    content.title = "Session Starting Soon"
+                    let speakers = viewModel.speakersFrom(talkID: talk.id)
+                    let location = viewModel.locationNameFrom(locationID: talk.locationID)
+                    content.body = "'\(talk.talkTitle)' by \(speakers) is starting in 10 minutes in \(location)."
+                    content.sound = .default
+                    content.userInfo = ["talkID": talk.id.uuidString, "url": "MythConf26://talk/\(talk.id.uuidString)"]
+
+                    // Offset from simulated "now" → real current time
+                    // e.g. simulated trigger is 25s away → real trigger is also 25s from now
+                    let simulatedTriggerDate = session.startTime.addingTimeInterval(-600)
+                    let offsetFromNow = simulatedTriggerDate.timeIntervalSince(now)
+                    let realTriggerDate = Date().addingTimeInterval(offsetFromNow)
+
+                    let components = Calendar.current.dateComponents(
+                        [.year, .month, .day, .hour, .minute, .second],
+                        from: realTriggerDate
+                    )
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                    print("Scheduled '\(talk.talkTitle)' at real time \(realTriggerDate) (offset: \(Int(offsetFromNow))s)")
+
+                    let request = UNNotificationRequest(identifier: talk.id.uuidString, content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request)
                 }
             }
         }

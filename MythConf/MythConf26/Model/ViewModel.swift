@@ -163,38 +163,34 @@ class ViewModel {
             try? data.write(to: readListURL, options: .noFileProtection)
         }
     }
-    
+
     func removeFavourite(talk: Talk) {
-        favouriteIds = favouriteIds.filter{$0 != talk.id}
+        favouriteIds = favouriteIds.filter { $0 != talk.id }
         saveFavourites()
         loadFavourites()
-        
         NotificationManager.shared.scheduleNotifications(
             for: confData.sessions,
             allTalks: confData.talks,
             viewModel: self,
-            simulatedNow: self.date()
+            now: date()
         )
     }
-    
+
     func addFavourite(talk: Talk) {
-        // Request authorization only if this is the very first favourite
         if favouriteIds.isEmpty {
             NotificationManager.shared.requestAuthorization()
         }
-
         favouriteIds.append(talk.id)
         saveFavourites()
         loadFavourites()
-        
         NotificationManager.shared.scheduleNotifications(
             for: confData.sessions,
             allTalks: confData.talks,
             viewModel: self,
-            simulatedNow: self.date()
+            now: date()
         )
     }
-    
+
     func isFavourite(talk: Talk) -> Bool {
         return favouriteIds.contains(talk.id)
     }
