@@ -30,68 +30,97 @@ class ViewModel {
         }
     }
     
+    // MARK: Lookups
+    //
+    // These helpers underpin every accessibility label on talk cards,
+    // speaker rows, and location screens. The previous implementations used
+    // `filter{...}[0]` which trap-crashes whenever the data has a missing
+    // reference — even a single typo'd ID in `conf.json` would take the app
+    // down. They now use `first(where:)` with safe fallback strings, and
+    // `assertionFailure` so bad references still surface loudly during
+    // development.
+
     func talkFrom(talkID: UUID) -> Talk {
-        let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
-        return matchingTalks[0]
-    }
-    
-    func talkUUIDFrom(talkTitle: String) -> UUID {
-        let matchingTalks = confData.talks.filter{$0.talkTitle == talkTitle}
-        if matchingTalks.count != 1 {print("Error - talkTitle did not exist")}
-        return matchingTalks[0].id
-    }
-    
-    func talkTitleFrom(talkID: UUID) -> String {
-        let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
-        return matchingTalks[0].talkTitle
-    }
-    
-    func speakersFrom(talkID: UUID) -> String {
-        let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
-        let speakerIDs = matchingTalks[0].speakerIDs
-        var speakers = speakerNameFrom(speakerID: speakerIDs[0])
-        if speakerIDs.count > 1 {
-            speakers = speakers + " and \(speakerNameFrom(speakerID: speakerIDs[1]))"
+        if let talk = confData.talks.first(where: { $0.id == talkID }) {
+            return talk
         }
-        return speakers
+        assertionFailure("Talk with id \(talkID) not found")
+        return Talk(id: talkID, talkTitle: "Talk to be announced", talkDescription: "", speakerIDs: [], locationID: "")
     }
-    
+
+    func talkUUIDFrom(talkTitle: String) -> UUID {
+        if let talk = confData.talks.first(where: { $0.talkTitle == talkTitle }) {
+            return talk.id
+        }
+        assertionFailure("Talk with title '\(talkTitle)' not found")
+        return UUID()
+    }
+
+    func talkTitleFrom(talkID: UUID) -> String {
+        confData.talks.first(where: { $0.id == talkID })?.talkTitle ?? "Talk to be announced"
+    }
+
+    func speakersFrom(talkID: UUID) -> String {
+        guard let talk = confData.talks.first(where: { $0.id == talkID }),
+              !talk.speakerIDs.isEmpty else {
+            return "Speaker to be announced"
+        }
+        let names = talk.speakerIDs.map { speakerNameFrom(speakerID: $0) }
+        return names.formatted(.list(type: .and))
+    }
+
     func speakerNameFrom(speakerID: String) -> String {
-        let matchingSpeakers = confData.speakers.filter{$0.id == speakerID}
-        if matchingSpeakers.count != 1 {print("Error - speakerID did not exist")}
-        return matchingSpeakers[0].name
+        confData.speakers.first(where: { $0.id == speakerID })?.name ?? "Speaker to be announced"
     }
-    
+
     func speakerFrom(speakerID: String) -> Speaker {
-        let matchingSpeakers = confData.speakers.filter{$0.id == speakerID}
-        if matchingSpeakers.count != 1 {print("Error - speakerID did not exist")}
-        return matchingSpeakers[0]
+        if let speaker = confData.speakers.first(where: { $0.id == speakerID }) {
+            return speaker
+        }
+        assertionFailure("Speaker with id \(speakerID) not found")
+        return Speaker(id: speakerID, name: "Speaker to be announced", talkIDs: [])
     }
-    
+
     func locationFrom(talkID: UUID) -> Location {
-        let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
-        let locationID = matchingTalks[0].locationID
-        let matchingLocations = confData.locations.filter{$0.id == locationID}
-        return matchingLocations[0]
+        guard let talk = confData.talks.first(where: { $0.id == talkID }) else {
+            assertionFailure("Talk with id \(talkID) not found")
+            return Location(id: "", name: "Location to be announced", latitude: 0, longitude: 0, placeDescription: "")
+        }
+        return locationFrom(locationID: talk.locationID)
     }
-    
+
     func locationFrom(locationID: String) -> Location {
-        let matchingLocations = confData.locations.filter{$0.id == locationID}
-        return matchingLocations[0]
+        if let location = confData.locations.first(where: { $0.id == locationID }) {
+            return location
+        }
+        assertionFailure("Location with id '\(locationID)' not found")
+        return Location(id: locationID, name: "Location to be announced", latitude: 0, longitude: 0, placeDescription: "")
     }
-    
+
     func locationNameFrom(talkID: UUID) -> String {
-        let location = locationFrom(talkID: talkID)
-        return location.name
+        locationFrom(talkID: talkID).name
     }
-    
+
     func locationNameFrom(locationID: String) -> String {
-        let location = locationFrom(locationID: locationID)
-        return location.name
+        locationFrom(locationID: locationID).name
+    }
+
+    /// Builds the accessibility label spoken by VoiceOver when focus lands
+    /// on a talk card. Centralised here so it can be unit-tested for shape
+    /// regressions — every word, comma, and connective in the spoken
+    /// sentence matters for VoiceOver clarity.
+    ///
+    /// Times use the shortened locale format ("9:30 am") rather than the
+    /// visible two-digit form ("09:30") which speech engines tend to read
+    /// with a pause between hour and minutes.
+    ///
+    /// Format: "[Type] from [start] to [end]: [title], by [speakers], [location]"
+    func talkCardAccessibilityLabel(talkID: UUID, in session: Session, liveStatus: SessionLiveStatus = .upcoming) -> String {
+        let type = session.sessionType.displayName
+        let title = talkTitleFrom(talkID: talkID)
+        let speakers = speakersFrom(talkID: talkID)
+        let location = locationNameFrom(talkID: talkID)
+        return "\(liveStatus.accessibilityPrefix)\(type) from \(session.startTimeAccessibilityText) to \(session.endTimeAccessibilityText): \(title), by \(speakers), \(location)"
     }
     
     // Handling favourites
@@ -162,6 +191,33 @@ class ViewModel {
     func isFavourite(talk: Talk) -> Bool {
         return favouriteIds.contains(talk.id)
     }
- 
+
+    /// Window (in seconds) inside which a future favourite is promoted
+    /// to the "Up next" slot on the My Schedule tab. Two hours covers
+    /// most of a conference morning or afternoon while keeping the
+    /// promotion quiet when the user has nothing imminent.
+    static let upNextWindow: TimeInterval = 2 * 60 * 60
+
+    /// The favourited session most relevant *right now* — either
+    /// currently underway or starting within the next two hours.
+    /// Returns `nil` outside the window so the view can hide the slot
+    /// rather than showing far-future or finished sessions.
+    func nextUpcomingFavouriteSession(now: Date = .now) -> Session? {
+        let candidates = confData.sessions.flatMap { $0 }
+            .filter { $0.containsTalk }
+            .filter { $0.contentIDs.contains(where: { favouriteIds.contains($0) }) }
+            .filter { now <= $0.endTime }
+
+        let live = candidates.first(where: { $0.startTime <= now && now <= $0.endTime })
+        if let live { return live }
+
+        let upcoming = candidates
+            .filter { $0.startTime > now }
+            .sorted { $0.startTime < $1.startTime }
+            .first
+
+        guard let upcoming else { return nil }
+        return upcoming.startTime.timeIntervalSince(now) <= Self.upNextWindow ? upcoming : nil
+    }
 }
 

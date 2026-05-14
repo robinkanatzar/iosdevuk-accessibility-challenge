@@ -32,12 +32,14 @@ struct SpeakerDetailView: View {
 
                 Divider()
                     .padding(.vertical)
+                    .accessibilityHidden(true)
 
                 // Bio
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
                     Divider()
                         .padding(.vertical)
+                        .accessibilityHidden(true)
                 }
 
                 // Sessions
@@ -45,6 +47,7 @@ struct SpeakerDetailView: View {
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
                         .font(.headline)
+                        .accessibilityAddTraits(.isHeader)
 
                     ForEach(speakerTalks, id: \.talkID) { item in
                         NavigationLink(value: TalkReference(talkID: item.talkID, session: item.session)) {

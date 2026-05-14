@@ -22,10 +22,13 @@ struct SpeakerRowView: View {
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .contrastAdaptiveSecondary()
                         .lineLimit(2)
                 }
             }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityHint("Opens speaker profile")
+        .accessibilityInputLabels([speaker.name])
     }
 }

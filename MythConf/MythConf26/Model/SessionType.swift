@@ -54,4 +54,25 @@ enum SessionType: Codable {
         case .dummy:         return .clear
         }
     }
+
+    /// SF Symbol that represents this session type. Used as a redundant,
+    /// shape-based cue alongside `color` so users with the
+    /// `Differentiate Without Color` accessibility setting can tell session
+    /// types apart by icon as well as colour.
+    var symbolName: String {
+        switch self {
+        case .talk:           return "bubble.left.and.bubble.right"
+        case .panel:          return "person.3.sequence"
+        case .workshop:       return "hammer"
+        case .lightningtalks: return "bolt"
+        case .teaBreak:       return "cup.and.saucer"
+        case .lunch:          return "fork.knife"
+        case .dinner:         return "fork.knife.circle"
+        case .confdinner:     return "wineglass"
+        case .social:         return "person.2.wave.2"
+        case .registration:   return "person.badge.plus"
+        case .railtrip:       return "train.side.front.car"
+        case .dummy:          return ""
+        }
+    }
 }

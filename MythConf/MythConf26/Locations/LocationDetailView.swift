@@ -31,9 +31,12 @@ struct LocationDetailView: View {
                 .frame(height: 400)
                 .clipShape(.rect(cornerRadius: 12))
                 .padding(.horizontal)
+                .accessibilityElement()
+                .accessibilityLabel("Map showing the location of \(location.name)")
+                .accessibilityHint("Scroll down for a text description of this venue.")
 
                 Text(location.placeDescription)
-                    .foregroundStyle(.secondary)
+                    .contrastAdaptiveSecondary()
                     .padding()
             }
         }

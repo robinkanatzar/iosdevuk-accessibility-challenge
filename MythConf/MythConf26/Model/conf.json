@@ -726,18 +726,18 @@
       "speakerInfo" : "Alex is one of the organisers of MythConf, a developer conference for iOS and Swift enthusiasts held at the fictional Northbridge University. Alex has been writing Swift since its very first release and started organising community events because there was no conference near enough to attend. Several years later, MythConf has become one of the most well-regarded Swift developer gatherings in the region."
     },
     {
-      "speakerInfo" : "You. With your different experiences, side projects, and hard-won war stories. The lightning talk sessions are your opportunity to share something that surprised you, something you wish someone had told you earlier, or something you built that you are unreasonably proud of. You have five minutes. Use them.",
+      "speakerInfo" : "This is not just any iOS developer. This is a meticulously hand-crafted Swift artisan, lovingly folded into layers of SwiftUI, generously drizzled with @Observable state, and finished with a delicate dusting of accessibility modifiers — slow-baked over fifteen years until every pixel falls effortlessly into place. ",
       "talkIDs" : [
         "C1001022-C100-4100-8100-100000000022"
       ],
-      "name" : "You",
+      "name" : "Trevor Doodes",
       "social" : [
         {
           "socialType" : "www",
           "socialLink" : ""
         }
       ],
-      "id" : "You"
+      "id" : "TrevorDoodes"
     }
   ],
   "locations" : [

@@ -17,11 +17,15 @@ struct TalkSummaryView: View {
                 .bold()
             HStack {
                 Label(session.timeRange, systemImage: "clock")
+                    .accessibilityLabel(session.timeRangeAccessibilityText)
                 Label(viewModel.locationNameFrom(talkID: talkID), systemImage: "mappin")
             }
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .contrastAdaptiveSecondary()
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityHint("Opens session details")
+        .accessibilityInputLabels([viewModel.talkTitleFrom(talkID: talkID)])
     }
 }

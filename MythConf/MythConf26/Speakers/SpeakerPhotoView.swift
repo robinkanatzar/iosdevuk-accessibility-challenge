@@ -10,9 +10,9 @@ struct SpeakerPhotoView: View {
     let speaker: Speaker
     let size: CGFloat
 
-    private var imageName: String {
-        UIImage(named: speaker.photoName) != nil ? speaker.photoName : "default"
-    }
+    private var hasPhoto: Bool { UIImage(named: speaker.photoName) != nil }
+
+    private var imageName: String { hasPhoto ? speaker.photoName : "default" }
 
     var body: some View {
         Image(imageName)
@@ -20,5 +20,6 @@ struct SpeakerPhotoView: View {
             .scaledToFill()
             .frame(width: size, height: size)
             .clipShape(.circle)
+            .accessibilityLabel(hasPhoto ? "\(speaker.name)'s profile photo" : "Profile photo not available")
     }
 }

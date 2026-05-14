@@ -17,9 +17,12 @@ struct LocationsView: View {
                             .bold()
                         Text(location.placeDescription)
                             .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .contrastAdaptiveSecondary()
                             .lineLimit(2)
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityHint("Opens venue details and map")
+                    .accessibilityInputLabels([location.name])
                 }
             }
             .navigationTitle("Locations")

@@ -18,13 +18,17 @@ struct SessionDetailView: View {
                 // Time and location
                 HStack {
                     Label(session.timeRange, systemImage: "clock")
+                        .accessibilityLabel("Time \(session.timeRangeAccessibilityText), at \(viewModel.locationNameFrom(locationID: talk.locationID))")
                     Spacer()
                     NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
                         Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")
+                            .frame(minHeight: 44)
+                            .contentShape(.rect)
                     }
+                    .accessibilityHint("Opens venue details and map")
                 }
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .contrastAdaptiveSecondary()
                 .padding(.bottom)
 
                 // Speakers
@@ -37,6 +41,7 @@ struct SessionDetailView: View {
 
                 Divider()
                     .padding(.vertical)
+                    .accessibilityHidden(true)
 
                 // Abstract
                 Text(talk.talkDescription)
@@ -47,7 +52,7 @@ struct SessionDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                FavouriteButtonView(talk: talk)
+                FavouriteButtonView(talk: talk, compact: true)
             }
         }
     }

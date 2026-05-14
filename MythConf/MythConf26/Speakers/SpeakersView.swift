@@ -25,6 +25,12 @@ struct SpeakersView: View {
             .searchable(text: $searchText, prompt: "Search speakers")
             .navigationTitle("Speakers")
             .conferenceNavigationDestinations()
+            .onChange(of: searchText) { _, newValue in
+                guard !newValue.isEmpty else { return }
+                let count = filteredSpeakers.count
+                let message = count == 1 ? "1 speaker matches" : "\(count) speakers match"
+                AccessibilityAnnouncer.shared.announce(message)
+            }
         }
     }
 }

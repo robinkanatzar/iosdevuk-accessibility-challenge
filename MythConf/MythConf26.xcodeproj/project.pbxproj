@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		F022FFB32FADFFFE001C33FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B2918AE2F73EA8B008A369D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B2918B52F73EA8B008A369D;
+			remoteInfo = MythConf26;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		1B2919CA2F74454F008A369D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -22,6 +32,7 @@
 /* Begin PBXFileReference section */
 		1B2918B62F73EA8B008A369D /* MythConf26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MythConf26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2919B72F74454E008A369D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F022FFAF2FADFFFE001C33FD /* MythConf26Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -30,10 +41,22 @@
 			path = MythConf26;
 			sourceTree = "<group>";
 		};
+		F022FFB02FADFFFE001C33FD /* MythConf26Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MythConf26Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1B2918B32F73EA8B008A369D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F022FFAC2FADFFFE001C33FD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				1B2918B82F73EA8B008A369D /* MythConf26 */,
+				F022FFB02FADFFFE001C33FD /* MythConf26Tests */,
 				1B2919B42F74454E008A369D /* Frameworks */,
 				1B2918B72F73EA8B008A369D /* Products */,
 			);
@@ -56,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				1B2918B62F73EA8B008A369D /* MythConf26.app */,
+				F022FFAF2FADFFFE001C33FD /* MythConf26Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +119,29 @@
 			productReference = 1B2918B62F73EA8B008A369D /* MythConf26.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F022FFAE2FADFFFE001C33FD /* MythConf26Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F022FFB52FADFFFE001C33FD /* Build configuration list for PBXNativeTarget "MythConf26Tests" */;
+			buildPhases = (
+				F022FFAB2FADFFFE001C33FD /* Sources */,
+				F022FFAC2FADFFFE001C33FD /* Frameworks */,
+				F022FFAD2FADFFFE001C33FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F022FFB42FADFFFE001C33FD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F022FFB02FADFFFE001C33FD /* MythConf26Tests */,
+			);
+			name = MythConf26Tests;
+			packageProductDependencies = (
+			);
+			productName = MythConf26Tests;
+			productReference = F022FFAF2FADFFFE001C33FD /* MythConf26Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -101,11 +149,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2630;
+				LastSwiftUpdateCheck = 2640;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					1B2918B52F73EA8B008A369D = {
 						CreatedOnToolsVersion = 26.3;
+					};
+					F022FFAE2FADFFFE001C33FD = {
+						CreatedOnToolsVersion = 26.4.1;
+						TestTargetID = 1B2918B52F73EA8B008A369D;
 					};
 				};
 			};
@@ -126,12 +178,20 @@
 			projectRoot = "";
 			targets = (
 				1B2918B52F73EA8B008A369D /* MythConf26 */,
+				F022FFAE2FADFFFE001C33FD /* MythConf26Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1B2918B42F73EA8B008A369D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F022FFAD2FADFFFE001C33FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -148,7 +208,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F022FFAB2FADFFFE001C33FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F022FFB42FADFFFE001C33FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
+			targetProxy = F022FFB32FADFFFE001C33FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1B2918BF2F73EA8B008A369D /* Debug */ = {
@@ -204,7 +279,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -263,7 +338,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -281,7 +356,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				DEVELOPMENT_TEAM = X7ERH955JW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
@@ -291,7 +366,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,7 +391,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				DEVELOPMENT_TEAM = X7ERH955JW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
@@ -326,7 +401,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -341,6 +416,50 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F022FFB62FADFFFE001C33FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X7ERH955JW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.ironworksmedialimited.MythConf26Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MythConf26.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MythConf26";
+			};
+			name = Debug;
+		};
+		F022FFB72FADFFFE001C33FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X7ERH955JW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.ironworksmedialimited.MythConf26Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MythConf26.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MythConf26";
 			};
 			name = Release;
 		};
@@ -361,6 +480,15 @@
 			buildConfigurations = (
 				1B2918C22F73EA8B008A369D /* Debug */,
 				1B2918C32F73EA8B008A369D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F022FFB52FADFFFE001C33FD /* Build configuration list for PBXNativeTarget "MythConf26Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F022FFB62FADFFFE001C33FD /* Debug */,
+				F022FFB72FADFFFE001C33FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
