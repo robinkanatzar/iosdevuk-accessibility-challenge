@@ -53,7 +53,7 @@ struct SpeakerRowView: View {
                 .bold()
                 .foregroundStyle(Color(.label))
 
-            if !speakerSummary.isEmpty {
+            if !speakerSummary.isEmpty && !dynamicTypeSize.isAccessibilitySize {
                 Text(speakerSummary)
                     .font(.body)
                     .foregroundStyle(Color(.label))

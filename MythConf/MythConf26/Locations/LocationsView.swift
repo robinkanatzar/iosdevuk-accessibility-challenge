@@ -16,10 +16,12 @@ struct LocationsView: View {
                     VStack(alignment: .leading) {
                         Text(location.name)
                             .bold()
-                        Text(location.placeDescription)
-                            .font(.body)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+                        if  !dynamicTypeSize.isAccessibilitySize {
+                            Text(location.placeDescription)
+                                .font(.body)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+                        }
                     }
                     .accessibilityElement(children: .combine)
                 }

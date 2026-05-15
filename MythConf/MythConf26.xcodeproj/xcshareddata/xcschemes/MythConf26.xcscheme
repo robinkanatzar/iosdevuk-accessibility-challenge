@@ -67,7 +67,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-TestingDate 841582680"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-TestingDate 841582200"
@@ -79,7 +79,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-TestingDate 841582175"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
