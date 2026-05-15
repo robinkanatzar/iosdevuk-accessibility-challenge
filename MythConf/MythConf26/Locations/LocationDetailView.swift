@@ -26,6 +26,7 @@ struct LocationDetailView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
+                    .accessibilityAddTraits(.isHeader)
                 Map(initialPosition: .region(
                     MKCoordinateRegion(
                         center: coordinate,
