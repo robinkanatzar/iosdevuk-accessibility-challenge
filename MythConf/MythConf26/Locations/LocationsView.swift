@@ -20,6 +20,9 @@ struct LocationsView: View {
                             .foregroundStyle(.secondary)
                             .lineLimit(2)
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(location.name)
+                    .accessibilityHint("Double tap to find out more.")
                 }
             }
             .navigationTitle("Locations")
