@@ -24,11 +24,11 @@ struct Session: Codable, Identifiable, Hashable {
     }
 
     var startTimeText: String {
-        startTime.formatted(.dateTime.hour(.twoDigits(amPM: .omitted)).minute(.twoDigits))
+        startTime.formatted(date: .omitted, time: .shortened)
     }
 
     var endTimeText: String {
-        endTime.formatted(.dateTime.hour(.twoDigits(amPM: .omitted)).minute(.twoDigits))
+        endTime.formatted(date: .omitted, time: .shortened)
     }
 
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
@@ -66,20 +66,6 @@ extension Session {
         }
     }
 
-//    var liveStatus: LiveStatus {
-//        let now = Date()
-//
-//        if now >= startTime && now <= endTime {
-//            return .live
-//        }
-//
-//        if now < startTime {
-//            return .upcoming
-//        }
-//
-//        return .ended
-//    }
-
     func liveStatus(now: Date) -> LiveStatus {
         if now >= startTime && now <= endTime {
             return .live
@@ -89,10 +75,6 @@ extension Session {
         }
         return .ended
     }
-
-//    var isLive: Bool {
-//        liveStatus == .live
-//    }
 
     var isLive: Bool {
         liveStatus(now: Date()) == .live

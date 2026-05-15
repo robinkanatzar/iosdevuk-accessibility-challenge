@@ -57,4 +57,17 @@ func fileExistsInDocuments( _ fileName: String ) -> Bool {
     return fileManager.fileExists(atPath: filepathName)
 }
 
+extension Locale {
+    var uses24HourClock: Bool {
+        switch hourCycle {
+        case .zeroToTwentyThree, .oneToTwentyFour:
+            return true
+        case .zeroToEleven, .oneToTwelve:
+            return false
+        @unknown default:
+            return false
+        }
+    }
+}
+
 
