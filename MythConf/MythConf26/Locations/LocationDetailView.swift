@@ -51,6 +51,7 @@ struct LocationDetailView: View {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 17, weight: .semibold))
                 }
+                .accessibilityHint("Go back to all locations")
             }
         }
     }
