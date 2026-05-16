@@ -80,10 +80,7 @@ struct ParallelTalkCardView: View {
             }
             .accessibilityIdentifier("programme.card.\(talk.id.uuidString)")
             .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
-//            .accessibilityValue("\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")")
-//            .accessibilityValue(
-//                "\(session.liveStatus.title), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
-//            )
+            .accessibilityInputLabels([talk.talkTitle])
             .accessibilityValue(
                 "\(session.liveStatus(now: Date()).title), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
             )

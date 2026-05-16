@@ -25,9 +25,8 @@ struct ProgrammeView: View {
                             .accessibilityLabel("\(ordinalDayLabel(for: index)), \(fullDayLabel(for: days[index]))")
                             .accessibilityInputLabels([
                                 dayLabel(for: days[index]),
-                                ordinalDayLabel(for: index),
-                                "day \(index + 1)",
-                                fullDayLabel(for: days[index])
+                                fullDayLabel(for: days[index]),
+                                ordinalDayLabel(for: index)
                             ])
                     }
                 }
