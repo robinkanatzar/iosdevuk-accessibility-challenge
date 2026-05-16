@@ -20,12 +20,13 @@ struct FavouriteButtonView: View {
         Button {
             toggleFavourite()
         } label: {
-            Image(systemName: isFavourite ? "star.fill" : "star")
+            Image(systemName: "star")
                 .symbolVariant(isFavourite ? .fill : .none)
                 .foregroundStyle(isFavourite ? .yellow : .secondary)
                 .frame(minWidth: 44, minHeight: 44)
                 .contentShape(.rect)
         }
+        .contentTransition(.symbolEffect(.replace))
         .accessibilityLabel(isFavourite ? "Remove \(talk.talkTitle) from favourites" : "Add \(talk.talkTitle) to favourites")
         .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
         .accessibilityHint(isFavourite ? "Removes this session from My Schedule" : "Adds this session to My Schedule")
@@ -36,7 +37,6 @@ struct FavouriteButtonView: View {
         ])
         .accessibilityAddTraits(isFavourite ? .isSelected : [])
         .buttonStyle(.plain)
-        .symbolEffect(.bounce.down, value: isFavourite)
         .popoverTip(saveSessionTip, arrowEdge: .bottom)
     }
 
