@@ -22,7 +22,6 @@ struct LocationsView: View {
                     }
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel(location.name)
-                    .accessibilityHint("Double tap to find out more.")
                 }
             }
             .navigationTitle("Locations")
