@@ -14,7 +14,12 @@ final class MythConf26UITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
-        app.launchArguments = ["-UITesting", "-UITestingResetFavourites", "-UITestingResetSettings"]
+        app.launchArguments = [
+            "-UITesting",
+            "-UITestingResetFavourites",
+            "-UITestingResetSettings",
+            "-UITestingResetNotifications"
+        ]
         app.launch()
     }
 
@@ -46,6 +51,39 @@ final class MythConf26UITests: XCTestCase {
 
         let startingSoon = app.staticTexts["Starting Soon"]
         XCTAssertTrue(startingSoon.waitForExistence(timeout: 5))
+    }
+
+    func testFavouritingNearReminderTimeRequestsNotificationPermission() throws {
+        // First workshop starts at 841582800. The reminder trigger is 10 minutes earlier: 841582200.
+        relaunchForTestingDate(841582080)
+        openTab(.programme)
+
+        let addButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        addButton.tap()
+
+        allowNotificationsIfPrompted()
+
+        let removeButton = firstButton(labelBeginningWith: "Remove ")
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 10))
+    }
+
+    func testFavouritingSchedulesTenMinuteLocalNotification() throws {
+        // First workshop starts at 841582800. The reminder trigger is 10 minutes earlier: 841582200.
+        relaunchForTestingDate(841582080)
+        openTab(.programme)
+
+        let addButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        addButton.tap()
+
+        allowNotificationsIfPrompted()
+
+        let summary = element(identifier: "debug.pendingReminderSummary")
+        XCTAssertTrue(summary.waitForExistence(timeout: 10))
+        waitForLabel(of: summary, containing: "1 pending reminder")
+        XCTAssertTrue(summary.label.contains("Session Starting Soon"), summary.label)
+        XCTAssertTrue(summary.label.contains("starting in 10 minutes"), summary.label)
     }
 
     func testProgrammeAccessibilityAudit() throws {
@@ -243,10 +281,24 @@ final class MythConf26UITests: XCTestCase {
             "-UITesting",
             "-UITestingResetFavourites",
             "-UITestingResetSettings",
+            "-UITestingResetNotifications",
             "-TestingDate",
             String(timestamp)
         ]
         app.launch()
+    }
+
+    private func allowNotificationsIfPrompted(timeout: TimeInterval = 5) {
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let allowLabels = ["Allow", "Allow Notifications"]
+
+        for label in allowLabels {
+            let allowButton = springboard.buttons[label]
+            if allowButton.waitForExistence(timeout: timeout) {
+                allowButton.tap()
+                return
+            }
+        }
     }
 
     private func openTab(_ tab: AppTab) {
@@ -359,6 +411,19 @@ final class MythConf26UITests: XCTestCase {
             file: file,
             line: line
         )
+    }
+
+    private func waitForLabel(
+        of element: XCUIElement,
+        containing expectedText: String,
+        timeout: TimeInterval = 10,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let predicate = NSPredicate(format: "label CONTAINS %@", expectedText)
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: element)
+        let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
+        XCTAssertEqual(result, .completed, "Expected label to contain \(expectedText), got \(element.label)", file: file, line: line)
     }
 
     private func auditVisibleScreen(

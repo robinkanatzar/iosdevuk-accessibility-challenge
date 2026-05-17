@@ -19,6 +19,7 @@ class ViewModel {
     var check = "Not done"
     var pendingDeepLinkTalkID: UUID? = nil
     var favouriteIds: [UUID] = []  // The talk IDs for each favourite
+    var pendingReminderDebugSummary = ""
     private var announcedTalkIDs: Set<UUID> = []
 
     init() {
@@ -173,27 +174,39 @@ class ViewModel {
         favouriteIds = favouriteIds.filter { $0 != talk.id }
         saveFavourites()
         loadFavourites()
-        NotificationManager.shared.scheduleNotifications(
-            for: confData.sessions,
-            allTalks: confData.talks,
-            viewModel: self,
-            now: date()
-        )
+        Task { @MainActor in
+            await scheduleFavouriteNotifications()
+        }
     }
 
     func addFavourite(talk: Talk) {
-        if favouriteIds.isEmpty {
-            NotificationManager.shared.requestAuthorization()
-        }
+        let shouldRequestAuthorization = favouriteIds.isEmpty
         favouriteIds.append(talk.id)
         saveFavourites()
         loadFavourites()
-        NotificationManager.shared.scheduleNotifications(
+
+        Task { @MainActor in
+            if shouldRequestAuthorization {
+                _ = await NotificationManager.shared.requestAuthorization()
+            }
+            await scheduleFavouriteNotifications()
+        }
+    }
+
+    private func scheduleFavouriteNotifications() async {
+        await NotificationManager.shared.scheduleNotifications(
             for: confData.sessions,
             allTalks: confData.talks,
             viewModel: self,
             now: date()
         )
+        await refreshPendingReminderDebugSummary()
+    }
+
+    private func refreshPendingReminderDebugSummary() async {
+        guard CommandLine.arguments.contains("-UITesting") else { return }
+
+        pendingReminderDebugSummary = await NotificationManager.shared.pendingReminderDebugSummary()
     }
 
     func isFavourite(talk: Talk) -> Bool {

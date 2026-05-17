@@ -40,6 +40,13 @@ struct ProgrammeView: View {
                 if !days.isEmpty {
                     DayScheduleView(sessions: days[selectedDayIndex])
                 }
+
+                if CommandLine.arguments.contains("-UITesting") {
+                    Text(viewModel.pendingReminderDebugSummary)
+                        .accessibilityIdentifier("debug.pendingReminderSummary")
+                        .frame(width: 1, height: 1)
+                        .opacity(0.01)
+                }
             }
             .navigationTitle("MythConf 2026")
             .navigationBarTitleDisplayMode(.inline)

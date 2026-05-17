@@ -30,6 +30,10 @@ struct MythConf: App {
         if CommandLine.arguments.contains("-UITestingResetSettings") {
             AppSettings.resetStoredSettings()
         }
+
+        if CommandLine.arguments.contains("-UITestingResetNotifications") {
+            NotificationManager.shared.cancelAll()
+        }
         
         let timestamp = CommandLine.arguments.firstIndex(of: "-TestingDate")
             .flatMap { index in

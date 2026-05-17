@@ -16,17 +16,23 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    func requestAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+    func requestAuthorization() async -> Bool {
+        do {
+            let granted = try await UNUserNotificationCenter.current()
+                .requestAuthorization(options: [.alert, .sound, .badge])
             if granted {
                 print("Notification permission granted.")
-            } else if let error = error {
-                print("Notification permission error: \(error.localizedDescription)")
+            } else {
+                print("Notification permission denied.")
             }
+            return granted
+        } catch {
+            print("Notification permission error: \(error.localizedDescription)")
+            return false
         }
     }
 
-    func scheduleNotifications(for sessions: [[Session]], allTalks: [Talk], viewModel: ViewModel, now: Date) {
+    func scheduleNotifications(for sessions: [[Session]], allTalks: [Talk], viewModel: ViewModel, now: Date) async {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
 
         for day in sessions {
@@ -58,7 +64,11 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
                     print("Scheduled '\(talk.talkTitle)' at real time \(realTriggerDate) (offset: \(Int(offsetFromNow))s)")
 
                     let request = UNNotificationRequest(identifier: talk.id.uuidString, content: content, trigger: trigger)
-                    UNUserNotificationCenter.current().add(request)
+                    do {
+                        try await UNUserNotificationCenter.current().add(request)
+                    } catch {
+                        print("Notification schedule error: \(error.localizedDescription)")
+                    }
                 }
             }
         }
@@ -66,6 +76,18 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     func cancelAll() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    }
+
+    func pendingReminderDebugSummary() async -> String {
+        let requests = await UNUserNotificationCenter.current().pendingNotificationRequests()
+        guard let first = requests.first else {
+            return "No pending reminders"
+        }
+
+        let title = first.content.title
+        let body = first.content.body
+        return "\(requests.count) pending reminder. \(title). \(body)"
     }
 
     // MARK: - UNUserNotificationCenterDelegate
