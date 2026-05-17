@@ -54,9 +54,8 @@ struct SpeakerDetailView: View {
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
                         .font(.headline)
-                        .accessibilityLabel { label in
-                            Text("Sessions by")
-                            label
+                        .accessibilityLabel { _ in
+                            Text("Sessions by \(speaker.name)")
                         }
                         .accessibilityIdentifier("speakerDetail.sessionsHeading")
                         .accessibilityAddTraits(.isHeader)
