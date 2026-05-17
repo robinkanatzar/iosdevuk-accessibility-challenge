@@ -16,14 +16,22 @@ enum FavouriteToggleFeedback {
     private static var configuredAudioSession = false
     private static var players: [Sound: AVAudioPlayer] = [:]
 
-    static func added() {
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
-        play(.bell)
+    static func added(hapticsEnabled: Bool = true, soundsEnabled: Bool = true) {
+        if hapticsEnabled {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        }
+        if soundsEnabled {
+            play(.bell)
+        }
     }
 
-    static func removed() {
-        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-        play(.pop)
+    static func removed(hapticsEnabled: Bool = true, soundsEnabled: Bool = true) {
+        if hapticsEnabled {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        }
+        if soundsEnabled {
+            play(.pop)
+        }
     }
 
     private static func play(_ sound: Sound) {

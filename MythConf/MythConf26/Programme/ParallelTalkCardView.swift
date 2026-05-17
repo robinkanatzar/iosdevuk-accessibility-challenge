@@ -12,6 +12,7 @@ struct ParallelTalkCardView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.legibilityWeight) private var legibilityWeight
+    @Environment(\.appSettings) private var appSettings
     @Environment(ViewModel.self) private var viewModel
     let talkID: UUID
     let session: Session
@@ -217,10 +218,16 @@ struct ParallelTalkCardView: View {
     private func toggleFavourite() {
         if isFavourite {
             viewModel.removeFavourite(talk: talk)
-            FavouriteToggleFeedback.removed()
+            FavouriteToggleFeedback.removed(
+                hapticsEnabled: appSettings.usesFavouriteHaptics,
+                soundsEnabled: appSettings.usesFavouriteSounds
+            )
         } else {
             viewModel.addFavourite(talk: talk)
-            FavouriteToggleFeedback.added()
+            FavouriteToggleFeedback.added(
+                hapticsEnabled: appSettings.usesFavouriteHaptics,
+                soundsEnabled: appSettings.usesFavouriteSounds
+            )
         }
     }
 }

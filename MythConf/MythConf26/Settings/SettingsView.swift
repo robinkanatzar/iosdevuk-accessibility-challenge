@@ -32,6 +32,23 @@ struct SettingsView: View {
                         .foregroundStyle(.secondary)
                 }
                 .accessibilityIdentifier("settings.openDyslexicPreview")
+
+                Section {
+                    Toggle("Haptic Feedback", isOn: $appSettings.usesFavouriteHaptics)
+                        .accessibilityIdentifier("settings.favouriteHapticsToggle")
+                        .accessibilityLabel("Favourite haptic feedback")
+                        .accessibilityHint("Controls vibration feedback when adding or removing favourites.")
+
+                    Toggle("Sound Feedback", isOn: $appSettings.usesFavouriteSounds)
+                        .accessibilityIdentifier("settings.favouriteSoundsToggle")
+                        .accessibilityLabel("Favourite sound feedback")
+                        .accessibilityHint("Controls sound feedback when adding or removing favourites.")
+                } header: {
+                    Text("Favourite Feedback")
+                } footer: {
+                    Text("Both feedback types are on by default. You can turn either off without changing how favourites work.")
+                }
+                .accessibilityIdentifier("settings.favouriteFeedbackSection")
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)

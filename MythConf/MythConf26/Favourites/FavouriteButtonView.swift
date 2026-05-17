@@ -8,6 +8,7 @@ import TipKit
 
 /// A button that toggles a talk as a favourite.
 struct FavouriteButtonView: View {
+    @Environment(\.appSettings) private var appSettings
     @Environment(ViewModel.self) private var viewModel
     let talk: Talk
     private let saveSessionTip = SaveSessionTip()
@@ -56,12 +57,18 @@ struct FavouriteButtonView: View {
     private func toggleFavourite() {
         if isFavourite {
             viewModel.removeFavourite(talk: talk)
-            FavouriteToggleFeedback.removed()
+            FavouriteToggleFeedback.removed(
+                hapticsEnabled: appSettings.usesFavouriteHaptics,
+                soundsEnabled: appSettings.usesFavouriteSounds
+            )
         } else {
             viewModel.addFavourite(talk: talk)
             SaveSessionTip.hasSavedFavourite = true
             saveSessionTip.invalidate(reason: .actionPerformed)
-            FavouriteToggleFeedback.added()
+            FavouriteToggleFeedback.added(
+                hapticsEnabled: appSettings.usesFavouriteHaptics,
+                soundsEnabled: appSettings.usesFavouriteSounds
+            )
         }
     }
 }

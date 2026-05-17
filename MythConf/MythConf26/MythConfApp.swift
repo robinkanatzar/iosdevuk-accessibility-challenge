@@ -28,7 +28,7 @@ struct MythConf: App {
         }
 
         if CommandLine.arguments.contains("-UITestingResetSettings") {
-            UserDefaults.standard.removeObject(forKey: AppSettings.openDyslexicReadingFontKey)
+            AppSettings.resetStoredSettings()
         }
         
         let timestamp = CommandLine.arguments.firstIndex(of: "-TestingDate")

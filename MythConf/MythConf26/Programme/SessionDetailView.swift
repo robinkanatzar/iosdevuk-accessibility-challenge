@@ -8,6 +8,7 @@ import NaturalLanguage
 
 struct SessionDetailView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.appSettings) private var appSettings
     @Environment(ViewModel.self) private var viewModel
     let talkReference: TalkReference
 
@@ -266,11 +267,17 @@ struct SessionDetailView: View {
     private func toggleFavourite() {
         if isFavourite {
             viewModel.removeFavourite(talk: talk)
-            FavouriteToggleFeedback.removed()
+            FavouriteToggleFeedback.removed(
+                hapticsEnabled: appSettings.usesFavouriteHaptics,
+                soundsEnabled: appSettings.usesFavouriteSounds
+            )
         } else {
             viewModel.addFavourite(talk: talk)
             SaveSessionTip.hasSavedFavourite = true
-            FavouriteToggleFeedback.added()
+            FavouriteToggleFeedback.added(
+                hapticsEnabled: appSettings.usesFavouriteHaptics,
+                soundsEnabled: appSettings.usesFavouriteSounds
+            )
         }
     }
 }

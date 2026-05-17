@@ -91,6 +91,21 @@ final class MythConf26UITests: XCTestCase {
         try auditVisibleScreen("My Schedule populated", includesContrast: false)
     }
 
+    func testSettingsAccessibilityAudit() throws {
+        openTab(.programme)
+
+        let settingsButton = app.buttons["settings.open"]
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        settingsButton.tap()
+
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.switches["settings.openDyslexicToggle"].waitForExistence(timeout: 5))
+        XCTAssertTrue(scrollToSwitch(identifier: "settings.favouriteHapticsToggle", labels: ["Favourite haptic feedback", "Haptic Feedback"]).exists)
+        XCTAssertTrue(scrollToSwitch(identifier: "settings.favouriteSoundsToggle", labels: ["Favourite sound feedback", "Sound Feedback"]).exists)
+
+        try auditVisibleScreen("Settings", includesDynamicType: false)
+    }
+
     func testFavouriteButtonLabelChangesAfterToggle() throws {
         openTab(.programme)
 
@@ -151,16 +166,38 @@ final class MythConf26UITests: XCTestCase {
 
         let toggle = app.switches["settings.openDyslexicToggle"]
         XCTAssertTrue(toggle.waitForExistence(timeout: 5))
-        XCTAssertTrue(["0", "Off"].contains(toggle.value as? String))
+        assertSwitch(toggle, isOn: false)
 
         toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
-        XCTAssertTrue(["1", "On"].contains(toggle.value as? String))
+        assertSwitch(toggle, isOn: true)
 
         XCTAssertTrue(element(identifier: "settings.openDyslexicPreview").exists)
 
         let doneButton = app.buttons["settings.done"]
         XCTAssertTrue(doneButton.waitForExistence(timeout: 5))
         doneButton.tap()
+    }
+
+    func testFavouriteFeedbackSettingsCanBeToggled() throws {
+        openTab(.programme)
+
+        let settingsButton = app.buttons["settings.open"]
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        settingsButton.tap()
+
+        let hapticsToggle = scrollToSwitch(identifier: "settings.favouriteHapticsToggle", labels: ["Favourite haptic feedback", "Haptic Feedback"])
+        XCTAssertTrue(hapticsToggle.exists)
+        assertSwitch(hapticsToggle, isOn: true)
+
+        hapticsToggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+        assertSwitch(hapticsToggle, isOn: false)
+
+        let soundsToggle = scrollToSwitch(identifier: "settings.favouriteSoundsToggle", labels: ["Favourite sound feedback", "Sound Feedback"])
+        XCTAssertTrue(soundsToggle.exists)
+        assertSwitch(soundsToggle, isOn: true)
+
+        soundsToggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+        assertSwitch(soundsToggle, isOn: false)
     }
 
     private enum AppTab: String {
@@ -246,9 +283,50 @@ final class MythConf26UITests: XCTestCase {
         app.descendants(matching: .any)[identifier]
     }
 
+    private func scrollToSwitch(identifier: String, labels: [String] = [], maxSwipes: Int = 4) -> XCUIElement {
+        let toggle = firstSwitch(identifier: identifier, labels: labels)
+        for _ in 0..<maxSwipes where !toggle.exists {
+            app.swipeUp()
+        }
+        return firstSwitch(identifier: identifier, labels: labels)
+    }
+
+    private func firstSwitch(identifier: String, labels: [String]) -> XCUIElement {
+        let identifierMatch = app.switches[identifier]
+        if identifierMatch.exists {
+            return identifierMatch
+        }
+
+        for label in labels {
+            let labelMatch = app.switches[label]
+            if labelMatch.exists {
+                return labelMatch
+            }
+        }
+
+        return identifierMatch
+    }
+
+    private func assertSwitch(
+        _ toggle: XCUIElement,
+        isOn expectedIsOn: Bool,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let expectedValues = expectedIsOn ? ["1", "On"] : ["0", "Off"]
+        let actualValue = toggle.value as? String ?? ""
+        XCTAssertTrue(
+            expectedValues.contains(actualValue),
+            "Expected switch to be \(expectedIsOn ? "on" : "off"), got \(String(describing: toggle.value))",
+            file: file,
+            line: line
+        )
+    }
+
     private func auditVisibleScreen(
         _ name: String,
         includesContrast: Bool = true,
+        includesDynamicType: Bool = true,
         file: StaticString = #filePath,
         line: UInt = #line
     ) throws {
@@ -256,13 +334,15 @@ final class MythConf26UITests: XCTestCase {
             guard #available(iOS 17.0, *) else { return }
             var auditTypes: XCUIAccessibilityAuditType = [
 //                .contrast,
-                .dynamicType,
                 .textClipped,
                 .elementDetection,
                 .hitRegion,
                 .sufficientElementDescription,
                 .trait
             ]
+            if includesDynamicType {
+                auditTypes.insert(.dynamicType)
+            }
             if includesContrast {
                 auditTypes.insert(.contrast)
             }
