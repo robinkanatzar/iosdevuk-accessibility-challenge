@@ -20,10 +20,11 @@ struct BreakRowView: View {
 
     private var rowAccessibilityLabel: String {
         let statusDisplay = session.statusDisplay(now: viewModel.currentDate)
+        let statusPrefix = statusDisplay.isVisible ? "\(statusDisplay.accessibilityLabel), " : ""
         if let locationName {
-            return "\(session.sessionType.displayName), \(statusDisplay.accessibilityLabel), \(session.timeRange), \(locationName)"
+            return "\(session.sessionType.displayName), \(statusPrefix)\(session.timeRange), \(locationName)"
         } else {
-            return "\(session.sessionType.displayName), \(statusDisplay.accessibilityLabel), \(session.timeRange)"
+            return "\(session.sessionType.displayName), \(statusPrefix)\(session.timeRange)"
         }
     }
 

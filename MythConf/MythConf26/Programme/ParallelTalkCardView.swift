@@ -37,6 +37,10 @@ struct ParallelTalkCardView: View {
         session.statusDisplay(now: viewModel.currentDate)
     }
 
+    private var accessibilityStatusPrefix: String {
+        statusDisplay.isVisible ? "\(statusDisplay.accessibilityLabel), " : ""
+    }
+
     private var cardBackground: AnyShapeStyle {
         if reduceTransparency {
             return AnyShapeStyle(Color(.secondarySystemBackground))
@@ -57,7 +61,7 @@ struct ParallelTalkCardView: View {
 //    }
 
     private var cardBorderColor: Color {
-        if session.isLive {
+        if statusDisplay.status == .live {
             return .red.opacity(colorSchemeContrast == .increased ? 1 : 0.7)
         }
 
@@ -86,7 +90,7 @@ struct ParallelTalkCardView: View {
                 "Open \(talk.talkTitle)"
             ])
             .accessibilityValue(
-                "\(statusDisplay.accessibilityLabel), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
+                "\(accessibilityStatusPrefix)\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
             )
             .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
 

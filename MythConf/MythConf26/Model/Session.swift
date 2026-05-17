@@ -71,8 +71,10 @@ extension Session {
         let title: String
         let accessibilityLabel: String
         let symbolName: String
+        let isVisible: Bool
     }
 
+    private static let statusVisibilityThreshold: TimeInterval = 20 * 60
     private static let countdownThreshold: TimeInterval = 15 * 60
 
     func liveStatus(now: Date) -> LiveStatus {
@@ -93,17 +95,29 @@ extension Session {
                 status: status,
                 title: status.title,
                 accessibilityLabel: status.title,
-                symbolName: status.symbolName
+                symbolName: status.symbolName,
+                isVisible: true
             )
         }
 
         let secondsUntilStart = startTime.timeIntervalSince(now)
+        guard secondsUntilStart <= Self.statusVisibilityThreshold else {
+            return StatusDisplay(
+                status: status,
+                title: status.title,
+                accessibilityLabel: status.title,
+                symbolName: status.symbolName,
+                isVisible: false
+            )
+        }
+
         guard secondsUntilStart <= Self.countdownThreshold else {
             return StatusDisplay(
                 status: status,
                 title: status.title,
                 accessibilityLabel: status.title,
-                symbolName: status.symbolName
+                symbolName: status.symbolName,
+                isVisible: true
             )
         }
 
@@ -113,7 +127,8 @@ extension Session {
                 status: status,
                 title: "Starting now",
                 accessibilityLabel: "Starting now",
-                symbolName: status.symbolName
+                symbolName: status.symbolName,
+                isVisible: true
             )
         }
 
@@ -122,7 +137,8 @@ extension Session {
             status: status,
             title: "Starting in \(minutesUntilStart)m",
             accessibilityLabel: "Starting in \(minutesUntilStart) \(minuteText)",
-            symbolName: status.symbolName
+            symbolName: status.symbolName,
+            isVisible: true
         )
     }
 

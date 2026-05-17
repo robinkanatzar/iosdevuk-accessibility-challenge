@@ -17,20 +17,23 @@ struct SessionStatusBadge: View {
         }
     }
 
+    @ViewBuilder
     var body: some View {
-        Label {
-            Text(display.title)
-        } icon: {
-            Image(systemName: display.symbolName)
-                .accessibilityHidden(true)
+        if display.isVisible {
+            Label {
+                Text(display.title)
+            } icon: {
+                Image(systemName: display.symbolName)
+                    .accessibilityHidden(true)
+            }
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundStyle(tint)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(Capsule().fill(tint.opacity(0.12)))
+            .accessibilityLabel(display.accessibilityLabel)
+            .dynamicTypeSize(...DynamicTypeSize.accessibility2)
         }
-        .font(.caption)
-        .fontWeight(.semibold)
-        .foregroundStyle(tint)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
-        .background(Capsule().fill(tint.opacity(0.12)))
-        .accessibilityLabel(display.accessibilityLabel)
-        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
 }

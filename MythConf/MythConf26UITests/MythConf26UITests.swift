@@ -31,6 +31,23 @@ final class MythConf26UITests: XCTestCase {
         XCTAssertTrue(countdown.waitForExistence(timeout: 5))
     }
 
+    func testSessionStatusBadgeIsHiddenUntilTwentyMinutesBeforeStart() throws {
+        // First bundled workshop starts at 841582800. This sets the app clock to 30 minutes before.
+        relaunchForTestingDate(841581000)
+        openTab(.programme)
+
+        XCTAssertFalse(app.staticTexts["Starting Soon"].waitForExistence(timeout: 2))
+    }
+
+    func testSessionStatusShowsStartingSoonBeforeCountdownWindow() throws {
+        // First bundled workshop starts at 841582800. This sets the app clock to 18 minutes before.
+        relaunchForTestingDate(841581720)
+        openTab(.programme)
+
+        let startingSoon = app.staticTexts["Starting Soon"]
+        XCTAssertTrue(startingSoon.waitForExistence(timeout: 5))
+    }
+
     func testProgrammeAccessibilityAudit() throws {
         openTab(.programme)
         XCTAssertTrue(app.navigationBars["MythConf 2026"].waitForExistence(timeout: 5))
