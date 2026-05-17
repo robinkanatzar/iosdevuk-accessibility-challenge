@@ -31,8 +31,22 @@ struct FavouriteButtonView: View {
         .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
         .accessibilityHint(isFavourite ? "Removes this session from your schedule" : "Adds this session to your schedule")
         .accessibilityInputLabels(isFavourite
-            ? ["Unfavourite", "Remove from favourites", "Star", talk.talkTitle]
-            : ["Favourite", "Add to favourites", "Star", talk.talkTitle]
+            ? [
+                "Unfavourite",
+                "Remove from favourites",
+                "Unfavourite \(talk.talkTitle)",
+                "Remove \(talk.talkTitle) from favourites",
+                talk.talkTitle,
+                "Star"
+            ]
+            : [
+                "Favourite",
+                "Add to favourites",
+                "Favourite \(talk.talkTitle)",
+                "Add \(talk.talkTitle) to favourites",
+                talk.talkTitle,
+                "Star"
+            ]
         )
         .accessibilityAddTraits(isFavourite ? .isSelected : [])
         .buttonStyle(.plain)
