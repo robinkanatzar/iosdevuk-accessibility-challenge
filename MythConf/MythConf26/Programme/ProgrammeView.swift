@@ -53,19 +53,15 @@ struct ProgrammeView: View {
             .navigationTitle("MythConf 2026")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     SettingsToolbarButton {
                         isShowingSettings = true
                     }
                     .accessibilityFocused($isSettingsButtonFocused)
                 }
             }
-            .sheet(isPresented: $isShowingSettings) {
+            .sheet(isPresented: $isShowingSettings, onDismiss: restoreSettingsButtonFocus) {
                 SettingsView()
-            }
-            .onChange(of: isShowingSettings) { _, isPresented in
-                guard !isPresented else { return }
-                restoreSettingsButtonFocus()
             }
             .onAppear {
                 SaveSessionTip.hasViewedSaveContext = true
@@ -86,7 +82,8 @@ struct ProgrammeView: View {
                 dayPickerTip.invalidate(reason: .actionPerformed)
             }
             .conferenceNavigationDestinations()
-        }.onChange(of: viewModel.pendingDeepLinkTalkID) { _, talkID in
+        }
+        .onChange(of: viewModel.pendingDeepLinkTalkID) { _, talkID in
             print("📍 [DeepLink] onChange(pendingDeepLinkTalkID) fired — value: \(talkID?.uuidString ?? "nil")")
 
             guard let talkID else {

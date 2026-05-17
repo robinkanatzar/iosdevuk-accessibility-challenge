@@ -77,12 +77,8 @@ struct MyScheduleView: View {
                     .accessibilityFocused($isSettingsButtonFocused)
                 }
             }
-            .sheet(isPresented: $isShowingSettings) {
+            .sheet(isPresented: $isShowingSettings, onDismiss: restoreSettingsButtonFocus) {
                 SettingsView()
-            }
-            .onChange(of: isShowingSettings) { _, isPresented in
-                guard !isPresented else { return }
-                restoreSettingsButtonFocus()
             }
             .conferenceNavigationDestinations()
         }
