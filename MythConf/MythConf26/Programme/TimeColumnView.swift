@@ -23,5 +23,6 @@ struct TimeColumnView: View {
         .font(.caption)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
+        .accessibilityAddTraits(.isHeader)
     }
 }
