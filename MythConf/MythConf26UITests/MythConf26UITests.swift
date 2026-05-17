@@ -14,7 +14,7 @@ final class MythConf26UITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
-        app.launchArguments = ["-UITesting", "-UITestingResetFavourites"]
+        app.launchArguments = ["-UITesting", "-UITestingResetFavourites", "-UITestingResetSettings"]
         app.launch()
     }
 
@@ -140,6 +140,27 @@ final class MythConf26UITests: XCTestCase {
         let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
         XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 5))
         XCTAssertEqual(sessionsHeading.label, "Sessions by \(speakerName)")
+    }
+
+    func testOpenDyslexicSettingCanBeToggled() throws {
+        openTab(.programme)
+
+        let settingsButton = app.buttons["settings.open"]
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        settingsButton.tap()
+
+        let toggle = app.switches["settings.openDyslexicToggle"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5))
+        XCTAssertTrue(["0", "Off"].contains(toggle.value as? String))
+
+        toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+        XCTAssertTrue(["1", "On"].contains(toggle.value as? String))
+
+        XCTAssertTrue(element(identifier: "settings.openDyslexicPreview").exists)
+
+        let doneButton = app.buttons["settings.done"]
+        XCTAssertTrue(doneButton.waitForExistence(timeout: 5))
+        doneButton.tap()
     }
 
     private enum AppTab: String {

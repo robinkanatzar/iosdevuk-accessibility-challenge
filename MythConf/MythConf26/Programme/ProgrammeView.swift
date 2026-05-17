@@ -10,6 +10,7 @@ struct ProgrammeView: View {
     @Environment(ViewModel.self) private var viewModel
     @State private var selectedDayIndex = 0
     @State private var path: [TalkReference] = []   // ← new
+    @State private var isShowingSettings = false
     private let dayPickerTip = ConferenceDayPickerTip()
 
     private var days: [[Session]] { viewModel.confData.sessions }
@@ -42,6 +43,16 @@ struct ProgrammeView: View {
             }
             .navigationTitle("MythConf 2026")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    SettingsToolbarButton {
+                        isShowingSettings = true
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingSettings) {
+                SettingsView()
+            }
             .onAppear {
                 SaveSessionTip.hasViewedSaveContext = true
                 ConferenceDayPickerTip.hasViewedProgramme = true

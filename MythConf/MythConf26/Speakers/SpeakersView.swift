@@ -9,6 +9,7 @@ import TipKit
 struct SpeakersView: View {
     @Environment(ViewModel.self) private var viewModel
     @State private var searchText = ""
+    @State private var isShowingSettings = false
     private let speakerSearchTip = SpeakerSearchTip()
 
     private var filteredSpeakers: [Speaker] {
@@ -54,6 +55,16 @@ struct SpeakersView: View {
                 speakerSearchTip.invalidate(reason: .actionPerformed)
             }
             .navigationTitle("Speakers")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    SettingsToolbarButton {
+                        isShowingSettings = true
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingSettings) {
+                SettingsView()
+            }
             .conferenceNavigationDestinations()
         }
     }

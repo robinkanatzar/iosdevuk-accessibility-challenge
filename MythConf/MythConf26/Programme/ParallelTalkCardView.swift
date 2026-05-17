@@ -65,10 +65,6 @@ struct ParallelTalkCardView: View {
             : session.sessionType.color.opacity(0.18)
     }
 
-    private var titleFont: Font {
-        dynamicTypeSize.isAccessibilitySize ? .body : .headline
-    }
-
     private var metadataLayoutSpacing: CGFloat {
         dynamicTypeSize.isAccessibilitySize ? 10 : 8
     }
@@ -141,8 +137,11 @@ struct ParallelTalkCardView: View {
 
 
                 Text(talk.talkTitle)
-                    .font(titleFont)
-                    .fontWeight(legibilityWeight == .bold ? .black : .bold)
+                    .dyslexiaReadingFont(
+                        dynamicTypeSize.isAccessibilitySize ? .body : .headline,
+                        size: 17,
+                        weight: legibilityWeight == .bold ? .black : .bold
+                    )
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 4)

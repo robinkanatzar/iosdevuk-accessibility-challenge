@@ -51,8 +51,7 @@ struct LocationDetailView: View {
     private var locationContent: some View {
         VStack {
             Text(location.name)
-                .font(.title)
-                .fontWeight(.heavy)
+                .dyslexiaReadingFont(.title, size: 28, weight: .heavy)
                 .foregroundStyle(Color(.label))
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
@@ -74,6 +73,7 @@ struct LocationDetailView: View {
             .accessibilityLabel("Map showing the location of \(location.name)")
             
             Text(location.placeDescription)
+                .dyslexiaReadingFont(.body, size: 17)
                 .foregroundStyle(.secondary)
                 .padding()
                 .accessibilityLabel { label in

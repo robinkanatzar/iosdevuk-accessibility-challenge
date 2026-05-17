@@ -20,8 +20,7 @@ struct SpeakerDetailView: View {
 
                     VStack(alignment: .leading) {
                         Text(speaker.name)
-                            .font(.title2)
-                            .bold()
+                            .dyslexiaReadingFont(.title2, size: 22, weight: .bold)
                             .accessibilityAddTraits(.isHeader)
                             .accessibilityLabel { label in
                                 Text("Speaker:")
@@ -41,6 +40,7 @@ struct SpeakerDetailView: View {
                 // Bio
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
+                        .dyslexiaReadingFont(.body, size: 17)
                         .accessibilityLabel { label in
                             Text("Biography:")
                             label

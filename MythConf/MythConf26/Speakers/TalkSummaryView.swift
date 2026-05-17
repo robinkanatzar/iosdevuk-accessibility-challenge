@@ -88,8 +88,7 @@ struct TalkSummaryView: View {
 
     private var titleText: some View {
         Text(viewModel.talkTitleFrom(talkID: talkID))
-            .font(.body)
-            .fontWeight(.semibold)
+            .dyslexiaReadingFont(.body, size: 17, weight: .semibold)
     }
 
     private var timeLabel: some View {

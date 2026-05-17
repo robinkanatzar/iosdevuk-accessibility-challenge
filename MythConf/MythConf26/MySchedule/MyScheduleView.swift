@@ -8,6 +8,7 @@ import SwiftUI
 struct MyScheduleView: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(ViewModel.self) private var viewModel
+    @State private var isShowingSettings = false
 
     private var headerBackground: AnyShapeStyle {
         reduceTransparency ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(.regularMaterial)
@@ -54,6 +55,16 @@ struct MyScheduleView: View {
                 }
             }
             .navigationTitle("My Schedule")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    SettingsToolbarButton {
+                        isShowingSettings = true
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingSettings) {
+                SettingsView()
+            }
             .conferenceNavigationDestinations()
         }
     }

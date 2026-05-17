@@ -13,6 +13,7 @@ import Dependencies
 struct MythConf: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var viewModel = MythConf.makeViewModel()
+    @State private var appSettings = AppSettings()
 
     init() {
         UIImageView.appearance().accessibilityIgnoresInvertColors = true
@@ -24,6 +25,10 @@ struct MythConf: App {
             let favouritesURL = urlToFileInDocuments("favourites.json")
             try? FileManager.default.removeItem(at: favouritesURL)
             print("favourites Removed")
+        }
+
+        if CommandLine.arguments.contains("-UITestingResetSettings") {
+            UserDefaults.standard.removeObject(forKey: AppSettings.openDyslexicReadingFontKey)
         }
         
         let timestamp = CommandLine.arguments.firstIndex(of: "-TestingDate")
@@ -72,6 +77,7 @@ struct MythConf: App {
         WindowGroup {
             HomeView()
                 .environment(viewModel)
+                .environment(\.appSettings, appSettings)
                 .foregroundStyle(.primary, .secondary, .tertiary)
                 .onChange(of: scenePhase) { _, newPhase in
                     guard newPhase == .active else { return }

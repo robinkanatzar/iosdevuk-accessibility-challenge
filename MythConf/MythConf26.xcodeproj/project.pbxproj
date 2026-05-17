@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C83BACAC2FB96A53001114FE /* FontKit in Frameworks */ = {isa = PBXBuildFile; productRef = C83BACAB2FB96A53001114FE /* FontKit */; };
 		C8726CEF2FB3F0FF0087713F /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = C8726CEE2FB3F0FF0087713F /* Dependencies */; };
 		C8726CF12FB3F0FF0087713F /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = C8726CF02FB3F0FF0087713F /* DependenciesMacros */; };
 		C8726CF32FB3F0FF0087713F /* DependenciesTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C8726CF22FB3F0FF0087713F /* DependenciesTestSupport */; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C83BACAC2FB96A53001114FE /* FontKit in Frameworks */,
 				C8726CF12FB3F0FF0087713F /* DependenciesMacros in Frameworks */,
 				C8726CEF2FB3F0FF0087713F /* Dependencies in Frameworks */,
 			);
@@ -139,6 +141,7 @@
 			packageProductDependencies = (
 				C8726CEE2FB3F0FF0087713F /* Dependencies */,
 				C8726CF02FB3F0FF0087713F /* DependenciesMacros */,
+				C83BACAB2FB96A53001114FE /* FontKit */,
 			);
 			productName = IOSDevuk26;
 			productReference = 1B2918B62F73EA8B008A369D /* MythConf26.app */;
@@ -198,6 +201,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				C83BACAA2FB96A53001114FE /* XCRemoteSwiftPackageReference "FontKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1B2918B72F73EA8B008A369D /* Products */;
@@ -558,6 +562,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C83BACAA2FB96A53001114FE /* XCRemoteSwiftPackageReference "FontKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/FontKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
@@ -569,6 +581,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C83BACAB2FB96A53001114FE /* FontKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C83BACAA2FB96A53001114FE /* XCRemoteSwiftPackageReference "FontKit" */;
+			productName = FontKit;
+		};
 		C8726CEE2FB3F0FF0087713F /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C8726CED2FB3F0FF0087713F /* XCRemoteSwiftPackageReference "swift-dependencies" */;

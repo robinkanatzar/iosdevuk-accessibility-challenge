@@ -8,6 +8,7 @@ import SwiftUI
 struct LocationsView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(ViewModel.self) private var viewModel
+    @State private var isShowingSettings = false
 
     var body: some View {
         NavigationStack {
@@ -15,10 +16,10 @@ struct LocationsView: View {
                 NavigationLink(value: LocationNavigationID(value: location.id)) {
                     VStack(alignment: .leading) {
                         Text(location.name)
-                            .bold()
+                            .dyslexiaReadingFont(.body, size: 17, weight: .bold)
                         if  !dynamicTypeSize.isAccessibilitySize {
                             Text(location.placeDescription)
-                                .font(.body)
+                                .dyslexiaReadingFont(.body, size: 17)
                                 .foregroundStyle(.secondary)
                                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                         }
@@ -29,6 +30,16 @@ struct LocationsView: View {
             }
             .accessibilityIdentifier("locations.list")
             .navigationTitle("Locations")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    SettingsToolbarButton {
+                        isShowingSettings = true
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingSettings) {
+                SettingsView()
+            }
             .conferenceNavigationDestinations()
         }
     }

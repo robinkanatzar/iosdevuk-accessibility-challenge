@@ -1,5 +1,5 @@
 {
-  "originHash" : "8823f42c121e2bd59c7065deafaa6b94a0ad3634a0538fbca4b0a4fb79b4fb03",
+  "originHash" : "a6f8368734b22965c4f2795df5f348db5cbd29e65aac680f350e1537ca0c593a",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "dcccb979a2183b8df3334237e3dc1ae2b4116a86",
         "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "fontkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danielsaidi/FontKit.git",
+      "state" : {
+        "revision" : "1445142b6212a2d9959607132046211268ece90f",
+        "version" : "0.2.0"
       }
     },
     {

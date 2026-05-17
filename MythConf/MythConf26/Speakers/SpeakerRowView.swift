@@ -50,12 +50,12 @@ struct SpeakerRowView: View {
     private var speakerContent: some View {
         VStack(alignment: .leading) {
             Text(speaker.name)
-                .bold()
+                .dyslexiaReadingFont(.body, size: 17, weight: .bold)
                 .foregroundStyle(Color(.label))
 
             if !speakerSummary.isEmpty && !dynamicTypeSize.isAccessibilitySize {
                 Text(speakerSummary)
-                    .font(.body)
+                    .dyslexiaReadingFont(.body, size: 17)
                     .foregroundStyle(Color(.label))
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     .accessibilityLabel("Biography. \(speakerSummary)")

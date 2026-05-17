@@ -20,8 +20,7 @@ struct SessionDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
                 Text(talk.talkTitle)
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
+                    .dyslexiaReadingFont(.largeTitle, size: 34, weight: .heavy)
                     .foregroundStyle(Color(.label))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
@@ -56,7 +55,7 @@ struct SessionDetailView: View {
                         .accessibilityIdentifier("sessionDetail.aboutHeading")
 
                     Text(talk.talkDescription)
-                        .font(.body)
+                        .dyslexiaReadingFont(.body, size: 17)
                         .lineSpacing(5)
                         .foregroundStyle(Color(.label))
                         .fixedSize(horizontal: false, vertical: true)
@@ -190,12 +189,12 @@ struct SessionDetailView: View {
         var speakerDetails: some View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(speaker.name)
-                    .font(.body)
+                    .dyslexiaReadingFont(.body, size: 17, weight: .bold)
                     .foregroundStyle(Color(.label))
                     .fixedSize(horizontal: false, vertical: true)
 
                 Text(speakerSummary(for: speakerID))
-                    .font(.body)
+                    .dyslexiaReadingFont(.body, size: 17)
                     .foregroundStyle(.secondary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     .fixedSize(horizontal: false, vertical: true)
