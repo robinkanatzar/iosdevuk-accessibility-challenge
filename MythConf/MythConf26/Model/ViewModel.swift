@@ -26,6 +26,10 @@ class ViewModel {
         loadFavourites()
     }
 
+    var currentDate: Date {
+        date()
+    }
+
     // Change private → internal
     func sessionFor(talkID: UUID) -> Session? {
         for day in confData.sessions {
@@ -197,4 +201,3 @@ class ViewModel {
     }
  
 }
-

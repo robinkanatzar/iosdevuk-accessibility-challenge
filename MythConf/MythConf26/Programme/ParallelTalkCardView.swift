@@ -33,6 +33,10 @@ struct ParallelTalkCardView: View {
         viewModel.locationNameFrom(talkID: talkID)
     }
 
+    private var statusDisplay: Session.StatusDisplay {
+        session.statusDisplay(now: viewModel.currentDate)
+    }
+
     private var cardBackground: AnyShapeStyle {
         if reduceTransparency {
             return AnyShapeStyle(Color(.secondarySystemBackground))
@@ -82,7 +86,7 @@ struct ParallelTalkCardView: View {
                 "Open \(talk.talkTitle)"
             ])
             .accessibilityValue(
-                "\(session.liveStatus(now: Date()).title), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
+                "\(statusDisplay.accessibilityLabel), \(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
             )
             .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
 

@@ -18,20 +18,12 @@ struct BreakRowView: View {
         return viewModel.locationNameFrom(talkID: talkID)
     }
 
-//    private var rowAccessibilityLabel: String {
-//        if let locationName {
-//            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange), \(locationName)"
-//        } else {
-//            return "\(session.sessionType.displayName), \(session.liveStatus.title), \(session.timeRange)"
-//        }
-//    }
-
     private var rowAccessibilityLabel: String {
-        let status = session.liveStatus(now: Date())
+        let statusDisplay = session.statusDisplay(now: viewModel.currentDate)
         if let locationName {
-            return "\(session.sessionType.displayName), \(status.title), \(session.timeRange), \(locationName)"
+            return "\(session.sessionType.displayName), \(statusDisplay.accessibilityLabel), \(session.timeRange), \(locationName)"
         } else {
-            return "\(session.sessionType.displayName), \(status.title), \(session.timeRange)"
+            return "\(session.sessionType.displayName), \(statusDisplay.accessibilityLabel), \(session.timeRange)"
         }
     }
 

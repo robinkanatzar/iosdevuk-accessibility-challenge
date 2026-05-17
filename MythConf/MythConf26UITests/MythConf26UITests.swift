@@ -22,6 +22,14 @@ final class MythConf26UITests: XCTestCase {
         app = nil
     }
 
+    func testSessionStatusShowsPreciseCountdownNearStartTime() throws {
+        // First bundled workshop starts at 841582800. This sets the app clock to 8 minutes before.
+        relaunchForTestingDate(841582320)
+        openTab(.programme)
+
+        let countdown = app.staticTexts["Starting in 8 minutes"]
+        XCTAssertTrue(countdown.waitForExistence(timeout: 5))
+    }
 
     func testProgrammeAccessibilityAudit() throws {
         openTab(.programme)
@@ -209,6 +217,19 @@ final class MythConf26UITests: XCTestCase {
 
     private func openInMapsElement() -> XCUIElement {
         app.descendants(matching: .any)["location.openInMaps"]
+    }
+
+    private func relaunchForTestingDate(_ timestamp: TimeInterval) {
+        app.terminate()
+        app = XCUIApplication()
+        app.launchArguments = [
+            "-UITesting",
+            "-UITestingResetFavourites",
+            "-UITestingResetSettings",
+            "-TestingDate",
+            String(timestamp)
+        ]
+        app.launch()
     }
 
     private func openTab(_ tab: AppTab) {

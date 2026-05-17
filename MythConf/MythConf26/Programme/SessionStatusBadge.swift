@@ -1,67 +1,16 @@
-//
-//  SessionStatusBadge.swift
-//  MythConf26
-//
-//  Created by Byaruhanga Franklin on 14/05/2026.
-//
-
-
-//import SwiftUI
-//
-//struct SessionStatusBadge: View {
-//    let session: Session
-//
-//    private var tint: Color {
-//        switch session.liveStatus {
-//        case .live:
-//            return .red
-//        case .upcoming:
-//            return .orange
-//        case .ended:
-//            return .secondary
-//        }
-//    }
-//
-//    var body: some View {
-////        if session.liveStatus == .upcoming {
-////            EmptyView()
-////        } else {
-//            Label {
-//                Text(session.liveStatus.title)
-//            } icon: {
-//                Image(systemName: session.liveStatus.symbolName)
-//                    .accessibilityHidden(true)
-//            }
-//            .font(.caption)
-//            .fontWeight(.semibold)
-//            .foregroundStyle(tint)
-//            .padding(.horizontal, 10)
-//            .padding(.vertical, 6)
-//            .background(
-//                Capsule()
-//                    .fill(tint.opacity(0.12))
-//            )
-//            .accessibilityLabel(session.liveStatus.title)
-//            .dynamicTypeSize(...DynamicTypeSize.accessibility2)
-////        }
-//    }
-//}
-
-
 import SwiftUI
-import Dependencies
 
 struct SessionStatusBadge: View {
+    @Environment(ViewModel.self) private var viewModel
+
     let session: Session
 
-    @Dependency(\.date) private var date
-
-    private var status: Session.LiveStatus {
-        session.liveStatus(now: date())
+    private var display: Session.StatusDisplay {
+        session.statusDisplay(now: viewModel.currentDate)
     }
 
     private var tint: Color {
-        switch status {
+        switch display.status {
         case .live:     return .red
         case .upcoming: return .orange
         case .ended:    return .secondary
@@ -70,9 +19,9 @@ struct SessionStatusBadge: View {
 
     var body: some View {
         Label {
-            Text(status.title)
+            Text(display.title)
         } icon: {
-            Image(systemName: status.symbolName)
+            Image(systemName: display.symbolName)
                 .accessibilityHidden(true)
         }
         .font(.caption)
@@ -81,7 +30,7 @@ struct SessionStatusBadge: View {
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
         .background(Capsule().fill(tint.opacity(0.12)))
-        .accessibilityLabel(status.title)
+        .accessibilityLabel(display.accessibilityLabel)
         .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
 }

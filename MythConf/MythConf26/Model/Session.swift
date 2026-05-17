@@ -66,6 +66,15 @@ extension Session {
         }
     }
 
+    struct StatusDisplay {
+        let status: LiveStatus
+        let title: String
+        let accessibilityLabel: String
+        let symbolName: String
+    }
+
+    private static let countdownThreshold: TimeInterval = 15 * 60
+
     func liveStatus(now: Date) -> LiveStatus {
         if now >= startTime && now <= endTime {
             return .live
@@ -74,6 +83,47 @@ extension Session {
             return .upcoming
         }
         return .ended
+    }
+
+    func statusDisplay(now: Date) -> StatusDisplay {
+        let status = liveStatus(now: now)
+
+        guard status == .upcoming else {
+            return StatusDisplay(
+                status: status,
+                title: status.title,
+                accessibilityLabel: status.title,
+                symbolName: status.symbolName
+            )
+        }
+
+        let secondsUntilStart = startTime.timeIntervalSince(now)
+        guard secondsUntilStart <= Self.countdownThreshold else {
+            return StatusDisplay(
+                status: status,
+                title: status.title,
+                accessibilityLabel: status.title,
+                symbolName: status.symbolName
+            )
+        }
+
+        let minutesUntilStart = max(0, Int(ceil(secondsUntilStart / 60)))
+        if minutesUntilStart < 1 {
+            return StatusDisplay(
+                status: status,
+                title: "Starting now",
+                accessibilityLabel: "Starting now",
+                symbolName: status.symbolName
+            )
+        }
+
+        let minuteText = minutesUntilStart == 1 ? "minute" : "minutes"
+        return StatusDisplay(
+            status: status,
+            title: "Starting in \(minutesUntilStart)m",
+            accessibilityLabel: "Starting in \(minutesUntilStart) \(minuteText)",
+            symbolName: status.symbolName
+        )
     }
 
     var isLive: Bool {
