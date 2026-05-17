@@ -46,8 +46,6 @@ struct MythConf: App {
             print("Injecting Testing Date: \(customDate) (Offset: \(Int(offset))s)")
             
             return withDependencies {
-                $0.date = .constant(Date().addingTimeInterval(offset))
-                // Note: Using a closure to ensure the clock ticks relative to the real system clock
                 $0.date = DateGenerator { Date().addingTimeInterval(offset) }
             } operation: {
                 ViewModel()

@@ -44,6 +44,14 @@ final class SessionStatusUITests: MythConfUITestCase {
         XCTAssertTrue(startingSoon.waitForExistence(timeout: 5))
     }
 
+    func testSessionStatusRefreshesAsInjectedTimeAdvances() throws {
+        // First bundled workshop starts at 841582800. This starts 2 seconds before the session goes live.
+        relaunchForTestingDate(841582798)
+        openTab(.programme)
+
+        XCTAssertTrue(app.staticTexts["Live"].waitForExistence(timeout: 10))
+    }
+
     func testProgrammeShowsNowAndNextRowBadges() throws {
         relaunchForTestingDate(841582860)
         openTab(.programme)

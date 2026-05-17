@@ -19,21 +19,26 @@ class ViewModel {
 
     @ObservationIgnored
     @Dependency(\.date) private var date
+    @ObservationIgnored
+    private var clockTask: Task<Void, Never>?
     var confData: ConfData
     var favouritesBySession: [[Session]] = []
     var check = "Not done"
     var pendingDeepLinkTalkID: UUID? = nil
     var favouriteIds: [UUID] = []  // The talk IDs for each favourite
     var pendingReminderDebugSummary = ""
+    var currentDate = Date()
     private var announcedTalkIDs: Set<UUID> = []
 
     init() {
         confData = loadConfData()
         loadFavourites()
+        currentDate = date()
+        startClock()
     }
 
-    var currentDate: Date {
-        date()
+    deinit {
+        clockTask?.cancel()
     }
 
     // Change private → internal
@@ -216,6 +221,16 @@ class ViewModel {
 
     func isFavourite(talk: Talk) -> Bool {
         return favouriteIds.contains(talk.id)
+    }
+
+    func startClock() {
+        clockTask?.cancel()
+        clockTask = Task { @MainActor in
+            while !Task.isCancelled {
+                currentDate = date()
+                try? await Task.sleep(for: .seconds(1))
+            }
+        }
     }
 
     func schedulePosition(for session: Session, in sessions: [Session], now: Date? = nil) -> SchedulePosition? {
