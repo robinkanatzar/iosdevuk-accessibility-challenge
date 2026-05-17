@@ -12,6 +12,11 @@ import Dependencies
 
 @Observable
 class ViewModel {
+    enum SchedulePosition: Equatable {
+        case now
+        case next
+    }
+
     @ObservationIgnored
     @Dependency(\.date) private var date
     var confData: ConfData
@@ -211,6 +216,29 @@ class ViewModel {
 
     func isFavourite(talk: Talk) -> Bool {
         return favouriteIds.contains(talk.id)
+    }
+
+    func schedulePosition(for session: Session, in sessions: [Session], now: Date? = nil) -> SchedulePosition? {
+        let currentDate = now ?? currentDate
+        let realSessions = sessions
+            .filter { $0.sessionType != .dummy }
+            .sorted { $0.startTime < $1.startTime }
+
+        let currentSession = realSessions.first { currentDate >= $0.startTime && currentDate <= $0.endTime }
+
+        guard let currentSession else {
+            return nil
+        }
+
+        if currentSession.id == session.id {
+            return .now
+        }
+
+        if realSessions.first(where: { $0.startTime > currentDate })?.id == session.id {
+            return .next
+        }
+
+        return nil
     }
  
 }

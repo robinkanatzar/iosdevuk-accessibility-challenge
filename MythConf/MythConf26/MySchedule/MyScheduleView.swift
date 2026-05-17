@@ -48,7 +48,7 @@ struct MyScheduleView: View {
                                 if daySessions.first?.sessionType != .dummy {
                                     Section {
                                         ForEach(daySessions) { session in
-                                            ParallelSessionsRowView(session: session)
+                                            ParallelSessionsRowView(session: session, daySessions: daySessions)
                                             Divider()
                                         }
                                     } header: {

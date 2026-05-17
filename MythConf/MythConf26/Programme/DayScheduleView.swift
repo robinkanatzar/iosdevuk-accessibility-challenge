@@ -14,9 +14,9 @@ struct DayScheduleView: View {
             LazyVStack(spacing: 0) {
                 ForEach(sessions) { session in
                     if session.containsTalk {
-                        ParallelSessionsRowView(session: session)
+                        ParallelSessionsRowView(session: session, daySessions: sessions)
                     } else {
-                        BreakRowView(session: session)
+                        BreakRowView(session: session, daySessions: sessions)
                     }
                     Divider()
                 }

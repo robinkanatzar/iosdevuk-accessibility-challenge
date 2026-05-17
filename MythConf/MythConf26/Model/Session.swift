@@ -48,7 +48,7 @@ extension Session {
             case .upcoming:
                 return "Starting Soon"
             case .live:
-                return "Live Now"
+                return "Live"
             case .ended:
                 return "Ended"
             }

@@ -23,6 +23,11 @@ enum FavouriteToggleFeedback {
         if soundsEnabled {
             play(.bell)
         }
+        announceIfNeeded(
+            "Added to favourites",
+            hapticsEnabled: hapticsEnabled,
+            soundsEnabled: soundsEnabled
+        )
     }
 
     static func removed(hapticsEnabled: Bool = true, soundsEnabled: Bool = true) {
@@ -32,6 +37,18 @@ enum FavouriteToggleFeedback {
         if soundsEnabled {
             play(.pop)
         }
+        announceIfNeeded(
+            "Removed from favourites",
+            hapticsEnabled: hapticsEnabled,
+            soundsEnabled: soundsEnabled
+        )
+    }
+
+    private static func announceIfNeeded(_ message: String, hapticsEnabled: Bool, soundsEnabled: Bool) {
+        guard !hapticsEnabled && !soundsEnabled else { return }
+        guard UIAccessibility.isVoiceOverRunning || UIAccessibility.isSwitchControlRunning else { return }
+
+        UIAccessibility.post(notification: .announcement, argument: message)
     }
 
     private static func play(_ sound: Sound) {

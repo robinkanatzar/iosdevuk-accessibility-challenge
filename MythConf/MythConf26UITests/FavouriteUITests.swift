@@ -22,4 +22,31 @@ final class FavouriteUITests: MythConfUITestCase {
         XCTAssertTrue(removeButton.waitForExistence(timeout: 5))
         XCTAssertTrue(removeButton.label.contains("from favourites"))
     }
+
+    func testFavouriteToggleWorksWhenSoundAndHapticsAreDisabled() throws {
+        openTab(.programme)
+
+        app.buttons["settings.open"].tap()
+
+        let hapticsToggle = scrollToSwitch(identifier: "settings.favouriteHapticsToggle", labels: ["Favourite haptic feedback", "Haptic Feedback"])
+        XCTAssertTrue(hapticsToggle.exists)
+        if hapticsToggle.value as? String == "1" {
+            hapticsToggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+        }
+
+        let soundsToggle = scrollToSwitch(identifier: "settings.favouriteSoundsToggle", labels: ["Favourite sound feedback", "Sound Feedback"])
+        XCTAssertTrue(soundsToggle.exists)
+        if soundsToggle.value as? String == "1" {
+            soundsToggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
+        }
+
+        app.buttons["settings.done"].tap()
+
+        let addButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        addButton.tap()
+
+        let removeButton = firstButton(labelBeginningWith: "Remove ")
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 5))
+    }
 }

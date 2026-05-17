@@ -10,7 +10,13 @@ struct ParallelSessionsRowView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(ViewModel.self) private var viewModel
     let session: Session
+    let daySessions: [Session]
+
+    private var schedulePosition: ViewModel.SchedulePosition? {
+        viewModel.schedulePosition(for: session, in: daySessions)
+    }
 
     var body: some View {
         Group {
@@ -33,7 +39,7 @@ struct ParallelSessionsRowView: View {
 
     private var accessibilityLayout: some View {
         VStack(alignment: .leading, spacing: 12) {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+            timeAndPositionColumn
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             talkStack
@@ -42,7 +48,7 @@ struct ParallelSessionsRowView: View {
 
     private var compactParallelLayout: some View {
         HStack(alignment: .top, spacing: 12) {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+            timeAndPositionColumn
 
             talkStack
         }
@@ -50,20 +56,32 @@ struct ParallelSessionsRowView: View {
 
     private var horizontalLayout: some View {
         HStack(alignment: .top) {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+            timeAndPositionColumn
 
             HStack(alignment: .top) {
                 ForEach(session.contentIDs, id: \.self) { talkID in
-                    ParallelTalkCardView(talkID: talkID, session: session)
+                    ParallelTalkCardView(talkID: talkID, session: session, schedulePosition: schedulePosition)
                 }
             }
+        }
+    }
+
+    private var timeAndPositionColumn: some View {
+        VStack(alignment: .trailing, spacing: 8) {
+            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+
+            if let schedulePosition {
+                NowNextBadge(position: schedulePosition)
+            }
+
+            Spacer(minLength: 0)
         }
     }
 
     private var talkStack: some View {
         VStack(alignment: .leading, spacing: 12) {
             ForEach(session.contentIDs, id: \.self) { talkID in
-                ParallelTalkCardView(talkID: talkID, session: session)
+                ParallelTalkCardView(talkID: talkID, session: session, schedulePosition: schedulePosition)
             }
         }
     }
@@ -72,6 +90,6 @@ struct ParallelSessionsRowView: View {
 #Preview {
     let viewModel = ViewModel()
     let session = viewModel.confData.sessions[1][2]
-    ParallelSessionsRowView(session: session)
+    ParallelSessionsRowView(session: session, daySessions: viewModel.confData.sessions[1])
         .environment(viewModel)
 }

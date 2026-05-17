@@ -16,6 +16,7 @@ struct ParallelTalkCardView: View {
     @Environment(ViewModel.self) private var viewModel
     let talkID: UUID
     let session: Session
+    let schedulePosition: ViewModel.SchedulePosition?
 
     private var talk: Talk {
         viewModel.talkFrom(talkID: talkID)
@@ -39,6 +40,17 @@ struct ParallelTalkCardView: View {
 
     private var accessibilityStatusPrefix: String {
         statusDisplay.isVisible ? "\(statusDisplay.accessibilityLabel), " : ""
+    }
+
+    private var schedulePositionPrefix: String {
+        switch schedulePosition {
+        case .now:
+            return "Now, "
+        case .next:
+            return "Next, "
+        case nil:
+            return ""
+        }
     }
 
     private var cardBackground: AnyShapeStyle {
@@ -90,7 +102,7 @@ struct ParallelTalkCardView: View {
                 "Open \(talk.talkTitle)"
             ])
             .accessibilityValue(
-                "\(accessibilityStatusPrefix)\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
+                "\(schedulePositionPrefix)\(accessibilityStatusPrefix)\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
             )
             .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
 
@@ -245,7 +257,7 @@ struct ParallelTalkCardView: View {
     let talkID = UUID(uuidString: "C1001006-C100-4100-8100-100000000006")!
     let session = viewModel.confData.sessions[1][2]
     
-    ParallelTalkCardView(talkID: talkID, session: session)
+    ParallelTalkCardView(talkID: talkID, session: session, schedulePosition: .next)
         .environment(viewModel)
         .padding()
 }
