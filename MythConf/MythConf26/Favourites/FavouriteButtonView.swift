@@ -29,8 +29,11 @@ struct FavouriteButtonView: View {
         .contentTransition(.symbolEffect(.replace))
         .accessibilityLabel(isFavourite ? "Remove \(talk.talkTitle) from favourites" : "Add \(talk.talkTitle) to favourites")
         .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
-        .accessibilityHint(isFavourite ? "Removes this session from My Schedule" : "Adds this session to My Schedule")
-        .accessibilityInputLabels(isFavourite ? ["Unfavourite", "Remove from schedule", "Star"] : ["Favourite", "Add to schedule", "Star"])
+        .accessibilityHint(isFavourite ? "Removes this session from your schedule" : "Adds this session to your schedule")
+        .accessibilityInputLabels(isFavourite
+            ? ["Unfavourite", "Remove from favourites", "Star", talk.talkTitle]
+            : ["Favourite", "Add to favourites", "Star", talk.talkTitle]
+        )
         .accessibilityAddTraits(isFavourite ? .isSelected : [])
         .buttonStyle(.plain)
         .popoverTip(saveSessionTip, arrowEdge: .bottom)

@@ -18,7 +18,7 @@ struct SaveSessionTip: Tip {
     }
 
     var message: Text? {
-        Text("Tap the star to keep sessions in My Schedule.")
+        Text("Tap the star to favourite sessions and keep them in your schedule.")
     }
 
     var image: Image? {

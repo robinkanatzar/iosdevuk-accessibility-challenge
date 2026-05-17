@@ -34,60 +34,60 @@ struct GetSessionDetailsIntent: AppIntent {
     }
 }
 
-struct AddSessionToMyScheduleIntent: AppIntent {
-    static var title: LocalizedStringResource = "Add Session to Your Schedule"
-    static var description = IntentDescription("Add an existing MythConf session to your schedule.")
+struct FavouriteSessionIntent: AppIntent {
+    static var title: LocalizedStringResource = "Favourite Session"
+    static var description = IntentDescription("Favourite an existing MythConf session so it appears in your schedule.")
     static var openAppWhenRun = false
 
     @Parameter(
         title: "Session",
-        requestValueDialog: IntentDialog("Which MythConf session should I add to your schedule?")
+        requestValueDialog: IntentDialog("Which MythConf session should I favourite?")
     )
     var session: ConferenceSessionEntity
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Add \(\.$session) to your schedule")
+        Summary("Favourite \(\.$session)")
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
         do {
             let added = try await ConferenceSessionStore.addFavourite(session.id)
             if added {
-                return .result(dialog: IntentDialog("Added \(session.title) to your schedule. It is on \(session.dayAndDate) from \(session.timeRange), in \(session.locationName)."))
+                return .result(dialog: IntentDialog("Favourited \(session.title). It is now in your schedule. It is on \(session.dayAndDate) from \(session.timeRange), in \(session.locationName)."))
             } else {
-                return .result(dialog: IntentDialog("\(session.title) is already in your schedule. It is on \(session.dayAndDate) from \(session.timeRange), in \(session.locationName)."))
+                return .result(dialog: IntentDialog("\(session.title) is already favourited and in your schedule. It is on \(session.dayAndDate) from \(session.timeRange), in \(session.locationName)."))
             }
         } catch {
-            throw MythConfIntentError(message: "I could not update your schedule. Please try again.")
+            throw MythConfIntentError(message: "I could not update your favourites. Please try again.")
         }
     }
 }
 
-struct RemoveSessionFromMyScheduleIntent: AppIntent {
-    static var title: LocalizedStringResource = "Remove Session from Your Schedule"
-    static var description = IntentDescription("Remove an existing MythConf session from your schedule.")
+struct UnfavouriteSessionIntent: AppIntent {
+    static var title: LocalizedStringResource = "Unfavourite Session"
+    static var description = IntentDescription("Remove an existing MythConf session from favourites and your schedule.")
     static var openAppWhenRun = false
 
     @Parameter(
         title: "Session",
-        requestValueDialog: IntentDialog("Which MythConf session should I remove from your schedule?")
+        requestValueDialog: IntentDialog("Which MythConf session should I unfavourite?")
     )
     var session: ConferenceSessionEntity
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Remove \(\.$session) from your schedule")
+        Summary("Unfavourite \(\.$session)")
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
         do {
             let removed = try await ConferenceSessionStore.removeFavourite(session.id)
             if removed {
-                return .result(dialog: IntentDialog("Removed \(session.title) from your schedule."))
+                return .result(dialog: IntentDialog("Removed \(session.title) from favourites. It is no longer in your schedule."))
             } else {
-                return .result(dialog: IntentDialog("\(session.title) was not in your schedule."))
+                return .result(dialog: IntentDialog("\(session.title) was not favourited."))
             }
         } catch {
-            throw MythConfIntentError(message: "I could not update your schedule. Please try again.")
+            throw MythConfIntentError(message: "I could not update your favourites. Please try again.")
         }
     }
 }
@@ -105,7 +105,7 @@ struct ReadMyScheduleIntent: AppIntent {
         let sessions = await ConferenceSessionStore.favouriteSessions()
 
         guard !sessions.isEmpty else {
-            return .result(dialog: IntentDialog("Your schedule is empty. Add sessions from the Programme by asking me to add a session to your schedule."))
+            return .result(dialog: IntentDialog("Your schedule is empty. Favourite sessions from the Programme, or ask me to favourite a session."))
         }
 
         let sessionCountText = sessions.count == 1 ? "1 session" : "\(sessions.count) sessions"
@@ -136,26 +136,23 @@ struct MythConfShortcutsProvider: AppShortcutsProvider {
         )
 
         AppShortcut(
-            intent: AddSessionToMyScheduleIntent(),
+            intent: FavouriteSessionIntent(),
             phrases: [
-                "Add \(\.$session) to my schedule in \(.applicationName)",
-                "Add \(\.$session) to your schedule in \(.applicationName)",
-                "Save \(\.$session) in \(.applicationName)",
-                "Favourite \(\.$session) in \(.applicationName)"
+                "Favourite \(\.$session) in \(.applicationName)",
+                "Add \(\.$session) to favourites in \(.applicationName)",
+                "Save \(\.$session) in \(.applicationName)"
             ],
-            shortTitle: "Add Session",
+            shortTitle: "Favourite",
             systemImageName: "star"
         )
 
         AppShortcut(
-            intent: RemoveSessionFromMyScheduleIntent(),
+            intent: UnfavouriteSessionIntent(),
             phrases: [
-                "Remove \(\.$session) from my schedule in \(.applicationName)",
-                "Remove \(\.$session) from your schedule in \(.applicationName)",
                 "Unfavourite \(\.$session) in \(.applicationName)",
-                "Delete \(\.$session) from my schedule in \(.applicationName)"
+                "Remove \(\.$session) from favourites in \(.applicationName)"
             ],
-            shortTitle: "Remove Session",
+            shortTitle: "Unfavourite",
             systemImageName: "star.slash"
         )
 

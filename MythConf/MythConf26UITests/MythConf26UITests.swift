@@ -117,7 +117,7 @@ final class MythConf26UITests: XCTestCase {
         XCTAssertTrue(element(identifier: "sessionDetail.time").waitForExistence(timeout: 5))
         XCTAssertTrue(element(identifier: "sessionDetail.location").waitForExistence(timeout: 5))
         XCTAssertTrue(element(identifier: "sessionDetail.about").waitForExistence(timeout: 5))
-        XCTAssertTrue(element(identifier: "sessionDetail.scheduleAction").waitForExistence(timeout: 5))
+        XCTAssertTrue(element(identifier: "sessionDetail.favouriteAction").waitForExistence(timeout: 5))
     }
 
     func testVisibleButtonsDoNotRepeatButtonInLabel() throws {

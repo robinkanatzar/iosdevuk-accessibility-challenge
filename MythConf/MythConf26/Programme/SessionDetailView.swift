@@ -63,26 +63,18 @@ struct SessionDetailView: View {
                         .accessibilityIdentifier("sessionDetail.about")
                 }
 
-//                Button {
-//                    toggleFavourite()
-//                } label: {
-//                    Label(scheduleActionTitle, systemImage: isFavourite ? "checkmark" : "plus")
-//                        .font(.headline)
-//                        .frame(maxWidth: .infinity)
-//                        .padding(.vertical, 16)
-//                }
                 Button {
                     toggleFavourite()
                 } label: {
                     Group {
                         if dynamicTypeSize.isAccessibilitySize {
-                            Text(scheduleActionTitle)
+                            Text(favouriteActionTitle)
                                 .font(.headline)
                                 .multilineTextAlignment(.center)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
                         } else {
-                            Label(scheduleActionTitle, systemImage: isFavourite ? "checkmark" : "plus")
+                            Label(favouriteActionTitle, systemImage: isFavourite ? "checkmark" : "plus")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
@@ -91,11 +83,14 @@ struct SessionDetailView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
-                .accessibilityLabel(scheduleActionAccessibilityLabel)
-                .accessibilityValue(isFavourite ? "In My Schedule" : "Not in My Schedule")
-                .accessibilityHint(isFavourite ? "Removes this session from My Schedule" : "Adds this session to My Schedule")
-                .accessibilityInputLabels([scheduleActionTitle, talk.talkTitle])
-                .accessibilityIdentifier("sessionDetail.scheduleAction")
+                .accessibilityLabel(favouriteActionAccessibilityLabel)
+                .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
+                .accessibilityHint(isFavourite ? "Removes this session from your schedule" : "Adds this session to your schedule")
+                .accessibilityInputLabels(isFavourite
+                    ? ["Unfavourite", "Remove from favourites", "Star", talk.talkTitle]
+                    : ["Favourite", "Add to favourites", "Star", talk.talkTitle]
+                )
+                .accessibilityIdentifier("sessionDetail.favouriteAction")
             }
             .padding(.horizontal)
             .padding(.top, 24)
@@ -133,12 +128,12 @@ struct SessionDetailView: View {
         }
     }
 
-    private var scheduleActionTitle: String {
-        isFavourite ? "Remove from Schedule" : "Add to Schedule"
+    private var favouriteActionTitle: String {
+        isFavourite ? "Remove from Favourites" : "Add to Favourites"
     }
 
-    private var scheduleActionAccessibilityLabel: String {
-        isFavourite ? "Remove \(talk.talkTitle) from your schedule" : "Add \(talk.talkTitle) to your schedule"
+    private var favouriteActionAccessibilityLabel: String {
+        isFavourite ? "Remove \(talk.talkTitle) from favourites" : "Add \(talk.talkTitle) to favourites"
     }
 
     private func sectionHeading(_ title: String) -> some View {

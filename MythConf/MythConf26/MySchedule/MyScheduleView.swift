@@ -21,7 +21,7 @@ struct MyScheduleView: View {
                         ContentUnavailableView(
                             "No Favourites Yet",
                             systemImage: "star",
-                            description: Text("Tap the star on any session in the Programme to save it here.")
+                            description: Text("Tap the star on any session in the Programme to add it to your schedule.")
                         )
                         .accessibilityIdentifier("mySchedule.empty")
                     }.defaultScrollAnchor(.center, for: .alignment)
