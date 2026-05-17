@@ -8,7 +8,9 @@ import SwiftUI
 struct MyScheduleView: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(ViewModel.self) private var viewModel
+    @Binding var selectedTab: Int
     @State private var isShowingSettings = false
+    @AccessibilityFocusState private var isSettingsButtonFocused: Bool
 
     private var headerBackground: AnyShapeStyle {
         reduceTransparency ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(.regularMaterial)
@@ -19,12 +21,24 @@ struct MyScheduleView: View {
             Group {
                 if viewModel.favouriteIds.isEmpty {
                     ScrollView {
-                        ContentUnavailableView(
-                            "No Favourites Yet",
-                            systemImage: "star",
-                            description: Text("Tap the star on any session in the Programme to add it to your schedule.")
-                        )
-                        .accessibilityIdentifier("mySchedule.empty")
+                        VStack(spacing: 24) {
+                            ContentUnavailableView(
+                                "No Favourites Yet",
+                                systemImage: "star",
+                                description: Text("Tap the star on any session in the Programme to add it to your schedule.")
+                            )
+                            .accessibilityIdentifier("mySchedule.empty")
+
+                            Button {
+                                selectedTab = 0
+                            } label: {
+                                Label("Browse Programme", systemImage: "calendar")
+                                    .frame(minHeight: 44)
+                                    .accessibilityIdentifier("mySchedule.browseProgramme")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .accessibilityHint("Opens the Programme tab so you can find sessions to add to your schedule.")
+                        }
                     }.defaultScrollAnchor(.center, for: .alignment)
                 } else {
                     ScrollView {
@@ -60,12 +74,24 @@ struct MyScheduleView: View {
                     SettingsToolbarButton {
                         isShowingSettings = true
                     }
+                    .accessibilityFocused($isSettingsButtonFocused)
                 }
             }
             .sheet(isPresented: $isShowingSettings) {
                 SettingsView()
             }
+            .onChange(of: isShowingSettings) { _, isPresented in
+                guard !isPresented else { return }
+                restoreSettingsButtonFocus()
+            }
             .conferenceNavigationDestinations()
+        }
+    }
+
+    private func restoreSettingsButtonFocus() {
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(100))
+            isSettingsButtonFocused = true
         }
     }
 
@@ -76,6 +102,6 @@ struct MyScheduleView: View {
 }
 
 #Preview {
-    MyScheduleView()
+    MyScheduleView(selectedTab: .constant(3))
         .environment(ViewModel())
 }

@@ -8,9 +8,11 @@ import TipKit
 
 struct ProgrammeView: View {
     @Environment(ViewModel.self) private var viewModel
+    @Binding var selectedTab: Int
     @State private var selectedDayIndex = 0
     @State private var path: [TalkReference] = []   // ← new
     @State private var isShowingSettings = false
+    @AccessibilityFocusState private var isSettingsButtonFocused: Bool
     private let dayPickerTip = ConferenceDayPickerTip()
 
     private var days: [[Session]] { viewModel.confData.sessions }
@@ -55,10 +57,15 @@ struct ProgrammeView: View {
                     SettingsToolbarButton {
                         isShowingSettings = true
                     }
+                    .accessibilityFocused($isSettingsButtonFocused)
                 }
             }
             .sheet(isPresented: $isShowingSettings) {
                 SettingsView()
+            }
+            .onChange(of: isShowingSettings) { _, isPresented in
+                guard !isPresented else { return }
+                restoreSettingsButtonFocus()
             }
             .onAppear {
                 SaveSessionTip.hasViewedSaveContext = true
@@ -105,6 +112,13 @@ struct ProgrammeView: View {
         }
     }
 
+    private func restoreSettingsButtonFocus() {
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(100))
+            isSettingsButtonFocused = true
+        }
+    }
+
     private func dayLabel(for sessions: [Session]) -> String {
         guard let first = sessions.first else { return "" }
         return first.startTime.formatted(.dateTime.weekday(.abbreviated))
@@ -127,6 +141,6 @@ struct ProgrammeView: View {
 }
 
 #Preview {
-    ProgrammeView()
+    ProgrammeView(selectedTab: .constant(0))
         .environment(ViewModel())
 }

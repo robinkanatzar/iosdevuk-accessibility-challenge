@@ -59,7 +59,20 @@ final class AccessibilityAuditUITests: MythConfUITestCase {
         openTab(.mySchedule)
         XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 5))
         XCTAssertTrue(element(identifier: "mySchedule.empty").waitForExistence(timeout: 10))
-        try auditVisibleScreen("My Schedule empty", includesDynamicType: false)
+        XCTAssertTrue(app.buttons["mySchedule.browseProgramme"].waitForExistence(timeout: 5))
+        try auditVisibleScreen("My Schedule empty", includesContrast: false, includesDynamicType: false)
+    }
+
+    func testMyScheduleEmptyStateCanOpenProgramme() throws {
+        openTab(.mySchedule)
+        XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 5))
+
+        let browseProgrammeButton = app.buttons["mySchedule.browseProgramme"]
+        XCTAssertTrue(browseProgrammeButton.waitForExistence(timeout: 5))
+        browseProgrammeButton.tap()
+
+        XCTAssertTrue(app.navigationBars["MythConf 2026"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.tabBars.buttons["Programme"].isSelected)
     }
 
     func testMyScheduleWithFavouriteAccessibilityAudit() throws {

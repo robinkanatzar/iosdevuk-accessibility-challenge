@@ -13,7 +13,7 @@ struct HomeView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            ProgrammeView()
+            ProgrammeView(selectedTab: $selectedTab)
                 .tag(0)
                 .accessibilityIdentifier("tab.programme")
                 .tabItem {
@@ -37,7 +37,7 @@ struct HomeView: View {
                         .symbolRenderingMode(.monochrome)
                 }
 
-            MyScheduleView()
+            MyScheduleView(selectedTab: $selectedTab)
                 .tag(3)
                 .accessibilityIdentifier("tab.mySchedule")
                 .tabItem {

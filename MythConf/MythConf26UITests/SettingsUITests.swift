@@ -9,6 +9,21 @@ import XCTest
 
 @MainActor
 final class SettingsUITests: MythConfUITestCase {
+    func testSettingsButtonIsAvailableAfterClosingSettings() throws {
+        openTab(.programme)
+
+        let settingsButton = app.buttons["settings.open"]
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        settingsButton.tap()
+
+        let doneButton = app.buttons["settings.done"]
+        XCTAssertTrue(doneButton.waitForExistence(timeout: 5))
+        doneButton.tap()
+
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(settingsButton.isHittable)
+    }
+
     func testOpenDyslexicSettingCanBeToggled() throws {
         openTab(.programme)
 

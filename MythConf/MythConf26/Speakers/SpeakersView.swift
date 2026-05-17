@@ -10,6 +10,7 @@ struct SpeakersView: View {
     @Environment(ViewModel.self) private var viewModel
     @State private var searchText = ""
     @State private var isShowingSettings = false
+    @AccessibilityFocusState private var isSettingsButtonFocused: Bool
     private let speakerSearchTip = SpeakerSearchTip()
 
     private var filteredSpeakers: [Speaker] {
@@ -60,12 +61,24 @@ struct SpeakersView: View {
                     SettingsToolbarButton {
                         isShowingSettings = true
                     }
+                    .accessibilityFocused($isSettingsButtonFocused)
                 }
             }
             .sheet(isPresented: $isShowingSettings) {
                 SettingsView()
             }
+            .onChange(of: isShowingSettings) { _, isPresented in
+                guard !isPresented else { return }
+                restoreSettingsButtonFocus()
+            }
             .conferenceNavigationDestinations()
+        }
+    }
+
+    private func restoreSettingsButtonFocus() {
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(100))
+            isSettingsButtonFocused = true
         }
     }
 }

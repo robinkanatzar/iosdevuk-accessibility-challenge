@@ -9,6 +9,7 @@ struct LocationsView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(ViewModel.self) private var viewModel
     @State private var isShowingSettings = false
+    @AccessibilityFocusState private var isSettingsButtonFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -35,12 +36,24 @@ struct LocationsView: View {
                     SettingsToolbarButton {
                         isShowingSettings = true
                     }
+                    .accessibilityFocused($isSettingsButtonFocused)
                 }
             }
             .sheet(isPresented: $isShowingSettings) {
                 SettingsView()
             }
+            .onChange(of: isShowingSettings) { _, isPresented in
+                guard !isPresented else { return }
+                restoreSettingsButtonFocus()
+            }
             .conferenceNavigationDestinations()
+        }
+    }
+
+    private func restoreSettingsButtonFocus() {
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(100))
+            isSettingsButtonFocused = true
         }
     }
 }
