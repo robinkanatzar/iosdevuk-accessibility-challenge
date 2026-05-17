@@ -41,4 +41,20 @@ final class NotificationUITests: MythConfUITestCase {
         XCTAssertTrue(summary.label.contains("Session Starting Soon"), summary.label)
         XCTAssertTrue(summary.label.contains("starting in 10 minutes"), summary.label)
     }
+
+    func testFavouritingPastSessionDoesNotScheduleNotification() throws {
+        // Friday 09:35. Thursday workshop and its 10-minute reminder are already in the past.
+        relaunchForTestingDate(841646100)
+        openTab(.programme)
+
+        let addButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        addButton.tap()
+
+        allowNotificationsIfPrompted()
+
+        let summary = element(identifier: "debug.pendingReminderSummary")
+        XCTAssertTrue(summary.waitForExistence(timeout: 10))
+        waitForLabel(of: summary, containing: "No pending reminders")
+    }
 }

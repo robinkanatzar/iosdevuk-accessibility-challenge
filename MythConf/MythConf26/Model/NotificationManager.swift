@@ -54,6 +54,10 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
                     // e.g. simulated trigger is 25s away → real trigger is also 25s from now
                     let simulatedTriggerDate = session.startTime.addingTimeInterval(-600)
                     let offsetFromNow = simulatedTriggerDate.timeIntervalSince(now)
+                    guard offsetFromNow > 0 else {
+                        print("Skipping '\(talk.talkTitle)' reminder because its trigger is in the past")
+                        continue
+                    }
                     let realTriggerDate = Date().addingTimeInterval(offsetFromNow)
 
                     let components = Calendar.current.dateComponents(
