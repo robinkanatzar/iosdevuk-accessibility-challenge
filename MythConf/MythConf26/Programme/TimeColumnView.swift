@@ -12,11 +12,8 @@ struct TimeColumnView: View {
     
     var body: some View {
         HStack {
-            Text(startTime)
+            Text("\(startTime) - \(endTime)")
                 .bold()
-                .monospacedDigit()
-            Text(endTime)
-                .foregroundStyle(.secondary)
                 .monospacedDigit()
             Spacer()
         }
