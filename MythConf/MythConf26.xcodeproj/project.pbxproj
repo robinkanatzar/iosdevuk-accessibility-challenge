@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		35A633DD2FBB9D670009653B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B2918AE2F73EA8B008A369D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B2918B52F73EA8B008A369D;
+			remoteInfo = MythConf26;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		1B2919CA2F74454F008A369D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -22,6 +32,7 @@
 /* Begin PBXFileReference section */
 		1B2918B62F73EA8B008A369D /* MythConf26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MythConf26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2919B72F74454E008A369D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		35A633D92FBB9D670009653B /* MythConf26Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -44,10 +55,22 @@
 			path = MythConf26;
 			sourceTree = "<group>";
 		};
+		35A633DA2FBB9D670009653B /* MythConf26Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MythConf26Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1B2918B32F73EA8B008A369D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35A633D62FBB9D670009653B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -61,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				1B2918B82F73EA8B008A369D /* MythConf26 */,
+				35A633DA2FBB9D670009653B /* MythConf26Tests */,
 				1B2919B42F74454E008A369D /* Frameworks */,
 				1B2918B72F73EA8B008A369D /* Products */,
 			);
@@ -70,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				1B2918B62F73EA8B008A369D /* MythConf26.app */,
+				35A633D92FBB9D670009653B /* MythConf26Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +133,29 @@
 			productReference = 1B2918B62F73EA8B008A369D /* MythConf26.app */;
 			productType = "com.apple.product-type.application";
 		};
+		35A633D82FBB9D670009653B /* MythConf26Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35A633DF2FBB9D670009653B /* Build configuration list for PBXNativeTarget "MythConf26Tests" */;
+			buildPhases = (
+				35A633D52FBB9D670009653B /* Sources */,
+				35A633D62FBB9D670009653B /* Frameworks */,
+				35A633D72FBB9D670009653B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				35A633DE2FBB9D670009653B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				35A633DA2FBB9D670009653B /* MythConf26Tests */,
+			);
+			name = MythConf26Tests;
+			packageProductDependencies = (
+			);
+			productName = MythConf26Tests;
+			productReference = 35A633D92FBB9D670009653B /* MythConf26Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -115,11 +163,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2630;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					1B2918B52F73EA8B008A369D = {
 						CreatedOnToolsVersion = 26.3;
+					};
+					35A633D82FBB9D670009653B = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 1B2918B52F73EA8B008A369D;
 					};
 				};
 			};
@@ -140,12 +192,20 @@
 			projectRoot = "";
 			targets = (
 				1B2918B52F73EA8B008A369D /* MythConf26 */,
+				35A633D82FBB9D670009653B /* MythConf26Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1B2918B42F73EA8B008A369D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35A633D72FBB9D670009653B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -162,7 +222,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		35A633D52FBB9D670009653B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		35A633DE2FBB9D670009653B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
+			targetProxy = 35A633DD2FBB9D670009653B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1B2918BF2F73EA8B008A369D /* Debug */ = {
@@ -358,6 +433,46 @@
 			};
 			name = Release;
 		};
+		35A633E02FBB9D670009653B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fokswang.MythConf26Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MythConf26.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MythConf26";
+			};
+			name = Debug;
+		};
+		35A633E12FBB9D670009653B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = fokswang.MythConf26Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MythConf26.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MythConf26";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -375,6 +490,15 @@
 			buildConfigurations = (
 				1B2918C22F73EA8B008A369D /* Debug */,
 				1B2918C32F73EA8B008A369D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		35A633DF2FBB9D670009653B /* Build configuration list for PBXNativeTarget "MythConf26Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35A633E02FBB9D670009653B /* Debug */,
+				35A633E12FBB9D670009653B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
