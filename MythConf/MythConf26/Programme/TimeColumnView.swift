@@ -1,27 +1,27 @@
-//
-//  TimeColumnView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 /// A fixed-width column showing a session's start and end times.
 struct TimeColumnView: View {
-    let startTime: String
-    let endTime: String
+    let timeRange: AccessibleTimeRange
+
+    init(startTime: Date, endTime: Date) {
+        self.timeRange = AccessibleTimeRange(start: startTime, end: endTime)
+    }
 
     var body: some View {
         VStack(alignment: .trailing) {
-            Text(startTime)
+            Text(timeRange.visualStartTime)
                 .bold()
                 .monospacedDigit()
-            Text(endTime)
+
+            Text(timeRange.visualEndTime)
                 .foregroundStyle(.secondary)
                 .monospacedDigit()
         }
         .font(.caption)
-        .frame(width: 44, alignment: .trailing)
+        .frame(width: 52, alignment: .trailing)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
+        .accessibilityLabel(timeRange.accessibilityLabel)
+        .accessibilityValue(timeRange.accessibilityValue)
     }
 }

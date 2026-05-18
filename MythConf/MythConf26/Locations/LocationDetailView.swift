@@ -1,8 +1,3 @@
-//
-//  LocationDetailView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 import MapKit
 
@@ -10,7 +5,9 @@ struct LocationDetailView: View {
     @Environment(ViewModel.self) private var viewModel
     let locationID: String
 
-    private var location: Location { viewModel.locationFrom(locationID: locationID) }
+    private var location: Location {
+        viewModel.locationFrom(locationID: locationID)
+    }
 
     private var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
@@ -18,7 +15,13 @@ struct LocationDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text(location.name)
+                    .font(.title2)
+                    .bold()
+                    .conferenceHeaderAccessibility(label: location.name)
+                    .padding(.horizontal)
+
                 Map(initialPosition: .region(
                     MKCoordinateRegion(
                         center: coordinate,
@@ -28,14 +31,22 @@ struct LocationDetailView: View {
                 )) {
                     Marker(location.name, coordinate: coordinate)
                 }
-                .frame(height: 400)
+                .frame(height: 320)
                 .clipShape(.rect(cornerRadius: 12))
                 .padding(.horizontal)
+                .conferenceGroupAccessibility(
+                    label: "Map showing \(location.name)",
+                    hint: "The venue is \(location.placeDescription)."
+                )
 
                 Text(location.placeDescription)
                     .foregroundStyle(.secondary)
-                    .padding()
+                    .padding(.horizontal)
+                    .conferenceGroupAccessibility(
+                        label: "Venue description, \(location.placeDescription)"
+                    )
             }
+            .padding(.vertical)
         }
         .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.large)

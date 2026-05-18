@@ -1,8 +1,3 @@
-//
-//  LocationsView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 struct LocationsView: View {
@@ -15,12 +10,23 @@ struct LocationsView: View {
                     VStack(alignment: .leading) {
                         Text(location.name)
                             .bold()
+
                         Text(location.placeDescription)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .lineLimit(2)
                     }
                 }
+                .conferenceLinkAccessibility(
+                    label: "\(location.name), \(location.placeDescription)",
+                    hint: "Opens venue details and map.",
+                    inputLabels: [
+                        location.name,
+                        "Location",
+                        "Venue",
+                        "Open \(location.name)"
+                    ]
+                )
             }
             .navigationTitle("Locations")
             .conferenceNavigationDestinations()

@@ -1,14 +1,10 @@
-//
-//  SpeakerPhotoView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 /// A circular speaker photo at a given size, falling back to a default if no photo exists.
 struct SpeakerPhotoView: View {
     let speaker: Speaker
     let size: CGFloat
+    var isDecorative = true
 
     private var imageName: String {
         UIImage(named: speaker.photoName) != nil ? speaker.photoName : "default"
@@ -20,5 +16,7 @@ struct SpeakerPhotoView: View {
             .scaledToFill()
             .frame(width: size, height: size)
             .clipShape(.circle)
+            .accessibilityHidden(isDecorative)
+            .accessibilityLabel(isDecorative ? "" : "Photo of \(speaker.name)")
     }
 }
