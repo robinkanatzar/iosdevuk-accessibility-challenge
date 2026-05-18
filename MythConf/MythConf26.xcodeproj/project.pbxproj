@@ -35,9 +35,22 @@
 		5B5EED672FBB09EE00B9B5EE /* MythConf26UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5B5EF0D82FBB212000B9B5EE /* Exceptions for "MythConf26" folder in "MythConf26UITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Constants/LaunchArguments.swift,
+			);
+			target = 5B5EED662FBB09EE00B9B5EE /* MythConf26UITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1B2918B82F73EA8B008A369D /* MythConf26 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5B5EF0D82FBB212000B9B5EE /* Exceptions for "MythConf26" folder in "MythConf26UITests" target */,
+			);
 			path = MythConf26;
 			sourceTree = "<group>";
 		};
