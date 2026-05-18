@@ -29,7 +29,7 @@ struct SessionStatusBadge: View {
             .font(.caption)
             .fontWeight(.semibold)
             .foregroundStyle(tint)
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 6)
             .padding(.vertical, 6)
             .background(Capsule().fill(tint.opacity(0.12)))
             .accessibilityLabel(display.accessibilityLabel)
