@@ -15,16 +15,15 @@ struct BreakRowView: View {
             TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
             Text(session.sessionType.displayName)
                 .italic()
-                .foregroundStyle(.primary)
             if let talkID = session.contentIDs.first {
                 Text(viewModel.locationNameFrom(talkID: talkID))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
             }
             Spacer()
         }
         .padding()
         .frame(maxWidth: .infinity)
+        .foregroundStyle(.primary)
         .background(session.sessionType.color.opacity(0.12))
     }
 }
