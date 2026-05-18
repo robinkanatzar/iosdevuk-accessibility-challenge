@@ -88,6 +88,7 @@ struct LocationDetailView: View {
                     .padding(.trailing, 28)
                     .padding(.bottom, 16)
                 }
+                .accessibilityShowsLargeContentViewer()
                 
                 Text(location.placeDescription)
                     .foregroundStyle(.secondary)
