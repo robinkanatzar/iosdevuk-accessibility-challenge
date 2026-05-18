@@ -56,13 +56,13 @@ struct FavouriteButtonView: View {
 
     private func toggleFavourite() {
         if isFavourite {
-            viewModel.removeFavourite(talk: talk)
+            viewModel.removeFavourite(talk: talk, reminderTiming: appSettings.favouriteReminderTiming)
             FavouriteToggleFeedback.removed(
                 hapticsEnabled: appSettings.usesFavouriteHaptics,
                 soundsEnabled: appSettings.usesFavouriteSounds
             )
         } else {
-            viewModel.addFavourite(talk: talk)
+            viewModel.addFavourite(talk: talk, reminderTiming: appSettings.favouriteReminderTiming)
             SaveSessionTip.hasSavedFavourite = true
             saveSessionTip.invalidate(reason: .actionPerformed)
             FavouriteToggleFeedback.added(

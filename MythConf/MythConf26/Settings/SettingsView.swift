@@ -8,6 +8,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.appSettings) private var appSettings
     @Environment(\.dismiss) private var dismiss
+    @Environment(ViewModel.self) private var viewModel
 
     var body: some View {
         @Bindable var appSettings = appSettings
@@ -49,9 +50,29 @@ struct SettingsView: View {
                     Text("Both feedback types are on by default. You can turn either off without changing how favourites work.")
                 }
                 .accessibilityIdentifier("settings.favouriteFeedbackSection")
+
+                Section {
+                    Picker("Reminder Timing", selection: $appSettings.favouriteReminderTiming) {
+                        ForEach(FavouriteReminderTiming.allCases) { timing in
+                            Text(timing.title).tag(timing)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .accessibilityIdentifier("settings.favouriteReminderTimingPicker")
+                    .accessibilityLabel("Favourite reminder timing")
+                    .accessibilityHint("Controls whether favourited sessions create local reminders and how long before the session they appear.")
+                } header: {
+                    Text("Session Reminders")
+                } footer: {
+                    Text("Choose when the app reminds you about favourited sessions. Turn reminders off to reduce interruptions.")
+                }
+                .accessibilityIdentifier("settings.sessionRemindersSection")
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: appSettings.favouriteReminderTiming) { _, newValue in
+                viewModel.rescheduleFavouriteNotifications(reminderTiming: newValue)
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
@@ -68,4 +89,5 @@ struct SettingsView: View {
 #Preview {
     SettingsView()
         .environment(\.appSettings, AppSettings())
+        .environment(ViewModel())
 }

@@ -127,6 +127,15 @@ class MythConfUITestCase: XCTestCase {
         app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", prefix)).firstMatch
     }
 
+    func scrollToButton(label: String, maxSwipes: Int = 4) -> XCUIElement {
+        var button = app.buttons[label]
+        for _ in 0..<maxSwipes where !button.exists {
+            app.swipeUp()
+            button = app.buttons[label]
+        }
+        return button
+    }
+
     func firstElement(identifierBeginningWith prefix: String) -> XCUIElement {
         app.descendants(matching: .any)
             .matching(NSPredicate(format: "identifier BEGINSWITH %@", prefix))

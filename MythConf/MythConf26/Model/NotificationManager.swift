@@ -32,8 +32,19 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         }
     }
 
-    func scheduleNotifications(for sessions: [[Session]], allTalks: [Talk], viewModel: ViewModel, now: Date) async {
+    func scheduleNotifications(
+        for sessions: [[Session]],
+        allTalks: [Talk],
+        viewModel: ViewModel,
+        now: Date,
+        reminderTiming: FavouriteReminderTiming
+    ) async {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
+        guard let leadTime = reminderTiming.leadTime else {
+            print("Favourite reminders are off")
+            return
+        }
 
         for day in sessions {
             for session in day {
@@ -46,13 +57,13 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
                     content.title = "Session Starting Soon"
                     let speakers = viewModel.speakersFrom(talkID: talk.id)
                     let location = viewModel.locationNameFrom(locationID: talk.locationID)
-                    content.body = "'\(talk.talkTitle)' by \(speakers) is starting in 10 minutes in \(location)."
+                    content.body = "'\(talk.talkTitle)' by \(speakers) is starting in \(reminderTiming.notificationBodyText) in \(location)."
                     content.sound = .default
                     content.userInfo = ["talkID": talk.id.uuidString, "url": "MythConf26://talk/\(talk.id.uuidString)"]
 
                     // Offset from simulated "now" → real current time
                     // e.g. simulated trigger is 25s away → real trigger is also 25s from now
-                    let simulatedTriggerDate = session.startTime.addingTimeInterval(-600)
+                    let simulatedTriggerDate = session.startTime.addingTimeInterval(-leadTime)
                     let offsetFromNow = simulatedTriggerDate.timeIntervalSince(now)
                     guard offsetFromNow > 0 else {
                         print("Skipping '\(talk.talkTitle)' reminder because its trigger is in the past")

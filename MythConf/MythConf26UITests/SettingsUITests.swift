@@ -66,4 +66,20 @@ final class SettingsUITests: MythConfUITestCase {
         soundsToggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
         assertSwitch(soundsToggle, isOn: false)
     }
+
+    func testFavouriteReminderTimingCanBeChanged() throws {
+        openTab(.programme)
+
+        let settingsButton = app.buttons["settings.open"]
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        settingsButton.tap()
+
+        let offOption = scrollToButton(label: "Off")
+        XCTAssertTrue(offOption.waitForExistence(timeout: 5))
+        offOption.tap()
+
+        let fiveMinutesOption = scrollToButton(label: "5 minutes")
+        XCTAssertTrue(fiveMinutesOption.waitForExistence(timeout: 5))
+        fiveMinutesOption.tap()
+    }
 }

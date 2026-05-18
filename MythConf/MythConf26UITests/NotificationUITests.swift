@@ -57,4 +57,49 @@ final class NotificationUITests: MythConfUITestCase {
         XCTAssertTrue(summary.waitForExistence(timeout: 10))
         waitForLabel(of: summary, containing: "No pending reminders")
     }
+
+    func testReminderTimingOffDoesNotScheduleNotification() throws {
+        relaunchForTestingDate(841582080)
+        openTab(.programme)
+
+        app.buttons["settings.open"].tap()
+        let offOption = scrollToButton(label: "Off")
+        XCTAssertTrue(offOption.waitForExistence(timeout: 5))
+        offOption.tap()
+        app.buttons["settings.done"].tap()
+
+        let addButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        addButton.tap()
+
+        allowNotificationsIfPrompted()
+
+        let summary = element(identifier: "debug.pendingReminderSummary")
+        XCTAssertTrue(summary.waitForExistence(timeout: 10))
+        waitForLabel(of: summary, containing: "No pending reminders")
+    }
+
+    func testFavouritingSchedulesFiveMinuteLocalNotification() throws {
+        // First workshop starts at 841582800. This sets the app clock 7 minutes before start,
+        // so a 5-minute reminder is 2 minutes away and should be scheduled.
+        relaunchForTestingDate(841582380)
+        openTab(.programme)
+
+        app.buttons["settings.open"].tap()
+        let fiveMinutesOption = scrollToButton(label: "5 minutes")
+        XCTAssertTrue(fiveMinutesOption.waitForExistence(timeout: 5))
+        fiveMinutesOption.tap()
+        app.buttons["settings.done"].tap()
+
+        let addButton = firstButton(labelBeginningWith: "Add ")
+        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        addButton.tap()
+
+        allowNotificationsIfPrompted()
+
+        let summary = element(identifier: "debug.pendingReminderSummary")
+        XCTAssertTrue(summary.waitForExistence(timeout: 10))
+        waitForLabel(of: summary, containing: "1 pending reminder")
+        XCTAssertTrue(summary.label.contains("starting in 5 minutes"), summary.label)
+    }
 }

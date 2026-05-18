@@ -180,16 +180,16 @@ class ViewModel {
         }
     }
 
-    func removeFavourite(talk: Talk) {
+    func removeFavourite(talk: Talk, reminderTiming: FavouriteReminderTiming = .tenMinutes) {
         favouriteIds = favouriteIds.filter { $0 != talk.id }
         saveFavourites()
         loadFavourites()
         Task { @MainActor in
-            await scheduleFavouriteNotifications()
+            await scheduleFavouriteNotifications(reminderTiming: reminderTiming)
         }
     }
 
-    func addFavourite(talk: Talk) {
+    func addFavourite(talk: Talk, reminderTiming: FavouriteReminderTiming = .tenMinutes) {
         let shouldRequestAuthorization = favouriteIds.isEmpty
         favouriteIds.append(talk.id)
         saveFavourites()
@@ -199,16 +199,23 @@ class ViewModel {
             if shouldRequestAuthorization {
                 _ = await NotificationManager.shared.requestAuthorization()
             }
-            await scheduleFavouriteNotifications()
+            await scheduleFavouriteNotifications(reminderTiming: reminderTiming)
         }
     }
 
-    private func scheduleFavouriteNotifications() async {
+    func rescheduleFavouriteNotifications(reminderTiming: FavouriteReminderTiming) {
+        Task { @MainActor in
+            await scheduleFavouriteNotifications(reminderTiming: reminderTiming)
+        }
+    }
+
+    private func scheduleFavouriteNotifications(reminderTiming: FavouriteReminderTiming) async {
         await NotificationManager.shared.scheduleNotifications(
             for: confData.sessions,
             allTalks: confData.talks,
             viewModel: self,
-            now: date()
+            now: date(),
+            reminderTiming: reminderTiming
         )
         await refreshPendingReminderDebugSummary()
     }

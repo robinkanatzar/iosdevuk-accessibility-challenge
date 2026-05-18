@@ -237,13 +237,13 @@ struct ParallelTalkCardView: View {
 
     private func toggleFavourite() {
         if isFavourite {
-            viewModel.removeFavourite(talk: talk)
+            viewModel.removeFavourite(talk: talk, reminderTiming: appSettings.favouriteReminderTiming)
             FavouriteToggleFeedback.removed(
                 hapticsEnabled: appSettings.usesFavouriteHaptics,
                 soundsEnabled: appSettings.usesFavouriteSounds
             )
         } else {
-            viewModel.addFavourite(talk: talk)
+            viewModel.addFavourite(talk: talk, reminderTiming: appSettings.favouriteReminderTiming)
             FavouriteToggleFeedback.added(
                 hapticsEnabled: appSettings.usesFavouriteHaptics,
                 soundsEnabled: appSettings.usesFavouriteSounds
