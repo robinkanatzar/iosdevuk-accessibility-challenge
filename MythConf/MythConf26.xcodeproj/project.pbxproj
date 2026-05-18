@@ -40,6 +40,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"docs/judging-matrix.md",
+				"docs/manual-accessibility-audit.md",
 				"docs/README-ACCESSIBILITY.md",
 			);
 			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
