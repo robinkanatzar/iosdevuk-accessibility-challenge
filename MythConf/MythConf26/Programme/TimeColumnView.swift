@@ -10,11 +10,11 @@ struct TimeColumnView: View {
 
     var body: some View {
         VStack(alignment: .trailing) {
-            Text(timeRange.visualText.components(separatedBy: " – ").first ?? "")
+            Text(timeRange.visualStartTime)
                 .bold()
                 .monospacedDigit()
 
-            Text(timeRange.visualText.components(separatedBy: " – ").last ?? "")
+            Text(timeRange.visualEndTime)
                 .foregroundStyle(.secondary)
                 .monospacedDigit()
         }

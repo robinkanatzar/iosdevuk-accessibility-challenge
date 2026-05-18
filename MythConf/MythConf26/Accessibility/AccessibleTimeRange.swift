@@ -5,8 +5,16 @@ struct AccessibleTimeRange: Equatable {
     let start: Date
     let end: Date
 
+    var visualStartTime: String {
+        visualTime(for: start)
+    }
+
+    var visualEndTime: String {
+        visualTime(for: end)
+    }
+
     var visualText: String {
-        "\(visualTime(for: start)) – \(visualTime(for: end))"
+        "\(visualStartTime) – \(visualEndTime)"
     }
 
     var accessibilityLabel: String {
