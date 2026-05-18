@@ -1,12 +1,11 @@
-//
-//  MyScheduleView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 struct MyScheduleView: View {
     @Environment(ViewModel.self) private var viewModel
+
+    private var conflicts: [ScheduleConflict] {
+        ScheduleConflictDetector.conflicts(in: viewModel.favouritesBySession)
+    }
 
     var body: some View {
         NavigationStack {
@@ -17,11 +16,23 @@ struct MyScheduleView: View {
                         systemImage: "star",
                         description: Text("Tap the star on any session in the Programme to save it here.")
                     )
+                    .conferenceGroupAccessibility(
+                        label: "No favourites yet",
+                        hint: "Tap the star on any session in the Programme to save it here."
+                    )
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
+                            ScheduleStatusView(
+                                favouriteCount: viewModel.favouriteIds.count,
+                                conflictCount: conflicts.count
+                            )
+
+                            ScheduleConflictWarningView(conflicts: conflicts)
+
                             ForEach(viewModel.favouritesBySession.indices, id: \.self) { dayIndex in
                                 let daySessions = viewModel.favouritesBySession[dayIndex]
+
                                 if daySessions.first?.sessionType != .dummy {
                                     Section {
                                         ForEach(daySessions) { session in
@@ -36,6 +47,7 @@ struct MyScheduleView: View {
                                             .padding(.horizontal)
                                             .padding(.vertical, 8)
                                             .background(.regularMaterial)
+                                            .conferenceHeaderAccessibility(label: dayHeader(for: daySessions))
                                     }
                                 }
                             }
