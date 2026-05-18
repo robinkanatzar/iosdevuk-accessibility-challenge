@@ -1,8 +1,3 @@
-//
-//  SpeakerDetailView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 struct SpeakerDetailView: View {
@@ -16,12 +11,13 @@ struct SpeakerDetailView: View {
             VStack(alignment: .leading) {
                 // Header
                 HStack(alignment: .top) {
-                    SpeakerPhotoView(speaker: speaker, size: 80)
+                    SpeakerPhotoView(speaker: speaker, size: 80, isDecorative: false)
 
                     VStack(alignment: .leading) {
                         Text(speaker.name)
                             .font(.title2)
                             .bold()
+                            .conferenceHeaderAccessibility(label: speaker.name)
                         if !speaker.social.isEmpty {
                             SocialLinksView(social: speaker.social)
                         }
@@ -45,6 +41,7 @@ struct SpeakerDetailView: View {
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
                         .font(.headline)
+                        .conferenceHeaderAccessibility(label: "Sessions")
 
                     ForEach(speakerTalks, id: \.talkID) { item in
                         NavigationLink(value: TalkReference(talkID: item.talkID, session: item.session)) {
