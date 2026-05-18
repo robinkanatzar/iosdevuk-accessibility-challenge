@@ -51,7 +51,6 @@ struct ProgrammeView: View {
                 }
             }
             .navigationTitle("MythConf 2026")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     SettingsToolbarButton {
