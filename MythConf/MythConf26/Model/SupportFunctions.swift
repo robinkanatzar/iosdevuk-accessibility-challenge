@@ -11,11 +11,11 @@ func loadConfData() -> ConfData{
     var result = ConfData(version: 0, speakers: [], talks: [], locations: [], sessions: [])
     let filename = "conf.json"
     var filePath = urlToFileInDocuments(filename)
-    print("File in docs is \(filePath)")
+    debugLog("File in docs is \(filePath)")
     
     if !fileExistsInDocuments(filename) {
         guard let bundlePath = pathToFileInBundle(fileName: "conf", ending: ".json")  else {
-            print("Failed to find speaker file in bundle")
+            debugLog("Failed to find speaker file in bundle")
             return result
         }
         filePath = bundlePath
@@ -39,7 +39,7 @@ func pathToFileInBundle(fileName: String, ending: String) -> URL? {
         assertionFailure( "Couldn't find file path for \(fileName).json in bundle")
         return nil
     }
-    print("bundle path is ", bundlePath)
+    debugLog("bundle path is \(bundlePath)")
     return bundlePath
 }
 

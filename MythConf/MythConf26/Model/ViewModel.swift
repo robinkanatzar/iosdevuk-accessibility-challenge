@@ -26,31 +26,31 @@ class ViewModel {
         encoder.outputFormatting = .prettyPrinted
         if let data = try? encoder.encode(confData) {
             try? data.write(to: readListURL, options: .noFileProtection)
-            print( "Conf file is at \(readListURL)")
+            debugLog( "Conf file is at \(readListURL)")
         }
     }
     
     func talkFrom(talkID: UUID) -> Talk {
         let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
+        if matchingTalks.count != 1 {debugLog("Error - talkID did not exist")}
         return matchingTalks[0]
     }
     
     func talkUUIDFrom(talkTitle: String) -> UUID {
         let matchingTalks = confData.talks.filter{$0.talkTitle == talkTitle}
-        if matchingTalks.count != 1 {print("Error - talkTitle did not exist")}
+        if matchingTalks.count != 1 {debugLog("Error - talkTitle did not exist")}
         return matchingTalks[0].id
     }
     
     func talkTitleFrom(talkID: UUID) -> String {
         let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
+        if matchingTalks.count != 1 {debugLog("Error - talkID did not exist")}
         return matchingTalks[0].talkTitle
     }
     
     func speakersFrom(talkID: UUID) -> String {
         let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
+        if matchingTalks.count != 1 {debugLog("Error - talkID did not exist")}
         let speakerIDs = matchingTalks[0].speakerIDs
         var speakers = speakerNameFrom(speakerID: speakerIDs[0])
         if speakerIDs.count > 1 {
@@ -61,19 +61,19 @@ class ViewModel {
     
     func speakerNameFrom(speakerID: String) -> String {
         let matchingSpeakers = confData.speakers.filter{$0.id == speakerID}
-        if matchingSpeakers.count != 1 {print("Error - speakerID did not exist")}
+        if matchingSpeakers.count != 1 {debugLog("Error - speakerID did not exist")}
         return matchingSpeakers[0].name
     }
     
     func speakerFrom(speakerID: String) -> Speaker {
         let matchingSpeakers = confData.speakers.filter{$0.id == speakerID}
-        if matchingSpeakers.count != 1 {print("Error - speakerID did not exist")}
+        if matchingSpeakers.count != 1 {debugLog("Error - speakerID did not exist")}
         return matchingSpeakers[0]
     }
     
     func locationFrom(talkID: UUID) -> Location {
         let matchingTalks = confData.talks.filter{$0.id == talkID}
-        if matchingTalks.count != 1 {print("Error - talkID did not exist")}
+        if matchingTalks.count != 1 {debugLog("Error - talkID did not exist")}
         let locationID = matchingTalks[0].locationID
         let matchingLocations = confData.locations.filter{$0.id == locationID}
         return matchingLocations[0]
@@ -98,7 +98,7 @@ class ViewModel {
     func loadFavourites() {
         if fileExistsInDocuments("favourites.json") {
             let readListURL =  urlToFileInDocuments("favourites.json")
-            print( "favourites at \(readListURL)")
+            debugLog( "favourites at \(readListURL)")
             if let dataFromFile = try? Data(contentsOf: readListURL) {
                 // Decode the json back to state of program
                 // it is a list of talkIDs, and we need to make it into an array of arrays of sessions, with just the favourite talks
