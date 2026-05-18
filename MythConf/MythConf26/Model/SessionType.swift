@@ -37,6 +37,22 @@ enum SessionType: Codable {
         case .dummy: return ""
         }
     }
+    
+    var symbolName: String {
+        switch self {
+        case .talk: "person.wave.2"
+        case .panel: "person.3"
+        case .workshop: "hammer"
+        case .teaBreak: "cup.and.saucer"
+        case .lunch: "fork.knife"
+        case .dinner, .confdinner: "fork.knife.circle"
+        case .social: "person.2"
+        case .registration: "checkmark.seal"
+        case .railtrip: "tram"
+        case .lightningtalks: "bolt"
+        case .dummy: "calendar"
+        }
+    }
 
     var color: Color {
         switch self {
