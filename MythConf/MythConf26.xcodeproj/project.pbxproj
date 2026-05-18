@@ -24,9 +24,23 @@
 		1B2919B72F74454E008A369D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		35A633D12FBB9C480009653B /* Exceptions for "MythConf26" folder in "MythConf26" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"docs/judging-matrix.md",
+				"docs/README-ACCESSIBILITY.md",
+			);
+			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1B2918B82F73EA8B008A369D /* MythConf26 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				35A633D12FBB9C480009653B /* Exceptions for "MythConf26" folder in "MythConf26" target */,
+			);
 			path = MythConf26;
 			sourceTree = "<group>";
 		};
