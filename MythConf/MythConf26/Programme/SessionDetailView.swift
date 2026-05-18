@@ -1,8 +1,3 @@
-//
-//  SessionDetailView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 struct SessionDetailView: View {
@@ -11,13 +6,18 @@ struct SessionDetailView: View {
 
     private var talk: Talk { viewModel.talkFrom(talkID: talkReference.talkID) }
     private var session: Session { talkReference.session }
+    private var timeRange: AccessibleTimeRange {
+        AccessibleTimeRange(start: session.startTime, end: session.endTime)
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 // Time and location
                 HStack {
-                    Label(session.timeRange, systemImage: "clock")
+                    Label(timeRange.visualText, systemImage: "clock")
+                        .accessibilityLabel("Time")
+                        .accessibilityValue(timeRange.accessibilityLabel)
                     Spacer()
                     NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
                         Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")

@@ -1,8 +1,3 @@
-//
-//  ParallelSessionsRowView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 /// A row displaying two parallel sessions side by side.
@@ -11,7 +6,7 @@ struct ParallelSessionsRowView: View {
 
     var body: some View {
         HStack(alignment: .top) {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+            TimeColumnView(startTime: session.startTime, endTime: session.endTime)
 
             HStack(alignment: .top) {
                 ForEach(session.contentIDs, id: \.self) { talkID in

@@ -1,8 +1,3 @@
-//
-//  BreakRowView.swift
-//  IOSDevuk26
-//
-
 import SwiftUI
 
 /// A full-width row for non-session slots such as breaks, lunch, and social events.
@@ -12,7 +7,7 @@ struct BreakRowView: View {
 
     var body: some View {
         HStack {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+            TimeColumnView(startTime: session.startTime, endTime: session.endTime)
 
             VStack(alignment: .leading) {
                 Text(session.sessionType.displayName)
