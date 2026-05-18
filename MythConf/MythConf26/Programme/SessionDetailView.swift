@@ -10,36 +10,31 @@ struct SessionDetailView: View {
         AccessibleTimeRange(start: session.startTime, end: session.endTime)
     }
 
+    private var locationName: String {
+        viewModel.locationNameFrom(locationID: talk.locationID)
+    }
+
+    private var speakers: [Speaker] {
+        talk.speakerIDs.map { speakerID in
+            viewModel.speakerFrom(speakerID: speakerID)
+        }
+    }
+
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                // Time and location
-                HStack {
-                    Label(timeRange.visualText, systemImage: "clock")
-                        .accessibilityLabel("Time")
-                        .accessibilityValue(timeRange.accessibilityLabel)
-                    Spacer()
-                    NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
-                        Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")
-                    }
-                }
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .padding(.bottom)
+            VStack(alignment: .leading, spacing: 20) {
+                SessionDetailHeaderView(
+                    title: talk.talkTitle,
+                    timeRange: timeRange,
+                    locationID: talk.locationID,
+                    locationName: locationName
+                )
 
-                // Speakers
-                ForEach(talk.speakerIDs, id: \.self) { speakerID in
-                    NavigationLink(value: SpeakerNavigationID(value: speakerID)) {
-                        SpeakerRowView(speakerID: speakerID)
-                    }
-                    .buttonStyle(.plain)
-                }
+                SessionDetailSpeakersSectionView(speakers: speakers)
 
                 Divider()
-                    .padding(.vertical)
 
-                // Abstract
-                Text(talk.talkDescription)
+                SessionDetailAbstractSectionView(text: talk.talkDescription)
             }
             .padding()
         }
