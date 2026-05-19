@@ -42,7 +42,6 @@ struct SpeakerRowView: View {
         }
         .padding(.vertical, 4)
         .background(Color(.systemBackground))
-        .accessibilityElement(children: .combine)
         .accessibilityIdentifier("speakers.rowContent.\(speaker.id)")
     }
 
@@ -53,12 +52,12 @@ struct SpeakerRowView: View {
                 .dyslexiaReadingFont(.body, size: 17, weight: .bold)
                 .foregroundStyle(Color(.label))
 
-            if !speakerSummary.isEmpty && !dynamicTypeSize.isAccessibilitySize {
+//            if !speakerSummary.isEmpty && !dynamicTypeSize.isAccessibilitySize {
+            if !speakerSummary.isEmpty {
                 Text(speakerSummary)
                     .dyslexiaReadingFont(.body, size: 17)
                     .foregroundStyle(Color(.label))
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
-                    .accessibilityLabel("Biography. \(speakerSummary)")
             }
         }
     }

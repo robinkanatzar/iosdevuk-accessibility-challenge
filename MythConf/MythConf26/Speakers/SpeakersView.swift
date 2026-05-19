@@ -57,10 +57,20 @@ struct SpeakersView: View {
                 }
 
                 ForEach(filteredSpeakers) { speaker in
+                    // Accessibility: setting a label directly on the NavigationLink collapses the
+                    // entire row — photo, name, bio — into a single focusable element whose
+                    // announcement is just the speaker's name. This keeps VoiceOver list traversal
+                    // fast and predictable; the full bio is available once the user navigates into
+                    // the detail view. It also makes Voice Control commands unambiguous: users say
+                    // "tap Sarah Thornton" rather than a long bio-derived phrase.
+                    // Note: this label overrides any accessibilityElement(children:) modifier on
+                    // SpeakerRowView, so that modifier is intentionally absent from the row.
                     NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
                         SpeakerRowView(speakerID: speaker.id)
                     }
                     .listRowBackground(Color(.systemBackground))
+                    .accessibilityLabel(speaker.name)
+                    .accessibilityHint("Opens speaker details")
                     .accessibilityIdentifier("speakers.row.\(speaker.id)")
                 }
             }
