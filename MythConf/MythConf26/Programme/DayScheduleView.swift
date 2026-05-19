@@ -7,22 +7,41 @@ import SwiftUI
 
 /// A scrollable list of all time slots for a single conference day.
 struct DayScheduleView: View {
+    @Environment(ViewModel.self) private var viewModel
+    @Namespace private var scheduleRotorNamespace
+
     let sessions: [Session]
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 0) {
                 ForEach(sessions) { session in
                     if session.containsTalk {
-                        ParallelSessionsRowView(session: session, daySessions: sessions)
+                        ParallelSessionsRowView(
+                            session: session,
+                            daySessions: sessions,
+                            rotorNamespace: scheduleRotorNamespace
+                        )
                     } else {
-                        BreakRowView(session: session, daySessions: sessions)
+                        BreakRowView(
+                            session: session,
+                            daySessions: sessions,
+                            rotorNamespace: scheduleRotorNamespace
+                        )
                     }
                     Divider()
-                }
             }
         }
         .accessibilityIdentifier("programme.schedule")
+        .accessibilityElement(children: .contain)
+        .scheduleAccessibilityRotors(entries: scheduleRotorEntries, namespace: scheduleRotorNamespace)
+    }
+
+    private var scheduleRotorEntries: [ScheduleRotorCategory: [ScheduleRotorEntry]] {
+        [
+            .liveSessions: ScheduleRotorEntries.liveEntries(in: sessions, viewModel: viewModel),
+            .favouritedSessions: ScheduleRotorEntries.favouritedEntries(in: sessions, viewModel: viewModel),
+            .breaks: ScheduleRotorEntries.breakEntries(in: sessions)
+        ]
     }
 }
 

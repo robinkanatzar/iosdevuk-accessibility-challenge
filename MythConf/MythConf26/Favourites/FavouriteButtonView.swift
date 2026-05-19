@@ -28,9 +28,9 @@ struct FavouriteButtonView: View {
                 .contentShape(.rect)
         }
         .contentTransition(.symbolEffect(.replace))
-        .accessibilityLabel(isFavourite ? "Remove \(talk.talkTitle) from favourites" : "Add \(talk.talkTitle) to favourites")
+        .accessibilityLabel(isFavourite ? "Remove talk from favourites" : "Add talk to favourites")
         .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
-        .accessibilityHint(isFavourite ? "Removes this session from your schedule" : "Adds this session to your schedule")
+        .accessibilityHint(isFavourite ? "Removes this talk from your favourites" : "Adds this talk to your favourites")
         .accessibilityInputLabels(isFavourite
             ? [
                 "Unfavourite",

@@ -22,9 +22,7 @@ struct TimeColumnView: View {
         .font(.caption)
         .frame(minWidth: 44, alignment: .trailing)
         .fixedSize(horizontal: true, vertical: false)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(startTime) to \(endTime)")
-        .accessibilityAddTraits(.isStaticText)
+        .accessibilityHidden(true)
     }
 }
 

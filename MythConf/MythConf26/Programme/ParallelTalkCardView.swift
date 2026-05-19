@@ -17,6 +17,7 @@ struct ParallelTalkCardView: View {
     let talkID: UUID
     let session: Session
     let schedulePosition: ViewModel.SchedulePosition?
+    let rotorNamespace: Namespace.ID
 
     private var talk: Talk {
         viewModel.talkFrom(talkID: talkID)
@@ -38,19 +39,13 @@ struct ParallelTalkCardView: View {
         session.statusDisplay(now: viewModel.currentDate)
     }
 
-    private var accessibilityStatusPrefix: String {
-        statusDisplay.isVisible ? "\(statusDisplay.accessibilityLabel), " : ""
-    }
-
-    private var schedulePositionPrefix: String {
-        switch schedulePosition {
-        case .now:
-            return "Now, "
-        case .next:
-            return "Next, "
-        case nil:
-            return ""
-        }
+    private var accessibilityStateValue: String {
+        [
+            schedulePosition?.accessibilityText,
+            statusDisplay.isVisible ? statusDisplay.accessibilityLabel : nil
+        ]
+        .compactMap { $0 }
+        .joined(separator: ", ")
     }
 
     private var cardBackground: AnyShapeStyle {
@@ -101,19 +96,27 @@ struct ParallelTalkCardView: View {
                 talk.talkTitle,
                 "Open \(talk.talkTitle)"
             ])
-            .accessibilityValue(
-                "\(schedulePositionPrefix)\(accessibilityStatusPrefix)\(session.timeRange), \(speakers), \(locationName), \(isFavourite ? "Favourited" : "Not favourited")"
-            )
+            .accessibilityValue(accessibilityStateValue)
+            .accessibilityCustomContent("Speaker", speakers, importance: .high)
+            .accessibilityCustomContent("Location", locationName, importance: .default)
+            .accessibilityCustomContent("Time", session.timeRange, importance: .default)
+            .accessibilityCustomContent("Status", statusDisplay.isVisible ? statusDisplay.accessibilityLabel : "Not started", importance: .default)
+            .accessibilityCustomContent("Favourite", isFavourite ? "Favourited" : "Not favourited", importance: .default)
+            .accessibilityRotorEntry(id: ScheduleRotorTargetID.talk(talk.id), in: rotorNamespace)
             .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
 
                 toggleFavourite()
             }
-            .accessibilitySortPriority(1)
             .buttonStyle(.plain)
 
             VStack {
                 Spacer()
+                // Hidden from VoiceOver because the card above already exposes a
+                // "Add/Remove from favourites" custom action (swipe up to access).
+                // Kept visible for Switch Control and Full Keyboard Access users
+                // who benefit from a discrete tap target.
                 FavouriteButtonView(talk: talk)
+                    .accessibilityHiddenFromVoiceOver()
                     .accessibilityIdentifier("programme.favourite.\(talk.id.uuidString)")
                     .background(
                         Circle()
@@ -122,7 +125,6 @@ struct ParallelTalkCardView: View {
                     )
                     .padding(.bottom, 16)
                     .padding(.trailing, 16)
-                    .accessibilitySortPriority(0)
             }
         }
     }
@@ -253,11 +255,17 @@ struct ParallelTalkCardView: View {
 }
 
 #Preview {
+    @Previewable @Namespace var rotorNamespace
     let viewModel = ViewModel()
     let talkID = UUID(uuidString: "C1001006-C100-4100-8100-100000000006")!
     let session = viewModel.confData.sessions[1][2]
-    
-    ParallelTalkCardView(talkID: talkID, session: session, schedulePosition: .next)
-        .environment(viewModel)
-        .padding()
+
+    ParallelTalkCardView(
+        talkID: talkID,
+        session: session,
+        schedulePosition: .next,
+        rotorNamespace: rotorNamespace
+    )
+    .environment(viewModel)
+    .padding()
 }

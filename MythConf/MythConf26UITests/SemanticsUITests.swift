@@ -30,4 +30,25 @@ final class SemanticsUITests: MythConfUITestCase {
         XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 5))
         XCTAssertEqual(sessionsHeading.label, "Sessions by \(speakerName)")
     }
+
+    func testProgrammeCardKeepsConciseLabelAndStructuredValue() throws {
+        relaunchForTestingDate(841646100)
+        openTab(.programme)
+
+        let card = firstElement(identifierBeginningWith: "programme.card.")
+        XCTAssertTrue(card.waitForExistence(timeout: 5))
+        XCTAssertTrue(card.label.contains(":"), card.label)
+
+        let value = card.value as? String ?? ""
+        XCTAssertFalse(value.contains("Tyndall Lecture Theatre"), value)
+        XCTAssertFalse(value.contains("Alex Morgan"), value)
+    }
+
+    func testProgrammeBreakRowsExposeStableRotorTargets() throws {
+        relaunchForTestingDate(841646100)
+        openTab(.programme)
+
+        let breakRow = firstElement(identifierBeginningWith: "schedule.rotor.break.")
+        XCTAssertTrue(breakRow.waitForExistence(timeout: 5))
+    }
 }

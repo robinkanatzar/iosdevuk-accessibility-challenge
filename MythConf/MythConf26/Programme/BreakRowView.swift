@@ -13,6 +13,7 @@ struct BreakRowView: View {
     @Environment(ViewModel.self) private var viewModel
     let session: Session
     let daySessions: [Session]
+    let rotorNamespace: Namespace.ID
 
     private var locationName: String? {
         guard let talkID = session.contentIDs.first else { return nil }
@@ -34,14 +35,21 @@ struct BreakRowView: View {
         }
     }
 
+    private var statusDisplay: Session.StatusDisplay {
+        session.statusDisplay(now: viewModel.currentDate)
+    }
+
     private var rowAccessibilityLabel: String {
-        let statusDisplay = session.statusDisplay(now: viewModel.currentDate)
-        let statusPrefix = statusDisplay.isVisible ? "\(statusDisplay.accessibilityLabel), " : ""
-        if let locationName {
-            return "\(schedulePositionPrefix)\(session.sessionType.displayName), \(statusPrefix)\(session.timeRange), \(locationName)"
-        } else {
-            return "\(schedulePositionPrefix)\(session.sessionType.displayName), \(statusPrefix)\(session.timeRange)"
-        }
+        "\(schedulePositionPrefix)\(session.sessionType.displayName)"
+    }
+
+    private var rowAccessibilityValue: String {
+        [
+            schedulePosition?.accessibilityText,
+            statusDisplay.isVisible ? statusDisplay.accessibilityLabel : nil
+        ]
+        .compactMap { $0 }
+        .joined(separator: ", ")
     }
 
     private var rowBackground: AnyShapeStyle {
@@ -55,19 +63,26 @@ struct BreakRowView: View {
     }
 
     var body: some View {
-
-        Group {
-            if dynamicTypeSize > .large  {
-                accessibilityLayout
-            } else {
-                compactParallelLayout
-            }
+        if dynamicTypeSize > .large  {
+            accessibleBreakRow(accessibilityLayout)
+        } else {
+            accessibleBreakRow(compactParallelLayout)
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(rowBackground)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(rowAccessibilityLabel)
+    }
+
+    private func accessibleBreakRow<Content: View>(_ content: Content) -> some View {
+        content
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(rowBackground)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(rowAccessibilityLabel)
+            .accessibilityValue(rowAccessibilityValue)
+            .accessibilityCustomContent("Time", session.timeRange, importance: .high)
+            .accessibilityCustomContent("Location", locationName ?? "No location", importance: .default)
+            .accessibilityCustomContent("Status", statusDisplay.isVisible ? statusDisplay.accessibilityLabel : "Not started", importance: .default)
+            .accessibilityIdentifier(ScheduleRotorTargetID.breakSession(session.id))
+            .accessibilityRotorEntry(id: ScheduleRotorTargetID.breakSession(session.id), in: rotorNamespace)
     }
 
     private var accessibilityLayout: some View {
@@ -126,8 +141,14 @@ struct BreakRowView: View {
 }
 
 #Preview {
+    @Previewable @Namespace var rotorNamespace
     let viewModel = ViewModel()
     let session = viewModel.confData.sessions[1][4]
-    BreakRowView(session: session, daySessions: viewModel.confData.sessions[1])
+
+    BreakRowView(
+        session: session,
+        daySessions: viewModel.confData.sessions[1],
+        rotorNamespace: rotorNamespace
+    )
         .environment(viewModel)
 }

@@ -11,9 +11,14 @@ struct MyScheduleView: View {
     @Binding var selectedTab: Int
     @State private var isShowingSettings = false
     @AccessibilityFocusState private var isSettingsButtonFocused: Bool
+    @Namespace private var scheduleRotorNamespace
 
     private var headerBackground: AnyShapeStyle {
         reduceTransparency ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(.regularMaterial)
+    }
+
+    private var visibleFavouriteSessions: [Session] {
+        viewModel.favouritesBySession.flatMap { $0 }.filter { $0.sessionType != .dummy }
     }
 
     var body: some View {
@@ -48,7 +53,11 @@ struct MyScheduleView: View {
                                 if daySessions.first?.sessionType != .dummy {
                                     Section {
                                         ForEach(daySessions) { session in
-                                            ParallelSessionsRowView(session: session, daySessions: daySessions)
+                                            ParallelSessionsRowView(
+                                                session: session,
+                                                daySessions: daySessions,
+                                                rotorNamespace: scheduleRotorNamespace
+                                            )
                                             Divider()
                                         }
                                     } header: {
@@ -66,6 +75,11 @@ struct MyScheduleView: View {
                         }
                     }
                     .accessibilityIdentifier("mySchedule.schedule")
+                    .accessibilityElement(children: .contain)
+                    .scheduleAccessibilityRotors(
+                        entries: scheduleRotorEntries,
+                        namespace: scheduleRotorNamespace
+                    )
                 }
             }
             .navigationTitle("My Schedule")
@@ -94,6 +108,13 @@ struct MyScheduleView: View {
     private func dayHeader(for sessions: [Session]) -> String {
         guard let first = sessions.first else { return "" }
         return first.startTime.formatted(.dateTime.weekday(.wide).day().month(.wide))
+    }
+
+    private var scheduleRotorEntries: [ScheduleRotorCategory: [ScheduleRotorEntry]] {
+        [
+            .liveSessions: ScheduleRotorEntries.liveEntries(in: visibleFavouriteSessions, viewModel: viewModel),
+            .breaks: ScheduleRotorEntries.breakEntries(in: visibleFavouriteSessions)
+        ]
     }
 }
 
