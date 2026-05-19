@@ -36,6 +36,7 @@ struct MyScheduleView: View {
                                             .padding(.horizontal)
                                             .padding(.vertical, 8)
                                             .background(.regularMaterial)
+                                            .accessibilityAddTraits(.isHeader)
                                     }
                                 }
                             }

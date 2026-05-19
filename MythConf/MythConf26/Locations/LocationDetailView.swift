@@ -18,26 +18,56 @@ struct LocationDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                Map(initialPosition: .region(
-                    MKCoordinateRegion(
-                        center: coordinate,
-                        latitudinalMeters: 500,
-                        longitudinalMeters: 500
-                    )
-                )) {
-                    Marker(location.name, coordinate: coordinate)
+                    VStack(alignment: .leading, spacing: 16) {
+                        Map(initialPosition: .region(
+                            MKCoordinateRegion(
+                                center: coordinate,
+                                latitudinalMeters: 500,
+                                longitudinalMeters: 500
+                            )
+                        )) {
+                            Marker(location.name, coordinate: coordinate)
+                        }
+                        .frame(height: 400)
+                        .clipShape(.rect(cornerRadius: 12))
+                        .padding(.horizontal)
+                        .accessibilityElement()
+                        .accessibilityLabel("Map showing \(location.name)")
+                        .accessibilityHint("Visual reference. Use Open in Maps below for directions.")
+         
+                        // Section header for the description.
+                        Text("About this location")
+                            .font(.headline)
+                            .accessibilityAddTraits(.isHeader)
+                            .padding(.horizontal)
+         
+                        Text(location.placeDescription)
+                            .foregroundStyle(.secondary)
+                            .padding(.horizontal)
+         
+                        Button {
+                            openInMaps()
+                        } label: {
+                            Label("Open in Maps", systemImage: "map.fill")
+                                .frame(maxWidth: .infinity, minHeight: 44)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .padding(.horizontal)
+                        .accessibilityHint("Opens \(location.name) in the Maps app for directions")
+                        .accessibilityInputLabels(["Open in Maps", "directions", "maps", "navigate"])
+                    }
+                    .padding(.vertical)
                 }
-                .frame(height: 400)
-                .clipShape(.rect(cornerRadius: 12))
-                .padding(.horizontal)
-
-                Text(location.placeDescription)
-                    .foregroundStyle(.secondary)
-                    .padding()
+                .navigationTitle(location.name)
+                .navigationBarTitleDisplayMode(.large)
+            }
+         
+            private func openInMaps() {
+                let placemark = MKPlacemark(coordinate: coordinate)
+                let mapItem = MKMapItem(placemark: placemark)
+                mapItem.name = location.name
+                mapItem.openInMaps(launchOptions: [
+                    MKLaunchOptionsMapTypeKey: NSNumber(value: MKMapType.standard.rawValue)
+                ])
             }
         }
-        .navigationTitle(location.name)
-        .navigationBarTitleDisplayMode(.large)
-    }
-}

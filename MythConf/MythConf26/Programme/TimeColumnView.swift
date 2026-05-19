@@ -7,9 +7,12 @@ import SwiftUI
 
 /// A fixed-width column showing a session's start and end times.
 struct TimeColumnView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    
     let startTime: String
     let endTime: String
-
+    var accessibleRange: String? = nil
+    
     var body: some View {
         VStack(alignment: .trailing) {
             Text(startTime)
@@ -22,6 +25,7 @@ struct TimeColumnView: View {
         .font(.caption)
         .frame(width: 44, alignment: .trailing)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
+        .accessibilityLabel(accessibleRange ?? "from \(startTime), session end time \(endTime)")
+        .accessibilityAddTraits(.isStaticText)
     }
 }
