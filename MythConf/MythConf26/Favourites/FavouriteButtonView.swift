@@ -8,6 +8,7 @@ import TipKit
 
 /// A button that toggles a talk as a favourite.
 struct FavouriteButtonView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.appSettings) private var appSettings
     @Environment(ViewModel.self) private var viewModel
     let talk: Talk
@@ -27,7 +28,7 @@ struct FavouriteButtonView: View {
                 .frame(minWidth: 44, minHeight: 44)
                 .contentShape(.rect)
         }
-        .contentTransition(.symbolEffect(.replace))
+        .contentTransition(reduceMotion ? .identity : .symbolEffect(.replace))
         .accessibilityLabel(isFavourite ? "Remove talk from favourites" : "Add talk to favourites")
         .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
         .accessibilityHint(isFavourite ? "Removes this talk from your favourites" : "Adds this talk to your favourites")
