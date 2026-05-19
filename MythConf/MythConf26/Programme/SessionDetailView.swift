@@ -31,6 +31,7 @@ struct SessionDetailView: View {
                     sessionInfoRow(
                         title: "Time",
                         value: session.timeRange,
+                        accessibilityValue: session.accessibilityTimeRange,
                         systemImage: "clock",
                         accessibilityIdentifier: "sessionDetail.time"
                     )
@@ -155,13 +156,14 @@ struct SessionDetailView: View {
     private func sessionInfoRow(
         title: String,
         value: String,
+        accessibilityValue: String? = nil,
         systemImage: String,
         accessibilityIdentifier: String
     ) -> some View {
         sessionInfoRowContent(title: title, value: value, systemImage: systemImage)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(title)
-            .accessibilityValue(value)
+            .accessibilityValue(accessibilityValue ?? value)
             .accessibilityIdentifier(accessibilityIdentifier)
     }
 

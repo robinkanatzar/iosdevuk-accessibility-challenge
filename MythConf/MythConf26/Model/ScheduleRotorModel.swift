@@ -88,7 +88,7 @@ enum ScheduleRotorEntries {
             .map { session in
                 ScheduleRotorEntry(
                     id: "break-\(session.id.uuidString)",
-                    label: "\(session.sessionType.displayName), \(session.timeRange)",
+                    label: "\(session.sessionType.displayName). \(session.accessibilityTimeRange)",
                     targetID: ScheduleRotorTargetID.breakSession(session.id)
                 )
             }

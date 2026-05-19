@@ -53,9 +53,9 @@ struct FavouriteSessionIntent: AppIntent {
         do {
             let added = try await ConferenceSessionStore.addFavourite(session.id)
             if added {
-                return .result(dialog: IntentDialog("Favourited \(session.title). It is now in your schedule. It is on \(session.dayAndDate) from \(session.timeRange), in \(session.locationName)."))
+                return .result(dialog: IntentDialog("Favourited \(session.title). It is now in your schedule. It is on \(session.dayAndDate). \(session.spokenTimeRange) In \(session.locationName)."))
             } else {
-                return .result(dialog: IntentDialog("\(session.title) is already favourited and in your schedule. It is on \(session.dayAndDate) from \(session.timeRange), in \(session.locationName)."))
+                return .result(dialog: IntentDialog("\(session.title) is already favourited and in your schedule. It is on \(session.dayAndDate). \(session.spokenTimeRange) In \(session.locationName)."))
             }
         } catch {
             throw MythConfIntentError(message: "I could not update your favourites. Please try again.")

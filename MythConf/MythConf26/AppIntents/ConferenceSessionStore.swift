@@ -34,6 +34,7 @@ enum ConferenceSessionStore {
                         locationName: location.name,
                         dayAndDate: session.dayAndDate,
                         timeRange: session.timeRange,
+                        spokenTimeRange: session.accessibilityTimeRange,
                         startDate: session.startTime,
                         summary: firstSentence(from: talk.talkDescription),
                         details: talk.talkDescription,

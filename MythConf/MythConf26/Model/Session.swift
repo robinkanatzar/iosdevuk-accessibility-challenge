@@ -32,6 +32,10 @@ struct Session: Codable, Identifiable, Hashable {
     }
 
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
+
+    var accessibilityTimeRange: String {
+        "Starts at \(startTimeText). Ends at \(endTimeText)."
+    }
 }
 
 // MARK: - Live Status

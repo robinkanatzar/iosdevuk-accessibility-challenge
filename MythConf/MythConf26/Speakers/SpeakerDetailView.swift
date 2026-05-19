@@ -67,7 +67,7 @@ struct SpeakerDetailView: View {
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel("Session: \(viewModel.talkTitleFrom(talkID: item.talkID))")
-                        .accessibilityValue("\(item.session.timeRange), \(viewModel.locationNameFrom(talkID: item.talkID))")
+                        .accessibilityValue("\(item.session.accessibilityTimeRange) \(viewModel.locationNameFrom(talkID: item.talkID))")
                         .accessibilityHint("Opens session details")
                     }
                 }

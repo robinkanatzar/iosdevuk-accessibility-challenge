@@ -17,6 +17,7 @@ struct ConferenceSessionEntity: AppEntity, Identifiable, Sendable {
     let locationName: String
     let dayAndDate: String
     let timeRange: String
+    let spokenTimeRange: String
     let startDate: Date
     let summary: String
     let details: String
@@ -30,11 +31,11 @@ struct ConferenceSessionEntity: AppEntity, Identifiable, Sendable {
     }
 
     var spokenDetails: String {
-        "\(title) is a \(sessionType.lowercased()) by \(speakerNames), on \(dayAndDate) from \(timeRange), in \(locationName). \(summary)"
+        "\(title) is a \(sessionType.lowercased()) by \(speakerNames), on \(dayAndDate). \(spokenTimeRange) In \(locationName). \(summary)"
     }
 
     var shortScheduleLine: String {
-        "\(timeRange), \(title), in \(locationName)"
+        "\(title). \(spokenTimeRange) In \(locationName)"
     }
 }
 
