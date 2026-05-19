@@ -27,11 +27,11 @@ struct ParallelTalkCardView: View {
                         .font(.subheadline)
                         .multilineTextAlignment(.leading)
                     Text(viewModel.speakersFrom(talkID: talkID))
-                        .font(.caption)
+                        .font(.caption).opacity(0.6)
                         .foregroundStyle(.primary)
                         .multilineTextAlignment(.leading)
                     Text(viewModel.locationNameFrom(talkID: talkID))
-                        .font(.caption)
+                        .font(.caption).opacity(0.6)
                         .foregroundStyle(.primary)
                     Spacer()
                     HStack {

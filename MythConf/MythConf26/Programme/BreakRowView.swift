@@ -17,7 +17,7 @@ struct BreakRowView: View {
                 .italic()
             if let talkID = session.contentIDs.first {
                 Text(viewModel.locationNameFrom(talkID: talkID))
-                    .font(.caption)
+                    .font(.caption).opacity(0.6)
             }
             Spacer()
         }
