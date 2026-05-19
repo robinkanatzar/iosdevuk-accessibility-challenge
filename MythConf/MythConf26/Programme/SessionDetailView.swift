@@ -46,6 +46,7 @@ struct SessionDetailView: View {
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Location")
                     .accessibilityValue(locationName)
+                    .accessibilityHint("Opens location details")
                     .accessibilityIdentifier("sessionDetail.location")
                 }
 
@@ -85,7 +86,7 @@ struct SessionDetailView: View {
                 .controlSize(.large)
                 .accessibilityLabel(favouriteActionAccessibilityLabel)
                 .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
-                .accessibilityHint(isFavourite ? "Removes this session from your schedule" : "Adds this session to your schedule")
+                .accessibilityHint(isFavourite ? "Removes this session from your favourites" : "Adds this session to your favourites")
                 .accessibilityInputLabels(isFavourite
                     ? ["Unfavourite", "Remove from favourites", "Star", talk.talkTitle]
                     : ["Favourite", "Add to favourites", "Star", talk.talkTitle]
@@ -107,6 +108,10 @@ struct SessionDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 FavouriteButtonView(talk: talk)
+                // Hidden from VoiceOver — the Add/Remove button below
+                // already covers this action with full context.
+                // Kept visible for Switch Control and Full Keyboard Access.
+                .accessibilityHiddenFromVoiceOver()
             }
         }
     }
@@ -123,6 +128,7 @@ struct SessionDetailView: View {
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(viewModel.speakerNameFrom(speakerID: speakerID))
                 .accessibilityValue(speakerSummary(for: speakerID))
+                .accessibilityHint("Opens speaker profile")
                 .accessibilityIdentifier("sessionDetail.speaker.\(speakerID)")
             }
         }
@@ -259,8 +265,6 @@ struct SessionDetailView: View {
         if let firstSentenceRange = tokenizer.tokens(for: speaker.speakerInfo.startIndex..<speaker.speakerInfo.endIndex).first {
             return String(speaker.speakerInfo[firstSentenceRange])
         }
-
-        print("Jranklin")
         return speaker.speakerInfo
     }
 
