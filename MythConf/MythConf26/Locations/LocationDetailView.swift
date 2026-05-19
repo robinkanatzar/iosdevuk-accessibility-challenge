@@ -23,6 +23,7 @@ struct LocationDetailView: View {
     
     private var panStep: CLLocationDegrees { currentRegion.span.latitudeDelta * 0.3 }
     private var zoomFactor: Double { 0.5 }
+    private let mapButtonSpacing: CGFloat = 12
     
     var body: some View {
         ScrollView {
@@ -54,12 +55,12 @@ struct LocationDetailView: View {
                     position = .region(initialRegion)
                 }
                 .overlay(alignment: .bottomTrailing) {
-                    HStack(alignment: .center, spacing: 12) {
-                        VStack(spacing: 6) {
+                    HStack(alignment: .center, spacing: mapButtonSpacing) {
+                        VStack(spacing: mapButtonSpacing) {
                             mapButton(systemName: "chevron.up", label: "Pan Up", hint: "Moves the map view North") {
                                 moveMap(latDelta: panStep, lonDelta: 0)
                             }
-                            HStack(spacing: 6) {
+                            HStack(spacing: mapButtonSpacing) {
                                 mapButton(systemName: "chevron.left", label: "Pan Left", hint: "Moves the map view West") {
                                     moveMap(latDelta: 0, lonDelta: -panStep)
                                 }
@@ -74,7 +75,7 @@ struct LocationDetailView: View {
                         .accessibilityElement(children: .contain)
                         .accessibilityLabel("Directional Controls")
                         
-                        VStack(spacing: 10) {
+                        VStack(spacing: mapButtonSpacing) {
                             mapButton(systemName: "plus", label: "Zoom In", hint: "Zooms closer into the map layout") {
                                 adjustZoom(multiplyBy: zoomFactor)
                             }
