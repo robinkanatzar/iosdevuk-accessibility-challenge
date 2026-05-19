@@ -25,8 +25,8 @@ struct SpeakerRowView: View {
                     .bold()
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(.subheadline).opacity(0.6)
+                        .foregroundStyle(.primary)
                         .lineLimit(2)
                 }
             }

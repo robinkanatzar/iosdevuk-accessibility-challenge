@@ -16,8 +16,8 @@ struct LocationsView: View {
                         Text(location.name)
                             .bold()
                         Text(location.placeDescription)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .font(.subheadline).opacity(0.6)
+                            .foregroundStyle(.primary)
                             .lineLimit(2)
                     }
                     .accessibilityElement(children: .ignore)
