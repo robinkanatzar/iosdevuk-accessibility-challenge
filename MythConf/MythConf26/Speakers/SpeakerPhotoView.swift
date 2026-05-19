@@ -7,6 +7,7 @@ import SwiftUI
 
 /// A circular speaker photo at a given size, falling back to a default if no photo exists.
 struct SpeakerPhotoView: View {
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     let speaker: Speaker
     let size: CGFloat
 
@@ -20,5 +21,12 @@ struct SpeakerPhotoView: View {
             .scaledToFill()
             .frame(width: size, height: size)
             .clipShape(.circle)
+            .overlay(
+                Circle()
+                    .stroke(
+                        colorSchemeContrast == .increased ? Color.primary : Color.clear,
+                        lineWidth: 2
+                    )
+            )
     }
 }
