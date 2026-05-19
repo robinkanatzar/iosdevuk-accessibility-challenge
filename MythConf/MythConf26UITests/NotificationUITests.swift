@@ -10,8 +10,9 @@ import XCTest
 @MainActor
 final class NotificationUITests: MythConfUITestCase {
     func testFavouritingNearReminderTimeRequestsNotificationPermission() throws {
-        // First workshop starts at 841582800. The reminder trigger is 10 minutes earlier: 841582200.
-        relaunchForTestingDate(841582080)
+        // First workshop starts at 841582800. The 10-minute reminder trigger is 841582200.
+        // Start 10 minutes before the trigger so slow launches do not miss the scheduling window.
+        relaunchForTestingDate(841581600)
         openTab(.programme)
 
         let addButton = firstButton(labelBeginningWith: "Add ")
@@ -25,8 +26,9 @@ final class NotificationUITests: MythConfUITestCase {
     }
 
     func testFavouritingSchedulesTenMinuteLocalNotification() throws {
-        // First workshop starts at 841582800. The reminder trigger is 10 minutes earlier: 841582200.
-        relaunchForTestingDate(841582080)
+        // First workshop starts at 841582800. The 10-minute reminder trigger is 841582200.
+        // Start 10 minutes before the trigger so slow launches do not miss the scheduling window.
+        relaunchForTestingDate(841581600)
         openTab(.programme)
 
         let addButton = firstButton(labelBeginningWith: "Add ")
@@ -59,13 +61,11 @@ final class NotificationUITests: MythConfUITestCase {
     }
 
     func testReminderTimingOffDoesNotScheduleNotification() throws {
-        relaunchForTestingDate(841582080)
+        relaunchForTestingDate(841581600)
         openTab(.programme)
 
         app.buttons["settings.open"].tap()
-        let offOption = scrollToButton(label: "Off")
-        XCTAssertTrue(offOption.waitForExistence(timeout: 5))
-        offOption.tap()
+        selectReminderTiming("Off")
         app.buttons["settings.done"].tap()
 
         let addButton = firstButton(labelBeginningWith: "Add ")
@@ -80,15 +80,13 @@ final class NotificationUITests: MythConfUITestCase {
     }
 
     func testFavouritingSchedulesFiveMinuteLocalNotification() throws {
-        // First workshop starts at 841582800. This sets the app clock 7 minutes before start,
-        // so a 5-minute reminder is 2 minutes away and should be scheduled.
-        relaunchForTestingDate(841582380)
+        // First workshop starts at 841582800. The 5-minute reminder trigger is 841582500.
+        // Start 5 minutes before the trigger so slow launches do not miss the scheduling window.
+        relaunchForTestingDate(841582200)
         openTab(.programme)
 
         app.buttons["settings.open"].tap()
-        let fiveMinutesOption = scrollToButton(label: "5 minutes")
-        XCTAssertTrue(fiveMinutesOption.waitForExistence(timeout: 5))
-        fiveMinutesOption.tap()
+        selectReminderTiming("5 minutes")
         app.buttons["settings.done"].tap()
 
         let addButton = firstButton(labelBeginningWith: "Add ")
@@ -101,5 +99,18 @@ final class NotificationUITests: MythConfUITestCase {
         XCTAssertTrue(summary.waitForExistence(timeout: 10))
         waitForLabel(of: summary, containing: "1 pending reminder")
         XCTAssertTrue(summary.label.contains("starting in 5 minutes"), summary.label)
+    }
+
+    private func selectReminderTiming(_ label: String) {
+        let reminderMenu = scrollToElement(
+            identifier: "settings.favouriteReminderTimingPicker",
+            labels: ["Favourite reminder timing", "Reminder Timing"]
+        )
+        XCTAssertTrue(reminderMenu.waitForExistence(timeout: 5))
+        reminderMenu.tap()
+
+        let option = app.buttons[label]
+        XCTAssertTrue(option.waitForExistence(timeout: 5))
+        option.tap()
     }
 }

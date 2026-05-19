@@ -30,13 +30,13 @@ final class FavouriteUITests: MythConfUITestCase {
 
         let hapticsToggle = scrollToSwitch(identifier: "settings.favouriteHapticsToggle", labels: ["Favourite haptic feedback", "Haptic Feedback"])
         XCTAssertTrue(hapticsToggle.exists)
-        if hapticsToggle.value as? String == "1" {
+        if isSwitchOn(hapticsToggle) {
             hapticsToggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
         }
 
         let soundsToggle = scrollToSwitch(identifier: "settings.favouriteSoundsToggle", labels: ["Favourite sound feedback", "Sound Feedback"])
         XCTAssertTrue(soundsToggle.exists)
-        if soundsToggle.value as? String == "1" {
+        if isSwitchOn(soundsToggle) {
             soundsToggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
         }
 

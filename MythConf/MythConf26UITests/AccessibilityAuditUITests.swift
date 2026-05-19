@@ -60,6 +60,8 @@ final class AccessibilityAuditUITests: MythConfUITestCase {
         XCTAssertTrue(app.navigationBars["My Schedule"].waitForExistence(timeout: 5))
         XCTAssertTrue(element(identifier: "mySchedule.empty").waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["mySchedule.browseProgramme"].waitForExistence(timeout: 5))
+        // Dynamic Type is covered by the populated My Schedule audit. On the empty state,
+        // XCTest's accessibility audit currently times out before returning issues.
         try auditVisibleScreen("My Schedule empty", includesContrast: false, includesDynamicType: false)
     }
 

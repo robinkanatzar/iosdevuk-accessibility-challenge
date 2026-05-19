@@ -137,11 +137,12 @@ class MythConfUITestCase: XCTestCase {
     }
 
     func scrollToButton(identifier: String, labels: [String] = [], maxSwipes: Int = 4) -> XCUIElement {
-        let button = firstButton(identifier: identifier, labels: labels)
+        var button = firstButton(identifier: identifier, labels: labels)
         for _ in 0..<maxSwipes where !button.exists {
             app.swipeUp()
+            button = firstButton(identifier: identifier, labels: labels)
         }
-        return firstButton(identifier: identifier, labels: labels)
+        return button
     }
 
     func firstButton(identifier: String, labels: [String]) -> XCUIElement {
@@ -163,11 +164,12 @@ class MythConfUITestCase: XCTestCase {
     }
 
     func scrollToElement(identifier: String, labels: [String] = [], maxSwipes: Int = 6) -> XCUIElement {
-        let element = firstElement(identifier: identifier, labels: labels)
+        var element = firstElement(identifier: identifier, labels: labels)
         for _ in 0..<maxSwipes where !element.exists {
             app.swipeUp()
+            element = firstElement(identifier: identifier, labels: labels)
         }
-        return firstElement(identifier: identifier, labels: labels)
+        return element
     }
 
     func firstElement(identifier: String, labels: [String]) -> XCUIElement {
@@ -204,11 +206,12 @@ class MythConfUITestCase: XCTestCase {
     }
 
     func scrollToSwitch(identifier: String, labels: [String] = [], maxSwipes: Int = 4) -> XCUIElement {
-        let toggle = firstSwitch(identifier: identifier, labels: labels)
+        var toggle = firstSwitch(identifier: identifier, labels: labels)
         for _ in 0..<maxSwipes where !toggle.exists {
             app.swipeUp()
+            toggle = firstSwitch(identifier: identifier, labels: labels)
         }
-        return firstSwitch(identifier: identifier, labels: labels)
+        return toggle
     }
 
     func firstSwitch(identifier: String, labels: [String]) -> XCUIElement {
@@ -241,6 +244,10 @@ class MythConfUITestCase: XCTestCase {
             file: file,
             line: line
         )
+    }
+
+    func isSwitchOn(_ toggle: XCUIElement) -> Bool {
+        ["1", "On"].contains(toggle.value as? String ?? "")
     }
 
     func waitForLabel(
