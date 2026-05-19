@@ -70,6 +70,16 @@ struct SpeakersView: View {
                     }
                     .listRowBackground(Color(.systemBackground))
                     .accessibilityLabel(speaker.name)
+                    // accessibilityInputLabels replaces the default Voice Control tap targets,
+                    // so all accepted phrases must be listed explicitly.
+                    // 1. speaker.name        — mirrors accessibilityLabel; preserves the default "tap [name]"
+                    // 2. "Open [name]"       — for users who prefix with an action word
+                    // 3. "[name] speaker"    — for users who add context to disambiguate in a long list
+                    .accessibilityInputLabels([
+                        speaker.name,
+                        "Open \(speaker.name)",
+                        "\(speaker.name) speaker"
+                    ])
                     .accessibilityHint("Opens speaker details")
                     .accessibilityIdentifier("speakers.row.\(speaker.id)")
                 }

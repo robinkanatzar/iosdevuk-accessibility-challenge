@@ -47,6 +47,11 @@ struct SessionDetailView: View {
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Location")
                     .accessibilityValue(locationName)
+                    .accessibilityInputLabels([
+                        "Location",
+                        locationName,
+                        "Open \(locationName)"
+                    ])
                     .accessibilityHint("Opens location details")
                     .accessibilityIdentifier("sessionDetail.location")
                 }
@@ -89,8 +94,8 @@ struct SessionDetailView: View {
                 .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
                 .accessibilityHint(isFavourite ? "Removes this session from your favourites" : "Adds this session to your favourites")
                 .accessibilityInputLabels(isFavourite
-                    ? ["Unfavourite", "Remove from favourites", "Star", talk.talkTitle]
-                    : ["Favourite", "Add to favourites", "Star", talk.talkTitle]
+                    ? ["Unfavourite", "Remove from favourites", "Remove from schedule", "Star", talk.talkTitle, "Unfavourite \(talk.talkTitle)"]
+                    : ["Favourite", "Add to favourites", "Add to schedule", "Star", talk.talkTitle, "Favourite \(talk.talkTitle)"]
                 )
                 .accessibilityIdentifier("sessionDetail.favouriteAction")
             }
@@ -129,6 +134,10 @@ struct SessionDetailView: View {
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(viewModel.speakerNameFrom(speakerID: speakerID))
                 .accessibilityValue(speakerSummary(for: speakerID))
+                .accessibilityInputLabels([
+                    viewModel.speakerNameFrom(speakerID: speakerID),
+                    "Open \(viewModel.speakerNameFrom(speakerID: speakerID))"
+                ])
                 .accessibilityHint("Opens speaker profile")
                 .accessibilityIdentifier("sessionDetail.speaker.\(speakerID)")
             }

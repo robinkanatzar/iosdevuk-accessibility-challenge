@@ -94,7 +94,9 @@ struct ParallelTalkCardView: View {
             .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
             .accessibilityInputLabels([
                 talk.talkTitle,
-                "Open \(talk.talkTitle)"
+                "Open \(talk.talkTitle)",
+                isFavourite ? "Unfavourite \(talk.talkTitle)" : "Favourite \(talk.talkTitle)",
+                isFavourite ? "Remove \(talk.talkTitle) from favourites" : "Add \(talk.talkTitle) to favourites"
             ])
             .accessibilityValue(accessibilityStateValue)
             .accessibilityCustomContent("Speaker", speakers, importance: .high)

@@ -33,6 +33,10 @@ struct LocationsView: View {
                 // Note: this label overrides any accessibilityElement(children:) modifier on
                 // the VStack, so that modifier is intentionally absent from the row.
                 .accessibilityLabel(location.name)
+                .accessibilityInputLabels([
+                    location.name,
+                    "Open \(location.name)"
+                ])
                 .accessibilityIdentifier("locations.row.\(location.id)")
             }
             .accessibilityIdentifier("locations.list")

@@ -36,16 +36,20 @@ struct FavouriteButtonView: View {
             ? [
                 "Unfavourite",
                 "Remove from favourites",
+                "Remove from schedule",
                 "Unfavourite \(talk.talkTitle)",
                 "Remove \(talk.talkTitle) from favourites",
+                "Remove \(talk.talkTitle) from schedule",
                 talk.talkTitle,
                 "Star"
             ]
             : [
                 "Favourite",
                 "Add to favourites",
+                "Add to schedule",
                 "Favourite \(talk.talkTitle)",
                 "Add \(talk.talkTitle) to favourites",
+                "Add \(talk.talkTitle) to schedule",
                 talk.talkTitle,
                 "Star"
             ]

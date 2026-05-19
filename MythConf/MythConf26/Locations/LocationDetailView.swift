@@ -94,6 +94,10 @@ struct LocationDetailView: View {
                 }
                 .contentShape(.rect)
                 .accessibilityLabel("Open \(location.name) in Maps for directions")
+                .accessibilityInputLabels([
+                    "Open in Maps",
+                    "Open \(location.name) in Maps"
+                ])
                 .accessibilityHint("Opens Apple Maps App for directions")
                 .accessibilityIdentifier("location.openInMaps")
                 .padding(.horizontal)
