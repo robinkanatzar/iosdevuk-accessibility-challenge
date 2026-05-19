@@ -3,6 +3,7 @@ import SwiftUI
 
 enum ScheduleRotorCategory: String, CaseIterable {
     case liveSessions = "Live Sessions"
+    case upcomingSessions = "Upcoming Sessions"
     case favouritedSessions = "Favourited Sessions"
     case breaks = "Breaks"
 }
@@ -45,8 +46,9 @@ enum ScheduleRotorEntries {
         in sessions: [Session],
         viewModel: ViewModel
     ) -> [ScheduleRotorEntry] {
+        let now = viewModel.currentDate
         let talkEntries = talkSessions(in: sessions).compactMap { session, talkID -> ScheduleRotorEntry? in
-            guard session.liveStatus(now: viewModel.currentDate) == .live else { return nil }
+            guard session.liveStatus(now: now) == .live else { return nil }
             return ScheduleRotorEntry(
                 id: "live-\(talkID.uuidString)",
                 label: viewModel.talkTitleFrom(talkID: talkID),
@@ -57,10 +59,38 @@ enum ScheduleRotorEntries {
         let breakEntries = sessions.compactMap { session -> ScheduleRotorEntry? in
             guard !session.containsTalk,
                   session.sessionType != .dummy,
-                  session.liveStatus(now: viewModel.currentDate) == .live else { return nil }
+                  session.liveStatus(now: now) == .live else { return nil }
             return ScheduleRotorEntry(
                 id: "live-break-\(session.id.uuidString)",
                 label: session.sessionType.displayName,
+                targetID: ScheduleRotorTargetID.breakSession(session.id)
+            )
+        }
+
+        return talkEntries + breakEntries
+    }
+
+    static func upcomingEntries(
+        in sessions: [Session],
+        viewModel: ViewModel
+    ) -> [ScheduleRotorEntry] {
+        let now = viewModel.currentDate
+        let talkEntries = talkSessions(in: sessions).compactMap { session, talkID -> ScheduleRotorEntry? in
+            guard session.liveStatus(now: now) == .upcoming else { return nil }
+            return ScheduleRotorEntry(
+                id: "upcoming-\(talkID.uuidString)",
+                label: "\(viewModel.talkTitleFrom(talkID: talkID)). Starts at \(session.startTimeText)",
+                targetID: ScheduleRotorTargetID.talk(talkID)
+            )
+        }
+
+        let breakEntries = sessions.compactMap { session -> ScheduleRotorEntry? in
+            guard !session.containsTalk,
+                  session.sessionType != .dummy,
+                  session.liveStatus(now: now) == .upcoming else { return nil }
+            return ScheduleRotorEntry(
+                id: "upcoming-break-\(session.id.uuidString)",
+                label: "\(session.sessionType.displayName). Starts at \(session.startTimeText)",
                 targetID: ScheduleRotorTargetID.breakSession(session.id)
             )
         }
@@ -103,6 +133,7 @@ extension View {
     ) -> some View {
         self
             .accessibilityRotorIfNotEmpty(.liveSessions, entries: entries, namespace: namespace)
+            .accessibilityRotorIfNotEmpty(.upcomingSessions, entries: entries, namespace: namespace)
             .accessibilityRotorIfNotEmpty(.favouritedSessions, entries: entries, namespace: namespace)
             .accessibilityRotorIfNotEmpty(.breaks, entries: entries, namespace: namespace)
     }
