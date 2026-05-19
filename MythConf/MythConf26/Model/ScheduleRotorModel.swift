@@ -82,13 +82,13 @@ enum ScheduleRotorEntries {
         }
     }
 
-    static func breakEntries(in sessions: [Session]) -> [ScheduleRotorEntry] {
+    static func breakEntries(in sessions: [Session], now: Date) -> [ScheduleRotorEntry] {
         sessions
             .filter { !$0.containsTalk && $0.sessionType != .dummy }
             .map { session in
                 ScheduleRotorEntry(
                     id: "break-\(session.id.uuidString)",
-                    label: "\(session.sessionType.displayName). \(session.accessibilityTimeRange)",
+                    label: "\(session.sessionType.displayName). \(session.accessibilityTimeRange(now: now))",
                     targetID: ScheduleRotorTargetID.breakSession(session.id)
                 )
             }

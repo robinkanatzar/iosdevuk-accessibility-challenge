@@ -99,7 +99,7 @@ struct ParallelTalkCardView: View {
             .accessibilityValue(accessibilityStateValue)
             .accessibilityCustomContent("Speaker", speakers, importance: .high)
             .accessibilityCustomContent("Location", locationName, importance: .default)
-            .accessibilityCustomContent("Time", session.accessibilityTimeRange, importance: .default)
+            .accessibilityCustomContent("Time", session.accessibilityTimeRange(now: viewModel.currentDate), importance: .default)
             .accessibilityCustomContent("Status", statusDisplay.isVisible ? statusDisplay.accessibilityLabel : "Not started", importance: .default)
             .accessibilityCustomContent("Favourite", isFavourite ? "Favourited" : "Not favourited", importance: .default)
             .accessibilityRotorEntry(id: ScheduleRotorTargetID.talk(talk.id), in: rotorNamespace)

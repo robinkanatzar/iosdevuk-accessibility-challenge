@@ -40,7 +40,7 @@ struct DayScheduleView: View {
         [
             .liveSessions: ScheduleRotorEntries.liveEntries(in: sessions, viewModel: viewModel),
             .favouritedSessions: ScheduleRotorEntries.favouritedEntries(in: sessions, viewModel: viewModel),
-            .breaks: ScheduleRotorEntries.breakEntries(in: sessions)
+            .breaks: ScheduleRotorEntries.breakEntries(in: sessions, now: viewModel.currentDate)
         ]
     }
 }

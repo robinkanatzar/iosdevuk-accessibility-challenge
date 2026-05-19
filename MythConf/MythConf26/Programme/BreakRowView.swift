@@ -78,7 +78,7 @@ struct BreakRowView: View {
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(rowAccessibilityLabel)
             .accessibilityValue(rowAccessibilityValue)
-            .accessibilityCustomContent("Time", session.accessibilityTimeRange, importance: .high)
+            .accessibilityCustomContent("Time", session.accessibilityTimeRange(now: viewModel.currentDate), importance: .high)
             .accessibilityCustomContent("Location", locationName ?? "No location", importance: .default)
             .accessibilityCustomContent("Status", statusDisplay.isVisible ? statusDisplay.accessibilityLabel : "Not started", importance: .default)
             .accessibilityIdentifier(ScheduleRotorTargetID.breakSession(session.id))

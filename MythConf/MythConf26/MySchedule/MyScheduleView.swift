@@ -113,7 +113,7 @@ struct MyScheduleView: View {
     private var scheduleRotorEntries: [ScheduleRotorCategory: [ScheduleRotorEntry]] {
         [
             .liveSessions: ScheduleRotorEntries.liveEntries(in: visibleFavouriteSessions, viewModel: viewModel),
-            .breaks: ScheduleRotorEntries.breakEntries(in: visibleFavouriteSessions)
+            .breaks: ScheduleRotorEntries.breakEntries(in: visibleFavouriteSessions, now: viewModel.currentDate)
         ]
     }
 }

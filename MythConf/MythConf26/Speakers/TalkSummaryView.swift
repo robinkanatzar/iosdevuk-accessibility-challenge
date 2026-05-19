@@ -54,7 +54,7 @@ struct TalkSummaryView: View {
             Text("Session:")
             label
         }
-        .accessibilityValue("\(session.accessibilityTimeRange) \(viewModel.locationNameFrom(talkID: talkID))")
+        .accessibilityValue("\(session.accessibilityTimeRange(now: viewModel.currentDate)) \(viewModel.locationNameFrom(talkID: talkID))")
     }
 
 
@@ -82,7 +82,7 @@ struct TalkSummaryView: View {
             Text("Session:")
             label
         }
-        .accessibilityValue("\(session.accessibilityTimeRange) \(viewModel.locationNameFrom(talkID: talkID))")
+        .accessibilityValue("\(session.accessibilityTimeRange(now: viewModel.currentDate)) \(viewModel.locationNameFrom(talkID: talkID))")
     }
 
 

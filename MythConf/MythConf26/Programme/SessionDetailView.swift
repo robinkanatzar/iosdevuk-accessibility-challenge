@@ -31,7 +31,7 @@ struct SessionDetailView: View {
                     sessionInfoRow(
                         title: "Time",
                         value: session.timeRange,
-                        accessibilityValue: session.accessibilityTimeRange,
+                        accessibilityValue: session.accessibilityTimeRange(now: viewModel.currentDate),
                         systemImage: "clock",
                         accessibilityIdentifier: "sessionDetail.time"
                     )

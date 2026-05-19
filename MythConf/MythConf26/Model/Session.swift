@@ -34,7 +34,18 @@ struct Session: Codable, Identifiable, Hashable {
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
 
     var accessibilityTimeRange: String {
-        "Starts at \(startTimeText). Ends at \(endTimeText)."
+        "Start time \(startTimeText). End time \(endTimeText)."
+    }
+
+    func accessibilityTimeRange(now: Date) -> String {
+        switch liveStatus(now: now) {
+        case .upcoming:
+            return "Starts at \(startTimeText). Ends at \(endTimeText)."
+        case .live:
+            return "Started at \(startTimeText). Ends at \(endTimeText)."
+        case .ended:
+            return "Started at \(startTimeText). Ended at \(endTimeText)."
+        }
     }
 }
 
