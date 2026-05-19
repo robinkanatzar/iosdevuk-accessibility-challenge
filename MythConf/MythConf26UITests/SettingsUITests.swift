@@ -74,11 +74,20 @@ final class SettingsUITests: MythConfUITestCase {
         XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
         settingsButton.tap()
 
-        let offOption = scrollToButton(label: "Off")
+        let reminderMenu = scrollToElement(
+            identifier: "settings.favouriteReminderTimingPicker",
+            labels: ["Favourite reminder timing", "Reminder Timing", "10 minutes"]
+        )
+        XCTAssertTrue(reminderMenu.waitForExistence(timeout: 5))
+        reminderMenu.tap()
+
+        let offOption = app.buttons["Off"]
         XCTAssertTrue(offOption.waitForExistence(timeout: 5))
         offOption.tap()
 
-        let fiveMinutesOption = scrollToButton(label: "5 minutes")
+        reminderMenu.tap()
+
+        let fiveMinutesOption = app.buttons["5 minutes"]
         XCTAssertTrue(fiveMinutesOption.waitForExistence(timeout: 5))
         fiveMinutesOption.tap()
     }

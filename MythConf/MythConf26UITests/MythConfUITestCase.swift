@@ -136,6 +136,63 @@ class MythConfUITestCase: XCTestCase {
         return button
     }
 
+    func scrollToButton(identifier: String, labels: [String] = [], maxSwipes: Int = 4) -> XCUIElement {
+        let button = firstButton(identifier: identifier, labels: labels)
+        for _ in 0..<maxSwipes where !button.exists {
+            app.swipeUp()
+        }
+        return firstButton(identifier: identifier, labels: labels)
+    }
+
+    func firstButton(identifier: String, labels: [String]) -> XCUIElement {
+        let identifierMatch = app.descendants(matching: .any)[identifier]
+        if identifierMatch.exists {
+            return identifierMatch
+        }
+
+        for label in labels {
+            let labelMatch = app.descendants(matching: .any)
+                .matching(NSPredicate(format: "label == %@ AND isHittable == true", label))
+                .firstMatch
+            if labelMatch.exists {
+                return labelMatch
+            }
+        }
+
+        return identifierMatch
+    }
+
+    func scrollToElement(identifier: String, labels: [String] = [], maxSwipes: Int = 6) -> XCUIElement {
+        let element = firstElement(identifier: identifier, labels: labels)
+        for _ in 0..<maxSwipes where !element.exists {
+            app.swipeUp()
+        }
+        return firstElement(identifier: identifier, labels: labels)
+    }
+
+    func firstElement(identifier: String, labels: [String]) -> XCUIElement {
+        let identifierMatch = app.descendants(matching: .any)[identifier]
+        if identifierMatch.exists {
+            return identifierMatch
+        }
+
+        for label in labels {
+            let exactLabelMatch = app.descendants(matching: .any)[label]
+            if exactLabelMatch.exists {
+                return exactLabelMatch
+            }
+
+            let containingLabelMatch = app.descendants(matching: .any)
+                .matching(NSPredicate(format: "label CONTAINS %@", label))
+                .firstMatch
+            if containingLabelMatch.exists {
+                return containingLabelMatch
+            }
+        }
+
+        return identifierMatch
+    }
+
     func firstElement(identifierBeginningWith prefix: String) -> XCUIElement {
         app.descendants(matching: .any)
             .matching(NSPredicate(format: "identifier BEGINSWITH %@", prefix))

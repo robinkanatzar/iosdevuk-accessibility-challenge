@@ -19,18 +19,22 @@ struct SettingsView: View {
                     Toggle("OpenDyslexic Reading Font", isOn: $appSettings.usesOpenDyslexicReadingFont)
                         .accessibilityIdentifier("settings.openDyslexicToggle")
                         .accessibilityLabel("OpenDyslexic reading font")
-                        .accessibilityHint("Uses OpenDyslexic for reading-heavy conference text.")
+                        .accessibilityHint("Applies OpenDyslexic font to session titles, descriptions, and biographies.")
                 } footer: {
                     Text("Applies OpenDyslexic to session titles, descriptions, speaker biographies, and location descriptions. Navigation, controls, times, and compact metadata stay in the system font.")
                 }
 
                 Section("Preview") {
-                    Text("Welcome to MythConf 2027")
-                        .dyslexiaReadingFont(.title2, size: 22, weight: .bold)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Welcome to MythConf 2027")
+                            .dyslexiaReadingFont(.title2, size: 22, weight: .bold)
 
-                    Text("A brief welcome from the organisers to set the scene for the conference.")
-                        .dyslexiaReadingFont(.body, size: 17)
-                        .foregroundStyle(.secondary)
+                        Text("A brief welcome from the organisers to set the scene for the conference.")
+                            .dyslexiaReadingFont(.body, size: 17)
+                            .foregroundStyle(.secondary)
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("Font preview: Welcome to MythConf 2027. A brief welcome from the organisers to set the scene for the conference.")
                 }
                 .accessibilityIdentifier("settings.openDyslexicPreview")
 
@@ -38,12 +42,12 @@ struct SettingsView: View {
                     Toggle("Haptic Feedback", isOn: $appSettings.usesFavouriteHaptics)
                         .accessibilityIdentifier("settings.favouriteHapticsToggle")
                         .accessibilityLabel("Favourite haptic feedback")
-                        .accessibilityHint("Controls vibration feedback when adding or removing favourites.")
+                        .accessibilityHint("Turns vibration on or off when adding or removing a favourite.")
 
                     Toggle("Sound Feedback", isOn: $appSettings.usesFavouriteSounds)
                         .accessibilityIdentifier("settings.favouriteSoundsToggle")
                         .accessibilityLabel("Favourite sound feedback")
-                        .accessibilityHint("Controls sound feedback when adding or removing favourites.")
+                        .accessibilityHint("Turns sound on or off when adding or removing a favourite.")
                 } header: {
                     Text("Favourite Feedback")
                 } footer: {
@@ -57,10 +61,10 @@ struct SettingsView: View {
                             Text(timing.title).tag(timing)
                         }
                     }
-                    .pickerStyle(.segmented)
+                    .pickerStyle(.menu)
                     .accessibilityIdentifier("settings.favouriteReminderTimingPicker")
                     .accessibilityLabel("Favourite reminder timing")
-                    .accessibilityHint("Controls whether favourited sessions create local reminders and how long before the session they appear.")
+                    .accessibilityHint("Chooses when reminders appear for favourited sessions.")
                 } header: {
                     Text("Session Reminders")
                 } footer: {
@@ -73,6 +77,9 @@ struct SettingsView: View {
             .onChange(of: appSettings.favouriteReminderTiming) { _, newValue in
                 viewModel.rescheduleFavouriteNotifications(reminderTiming: newValue)
             }
+            .onChange(of: appSettings.usesOpenDyslexicReadingFont) { _, isEnabled in
+                announceOpenDyslexicPreviewChange(isEnabled: isEnabled)
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
@@ -82,6 +89,16 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+
+    private func announceOpenDyslexicPreviewChange(isEnabled: Bool) {
+        guard UIAccessibility.isVoiceOverRunning else { return }
+        UIAccessibility.post(
+            notification: .announcement,
+            argument: isEnabled
+                ? "OpenDyslexic font enabled. Preview updated."
+                : "System font restored. Preview updated."
+        )
     }
 
 }
