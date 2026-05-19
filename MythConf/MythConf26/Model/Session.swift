@@ -32,5 +32,17 @@ struct Session: Codable, Identifiable, Hashable {
     }
 
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
+    
+    var startTimeAccessible: String {
+        startTime.formatted(date: .omitted, time: .shortened)
+    }
+    
+    var endTimeAccessible: String {
+        endTime.formatted(date: .omitted, time: .shortened)
+    }
+    
+    var accessibleTimeRange: String {
+        "from \(startTimeAccessible) to \(endTimeAccessible)"
+    }
 }
 
