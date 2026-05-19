@@ -21,40 +21,7 @@ struct SpeakersView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if filteredSpeakers.isEmpty && !searchText.isEmpty {
-                    ContentUnavailableView(
-                        "No Speakers Found",
-                        systemImage: "person.crop.circle.badge.questionmark",
-                        description: Text("No speakers match \(searchText).")
-                    )
-                } else {
-                    List {
-                        if searchText.isEmpty {
-                            TipView(speakerSearchTip)
-                                .listRowBackground(Color(.systemBackground))
-                        }
-
-                        ForEach(filteredSpeakers) { speaker in
-                            NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
-                                SpeakerRowView(speakerID: speaker.id)
-                            }
-                            .listRowBackground(Color(.systemBackground))
-                            .accessibilityIdentifier("speakers.row.\(speaker.id)")
-                        }
-                    }
-                    .accessibilityIdentifier("speakers.list")
-                }
-            }
-            .onAppear {
-                SpeakerSearchTip.hasViewedSpeakers = true
-            }
-            .searchable(text: $searchText, prompt: "Search speakers")
-            .onChange(of: searchText) { _, newValue in
-                guard !newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-                SpeakerSearchTip.hasSearchedSpeakers = true
-                speakerSearchTip.invalidate(reason: .actionPerformed)
-            }
+            speakerContent
             .navigationTitle("Speakers")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -68,6 +35,45 @@ struct SpeakersView: View {
                 SettingsView()
             }
             .conferenceNavigationDestinations()
+        }
+    }
+
+    @ViewBuilder
+    private var speakerContent: some View {
+        if filteredSpeakers.isEmpty && !searchText.isEmpty {
+            ContentUnavailableView(
+                "No Speakers Found",
+                systemImage: "person.crop.circle.badge.questionmark",
+                description: Text("No speakers match \(searchText).")
+            )
+            .onAppear {
+                SpeakerSearchTip.hasViewedSpeakers = true
+            }
+        } else {
+            List {
+                if searchText.isEmpty {
+                    TipView(speakerSearchTip)
+                        .listRowBackground(Color(.systemBackground))
+                }
+
+                ForEach(filteredSpeakers) { speaker in
+                    NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
+                        SpeakerRowView(speakerID: speaker.id)
+                    }
+                    .listRowBackground(Color(.systemBackground))
+                    .accessibilityIdentifier("speakers.row.\(speaker.id)")
+                }
+            }
+            .accessibilityIdentifier("speakers.list")
+            .onAppear {
+                SpeakerSearchTip.hasViewedSpeakers = true
+            }
+            .searchable(text: $searchText, prompt: "Search speakers")
+            .onChange(of: searchText) { _, newValue in
+                guard !newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+                SpeakerSearchTip.hasSearchedSpeakers = true
+                speakerSearchTip.invalidate(reason: .actionPerformed)
+            }
         }
     }
 
