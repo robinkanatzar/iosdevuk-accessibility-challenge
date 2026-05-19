@@ -18,15 +18,21 @@ struct LocationsView: View {
                     VStack(alignment: .leading) {
                         Text(location.name)
                             .dyslexiaReadingFont(.body, size: 17, weight: .bold)
-                        if  !dynamicTypeSize.isAccessibilitySize {
-                            Text(location.placeDescription)
-                                .dyslexiaReadingFont(.body, size: 17)
-                                .foregroundStyle(.secondary)
-                                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
-                        }
+                        Text(location.placeDescription)
+                            .dyslexiaReadingFont(.body, size: 17)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     }
-                    .accessibilityElement(children: .combine)
                 }
+                // Accessibility: setting a label directly on the NavigationLink collapses the
+                // entire row — name and description — into a single focusable element whose
+                // announcement is just the location's name. This keeps VoiceOver list traversal
+                // fast and predictable; the full description is available once the user navigates
+                // into the detail view. It also makes Voice Control commands unambiguous: users say
+                // "tap Tyndall Lecture Theatre" rather than a long description-derived phrase.
+                // Note: this label overrides any accessibilityElement(children:) modifier on
+                // the VStack, so that modifier is intentionally absent from the row.
+                .accessibilityLabel(location.name)
                 .accessibilityIdentifier("locations.row.\(location.id)")
             }
             .accessibilityIdentifier("locations.list")

@@ -16,7 +16,7 @@ struct SpeakerDetailView: View {
             VStack(alignment: .leading) {
                 // Header
                 HStack(alignment: .top) {
-                    SpeakerPhotoView(speaker: speaker, size: 80, accessibilityMode: .labelled)
+                    SpeakerPhotoView(speaker: speaker, size: 80, accessibilityMode: .decorative)
 
                     VStack(alignment: .leading) {
                         Text(speaker.name)
@@ -66,6 +66,9 @@ struct SpeakerDetailView: View {
                             TalkSummaryView(talkID: item.talkID, session: item.session)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityLabel("Session: \(viewModel.talkTitleFrom(talkID: item.talkID))")
+                        .accessibilityValue("\(item.session.timeRange), \(viewModel.locationNameFrom(talkID: item.talkID))")
+                        .accessibilityHint("Opens session details")
                     }
                 }
             }
