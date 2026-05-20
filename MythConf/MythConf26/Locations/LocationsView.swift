@@ -18,6 +18,7 @@ struct LocationsView: View {
                     VStack(alignment: .leading) {
                         Text(location.name)
                             .dyslexiaReadingFont(.body, size: 17, weight: .bold)
+                            .foregroundStyle(Color(.label))
                         Text(location.placeDescription)
                             .dyslexiaReadingFont(.body, size: 17)
                             .foregroundStyle(.secondary)
@@ -38,6 +39,7 @@ struct LocationsView: View {
                     "Open \(location.name)"
                 ])
                 .accessibilityIdentifier("locations.row.\(location.id)")
+                .listRowBackground(Color(.systemBackground)) 
             }
             .accessibilityIdentifier("locations.list")
             .navigationTitle("Locations")

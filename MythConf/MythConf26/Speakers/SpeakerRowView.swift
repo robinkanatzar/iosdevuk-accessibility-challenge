@@ -56,7 +56,7 @@ struct SpeakerRowView: View {
             if !speakerSummary.isEmpty {
                 Text(speakerSummary)
                     .dyslexiaReadingFont(.body, size: 17)
-                    .foregroundStyle(Color(.label))
+                    .foregroundStyle(.secondary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
             }
         }
