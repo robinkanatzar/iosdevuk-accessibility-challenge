@@ -4,9 +4,12 @@
 //
 
 import SwiftUI
+import Accessibility
 
 /// A horizontal row of tappable social/web links for a speaker.
 struct SocialLinksView: View {
+    @Environment(\.openURL) private var openURL
+
     let social: [SocialItem]
     let speakerName: String
 
@@ -14,21 +17,29 @@ struct SocialLinksView: View {
         HStack {
             ForEach(social, id: \.self) { item in
                 if let url = URL(string: item.socialLink) {
-                    Link(destination: url) {
+                    Button { // a11y-check:disable button-used-as-link
+                        announceExternalLinkOpening(item)
+                        openURL(url)
+                    } label: {
                         Label(item.socialType.capitalized, systemImage: iconName(for: item.socialType))
                             .font(.subheadline)
                             .frame(minWidth: 44, minHeight: 44)
                     }
                     .contentShape(.rect)
-                    .accessibilityRemoveTraits(.isButton)
                     .accessibilityLabel("Open \(speakerName) on \(item.socialType.capitalized)")
                     .accessibilityInputLabels([
                         item.socialType.capitalized,
                         "\(speakerName) \(item.socialType.capitalized)"
                     ])
+                    .accessibilityHint("Opens an external link")
                 }
             }
         }
+    }
+
+    private func announceExternalLinkOpening(_ item: SocialItem) {
+        let message = "One moment, opening \(item.socialType.capitalized) for \(speakerName)"
+        AccessibilityNotification.Announcement(message).post()
     }
 
     private func iconName(for type: String) -> String {
