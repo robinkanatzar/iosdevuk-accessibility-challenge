@@ -78,6 +78,18 @@ Manual verification: enable **Settings > Accessibility > Display & Text Size > B
 - With Reduce Motion on, the Session Detail favourite action updates instantly without animating the button state change.
 - Confirmed there are no active live badge `.symbolEffect` pulse animations in the current codebase. Any future symbol effects should also be gated by `accessibilityReduceMotion`.
 
+### Reduce Transparency (Updated 2026-05-20)
+
+The app avoids relying on blurred or translucent surfaces for core schedule content when the system Reduce Transparency setting is enabled.
+
+- My Schedule day headers read `accessibilityReduceTransparency` and switch from `.regularMaterial` to opaque `Color(.systemBackground)` when Reduce Transparency is enabled.
+- Programme and My Schedule talk cards read `accessibilityReduceTransparency` and use opaque `Color(.secondarySystemBackground)` instead of low-opacity session tinting when Reduce Transparency is enabled.
+- Break rows read `accessibilityReduceTransparency` and use opaque `Color(.secondarySystemBackground)` instead of low-opacity session tinting when Reduce Transparency is enabled.
+- Card shadows are suppressed in reduced-transparency contexts so schedule cards remain stable, flat, and readable.
+- Other primary action surfaces, including Session Detail favourite and Location Detail Open in Maps, already use opaque system backgrounds and separator borders rather than material blur.
+
+Remaining low-opacity accent fills in badges and icon backgrounds are decorative or secondary. Manual verification should confirm that these do not reduce readability when Reduce Transparency is enabled.
+
 ### Dyslexia Reading Mode (Updated 2026-05-17)
 
 - Added an optional OpenDyslexic reading mode for users with dyslexia.
@@ -107,6 +119,9 @@ Manual verification: enable **Settings > Accessibility > Display & Text Size > B
 - Shortened the visible speaker row summary to the first biography paragraph and used explicit system label/background colors so the list remains readable and audit-friendly.
 - Improved Dynamic Type behavior for speaker summaries by allowing full text at accessibility sizes.
 - Added contextual social link labels, for example links that include the speaker name.
+- Updated speaker social links to support the provided conference data format where multiple URLs are stored as newline-separated values in one `socialLink` field. The UI now renders one accessible button per valid URL without changing `conf.json`.
+- Improved social link naming by inferring platforms from URL hosts, including Website, GitHub, LinkedIn, Mastodon, Twitter, and Bluesky.
+- Refined social link VoiceOver labels so website links read as `Open [speaker]'s website`, while platform links read as `Open profile of [speaker] on [platform]`.
 - Added heading traits on detail sections where the text functions as a real heading.
 - Added a contextual accessibility label to the speaker detail sessions heading so VoiceOver announces "Sessions by [speaker name]" instead of only "Sessions".
 - Added an empty search result state for speaker search.
@@ -145,6 +160,18 @@ The primary Differentiate Without Color risks identified in the original audits 
 - The Programme day picker uses the native segmented control selected state. Its colour treatment supports the design, but selection is not conveyed by colour alone.
 
 Remaining visual colour use is decorative or redundant: card accents, low-opacity session type backgrounds, chip border tint, and metadata icon tint. These should remain acceptable as long as the adjacent text remains visible and the app continues to pass grayscale/Differentiate Without Color manual review.
+
+### Grayscale (Updated 2026-05-20)
+
+The app's primary states remain understandable when the display is converted to grayscale because important meaning is carried by text, symbols, shape, and explicit accessibility state rather than hue alone.
+
+- Session timing and status use visible text such as `Live`, `Starting in 8m`, `Ended`, `Now`, and `Next`, so users do not need to distinguish red, orange, blue, or green.
+- Favourite state uses star shape changes, explicit add/remove labels, accessibility values such as `Favourited` and `Not favourited`, and selected state where applicable, so the yellow star colour is not the only state indicator.
+- Session category uses visible chip text and card accessibility labels, so the coloured card strip and tinted background are redundant cues rather than the only category signal.
+- Action buttons such as Session Detail favourite and Location Detail Open in Maps use text, icons, borders, and filled surfaces that remain identifiable without colour.
+- The tab bar uses monochrome SF Symbols and visible labels, which avoids multi-colour tab state depending on hue.
+
+Remaining grayscale verification should focus on luminance contrast rather than meaning: check filled favourite stars, status badges, low-opacity card accents, and accent-colour icon backgrounds with the grayscale colour filter enabled.
 
 ### Siri and Voice-First Shortcuts (Updated 2026-05-17)
 

@@ -41,15 +41,15 @@ struct SocialLinksView: View {
                     announceExternalLinkOpening(item)
                     openURL(item.url)
                 } label: {
-                    Label(item.socialType.capitalized, systemImage: iconName(for: item.socialType))
+                    Label(displayName(for: item.socialType), systemImage: iconName(for: item.socialType))
                         .font(.subheadline)
                         .frame(minWidth: 44, minHeight: 44)
                 }
                 .contentShape(.rect)
-                .accessibilityLabel("Open \(speakerName) on \(item.socialType.capitalized)")
+                .accessibilityLabel(accessibilityLabel(for: item))
                 .accessibilityInputLabels([
-                    item.socialType.capitalized,
-                    "\(speakerName) \(item.socialType.capitalized)"
+                    displayName(for: item.socialType),
+                    "\(speakerName) \(displayName(for: item.socialType))"
                 ])
                 .accessibilityHint("Opens an external link")
             }
@@ -57,8 +57,26 @@ struct SocialLinksView: View {
     }
 
     private func announceExternalLinkOpening(_ item: RenderedSocialLink) {
-        let message = "One moment, opening \(item.socialType.capitalized) for \(speakerName)"
+        let message = "One moment, opening \(displayName(for: item.socialType)) for \(speakerName)"
         AccessibilityNotification.Announcement(message).post()
+    }
+
+    private func accessibilityLabel(for item: RenderedSocialLink) -> String {
+        switch item.socialType.lowercased() {
+        case "website", "web", "www":
+            return "Open \(possessiveSpeakerName) website"
+        case "blog":
+            return "Open \(possessiveSpeakerName) blog"
+        default:
+            return "Open profile of \(speakerName) on \(displayName(for: item.socialType))"
+        }
+    }
+
+    private var possessiveSpeakerName: String {
+        if speakerName.lowercased().hasSuffix("s") {
+            return "\(speakerName)'"
+        }
+        return "\(speakerName)'s"
     }
 
     private func displayType(for url: URL, fallback: String) -> String {
@@ -82,6 +100,20 @@ struct SocialLinksView: View {
             return "bluesky"
         }
         return fallback == "www" ? "website" : fallback
+    }
+
+    private func displayName(for type: String) -> String {
+        switch type.lowercased() {
+        case "github": return "GitHub"
+        case "linkedin": return "LinkedIn"
+        case "twitter": return "Twitter"
+        case "x": return "X"
+        case "mastodon": return "Mastodon"
+        case "bluesky": return "Bluesky"
+        case "website", "web", "www": return "Website"
+        case "blog": return "Blog"
+        default: return type.capitalized
+        }
     }
 
     private func iconName(for type: String) -> String {
