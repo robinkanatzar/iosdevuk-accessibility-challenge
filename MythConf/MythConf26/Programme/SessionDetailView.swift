@@ -9,6 +9,7 @@ import NaturalLanguage
 struct SessionDetailView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.appSettings) private var appSettings
     @Environment(ViewModel.self) private var viewModel
     let talkReference: TalkReference
@@ -275,7 +276,7 @@ struct SessionDetailView: View {
                 .stroke(borderColor, lineWidth: borderWidth)
         }
         .contentShape(.rect)
-        .animation(.easeInOut(duration: 0.2), value: isFavourite)
+        .animation(reduceMotion ? nil : .easeInOut(duration: 0.2), value: isFavourite)
     }
 
     private func sectionHeading(_ title: String) -> some View {
