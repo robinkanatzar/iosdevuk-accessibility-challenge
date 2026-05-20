@@ -10,6 +10,7 @@ struct SessionDetailView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityShowButtonShapes) private var showButtonShapes
     @Environment(\.appSettings) private var appSettings
     @Environment(ViewModel.self) private var viewModel
     let talkReference: TalkReference
@@ -92,6 +93,16 @@ struct SessionDetailView: View {
                         )
                     }
                     .buttonStyle(.plain)
+                    .padding(showButtonShapes ? 10 : 0)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(showButtonShapes ? Color(.secondarySystemBackground) : .clear)
+                    )
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(showButtonShapes ? Color(.separator) : .clear, lineWidth: borderWidth)
+                    }
+                    .contentShape(.rect)
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel { _ in
                         Text("Location: \(locationName)")
@@ -114,6 +125,16 @@ struct SessionDetailView: View {
                             )
                         }
                         .buttonStyle(.plain)
+                        .padding(showButtonShapes ? 10 : 0)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14)
+                                .fill(showButtonShapes ? Color(.secondarySystemBackground) : .clear)
+                        )
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(showButtonShapes ? Color(.separator) : .clear, lineWidth: borderWidth)
+                        }
+                        .contentShape(.rect)
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel { _ in
                             Text("Speaker: \(viewModel.speakerNameFrom(speakerID: speakerID))")
@@ -136,6 +157,7 @@ struct SessionDetailView: View {
                 } label: {
                     favouriteButtonLabel
                 }
+                .buttonStyle(.plain)
                 .contentShape(.rect)
                 .accessibilityLabel(favouriteActionAccessibilityLabel)
                 .accessibilityHint(isFavourite ? "Removes this session from your favourites" : "Adds this session to your favourites")

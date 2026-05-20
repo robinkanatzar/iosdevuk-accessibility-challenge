@@ -92,6 +92,7 @@ struct LocationDetailView: View {
                 } label: {
                     mapsButtonLabel
                 }
+                .buttonStyle(.plain)
                 .contentShape(.rect)
                 .accessibilityLabel("Open \(location.name) in Maps for directions")
                 .accessibilityInputLabels([

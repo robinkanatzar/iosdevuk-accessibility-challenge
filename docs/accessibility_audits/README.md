@@ -44,6 +44,30 @@ This folder contains the accessibility audit inputs and the remediation plan for
 - Kept both feedback types on by default while allowing users to disable either channel independently.
 - Preserved favourite functionality when either feedback channel is disabled.
 
+### On/Off Labels (Updated 2026-05-20)
+
+The app's binary settings use native SwiftUI `Toggle` controls, so iOS provides the system switch semantics and supports the user's On/Off Labels display setting without custom drawing.
+
+- `OpenDyslexic Reading Font`, `Haptic Feedback`, and `Sound Feedback` are implemented as native toggles in Settings rather than custom colour-only controls.
+- Each toggle uses a stable setting label that describes the preference, while the native control supplies the on/off state.
+- Toggle hints describe the result of changing the setting without duplicating the current state in the label.
+- Favourite controls outside Settings are not switches, but they expose equivalent binary state through visible star state, accessibility values such as `Favourited` and `Not favourited`, selected state where applicable, and explicit add/remove actions.
+
+Manual verification: enable **Settings > Accessibility > Display & Text Size > On/Off Labels**, open the app Settings screen, and confirm the system switch labels appear and VoiceOver announces each toggle label and state clearly.
+
+### Button Shapes (Updated 2026-05-20)
+
+The app uses a mix of native buttons, full-width action surfaces, icon buttons, and card/row navigation targets. Button Shapes support is handled by preserving native controls where possible and adding explicit shape affordances to custom icon-only controls when the system Button Shapes setting is enabled.
+
+- The shared Settings toolbar button reads `accessibilityShowButtonShapes` and adds a circular background and separator stroke around the gear icon when Button Shapes is enabled.
+- The favourite star button reads `accessibilityShowButtonShapes` and adds a circular background and separator stroke around the 44 x 44 point star target when Button Shapes is enabled.
+- Session Detail speaker and location navigation rows read `accessibilityShowButtonShapes` and add a rounded background, separator stroke, and rectangular content shape when Button Shapes is enabled.
+- Full-width actions such as Session Detail favourite and Location Detail Open in Maps use plain button styling with custom visible button surfaces: text, icons, rounded rectangular backgrounds, borders, and rectangular content shapes. This avoids the system drawing an extra oval around the custom label when Button Shapes is enabled.
+- The My Schedule empty-state Browse Programme action uses a native bordered prominent button style, so SwiftUI provides the visible button shape.
+- Other row and card navigation targets use visible card or row boundaries as the button-shape equivalent: programme cards have filled surfaces and strokes, location rows use standard list rows, and speaker rows use list-row structure.
+
+Manual verification: enable **Settings > Accessibility > Display & Text Size > Button Shapes**, then check the Settings toolbar button, favourite star buttons in Programme and Session Detail, full-width action buttons, and tappable rows/cards. Confirm tappable areas are visually discoverable without relying on colour or text alone.
+
 ### Reduce Motion (Updated 2026-05-20)
 
 - Gated the favourite star symbol replacement transition behind the system Reduce Motion setting.
