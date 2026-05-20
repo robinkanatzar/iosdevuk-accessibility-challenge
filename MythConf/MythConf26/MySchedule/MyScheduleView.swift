@@ -58,8 +58,10 @@ struct MyScheduleView: View {
                                                 daySessions: daySessions,
                                                 rotorNamespace: scheduleRotorNamespace
                                             )
+                                            .padding(.vertical, 4.0)
                                             Divider()
                                         }
+                                        .padding(.vertical, 8.0)
                                     } header: {
                                         Text(dayHeader(for: daySessions))
                                             .font(.headline)

@@ -21,12 +21,14 @@ struct DayScheduleView: View {
                             daySessions: sessions,
                             rotorNamespace: scheduleRotorNamespace
                         )
+                        .padding(.vertical, 4.0)
                     } else {
                         BreakRowView(
                             session: session,
                             daySessions: sessions,
                             rotorNamespace: scheduleRotorNamespace
                         )
+                        .padding(.vertical, 4.0)
                     }
                     Divider()
             }
