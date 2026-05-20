@@ -45,6 +45,16 @@ private struct SpeakersListContent: View {
                 }
             }
         }
+        .onChange(of: isSearching) { oldValue, newValue in
+            if oldValue == true && newValue == false {
+                handleSearchDismissed()
+            }
+        }
+    }
+    
+    private func handleSearchDismissed() {
+        let message = "Search closed. Showing all \(speakersSearchModel.filteredSpeakers.count) speakers."
+        AccessibilityNotification.Announcement(message).post()
     }
 }
 

@@ -9,7 +9,6 @@ import Accessibility
 
 @Observable
 final class SpeakersSearchModel {
-    //MARK: - Properties
     var searchText = "" {
         didSet {
             if searchText.isEmpty {
@@ -23,9 +22,7 @@ final class SpeakersSearchModel {
     private(set) var filteredSpeakers: [Speaker] = []
     private var allSpeakers: [Speaker] = []
     private var searchTask: Task<Void, Never>?
-    private var lastAnnouncementTime: Date = .distantPast
     
-    //MARK: - Functions
     func setup(with speakers: [Speaker]) {
         self.allSpeakers = speakers.sorted()
         if filteredSpeakers.isEmpty && searchText.isEmpty {
@@ -35,7 +32,8 @@ final class SpeakersSearchModel {
     
     private func performClear() {
         filteredSpeakers = allSpeakers
-        postHighPriorityAnnouncement("Showing all \(filteredSpeakers.count) speakers")
+        let message = "Search text cleared. Showing all \(allSpeakers.count) speakers"
+        AccessibilityNotification.Announcement(message).post()
     }
     
     private func scheduleDebouncedSearch() {
@@ -49,20 +47,14 @@ final class SpeakersSearchModel {
     
     private func performSearch() {
         filteredSpeakers = allSpeakers.filter { $0.name.localizedStandardContains(searchText) }
-        if filteredSpeakers.isEmpty {
-            postHighPriorityAnnouncement("No speakers found. Try another query")
-        } else {
-            let speakerText = filteredSpeakers.count == 1 ? "speaker" : "speakers"
-            postHighPriorityAnnouncement("Showing \(filteredSpeakers.count) \(speakerText)")
-        }
+        postAccessibilityAnnouncement()
     }
     
-    private func postHighPriorityAnnouncement(_ message: String) {
-        guard Date().timeIntervalSince(lastAnnouncementTime) > 0.2 else { return }
-        lastAnnouncementTime = Date()
-        
-        var announcement = AttributedString(message)
-        announcement.accessibilitySpeechAnnouncementPriority = .high
-        AccessibilityNotification.Announcement(announcement).post()
+    private func postAccessibilityAnnouncement() {
+        if filteredSpeakers.isEmpty {
+            AccessibilityNotification.Announcement("No speakers found").post()
+        } else {
+            AccessibilityNotification.Announcement("\(filteredSpeakers.count) \(filteredSpeakers.count == 1 ? "speaker" : "speakers") found").post()
+        }
     }
 }
