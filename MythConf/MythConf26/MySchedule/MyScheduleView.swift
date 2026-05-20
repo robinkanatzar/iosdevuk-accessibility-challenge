@@ -59,6 +59,7 @@ struct MyScheduleView: View {
                                                 rotorNamespace: scheduleRotorNamespace
                                             )
                                             .padding(.vertical, 4.0)
+                                            .padding(.horizontal, 16.0)
                                             Divider()
                                         }
                                         .padding(.vertical, 8.0)

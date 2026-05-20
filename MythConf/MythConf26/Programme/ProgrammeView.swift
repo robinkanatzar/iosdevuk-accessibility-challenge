@@ -50,7 +50,7 @@ struct ProgrammeView: View {
                         .opacity(0.01)
                 }
             }
-            .navigationTitle("MythConf 2026")
+            .navigationTitle("MythConf")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     SettingsToolbarButton {
