@@ -6,9 +6,11 @@
 import SwiftUI
 import Accessibility
 
-/// A horizontal row of tappable social/web links for a speaker.
+/// A responsive collection of tappable social/web links for a speaker.
 struct SocialLinksView: View {
     @Environment(\.openURL) private var openURL
+    @Environment(\.accessibilityShowButtonShapes) private var showButtonShapes
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let social: [SocialItem]
     let speakerName: String
@@ -35,24 +37,69 @@ struct SocialLinksView: View {
     }
 
     var body: some View {
-        HStack {
-            ForEach(renderedLinks, id: \.self) { item in
-                Button { // a11y-check:disable button-used-as-link
-                    announceExternalLinkOpening(item)
-                    openURL(item.url)
-                } label: {
-                    Label(displayName(for: item.socialType), systemImage: iconName(for: item.socialType))
-                        .font(.subheadline)
-                        .frame(minWidth: 44, minHeight: 44)
-                }
-                .contentShape(.rect)
-                .accessibilityLabel(accessibilityLabel(for: item))
-                .accessibilityInputLabels([
-                    displayName(for: item.socialType),
-                    "\(speakerName) \(displayName(for: item.socialType))"
-                ])
-                .accessibilityHint("Opens an external link")
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .center, spacing: 8) {
+                socialLinkButtons
             }
+        } else {
+            ScrollView(.horizontal) {
+                HStack(spacing: 8) {
+                    socialLinkButtons
+                }
+            }
+            .scrollIndicators(.hidden)
+        }
+    }
+
+    @ViewBuilder
+    private var socialLinkButtons: some View {
+        ForEach(renderedLinks, id: \.self) { item in
+            // SwiftUI limitation have to use Button rather than Link
+            Button { // a11y-check:disable button-used-as-link
+                announceExternalLinkOpening(item)
+                openURL(item.url)
+            } label: {
+                socialLinkLabel(for: item)
+            }
+            .buttonStyle(.plain)
+            .padding(showButtonShapes ? 8 : 0)
+            .background(
+                Capsule()
+                    .fill(showButtonShapes ? Color(.secondarySystemBackground) : .clear)
+            )
+            .overlay {
+                Capsule()
+                    .stroke(showButtonShapes ? Color(.separator) : .clear, lineWidth: 1)
+            }
+            .contentShape(.rect)
+            .accessibilityLabel(accessibilityLabel(for: item))
+            .accessibilityInputLabels([
+                displayName(for: item.socialType),
+                "\(speakerName) \(displayName(for: item.socialType))"
+            ])
+            .accessibilityHint("Opens an external link")
+        }
+    }
+
+    @ViewBuilder
+    private func socialLinkLabel(for item: RenderedSocialLink) -> some View {
+        Label {
+            Text(displayName(for: item.socialType))
+                .dynamicTypeSize(...DynamicTypeSize.accessibility3)
+        } icon: {
+            socialIcon(for: item.socialType)
+        }
+    }
+
+    @ViewBuilder
+    private func socialIcon(for type: String) -> some View {
+        if let symbolName = assetSymbolName(for: type) {
+            Image(decorative: symbolName)
+                .renderingMode(.template)
+                .symbolRenderingMode(.monochrome)
+        } else {
+            Image(systemName: fallbackIconName(for: type))
+                .accessibilityHidden(true)
         }
     }
 
@@ -64,11 +111,11 @@ struct SocialLinksView: View {
     private func accessibilityLabel(for item: RenderedSocialLink) -> String {
         switch item.socialType.lowercased() {
         case "website", "web", "www":
-            return "Open \(possessiveSpeakerName) website"
+            return "\(possessiveSpeakerName) website"
         case "blog":
-            return "Open \(possessiveSpeakerName) blog"
+            return "\(possessiveSpeakerName) blog"
         default:
-            return "Open profile of \(speakerName) on \(displayName(for: item.socialType))"
+            return "\(displayName(for: item.socialType))"
         }
     }
 
@@ -116,14 +163,20 @@ struct SocialLinksView: View {
         }
     }
 
-    private func iconName(for type: String) -> String {
+    private func assetSymbolName(for type: String) -> String? {
         switch type.lowercased() {
-        case "twitter", "x": return "at"
-        case "mastodon": return "at.badge.plus"
-        case "github": return "chevron.left.forwardslash.chevron.right"
-        case "linkedin": return "person.crop.square"
+        case "twitter", "x": return "x"
+        case "mastodon": return "mastodon"
+        case "github": return "github"
+        case "linkedin": return "linkedin"
+        case "bluesky": return "bluesky"
+        default: return nil
+        }
+    }
+
+    private func fallbackIconName(for type: String) -> String {
+        switch type.lowercased() {
         case "website", "web", "www", "blog": return "globe"
-        case "bluesky": return "cloud"
         default: return "link"
         }
     }

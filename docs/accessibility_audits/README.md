@@ -61,6 +61,7 @@ The app uses a mix of native buttons, full-width action surfaces, icon buttons, 
 
 - The shared Settings toolbar button reads `accessibilityShowButtonShapes` and adds a circular background and separator stroke around the gear icon when Button Shapes is enabled.
 - The favourite star button reads `accessibilityShowButtonShapes` and adds a circular background and separator stroke around the 44 x 44 point star target when Button Shapes is enabled.
+- Speaker social link buttons use plain button styling and read `accessibilityShowButtonShapes` to add a small rounded background and separator stroke when Button Shapes is enabled.
 - Session Detail speaker and location navigation rows read `accessibilityShowButtonShapes` and add a rounded background, separator stroke, and rectangular content shape when Button Shapes is enabled.
 - Full-width actions such as Session Detail favourite and Location Detail Open in Maps use plain button styling with custom visible button surfaces: text, icons, rounded rectangular backgrounds, borders, and rectangular content shapes. This avoids the system drawing an extra oval around the custom label when Button Shapes is enabled.
 - The My Schedule empty-state Browse Programme action uses a native bordered prominent button style, so SwiftUI provides the visible button shape.
@@ -122,6 +123,8 @@ Remaining low-opacity accent fills in badges and icon backgrounds are decorative
 - Updated speaker social links to support the provided conference data format where multiple URLs are stored as newline-separated values in one `socialLink` field. The UI now renders one accessible button per valid URL without changing `conf.json`.
 - Improved social link naming by inferring platforms from URL hosts, including Website, GitHub, LinkedIn, Mastodon, Twitter, and Bluesky.
 - Refined social link VoiceOver labels so website links read as `Open [speaker]'s website`, while platform links read as `Open profile of [speaker] on [platform]`.
+- Switched supported social/community platforms to local SF Symbol assets in `Assets.xcassets` so GitHub, LinkedIn, Mastodon, Twitter/X, and Bluesky use recognisable logo-style symbols without depending on the `SocialSymbols` package. Generic website/blog links keep system fallback symbols.
+- Changed the social link layout so standard Dynamic Type sizes use a horizontal scroll view with an `HStack`, while accessibility Dynamic Type sizes use a vertical stack to keep icon-and-text buttons readable without awkward wrapping.
 - Added heading traits on detail sections where the text functions as a real heading.
 - Added a contextual accessibility label to the speaker detail sessions heading so VoiceOver announces "Sessions by [speaker name]" instead of only "Sessions".
 - Added an empty search result state for speaker search.
