@@ -34,10 +34,20 @@ struct ProgrammeView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .background(RoundedRectangle(cornerRadius:15).fill(Color(.systemBlue)))
                 .accessibilityIdentifier("programme.dayPicker")
                 .padding(.horizontal)
                 .padding(.vertical, 8)
                 .popoverTip(dayPickerTip, arrowEdge: .top)
+                .onAppear {
+                    UISegmentedControl.appearance()
+                        .selectedSegmentTintColor = .systemCyan
+                    UISegmentedControl.appearance()
+                        .setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+                    UISegmentedControl.appearance()
+                        .setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
+                }
+
 
                 if !days.isEmpty {
                     DayScheduleView(sessions: days[selectedDayIndex])
