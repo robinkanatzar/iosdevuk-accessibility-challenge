@@ -8,6 +8,7 @@ import NaturalLanguage
 
 struct SessionDetailView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.appSettings) private var appSettings
     @Environment(ViewModel.self) private var viewModel
     let talkReference: TalkReference
@@ -21,21 +22,67 @@ struct SessionDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
                 Text(talk.talkTitle)
-                    .dyslexiaReadingFont(.largeTitle, size: 34, weight: .heavy)
+                    .dyslexiaReadingFont(.title, size: 24, weight: .heavy)
                     .foregroundStyle(Color(.label))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
                     .accessibilityIdentifier("sessionDetail.title")
+                    .accessibilityLabel("")
+                    .accessibilityLabel { _ in
+                        Text("Session Title: \(talk.talkTitle)")
+                    }
+
+                VStack(alignment: .leading, spacing: 14) {
+
+                    if dynamicTypeSize.isAccessibilitySize {
+
+                        VStack {
+                            sectionHeading("About This Session")
+                                .accessibilityHidden(true)
+
+                            Spacer()
+                            sectionHeading(session.timeRange)
+                                .accessibilityElement(children: .ignore)
+                                .accessibilityLabel { _ in
+                                    Text("Time: \(session.accessibilityTimeRange(now: viewModel.currentDate))")
+                                }
+                        }
+                        .accessibilityElement(children: .contain)
+                        .accessibilityIdentifier("sessionDetail.aboutHeading")
+
+                    } else {
+
+                        HStack {
+                            sectionHeading("About This Session")
+                                .accessibilityHidden(true)
+
+                            Spacer()
+                            sectionHeading(session.timeRange)
+                                .accessibilityElement(children: .ignore)
+                                .accessibilityLabel { _ in
+                                    Text("Time: \(session.accessibilityTimeRange(now: viewModel.currentDate))")
+                                }
+                        }
+                        .accessibilityElement(children: .contain)
+                        .accessibilityIdentifier("sessionDetail.aboutHeading")
+
+                    }
+
+
+                    Text(talk.talkDescription)
+                        .dyslexiaReadingFont(.body, size: 17)
+                        .lineSpacing(5)
+                        .foregroundStyle(Color(.label))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("sessionDetail.about")
+                        .accessibilityLabel { _ in
+                            Text("Session Description: \(talk.talkDescription)")
+                        }
+                }
+
+                Divider()
 
                 VStack(alignment: .leading, spacing: 20) {
-                    sessionInfoRow(
-                        title: "Time",
-                        value: session.timeRange,
-                        accessibilityValue: session.accessibilityTimeRange(now: viewModel.currentDate),
-                        systemImage: "clock",
-                        accessibilityIdentifier: "sessionDetail.time"
-                    )
-
                     NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
                         sessionInfoRowContent(
                             title: "Location",
@@ -45,8 +92,9 @@ struct SessionDetailView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Location")
-                    .accessibilityValue(locationName)
+                    .accessibilityLabel { _ in
+                        Text("Location: \(locationName)")
+                    }
                     .accessibilityInputLabels([
                         "Location",
                         locationName,
@@ -54,44 +102,41 @@ struct SessionDetailView: View {
                     ])
                     .accessibilityHint("Opens location details")
                     .accessibilityIdentifier("sessionDetail.location")
+                    .accessibilityAddTraits(.isButton)
+
+                    ForEach(talk.speakerIDs, id: \.self) { speakerID in
+                        NavigationLink(value: SpeakerNavigationID(value: speakerID)) {
+                            sessionInfoRowContent(
+                                title: "Speaker",
+                                value: viewModel.speakerNameFrom(speakerID: speakerID),
+                                systemImage: "person.circle"
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel { _ in
+                            Text("Speaker: \(viewModel.speakerNameFrom(speakerID: speakerID))")
+                        }
+                        .accessibilityInputLabels([
+                            viewModel.speakerNameFrom(speakerID: speakerID),
+                            "Open \(viewModel.speakerNameFrom(speakerID: speakerID))"
+                        ])
+                        .accessibilityHint("Opens speaker profile")
+                        .accessibilityIdentifier("sessionDetail.speaker.\(speakerID)")
+                        .accessibilityAddTraits(.isButton)
+                    }
                 }
 
-                speakerSection
+                Divider()
 
-                VStack(alignment: .leading, spacing: 14) {
-                    sectionHeading("About This Session")
-                        .accessibilityIdentifier("sessionDetail.aboutHeading")
-
-                    Text(talk.talkDescription)
-                        .dyslexiaReadingFont(.body, size: 17)
-                        .lineSpacing(5)
-                        .foregroundStyle(Color(.label))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("sessionDetail.about")
-                }
 
                 Button {
                     toggleFavourite()
                 } label: {
-                    Group {
-                        if dynamicTypeSize.isAccessibilitySize {
-                            Text(favouriteActionTitle)
-                                .font(.headline)
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                        } else {
-                            Label(favouriteActionTitle, systemImage: isFavourite ? "checkmark" : "plus")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                        }
-                    }
+                    favouriteButtonLabel
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
+                .contentShape(.rect)
                 .accessibilityLabel(favouriteActionAccessibilityLabel)
-                .accessibilityValue(isFavourite ? "Favourited" : "Not favourited")
                 .accessibilityHint(isFavourite ? "Removes this session from your favourites" : "Adds this session to your favourites")
                 .accessibilityInputLabels(isFavourite
                     ? ["Unfavourite", "Remove from favourites", "Remove from schedule", "Star", talk.talkTitle, "Unfavourite \(talk.talkTitle)"]
@@ -122,34 +167,115 @@ struct SessionDetailView: View {
         }
     }
 
-    private var speakerSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            sectionHeading(talk.speakerIDs.count == 1 ? "Speaker" : "Speakers")
-
-            ForEach(talk.speakerIDs, id: \.self) { speakerID in
-                NavigationLink(value: SpeakerNavigationID(value: speakerID)) {
-                    speakerCard(speakerID: speakerID)
-                }
-                .buttonStyle(.plain)
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(viewModel.speakerNameFrom(speakerID: speakerID))
-                .accessibilityValue(speakerSummary(for: speakerID))
-                .accessibilityInputLabels([
-                    viewModel.speakerNameFrom(speakerID: speakerID),
-                    "Open \(viewModel.speakerNameFrom(speakerID: speakerID))"
-                ])
-                .accessibilityHint("Opens speaker profile")
-                .accessibilityIdentifier("sessionDetail.speaker.\(speakerID)")
-            }
-        }
-    }
-
     private var favouriteActionTitle: String {
         isFavourite ? "Remove from Favourites" : "Add to Favourites"
     }
 
     private var favouriteActionAccessibilityLabel: String {
         isFavourite ? "Remove \(talk.talkTitle) from favourites" : "Add \(talk.talkTitle) to favourites"
+    }
+
+    // MARK: - Favourite button state colours
+
+    /// Neutral card for the "not yet saved" (add) state.
+    private var addBackground: Color { Color(.secondarySystemBackground) }
+
+    /// Accent-tinted card for the "already saved" (remove) state.
+    private var savedBackground: Color { Color.accentColor.opacity(0.12) }
+
+    private var buttonBackground: Color { isFavourite ? savedBackground : addBackground }
+
+    private var borderColor: Color {
+        isFavourite
+            ? Color.accentColor.opacity(colorSchemeContrast == .increased ? 0.8 : 0.35)
+            : Color(.separator)
+    }
+
+    private var borderWidth: CGFloat { colorSchemeContrast == .increased ? 1.5 : 0.5 }
+
+    /// Filled circle when saved, subtle tint when not.
+    private var iconCircleFill: Color {
+        isFavourite ? Color.accentColor : Color.accentColor.opacity(0.15)
+    }
+
+    /// White on a filled circle; accent on a tinted circle.
+    private var iconForeground: Color {
+        isFavourite ? Color.myWhite : Color.accentColor
+    }
+
+    private var favouriteButtonLabel: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(alignment: .top) {
+                        Image(systemName: isFavourite ? "star.fill" : "star")
+                            .font(.title2.weight(.semibold))
+                            .foregroundStyle(iconForeground)
+                            .frame(width: 44, height: 44)
+                            .background(Circle().fill(iconCircleFill))
+                            .dynamicTypeSize(.large)
+                            .accessibilityHidden(true)
+
+                        Spacer()
+
+                        Image(systemName: isFavourite ? "checkmark" : "plus")
+                            .font(.headline.weight(.bold))
+                            .foregroundStyle(Color.accentColor)
+                            .accessibilityHidden(true)
+                    }
+
+                    Text(favouriteActionTitle)
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityAddTraits(.isHeader)
+
+                    Text(isFavourite ? "Remove from your schedule" : "Save to your schedule")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            } else {
+                HStack(alignment: .center) {
+                    Image(systemName: isFavourite ? "star.fill" : "star")
+                        .font(.title2.weight(.semibold))
+                        .foregroundStyle(iconForeground)
+                        .frame(width: 44, height: 44)
+                        .background(Circle().fill(iconCircleFill))
+                        .dynamicTypeSize(.large)
+                        .accessibilityHidden(true)
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(favouriteActionTitle)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityAddTraits(.isHeader)
+
+                        Text(isFavourite ? "Remove from your schedule" : "Save to your schedule")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: isFavourite ? "checkmark" : "plus")
+                        .font(.headline.weight(.bold))
+                        .foregroundStyle(Color.accentColor)
+                        .accessibilityHidden(true)
+                }
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(buttonBackground, in: RoundedRectangle(cornerRadius: 14))
+        .overlay {
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(borderColor, lineWidth: borderWidth)
+        }
+        .contentShape(.rect)
+        .animation(.easeInOut(duration: 0.2), value: isFavourite)
     }
 
     private func sectionHeading(_ title: String) -> some View {
@@ -200,74 +326,6 @@ struct SessionDetailView: View {
         }
     }
 
-    private func speakerCard(speakerID: String) -> some View {
-        let speaker = viewModel.speakerFrom(speakerID: speakerID)
-
-        @ViewBuilder
-        var speakerDetails: some View {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(speaker.name)
-                    .dyslexiaReadingFont(.body, size: 17, weight: .bold)
-                    .foregroundStyle(Color(.label))
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Text(speakerSummary(for: speakerID))
-                    .dyslexiaReadingFont(.body, size: 17)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
-                    .fixedSize(horizontal: false, vertical: true)
-            }.fixedSize(horizontal: false, vertical: true)
-        }
-
-        var infoIcon: some View {
-            Image(systemName: "info.circle")
-                .font(.title3)
-                .foregroundStyle(.tint)
-                .frame(width: 44, height: 44)
-                .background(Color.accentColor.opacity(0.08), in: Circle())
-                .accessibilityHidden(true)
-        }
-
-        return Group {
-            if dynamicTypeSize > .large {
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        SpeakerPhotoView(
-                            speaker: speaker,
-                            size: dynamicTypeSize.isAccessibilitySize ? 48 : 64
-                        )
-                        Spacer()
-                        infoIcon
-                    }
-                    speakerDetails
-                }
-            } else {
-                HStack(alignment: .center, spacing: 14) {
-                    SpeakerPhotoView(
-                        speaker: speaker,
-                        size: dynamicTypeSize.isAccessibilitySize ? 48 : 64
-                    )
-
-                    speakerDetails
-
-                    Spacer(minLength: 8)
-
-                    infoIcon
-                }
-            }
-        }
-        .padding(dynamicTypeSize.isAccessibilitySize ? 12 : 14)
-        .background(
-            Color(.secondarySystemBackground),
-            in: RoundedRectangle(cornerRadius: 18)
-        )
-        .overlay {
-            RoundedRectangle(cornerRadius: 18)
-                .stroke(Color(.separator), lineWidth: 0.5)
-        }
-        .contentShape(RoundedRectangle(cornerRadius: 18))
-    }
-
     private func speakerSummary(for speakerID: String) -> String {
         let speaker = viewModel.speakerFrom(speakerID: speakerID)
         let tokenizer = NLTokenizer(unit: .sentence)
@@ -301,7 +359,7 @@ struct SessionDetailView: View {
     let viewModel = ViewModel()
     let talkID = UUID(uuidString: "C1001006-C100-4100-8100-100000000006")!
     let session = viewModel.confData.sessions[1][2]
-    
+
     NavigationStack {
         SessionDetailView(talkReference: TalkReference(talkID: talkID, session: session))
             .environment(viewModel)

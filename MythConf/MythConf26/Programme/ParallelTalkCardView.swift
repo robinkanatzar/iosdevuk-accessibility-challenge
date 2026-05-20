@@ -91,7 +91,9 @@ struct ParallelTalkCardView: View {
                 cardContent
             }
             .accessibilityIdentifier("programme.card.\(talk.id.uuidString)")
-            .accessibilityLabel("\(session.sessionType.displayName): \(talk.talkTitle)")
+            .accessibilityLabel { _ in
+                Text("\(session.sessionType.displayName): \(talk.talkTitle)")
+            }
             .accessibilityInputLabels([
                 talk.talkTitle,
                 "Open \(talk.talkTitle)",
