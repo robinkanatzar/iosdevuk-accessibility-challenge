@@ -10,7 +10,7 @@ struct ProgrammeView: View {
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedTab: Int
     @State private var selectedDayIndex = 0
-    @State private var path: [TalkReference] = []   // ← new
+    @State private var path = NavigationPath()
     @State private var isShowingSettings = false
     @AccessibilityFocusState private var isSettingsButtonFocused: Bool
     private let dayPickerTip = ConferenceDayPickerTip()
@@ -102,7 +102,9 @@ struct ProgrammeView: View {
                 print("📍 [DeepLink] ⚠️ Session not found in any day — day picker not changed")
             }
 
-            path = [TalkReference(talkID: talkID, session: session)]
+            var newPath = NavigationPath()
+            newPath.append(TalkReference(talkID: talkID, session: session))
+            path = newPath
             viewModel.pendingDeepLinkTalkID = nil
             print("📍 [DeepLink] path set, pendingDeepLinkTalkID cleared")
         }
