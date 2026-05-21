@@ -15,30 +15,45 @@ struct SessionDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                // Time and location
-                HStack {
-                    Label(session.timeRange, systemImage: "clock")
-                    Spacer()
-                    NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
-                        Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")
-                    }
+                Label(session.timeRange, systemImage: "clock")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("Time, \(session.timeRangeAccessible)")
+
+                NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
+                    Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                 }
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .accessibilityLabel("Location, \(viewModel.locationNameFrom(locationID: talk.locationID))")
+                .accessibilityHint("Opens location details")
                 .padding(.bottom)
 
-                // Speakers
+                Text("Speakers")
+                    .font(.headline)
+                    .accessibilityAddTraits(.isHeader)
+
                 ForEach(talk.speakerIDs, id: \.self) { speakerID in
                     NavigationLink(value: SpeakerNavigationID(value: speakerID)) {
                         SpeakerRowView(speakerID: speakerID)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityHint("Opens speaker profile")
+                }
+                .accessibilityRotor("Speakers") {
+                    ForEach(talk.speakerIDs, id: \.self) { speakerID in
+                        AccessibilityRotorEntry(viewModel.speakerNameFrom(speakerID: speakerID), id: speakerID)
+                    }
                 }
 
                 Divider()
                     .padding(.vertical)
 
-                // Abstract
+                Text("About this session")
+                    .font(.headline)
+                    .accessibilityAddTraits(.isHeader)
+
                 Text(talk.talkDescription)
             }
             .padding()
@@ -50,5 +65,6 @@ struct SessionDetailView: View {
                 FavouriteButtonView(talk: talk)
             }
         }
+        .resetVoiceOverFocusOnAppear()
     }
 }

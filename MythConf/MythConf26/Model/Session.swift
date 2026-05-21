@@ -32,5 +32,24 @@ struct Session: Codable, Identifiable, Hashable {
     }
 
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
+
+    /// Spoken-friendly time range, e.g. "9 AM to 10:30 AM". Used in accessibility labels
+    /// so VoiceOver doesn't read "15:00" as "fifteen zero" — and so en-GB locales (which
+    /// suppress AM/PM in `Date.FormatStyle`) still pronounce a recognisable time.
+    var timeRangeAccessible: String {
+        "\(spokenTime(for: startTime)) to \(spokenTime(for: endTime))"
+    }
+
+    private func spokenTime(for date: Date) -> String {
+        let comps = Calendar.current.dateComponents([.hour, .minute], from: date)
+        let hour24 = comps.hour ?? 0
+        let minute = comps.minute ?? 0
+        let hour12 = hour24 == 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24)
+        let suffix = hour24 < 12 ? "AM" : "PM"
+        if minute == 0 {
+            return "\(hour12) \(suffix)"
+        }
+        return "\(hour12):\(String(format: "%02d", minute)) \(suffix)"
+    }
 }
 

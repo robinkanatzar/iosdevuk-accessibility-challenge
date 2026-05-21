@@ -5,12 +5,18 @@
 
 import SwiftUI
 
-/// A horizontal row of tappable social/web links for a speaker.
+/// A horizontal row of tappable social/web links for a speaker. Switches to a vertical
+/// stack at accessibility text sizes so labels don't overlap.
 struct SocialLinksView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let social: [SocialItem]
 
     var body: some View {
-        HStack {
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading))
+            : AnyLayout(HStackLayout())
+
+        layout {
             ForEach(social, id: \.self) { item in
                 if let url = URL(string: item.socialLink) {
                     Link(destination: url) {
@@ -18,8 +24,12 @@ struct SocialLinksView: View {
                             .font(.subheadline)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 4)
+                            .frame(minWidth: 44, minHeight: 44, alignment: .leading)
                     }
                     .contentShape(.rect)
+                    .accessibilityLabel("\(item.socialType.capitalized) profile")
+                    .accessibilityHint("Opens in browser")
+                    .accessibilityAddTraits(.isLink)
                 }
             }
         }
