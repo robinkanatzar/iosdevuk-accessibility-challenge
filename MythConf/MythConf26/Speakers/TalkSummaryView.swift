@@ -20,6 +20,7 @@ struct TalkSummaryView: View {
             let layout = horizontalSizeClass == .compact && dynamicTypeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading)) : AnyLayout(HStackLayout(alignment: .top))
             layout {
                 Label(session.timeRange, systemImage: "clock")
+                    .accessibilityLabel(session.voiceOverTimeRange)
                 Label(viewModel.locationNameFrom(talkID: talkID), systemImage: "mappin")
             }
             .font(.caption)
