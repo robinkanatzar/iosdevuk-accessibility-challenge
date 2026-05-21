@@ -27,6 +27,9 @@ struct HomeView: View {
 
 }
 
+// MARK: - Preview
+
 #Preview {
     HomeView()
+        .environment(ViewModel())
 }

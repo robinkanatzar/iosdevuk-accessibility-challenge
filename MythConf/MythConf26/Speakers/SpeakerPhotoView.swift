@@ -20,5 +20,13 @@ struct SpeakerPhotoView: View {
             .scaledToFill()
             .frame(width: size, height: size)
             .clipShape(.circle)
+            .accessibilityHidden(true)
     }
+}
+
+// MARK: - Preview
+
+#Preview {
+    let viewModel = ViewModel()
+    SpeakerPhotoView(speaker: viewModel.confData.speakers.first!, size: 80)
 }

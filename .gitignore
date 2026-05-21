@@ -1,34 +1,45 @@
-# Gradle files
-.gradle/
+# macOS
+.DS_Store
+
+# Xcode
 build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
 
-# Local configuration file (sdk path, etc)
-local.properties
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.pins
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
 
-# Log/OS Files
-*.log
+# CocoaPods
+Pods/
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
+# Carthage
+Carthage/Build/
 
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
 
-# Keystore files
-*.jks
-*.keystore
+# Local working notes
+PROJECT_OVERVIEW.md
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
+# Local-only Claude Code skills and installer artefacts
+.claude/skills/
+.claude/settings.local.json
+.claude/worktrees/
+.agents/
+skills-lock.json

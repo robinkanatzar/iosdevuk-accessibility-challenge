@@ -28,9 +28,10 @@ struct LocationDetailView: View {
                 )) {
                     Marker(location.name, coordinate: coordinate)
                 }
-                .frame(height: 400)
+                .frame(minHeight: 200, maxHeight: 400)
                 .clipShape(.rect(cornerRadius: 12))
                 .padding(.horizontal)
+                .accessibilityLabel("Map showing \(location.name)")
 
                 Text(location.placeDescription)
                     .foregroundStyle(.secondary)
@@ -40,4 +41,14 @@ struct LocationDetailView: View {
         .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.large)
     }
+}
+
+// MARK: - Preview
+
+#Preview {
+    let viewModel = ViewModel()
+    NavigationStack {
+        LocationDetailView(locationID: viewModel.confData.locations.first!.id)
+    }
+    .environment(viewModel)
 }

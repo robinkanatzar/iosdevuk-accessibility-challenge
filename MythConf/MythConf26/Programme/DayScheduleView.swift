@@ -19,8 +19,19 @@ struct DayScheduleView: View {
                         BreakRowView(session: session)
                     }
                     Divider()
+                        .accessibilityHidden(true)
                 }
             }
         }
     }
+}
+
+// MARK: - Preview
+
+#Preview {
+    let viewModel = ViewModel()
+    NavigationStack {
+        DayScheduleView(sessions: viewModel.confData.sessions[1])
+    }
+    .environment(viewModel)
 }

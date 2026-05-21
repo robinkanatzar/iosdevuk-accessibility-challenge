@@ -20,9 +20,11 @@ struct SocialLinksView: View {
                             .padding(.horizontal, 4)
                     }
                     .contentShape(.rect)
+                    .accessibilityLabel("Open \(item.socialType.capitalized) profile")
                 }
             }
         }
+        .dynamicTypeSize(...DynamicTypeSize.accessibility1)
     }
 
     private func iconName(for type: String) -> String {
@@ -35,4 +37,14 @@ struct SocialLinksView: View {
         default: return "link"
         }
     }
+}
+
+// MARK: - Preview
+
+#Preview {
+    SocialLinksView(social: [
+        SocialItem(socialType: "twitter", socialLink: "https://twitter.com/example"),
+        SocialItem(socialType: "github", socialLink: "https://github.com/example"),
+        SocialItem(socialType: "website", socialLink: "https://example.com")
+    ])
 }

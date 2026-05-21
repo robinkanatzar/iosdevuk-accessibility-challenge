@@ -7,6 +7,12 @@ import SwiftUI
 
 struct SpeakerDetailView: View {
     @Environment(ViewModel.self) private var viewModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var isAccessibilitySize: Bool {
+        dynamicTypeSize >= .accessibility1
+    }
+
     let speakerID: String
 
     private var speaker: Speaker { viewModel.speakerFrom(speakerID: speakerID) }
@@ -17,11 +23,14 @@ struct SpeakerDetailView: View {
                 // Header
                 HStack(alignment: .top) {
                     SpeakerPhotoView(speaker: speaker, size: 80)
+                        .padding(.top, isAccessibilitySize ? 6 : 0)
 
                     VStack(alignment: .leading) {
                         Text(speaker.name)
+                            .accessibilityHidden(true)
                             .font(.title2)
                             .bold()
+                            .padding(isAccessibilitySize ? [.leading] : [.leading, .top])
                         if !speaker.social.isEmpty {
                             SocialLinksView(social: speaker.social)
                         }
@@ -32,18 +41,21 @@ struct SpeakerDetailView: View {
 
                 Divider()
                     .padding(.vertical)
+                    .accessibilityHidden(true)
 
                 // Bio
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
                     Divider()
                         .padding(.vertical)
+                        .accessibilityHidden(true)
                 }
 
                 // Sessions
                 let speakerTalks = talksWithSessions()
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
+                        .accessibilityAddTraits(.isHeader)
                         .font(.headline)
 
                     ForEach(speakerTalks, id: \.talkID) { item in
@@ -74,9 +86,12 @@ struct SpeakerDetailView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
+    let viewModel = ViewModel()
     NavigationStack {
-        SpeakerDetailView(speakerID: "")
+        SpeakerDetailView(speakerID: viewModel.confData.speakers.first!.id)
     }
-    .environment(ViewModel())
+    .environment(viewModel)
 }

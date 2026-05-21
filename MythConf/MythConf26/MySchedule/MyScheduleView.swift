@@ -27,9 +27,11 @@ struct MyScheduleView: View {
                                         ForEach(daySessions) { session in
                                             ParallelSessionsRowView(session: session)
                                             Divider()
+                                                .accessibilityHidden(true)
                                         }
                                     } header: {
                                         Text(dayHeader(for: daySessions))
+                                            .accessibilityAddTraits(.isHeader)
                                             .font(.headline)
                                             .bold()
                                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -44,6 +46,7 @@ struct MyScheduleView: View {
                 }
             }
             .navigationTitle("My Schedule")
+            .toolbarBackground(.background, for: .navigationBar)
             .conferenceNavigationDestinations()
         }
     }
@@ -54,7 +57,26 @@ struct MyScheduleView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
+    let viewModel: ViewModel = {
+        let vm = ViewModel()
+        vm.favouriteIds = []
+        return vm
+    }()
     MyScheduleView()
-        .environment(ViewModel())
+        .environment(viewModel)
+}
+
+#Preview("With favourites") {
+    let viewModel: ViewModel = {
+        let vm = ViewModel()
+        vm.favouriteIds = Array(vm.confData.talks.prefix(3).map(\.id))
+        vm.saveFavourites()
+        vm.loadFavourites()
+        return vm
+    }()
+    MyScheduleView()
+        .environment(viewModel)
 }
