@@ -7,6 +7,7 @@ import SwiftUI
 
 /// A horizontal row of tappable social/web links for a speaker.
 struct SocialLinksView: View {
+    @Environment(ViewModel.self) private var viewModel
     let social: [SocialItem]
 
     var body: some View {
@@ -15,11 +16,12 @@ struct SocialLinksView: View {
                 if let url = URL(string: item.socialLink) {
                     Link(destination: url) {
                         Label(item.socialType.capitalized, systemImage: iconName(for: item.socialType))
-                            .font(.subheadline)
+                            .appFont(.subheadline, useLexend: viewModel.useLexendFont)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 4)
                     }
                     .contentShape(.rect)
+                    .accessibilityLabel("\(item.socialType.capitalized), opens in browser")
                 }
             }
         }

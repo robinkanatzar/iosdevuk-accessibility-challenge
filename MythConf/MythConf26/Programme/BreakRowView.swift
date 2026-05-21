@@ -20,7 +20,7 @@ struct BreakRowView: View {
                     .foregroundStyle(.primary)
                 if let talkID = session.contentIDs.first {
                     Text(viewModel.locationNameFrom(talkID: talkID))
-                        .font(.caption)
+                        .appFont(.caption, useLexend: viewModel.useLexendFont)
                         .foregroundStyle(.secondary)
                 }
             }

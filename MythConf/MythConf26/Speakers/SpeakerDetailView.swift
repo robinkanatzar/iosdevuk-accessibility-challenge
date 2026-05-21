@@ -20,7 +20,7 @@ struct SpeakerDetailView: View {
 
                     VStack(alignment: .leading) {
                         Text(speaker.name)
-                            .font(.title2)
+                            .appFont(.title2, useLexend: viewModel.useLexendFont)
                             .bold()
                         if !speaker.social.isEmpty {
                             SocialLinksView(social: speaker.social)
@@ -44,7 +44,8 @@ struct SpeakerDetailView: View {
                 let speakerTalks = talksWithSessions()
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
-                        .font(.headline)
+                        .appFont(.headline, useLexend: viewModel.useLexendFont)
+                        .accessibilityAddTraits(.isHeader)
 
                     ForEach(speakerTalks, id: \.talkID) { item in
                         NavigationLink(value: TalkReference(talkID: item.talkID, session: item.session)) {

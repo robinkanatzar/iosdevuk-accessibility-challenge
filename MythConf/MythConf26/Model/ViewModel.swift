@@ -9,6 +9,18 @@ import Foundation
 
 @Observable
 class ViewModel {
+    var useLexendFont: Bool {
+        didSet {
+            UserDefaults.standard.set(useLexendFont, forKey: "useLexendFont")
+        }
+    }
+
+    var hapticFeedbackEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(hapticFeedbackEnabled, forKey: "hapticFeedbackEnabled")
+        }
+    }
+
     var confData: ConfData
     var favouritesBySession: [[Session]] = []
     var check = "Not done"
@@ -16,6 +28,8 @@ class ViewModel {
     var favouriteIds: [UUID] = []  // The talk IDs for each favourite
     
     init() {
+        useLexendFont = UserDefaults.standard.bool(forKey: "useLexendFont")
+        hapticFeedbackEnabled = UserDefaults.standard.object(forKey: "hapticFeedbackEnabled") as? Bool ?? true
         confData = loadConfData()
         loadFavourites()
     }

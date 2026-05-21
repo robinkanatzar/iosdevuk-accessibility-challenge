@@ -21,7 +21,7 @@ struct SpeakerRowView: View {
                     .bold()
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
-                        .font(.subheadline)
+                        .appFont(.subheadline, useLexend: viewModel.useLexendFont)
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }

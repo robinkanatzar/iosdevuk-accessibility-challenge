@@ -12,15 +12,27 @@ struct FavouriteButtonView: View {
 
     var body: some View {
         Button {
-            if viewModel.isFavourite(talk: talk) {
-                viewModel.removeFavourite(talk: talk)
-            } else {
-                viewModel.addFavourite(talk: talk)
-            }
+            toggleFavourite()
         } label: {
             Image(systemName: viewModel.isFavourite(talk: talk) ? "star.fill" : "star")
                 .foregroundStyle(viewModel.isFavourite(talk: talk) ? .yellow : .secondary)
+                .frame(minWidth: 44, minHeight: 44)
+                .contentShape(.rect)
         }
         .accessibilityLabel(viewModel.isFavourite(talk: talk) ? "Remove from favourites" : "Add to favourites")
+        .sensoryFeedback(trigger: viewModel.isFavourite(talk: talk)) { _, isNowFavourite in
+            guard viewModel.hapticFeedbackEnabled else { return nil }
+            return isNowFavourite ? SensoryFeedback.success : SensoryFeedback.impact(weight: .light)
+        }
+    }
+
+    private func toggleFavourite() {
+        if viewModel.isFavourite(talk: talk) {
+            viewModel.removeFavourite(talk: talk)
+            AccessibilityNotification.Announcement("Removed from favourites").post()
+        } else {
+            viewModel.addFavourite(talk: talk)
+            AccessibilityNotification.Announcement("Added to favourites").post()
+        }
     }
 }

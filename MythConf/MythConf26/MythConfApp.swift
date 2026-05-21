@@ -15,6 +15,7 @@ struct MythConf: App {
         WindowGroup {
             HomeView()
                 .environment(viewModel)
+                .appFont(.body, useLexend: viewModel.useLexendFont)
                 .foregroundStyle(.primary, .primary.opacity(0.7), .primary.opacity(0.45))
         }
     }

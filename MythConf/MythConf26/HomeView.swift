@@ -8,20 +8,34 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(ViewModel.self) private var viewModel
+    @State private var selectedTab: Int = 0
+
     var body: some View {
-        TabView {
-            Tab("Programme", systemImage: "calendar") {
+        TabView(selection: $selectedTab) {
+            Tab("Programme", systemImage: "calendar", value: 0) {
                 ProgrammeView()
+                    .accessibilityHint("Browse the conference schedule by day.")
             }
-            Tab("Speakers", systemImage: "person.2") {
+            Tab("Speakers", systemImage: "person.2", value: 1) {
                 SpeakersView()
+                    .accessibilityHint("Browse and search the list of speakers.")
             }
-            Tab("Locations", systemImage: "map") {
+            Tab("Locations", systemImage: "map", value: 2) {
                 LocationsView()
+                    .accessibilityHint("View venue rooms and their locations on a map.")
             }
-            Tab("My Schedule", systemImage: "star") {
+            Tab("My Schedule", systemImage: "star", value: 3) {
                 MyScheduleView()
+                    .accessibilityHint("Review the talks you have favourited.")
             }
+            Tab("Settings", systemImage: "gearshape", value: 4) {
+                SettingsView()
+                    .accessibilityHint("Change reading and sensory feedback settings.")
+            }
+        }
+        .sensoryFeedback(trigger: selectedTab) { _, _ in
+            viewModel.hapticFeedbackEnabled ? .selection : nil
         }
     }
 
@@ -29,4 +43,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(ViewModel())
 }

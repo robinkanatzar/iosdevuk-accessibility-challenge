@@ -1,11 +1,22 @@
 # iOSDevUK Accessibility Challenge 2026
 
-Welcome to the iOSDevUK Accessibility Challenge! 
-Your mission, if you choose to accept, is to make the iOSDevUK conference app more accessible. (See MythConf/ in this repo for the code)
-You'll have from May 7th until May 21st (GAAD) to work on the code and submit a pull request on this repo.
+This submission was created for the iOSDevUK Accessibility Competition by İrem Karaoğlu Sansak. The following sections outline the accessibility improvements made throughout the app.
 
-For more details, including judging criteria, you can check out [this link](https://www.iosdevuk.com/competition).
+---
 
-For all other questions, you can [email me at hello@robinkanatzar.com](mailto:hello@robinkanatzar.com)
+## Vision Improvements
+- Added a Settings tab with a dyslexia-friendly font toggle that switches the app to Lexend and explains it can improve reading proficiency and reduce visual stress.
+- Changed the time column from a fixed width to a minimum width with fixed sizing, reducing clipping risk with larger text.
 
-Best of luck to you all!
+## Screen Reader Improvements
+
+- Added clearer tab accessibility hints for Programme, Speakers, Locations, My Schedule, and Settings.
+- Improved talk cards with richer accessibility labels, favourite state via accessibilityValue, and custom favourite/unfavourite accessibility actions.
+- Added VoiceOver announcements when favourites are added or removed.
+- Improved speaker rows and session detail speaker links with labels that include speaker name, short bio preview, and “Double tap for full biography.”
+- Marked section headers such as “Sessions” and schedule day headers with header traits.
+- Hid decorative speaker photos and talk card colour strips from accessibility so VoiceOver focuses on meaningful content.
+- Improved social link labels to clarify that links open in a browser.
+
+## Sensory Improvements
+Added a haptic feedback toggle. When off, tab changes, day selection, and favourite actions no longer trigger sensory feedback.

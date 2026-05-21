@@ -23,7 +23,7 @@ struct SessionDetailView: View {
                         Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")
                     }
                 }
-                .font(.subheadline)
+                .appFont(.subheadline, useLexend: viewModel.useLexendFont)
                 .foregroundStyle(.secondary)
                 .padding(.bottom)
 
@@ -33,6 +33,11 @@ struct SessionDetailView: View {
                         SpeakerRowView(speakerID: speakerID)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("""
+                    \(viewModel.speakerFrom(speakerID: speakerID).name).
+                    \(accessibilityPreview(text: viewModel.speakerFrom(speakerID: speakerID).speakerInfo))
+                    Double tap for full biography.
+                    """)
                 }
 
                 Divider()
@@ -50,5 +55,16 @@ struct SessionDetailView: View {
                 FavouriteButtonView(talk: talk)
             }
         }
+    }
+    
+    private func accessibilityPreview(
+        text: String,
+        maxLength: Int = 120
+    ) -> String {
+        if text.count <= maxLength {
+            return text
+        }
+
+        return String(text.prefix(maxLength)) + "…"
     }
 }

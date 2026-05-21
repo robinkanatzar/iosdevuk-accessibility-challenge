@@ -16,7 +16,7 @@ struct LocationsView: View {
                         Text(location.name)
                             .bold()
                         Text(location.placeDescription)
-                            .font(.subheadline)
+                            .appFont(.subheadline, useLexend: viewModel.useLexendFont)
                             .foregroundStyle(.secondary)
                             .lineLimit(2)
                     }

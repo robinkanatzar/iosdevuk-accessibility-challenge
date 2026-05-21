@@ -21,11 +21,27 @@ struct SpeakersView: View {
                 NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
                     SpeakerRowView(speakerID: speaker.id)
                 }
+                .accessibilityLabel("""
+                \(viewModel.speakerFrom(speakerID: speaker.id).name).
+                \(accessibilityPreview(text: viewModel.speakerFrom(speakerID: speaker.id).speakerInfo))
+                Double tap for full biography.
+                """)
             }
             .searchable(text: $searchText, prompt: "Search speakers")
             .navigationTitle("Speakers")
             .conferenceNavigationDestinations()
         }
+    }
+    
+    private func accessibilityPreview(
+        text: String,
+        maxLength: Int = 120
+    ) -> String {
+        if text.count <= maxLength {
+            return text
+        }
+
+        return String(text.prefix(maxLength)) + "…"
     }
 }
 

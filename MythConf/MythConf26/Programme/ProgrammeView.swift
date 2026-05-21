@@ -24,6 +24,9 @@ struct ProgrammeView: View {
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
                 .padding(.vertical, 8)
+                .sensoryFeedback(trigger: selectedDayIndex) { _, _ in
+                    viewModel.hapticFeedbackEnabled ? .selection : nil
+                }
 
                 if !days.isEmpty {
                     DayScheduleView(sessions: days[selectedDayIndex])

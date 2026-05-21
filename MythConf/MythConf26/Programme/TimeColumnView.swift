@@ -7,6 +7,7 @@ import SwiftUI
 
 /// A fixed-width column showing a session's start and end times.
 struct TimeColumnView: View {
+    @Environment(ViewModel.self) private var viewModel
     let startTime: String
     let endTime: String
 
@@ -19,8 +20,9 @@ struct TimeColumnView: View {
                 .foregroundStyle(.secondary)
                 .monospacedDigit()
         }
-        .font(.caption)
-        .frame(width: 44, alignment: .trailing)
+        .appFont(.caption, useLexend: viewModel.useLexendFont)
+        .frame(minWidth: 44, alignment: .trailing)
+        .fixedSize(horizontal: true, vertical: false)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
     }
