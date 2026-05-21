@@ -10,6 +10,11 @@ struct ParallelTalkCardView: View {
     @Environment(ViewModel.self) private var viewModel
     let talkID: UUID
     let session: Session
+    var parallelHint: String? = nil
+    var rotorNamespace: Namespace.ID? = nil
+
+    private var talk: Talk { viewModel.talkFrom(talkID: talkID) }
+    private var isFavourite: Bool { viewModel.isFavourite(talk: talk) }
 
     var body: some View {
         NavigationLink(value: TalkReference(talkID: talkID, session: session)) {
@@ -19,6 +24,7 @@ struct ParallelTalkCardView: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading) {
+                    SessionTypeBadge(type: session.sessionType)
                     Text(viewModel.talkTitleFrom(talkID: talkID))
                         .bold()
                         .font(.subheadline)
@@ -33,7 +39,8 @@ struct ParallelTalkCardView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        FavouriteButtonView(talk: viewModel.talkFrom(talkID: talkID))
+                        FavouriteButtonView(talk: talk)
+                            .accessibilityHidden(true)
                     }
                 }
                 .padding()
@@ -42,15 +49,47 @@ struct ParallelTalkCardView: View {
             .background(session.sessionType.color.opacity(0.1), in: .rect(cornerRadius: 10))
             .clipShape(.rect(cornerRadius: 10))
         }
-        .accessibilityLabel("\(session.sessionType.displayName): \(viewModel.talkTitleFrom(talkID: talkID)), by \(viewModel.speakersFrom(talkID: talkID)), \(viewModel.locationNameFrom(talkID: talkID))")
-        .accessibilityAction(named: viewModel.isFavourite(talk: viewModel.talkFrom(talkID: talkID)) ? "Remove from favourites" : "Add to favourites") {
-            let talk = viewModel.talkFrom(talkID: talkID)
-            if viewModel.isFavourite(talk: talk) {
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityValue(isFavourite ? "Favourited" : "")
+        .accessibilityHint("Opens session details")
+        .accessibilityAction(named: isFavourite ? "Remove from favourites" : "Add to favourites") {
+            if isFavourite {
                 viewModel.removeFavourite(talk: talk)
+                AccessibilityNotification.Announcement("Removed from favourites").post()
             } else {
                 viewModel.addFavourite(talk: talk)
+                AccessibilityNotification.Announcement("Added to favourites").post()
             }
         }
         .buttonStyle(.plain)
+        .modifier(RotorEntryModifier(id: talkID, namespace: rotorNamespace))
+    }
+
+    private var accessibilityLabel: String {
+        var parts: [String] = ["\(session.timeRangeAccessible)."]
+        if let parallelHint {
+            parts.append("\(parallelHint).")
+        }
+        parts.append("\(session.sessionType.displayName).")
+        parts.append("\(viewModel.talkTitleFrom(talkID: talkID)).")
+        parts.append("By \(viewModel.speakersFrom(talkID: talkID)).")
+        parts.append("\(viewModel.locationNameFrom(talkID: talkID)).")
+        return parts.joined(separator: " ")
+    }
+}
+
+/// Conditionally applies `.accessibilityRotorEntry` so the same card view can be reused
+/// in contexts that don't have a rotor (e.g. My Schedule).
+private struct RotorEntryModifier: ViewModifier {
+    let id: UUID
+    let namespace: Namespace.ID?
+
+    func body(content: Content) -> some View {
+        if let namespace {
+            content.accessibilityRotorEntry(id: id, in: namespace)
+        } else {
+            content
+        }
     }
 }

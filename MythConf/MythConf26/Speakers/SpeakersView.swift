@@ -21,10 +21,17 @@ struct SpeakersView: View {
                 NavigationLink(value: SpeakerNavigationID(value: speaker.id)) {
                     SpeakerRowView(speakerID: speaker.id)
                 }
+                .accessibilityHint("Opens speaker profile")
             }
             .searchable(text: $searchText, prompt: "Search speakers")
             .navigationTitle("Speakers")
             .conferenceNavigationDestinations()
+            .onChange(of: searchText) { _, _ in
+                guard !searchText.isEmpty else { return }
+                let count = filteredSpeakers.count
+                let message = count == 1 ? "1 speaker found" : "\(count) speakers found"
+                AccessibilityNotification.Announcement(message).post()
+            }
         }
     }
 }

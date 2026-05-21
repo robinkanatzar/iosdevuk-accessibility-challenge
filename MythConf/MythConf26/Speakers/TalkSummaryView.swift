@@ -23,5 +23,7 @@ struct TalkSummaryView: View {
             .foregroundStyle(.secondary)
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(viewModel.talkTitleFrom(talkID: talkID)). \(session.timeRangeAccessible). \(viewModel.locationNameFrom(talkID: talkID)).")
     }
 }

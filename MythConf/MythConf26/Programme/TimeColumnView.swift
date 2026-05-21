@@ -5,8 +5,10 @@
 
 import SwiftUI
 
-/// A fixed-width column showing a session's start and end times.
+/// A fixed-width column showing a session's start and end times. Hidden from VoiceOver
+/// because the parent row's combined label already announces the time range.
 struct TimeColumnView: View {
+    @ScaledMetric private var width: CGFloat = 44
     let startTime: String
     let endTime: String
 
@@ -20,8 +22,7 @@ struct TimeColumnView: View {
                 .monospacedDigit()
         }
         .font(.caption)
-        .frame(width: 44, alignment: .trailing)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
+        .frame(width: width, alignment: .trailing)
+        .accessibilityHidden(true)
     }
 }
