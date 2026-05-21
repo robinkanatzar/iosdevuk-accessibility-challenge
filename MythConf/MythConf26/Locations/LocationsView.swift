@@ -20,6 +20,7 @@ struct LocationsView: View {
                             .foregroundStyle(.secondary)
                             .lineLimit(2)
                     }
+                    .accessibilityElement(children: .combine)
                 }
             }
             .navigationTitle("Locations")

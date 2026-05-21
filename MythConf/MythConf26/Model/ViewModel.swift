@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 @Observable
 class ViewModel {
@@ -151,16 +152,42 @@ class ViewModel {
         favouriteIds = favouriteIds.filter{$0 != talk.id}
         saveFavourites()
         loadFavourites()
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        UIAccessibility.post(notification: .announcement, argument: "Removed from favourites")
     }
     
     func addFavourite(talk: Talk) {
         favouriteIds.append(talk.id)
         saveFavourites()
         loadFavourites()
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        if let conflict = conflictingSession(for: talk) {
+            UIAccessibility.post(notification: .announcement, argument: "Added to favourites. Note: this overlaps with \(conflict)")
+        } else {
+            UIAccessibility.post(notification: .announcement, argument: "Added to favourites")
+        }
     }
     
     func isFavourite(talk: Talk) -> Bool {
         return favouriteIds.contains(talk.id)
+    }
+
+    func conflictingSession(for talk: Talk) -> String? {
+        for day in confData.sessions {
+            for session in day where session.contentIDs.contains(talk.id) {
+                for otherDay in confData.sessions {
+                    for otherSession in otherDay where otherSession.id != session.id {
+                        if otherSession.startTime < session.endTime && otherSession.endTime > session.startTime {
+                            for otherTalkID in otherSession.contentIDs where favouriteIds.contains(otherTalkID) {
+                                return talkTitleFrom(talkID: otherTalkID)
+                            }
+                        }
+                    }
+                }
+                return nil
+            }
+        }
+        return nil
     }
  
 }

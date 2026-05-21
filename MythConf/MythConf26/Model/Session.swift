@@ -32,5 +32,41 @@ struct Session: Codable, Identifiable, Hashable {
     }
 
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
+
+    var startTimeAccessibilityText: String {
+        startTime.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute(.twoDigits))
+            .replacingOccurrences(of: ":00", with: "")
+    }
+
+    var endTimeAccessibilityText: String {
+        endTime.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute(.twoDigits))
+            .replacingOccurrences(of: ":00", with: "")
+    }
+
+    var timeRangeAccessibilityText: String {
+        "\(startTimeAccessibilityText) to \(endTimeAccessibilityText)"
+    }
+
+    enum SessionLiveStatus {
+        case upcoming, startingSoon, live, ended
+    }
+
+    var liveStatus: SessionLiveStatus {
+        let now = Date.now
+        if now > endTime { return .ended }
+        if now >= startTime { return .live }
+        if now >= startTime.addingTimeInterval(-900) { return .startingSoon }
+        return .upcoming
+    }
+
+    var liveStatusText: String? {
+        switch liveStatus {
+        case .live: return "Now"
+        case .startingSoon:
+            let mins = Int(startTime.timeIntervalSince(Date.now) / 60) + 1
+            return "In \(mins) min"
+        default: return nil
+        }
+    }
 }
 

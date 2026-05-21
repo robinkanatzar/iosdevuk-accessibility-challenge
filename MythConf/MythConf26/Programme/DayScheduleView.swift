@@ -9,6 +9,10 @@ import SwiftUI
 struct DayScheduleView: View {
     let sessions: [Session]
 
+    private var talkSessions: [Session] {
+        sessions.filter { $0.containsTalk }
+    }
+
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
@@ -19,6 +23,13 @@ struct DayScheduleView: View {
                         BreakRowView(session: session)
                     }
                     Divider()
+                }
+            }
+        }
+        .accessibilityRotor("Sessions") {
+            ForEach(talkSessions) { session in
+                ForEach(session.contentIDs, id: \.self) { talkID in
+                    AccessibilityRotorEntry(talkID.uuidString, id: talkID)
                 }
             }
         }
