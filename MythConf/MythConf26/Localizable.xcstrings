@@ -1,0 +1,392 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ is already favourited and in your schedule. It is on %@. %@ In %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ is already favourited and in your schedule. It is on %2$@. %3$@ In %4$@."
+          }
+        }
+      }
+    },
+    "%@ was not favourited." : {
+
+    },
+    "%@, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
+    "%@, %@ - %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@ - %3$@"
+          }
+        }
+      }
+    },
+    "%@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
+          }
+        }
+      }
+    },
+    "A brief welcome from the organisers to set the scene for the conference." : {
+
+    },
+    "Add ${session} to your schedule" : {
+
+    },
+    "Add an existing MythConf session to your schedule." : {
+
+    },
+    "Add talk to favourites" : {
+
+    },
+    "Add to favourites" : {
+
+    },
+    "Add to Schedule" : {
+
+    },
+    "Adds this session to your favourites" : {
+
+    },
+    "Adds this talk to your favourites" : {
+
+    },
+    "Applies OpenDyslexic font to session titles, descriptions, and biographies." : {
+
+    },
+    "Applies OpenDyslexic to session titles, descriptions, speaker biographies, and location descriptions. Navigation, controls, times, and compact metadata stay in the system font." : {
+
+    },
+    "Both feedback types are on by default. You can turn either off without changing how favourites work." : {
+
+    },
+    "Browse Programme" : {
+
+    },
+    "Choose when the app reminds you about favourited sessions. Turn reminders off to reduce interruptions." : {
+
+    },
+    "Chooses when reminders appear for favourited sessions." : {
+
+    },
+    "Conference day" : {
+
+    },
+    "Conference Session" : {
+
+    },
+    "Done" : {
+
+    },
+    "Favourite" : {
+
+    },
+    "Favourite Feedback" : {
+
+    },
+    "Favourite haptic feedback" : {
+
+    },
+    "Favourite reminder timing" : {
+
+    },
+    "Favourite sound feedback" : {
+
+    },
+    "Favourited" : {
+
+    },
+    "Favourited %@. It is now in your schedule. It is on %@. %@ In %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Favourited %1$@. It is now in your schedule. It is on %2$@. %3$@ In %4$@."
+          }
+        }
+      }
+    },
+    "Favourited Session" : {
+
+    },
+    "Find a Speaker" : {
+
+    },
+    "Get details for ${session}" : {
+
+    },
+    "Get Session Details" : {
+
+    },
+    "Gets directions" : {
+
+    },
+    "Haptic Feedback" : {
+
+    },
+    "Hear a summary of the sessions currently saved in your schedule." : {
+
+    },
+    "Hear the time, speaker, location, and summary for a MythConf session." : {
+
+    },
+    "Location" : {
+
+    },
+    "Location Details" : {
+
+    },
+    "Locations" : {
+
+    },
+    "Map showing %@" : {
+
+    },
+    "My Schedule" : {
+
+    },
+    "MythConf" : {
+
+    },
+    "No Favourites Yet" : {
+
+    },
+    "No Speakers Found" : {
+
+    },
+    "No speakers match %@." : {
+
+    },
+    "Not favourited" : {
+
+    },
+    "Open %@ in Maps" : {
+
+    },
+    "Open in Maps" : {
+
+    },
+    "Open this venue in Maps for directions around campus." : {
+
+    },
+    "OpenDyslexic reading font" : {
+
+    },
+    "OpenDyslexic Reading Font" : {
+
+    },
+    "Opens an external link" : {
+
+    },
+    "Opens app display and accessibility settings." : {
+
+    },
+    "Opens location details" : {
+
+    },
+    "Opens session details" : {
+
+    },
+    "Opens speaker details" : {
+
+    },
+    "Opens speaker profile" : {
+
+    },
+    "Opens the Programme tab so you can find sessions to add to your schedule." : {
+
+    },
+    "Photo of %@" : {
+
+    },
+    "Preview" : {
+
+    },
+    "Programme" : {
+
+    },
+    "Read Schedule" : {
+
+    },
+    "Read your schedule" : {
+
+    },
+    "Read Your Schedule" : {
+
+    },
+    "Reminder Timing" : {
+
+    },
+    "Remove an existing MythConf session from favourites and your schedule." : {
+
+    },
+    "Remove from favourites" : {
+
+    },
+    "Remove from your schedule" : {
+
+    },
+    "Remove talk from favourites" : {
+
+    },
+    "Removed %@ from favourites. It is no longer in your schedule." : {
+
+    },
+    "Removes this session from your favourites" : {
+
+    },
+    "Removes this talk from your favourites" : {
+
+    },
+    "Save Sessions" : {
+
+    },
+    "Save to your schedule" : {
+
+    },
+    "Search by name to jump straight to a speaker profile." : {
+
+    },
+    "Search speakers" : {
+
+    },
+    "Session" : {
+
+    },
+    "Session Details" : {
+
+    },
+    "Session Reminders" : {
+
+    },
+    "Sessions" : {
+
+    },
+    "Sessions by %@" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Sound Feedback" : {
+
+    },
+    "Speaker" : {
+
+    },
+    "Speaker Details" : {
+
+    },
+    "Speakers" : {
+
+    },
+    "Status" : {
+
+    },
+    "Switch Days" : {
+
+    },
+    "Tap the star on any session in the Programme to add it to your schedule." : {
+
+    },
+    "Tap the star to favourite sessions and keep them in your schedule." : {
+
+    },
+    "Time" : {
+
+    },
+    "Time: %@" : {
+
+    },
+    "Turns sound on or off when adding or removing a favourite." : {
+
+    },
+    "Turns vibration on or off when adding or removing a favourite." : {
+
+    },
+    "Unfavorite" : {
+
+    },
+    "Unfavourite ${session}" : {
+
+    },
+    "Unfavourite Session" : {
+
+    },
+    "Use Apple Maps for directions" : {
+
+    },
+    "Use these tabs to browse each conference day." : {
+
+    },
+    "Welcome to MythConf 2027" : {
+
+    },
+    "Which MythConf session do you want details for?" : {
+
+    },
+    "Which MythConf session should I add to your schedule?" : {
+
+    },
+    "Which MythConf session should I unfavourite?" : {
+
+    },
+    "You have %@ in your schedule. %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You have %1$@ in your schedule. %2$@."
+          }
+        }
+      }
+    },
+    "You have %@ in your schedule. %@. There are %@ in the app." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You have %1$@ in your schedule. %2$@. There are %3$@ in the app."
+          }
+        }
+      }
+    },
+    "Your schedule is empty. Favourite sessions from the Programme, or ask me to favourite a session." : {
+
+    }
+  },
+  "version" : "1.2"
+}

@@ -23,81 +23,94 @@ struct MyScheduleView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.favouriteIds.isEmpty {
-                    ScrollView {
-                        VStack(spacing: 24) {
-                            ContentUnavailableView(
-                                "No Favourites Yet",
-                                systemImage: "star",
-                                description: Text("Tap the star on any session in the Programme to add it to your schedule.")
-                            )
-                            .accessibilityIdentifier("mySchedule.empty")
+            if viewModel.favouriteIds.isEmpty {
+                ScrollView {
+                    VStack(spacing: 24) {
+                        ContentUnavailableView(
+                            "No Favourites Yet",
+                            systemImage: "star",
+                            description: Text("Tap the star on any session in the Programme to add it to your schedule.")
+                        )
+                        .accessibilityIdentifier("mySchedule.empty")
 
-                            Button {
-                                selectedTab = 0
-                            } label: {
-                                Label("Browse Programme", systemImage: "calendar")
-                                    .frame(minHeight: 44)
-                                    .accessibilityIdentifier("mySchedule.browseProgramme")
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .accessibilityHint("Opens the Programme tab so you can find sessions to add to your schedule.")
+                        Button {
+                            selectedTab = 0
+                        } label: {
+                            Label("Browse Programme", systemImage: "calendar")
+                                .frame(minHeight: 44)
+                                .accessibilityIdentifier("mySchedule.browseProgramme")
                         }
-                    }.defaultScrollAnchor(.center, for: .alignment)
-                } else {
-                    ScrollView {
-                        LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
-                            ForEach(viewModel.favouritesBySession.indices, id: \.self) { dayIndex in
-                                let daySessions = viewModel.favouritesBySession[dayIndex]
-                                if daySessions.first?.sessionType != .dummy {
-                                    Section {
-                                        ForEach(daySessions) { session in
-                                            ParallelSessionsRowView(
-                                                session: session,
-                                                daySessions: daySessions,
-                                                rotorNamespace: scheduleRotorNamespace
-                                            )
-                                            .padding(.vertical, 4.0)
-                                            .padding(.horizontal, 16.0)
-                                            Divider()
-                                        }
-                                        .padding(.vertical, 8.0)
-                                    } header: {
-                                        Text(dayHeader(for: daySessions))
-                                            .font(.headline)
-                                            .bold()
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.horizontal)
-                                            .padding(.vertical, 8)
-                                            .background(headerBackground)
-                                            .accessibilityAddTraits(.isHeader)
+                        .buttonStyle(.borderedProminent)
+                        .accessibilityHint("Opens the Programme tab so you can find sessions to add to your schedule.")
+                    }
+                }
+                .defaultScrollAnchor(.center, for: .alignment)
+                .accessibilityIdentifier("mySchedule.schedule")
+                .navigationTitle("My Schedule")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        SettingsToolbarButton {
+                            isShowingSettings = true
+                        }
+                        .accessibilityFocused($isSettingsButtonFocused)
+                    }
+                }
+                .sheet(isPresented: $isShowingSettings, onDismiss: restoreSettingsButtonFocus) {
+                    SettingsView()
+                }
+                .conferenceNavigationDestinations()
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
+                        ForEach(viewModel.favouritesBySession.indices, id: \.self) { dayIndex in
+                            let daySessions = viewModel.favouritesBySession[dayIndex]
+                            if daySessions.first?.sessionType != .dummy {
+                                Section {
+                                    ForEach(daySessions) { session in
+                                        ParallelSessionsRowView(
+                                            session: session,
+                                            daySessions: daySessions,
+                                            rotorNamespace: scheduleRotorNamespace
+                                        )
+                                        .padding(.vertical, 4.0)
+                                        .padding(.horizontal, 16.0)
+                                        .accessibilityRemoveTraits(.isHeader)
+                                        Divider().accessibilityHidden(true)
                                     }
+                                    .padding(.vertical, 8.0)
+                                } header: {
+                                    Text(dayHeader(for: daySessions))
+                                        .font(.headline)
+                                        .bold()
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.horizontal)
+                                        .padding(.vertical, 8)
+                                        .background(headerBackground)
+                                        .accessibilityAddTraits(.isHeader)
                                 }
                             }
+                        }.accessibilityElement(children: .contain)
+                    }
+                }
+                .accessibilityIdentifier("mySchedule.schedule")
+                .scheduleAccessibilityRotors(
+                    entries: scheduleRotorEntries,
+                    namespace: scheduleRotorNamespace
+                )
+                .navigationTitle("My Schedule")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        SettingsToolbarButton {
+                            isShowingSettings = true
                         }
+                        .accessibilityFocused($isSettingsButtonFocused)
                     }
-                    .accessibilityIdentifier("mySchedule.schedule")
-                    .accessibilityElement(children: .contain)
-                    .scheduleAccessibilityRotors(
-                        entries: scheduleRotorEntries,
-                        namespace: scheduleRotorNamespace
-                    )
                 }
-            }
-            .navigationTitle("My Schedule")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    SettingsToolbarButton {
-                        isShowingSettings = true
-                    }
-                    .accessibilityFocused($isSettingsButtonFocused)
+                .sheet(isPresented: $isShowingSettings, onDismiss: restoreSettingsButtonFocus) {
+                    SettingsView()
                 }
+                .conferenceNavigationDestinations()
             }
-            .sheet(isPresented: $isShowingSettings, onDismiss: restoreSettingsButtonFocus) {
-                SettingsView()
-            }
-            .conferenceNavigationDestinations()
         }
     }
 

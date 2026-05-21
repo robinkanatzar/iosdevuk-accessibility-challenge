@@ -15,5 +15,26 @@
 			</array>
 		</dict>
 	</array>
+	<key>INAlternativeAppNames</key>
+	<array>
+		<dict>
+			<key>INAlternativeAppName</key>
+			<string>Myth Con</string>
+			<key>INAlternativeAppNamePronunciationHint</key>
+			<string>mith con</string>
+		</dict>
+		<dict>
+			<key>INAlternativeAppName</key>
+			<string>Myth Conference</string>
+			<key>INAlternativeAppNamePronunciationHint</key>
+			<string>mith conference</string>
+		</dict>
+		<dict>
+			<key>INAlternativeAppName</key>
+			<string>iOSDevUK</string>
+			<key>INAlternativeAppNamePronunciationHint</key>
+			<string>i o s dev u k</string>
+		</dict>
+	</array>
 </dict>
 </plist>

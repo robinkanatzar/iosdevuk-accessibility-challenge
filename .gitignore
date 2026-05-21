@@ -36,6 +36,7 @@ google-services.json
 
 # Accessibility Audits
 docs/
+Original/
 
 # Agent and Skill related files
 .agent/
