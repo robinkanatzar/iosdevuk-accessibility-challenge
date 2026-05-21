@@ -4,41 +4,37 @@ This pull request turns the MythConf conference app into a more inclusive, assis
 
 The original challenge app was a compact SwiftUI conference schedule with Programme, Speakers, Locations, My Schedule, and Favourites. This submission keeps that product shape, but adds a full accessibility layer across the real conference tasks: finding a talk, understanding when it starts, saving it, getting reminded, navigating to rooms, and using the app without relying only on touch or sight.
 
-> TODO: Add a short hero GIF here showing the app moving from Programme -> Session Details -> Favourite -> My Schedule.
->
-> Suggested file: `submission-media/hero-programme-to-my-schedule.gif`
-
-![TODO: Hero GIF showing Programme, Session Details, and My Schedule](submission-media/hero-programme-to-my-schedule.gif)
+![Hero GIF showing Programme, Session Details, and My Schedule](submission-media/hero-programme-to-my-schedule.gif)
 
 ## Benefits At A Glance
 
-| User benefit | Original experience | Improved experience |
-| --- | --- | --- |
-| Find and save talks with less effort | Dense cards with confusing nested targets | One clear card target, separate favourite action, and structured metadata |
-| Understand a session quickly | Sparse detail page with weak hierarchy | Time, location, speaker, description, and favourite action are visually and semantically clear |
-| Know whether a favourite action worked | Mostly visual state change | Visual, VoiceOver, haptic, sound, and optional spoken fallback feedback |
-| Stay oriented in the schedule | Users calculated time from raw timestamps | Status badges, countdowns, Now/Next chips, reminders, and spoken-friendly times |
-| Read long content more comfortably | System font only | Optional OpenDyslexic for descriptions and biographies |
-| Use the app without relying on touch or sight | Visual navigation required | VoiceOver, Voice Control, Siri, Magic Tap, rotors, and custom actions |
-| Use personal accessibility display settings | Some states relied on visual styling | Native toggles, Button Shapes support, Reduce Transparency fallbacks, grayscale-safe states, and non-colour cues |
-| Trust accessibility does not regress | Manual inspection only | Static linting, runtime UI audits, semantic UI tests, and deterministic time injection |
+| User benefit                                  | Original experience                       | Improved experience                                                                                              |
+| --------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Find and save talks with less effort          | Dense cards with confusing nested targets | One clear card target, separate favourite action, and structured metadata                                        |
+| Understand a session quickly                  | Sparse detail page with weak hierarchy    | Time, location, speaker, description, and favourite action are visually and semantically clear                   |
+| Know whether a favourite action worked        | Mostly visual state change                | Visual, VoiceOver, haptic, sound, and optional spoken fallback feedback                                          |
+| Stay oriented in the schedule                 | Users calculated time from raw timestamps | Status badges, countdowns, Now/Next chips, reminders, and spoken-friendly times                                  |
+| Read long content more comfortably            | System font only                          | Optional OpenDyslexic for descriptions and biographies                                                           |
+| Use the app without relying on touch or sight | Visual navigation required                | VoiceOver, Voice Control, Siri, Magic Tap, rotors, and custom actions                                            |
+| Use personal accessibility display settings   | Some states relied on visual styling      | Native toggles, Button Shapes support, Reduce Transparency fallbacks, grayscale-safe states, and non-colour cues |
+| Trust accessibility does not regress          | Manual inspection only                    | Static linting, runtime UI audits, semantic UI tests, and deterministic time injection                           |
 
 ## From Original App To Submission
 
 I kept a copy of the original challenge project locally while preparing this PR so I could compare what was supplied with the final app.
 
-| Original Challenge App | This Submission |
-| --- | --- |
-| 29 Swift source files in the app target | 43 Swift source files in the app target |
-| No UI test target | 8 UI test files covering accessibility-sensitive flows |
-| No Settings screen | Settings for OpenDyslexic, haptics, sounds, and reminder timing |
-| No App Intents or Siri shortcuts | Reliable Siri/Shortcuts actions for reading the saved schedule, getting session details, and opening directions, plus searchable session results that open details |
-| No TipKit onboarding | Contextual tips for favourite, day switching, speaker search, and Maps |
-| No local notification system | Configurable local reminders for favourited sessions |
-| No sound assets | Distinct add/remove favourite sounds |
-| Basic schedule cards and detail screens | Redesigned cards/details with assistive technology semantics |
-| No deterministic test clock | `-TestingDate` injection for time-based accessibility states |
-| No automated accessibility gate | Static `a11y-check` linting plus XCTest `performAccessibilityAudit` UI tests |
+| Original Challenge App                  | This Submission                                                                                                                                                    |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 29 Swift source files in the app target | 43 Swift source files in the app target                                                                                                                            |
+| No UI test target                       | 8 UI test files covering accessibility-sensitive flows                                                                                                             |
+| No Settings screen                      | Settings for OpenDyslexic, haptics, sounds, and reminder timing                                                                                                    |
+| No App Intents or Siri shortcuts        | Reliable Siri/Shortcuts actions for reading the saved schedule, getting session details, and opening directions, plus searchable session results that open details |
+| No TipKit onboarding                    | Contextual tips for favourite, day switching, speaker search, and Maps                                                                                             |
+| No local notification system            | Configurable local reminders for favourited sessions                                                                                                               |
+| No sound assets                         | Distinct add/remove favourite sounds                                                                                                                               |
+| Basic schedule cards and detail screens | Redesigned cards/details with assistive technology semantics                                                                                                       |
+| No deterministic test clock             | `-TestingDate` injection for time-based accessibility states                                                                                                       |
+| No automated accessibility gate         | Static `a11y-check` linting plus XCTest `performAccessibilityAudit` UI tests                                                                                       |
 
 This work landed through more than 100 small commits. The intent was to improve the app incrementally, verify each change, and avoid one large risky rewrite.
 
@@ -74,12 +70,13 @@ The Programme and My Schedule screens keep a recognisable conference schedule la
 > TODO: Add before/after screenshots of Programme cards at default text size and large accessibility text size.
 >
 > Suggested files:
+>
 > - `submission-media/programme-before.png`
 > - `submission-media/programme-after.png`
 > - `submission-media/programme-large-text.gif`
 
-| Before | After |
-| --- | --- |
+| Before                                                                           | After                                                                          |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | ![TODO: Before Programme card screenshot](submission-media/programme-before.png) | ![TODO: After Programme card screenshot](submission-media/programme-after.png) |
 
 ### 2. Session Details That Answer The Attendee's Questions
@@ -195,13 +192,14 @@ Siri responses are designed for voice-only use and visual glanceability. `Read S
 > TODO: Add screenshots from Shortcuts showing iOSDevUK actions and Siri result cards.
 >
 > Suggested files:
+>
 > - `submission-media/shortcuts-iosdevuk-actions.png`
 > - `submission-media/siri-read-schedule.png`
 > - `submission-media/siri-session-details.png`
 > - `submission-media/siri-directions.png`
 
-| Shortcuts | Siri |
-| --- | --- |
+| Shortcuts                                                                            | Siri                                                                        |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | ![TODO: Shortcuts iOSDevUK actions](submission-media/shortcuts-iosdevuk-actions.png) | ![TODO: Siri read schedule result](submission-media/siri-read-schedule.png) |
 
 > TODO: Add a Spotlight/system search GIF showing a search for "Observable" or "SwiftData", then tapping the result and landing on Session Details.
@@ -228,11 +226,12 @@ The implementation is intentionally targeted:
 > TODO: Add before/after screenshots of Session Details and Speaker Details with OpenDyslexic off/on.
 >
 > Suggested files:
+>
 > - `submission-media/opendyslexic-off.png`
 > - `submission-media/opendyslexic-on.png`
 
-| System Font | OpenDyslexic Reading Mode |
-| --- | --- |
+| System Font                                                      | OpenDyslexic Reading Mode                                      |
+| ---------------------------------------------------------------- | -------------------------------------------------------------- |
 | ![TODO: OpenDyslexic off](submission-media/opendyslexic-off.png) | ![TODO: OpenDyslexic on](submission-media/opendyslexic-on.png) |
 
 ### 7. Confirmation That Does Not Depend On One Sense
@@ -282,11 +281,12 @@ Accessibility benefits:
 > TODO: Add GIF or screenshots showing the reminder setting and resulting local notification.
 >
 > Suggested files:
+>
 > - `submission-media/reminder-setting.png`
 > - `submission-media/local-notification.png`
 
-| Reminder Setting | Local Notification |
-| --- | --- |
+| Reminder Setting                                                 | Local Notification                                                   |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------- |
 | ![TODO: Reminder setting](submission-media/reminder-setting.png) | ![TODO: Local notification](submission-media/local-notification.png) |
 
 ### 9. More Predictable Room Navigation
@@ -305,6 +305,7 @@ Location detail screens include a visible Open in Maps button.
 > TODO: Add Location Detail screenshot and Maps handoff GIF.
 >
 > Suggested files:
+>
 > - `submission-media/location-detail-maps-button.png`
 > - `submission-media/maps-handoff.gif`
 
@@ -326,6 +327,7 @@ Tips are invalidated after the taught action is used, and hidden during UI tests
 > TODO: Add screenshots of each TipKit tip.
 >
 > Suggested files:
+>
 > - `submission-media/tip-save-sessions.png`
 > - `submission-media/tip-switch-days.png`
 > - `submission-media/tip-find-speaker.png`
@@ -489,6 +491,7 @@ These checks show that the app respects user display preferences rather than rel
 > TODO: Add a comparison grid showing Button Shapes, Reduce Transparency, and grayscale/Differentiate Without Color.
 >
 > Suggested files:
+>
 > - `submission-media/button-shapes-settings.png`
 > - `submission-media/reduce-transparency-programme.png`
 > - `submission-media/grayscale-status-cards.png`
