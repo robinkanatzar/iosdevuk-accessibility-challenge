@@ -26,6 +26,7 @@ struct LocationsView: View {
             }
             .navigationTitle("Locations")
             .conferenceNavigationDestinations()
+            .accessibilityLabel("Six in total")
         }
     }
 }
