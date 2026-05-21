@@ -22,6 +22,7 @@ struct SettingsView: View {
                         .accessibilityHint("Applies OpenDyslexic font to session titles, descriptions, and biographies.")
                 } footer: {
                     Text("Applies OpenDyslexic to session titles, descriptions, speaker biographies, and location descriptions. Navigation, controls, times, and compact metadata stay in the system font.")
+                        .accessibilityHidden(true)
                 }
 
                 Section("Preview") {
@@ -33,10 +34,9 @@ struct SettingsView: View {
                             .dyslexiaReadingFont(.body, size: 17)
                             .foregroundStyle(.secondary)
                     }
-                    .accessibilityElement(children: .combine)
-                    .accessibilityLabel("Font preview: Welcome to MythConf 2027. A brief welcome from the organisers to set the scene for the conference.")
                 }
                 .accessibilityIdentifier("settings.openDyslexicPreview")
+                .accessibilityHidden(true)
 
                 Section {
                     Toggle("Haptic Feedback", isOn: $appSettings.usesFavouriteHaptics)
@@ -52,6 +52,7 @@ struct SettingsView: View {
                     Text("Favourite Feedback")
                 } footer: {
                     Text("Both feedback types are on by default. You can turn either off without changing how favourites work.")
+                        .accessibilityHidden(true)
                 }
                 .accessibilityIdentifier("settings.favouriteFeedbackSection")
 
@@ -69,6 +70,7 @@ struct SettingsView: View {
                     Text("Session Reminders")
                 } footer: {
                     Text("Choose when the app reminds you about favourited sessions. Turn reminders off to reduce interruptions.")
+                        .accessibilityHidden(true)
                 }
                 .accessibilityIdentifier("settings.sessionRemindersSection")
             }

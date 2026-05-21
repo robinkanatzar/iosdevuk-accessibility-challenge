@@ -29,10 +29,7 @@ struct SessionDetailView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
                     .accessibilityIdentifier("sessionDetail.title")
-                    .accessibilityLabel("")
-                    .accessibilityLabel { _ in
-                        Text("Session Title: \(talk.talkTitle)")
-                    }
+                    .accessibilityLabel(Text(talk.talkTitle))
 
                 VStack(alignment: .leading, spacing: 14) {
 
@@ -77,9 +74,7 @@ struct SessionDetailView: View {
                         .foregroundStyle(Color(.label))
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("sessionDetail.about")
-                        .accessibilityLabel { _ in
-                            Text("Session Description: \(talk.talkDescription)")
-                        }
+                        .accessibilityLabel(Text(talk.talkDescription))
                 }
 
                 Divider()
@@ -104,9 +99,7 @@ struct SessionDetailView: View {
                     }
                     .contentShape(.rect)
                     .accessibilityElement(children: .ignore)
-                    .accessibilityLabel { _ in
-                        Text("Location: \(locationName)")
-                    }
+                    .accessibilityLabel(Text(locationName))
                     .accessibilityInputLabels([
                         "Location",
                         locationName,
@@ -136,9 +129,7 @@ struct SessionDetailView: View {
                         }
                         .contentShape(.rect)
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel { _ in
-                            Text("Speaker: \(viewModel.speakerNameFrom(speakerID: speakerID))")
-                        }
+                        .accessibilityLabel(Text(viewModel.speakerNameFrom(speakerID: speakerID)))
                         .accessibilityInputLabels([
                             viewModel.speakerNameFrom(speakerID: speakerID),
                             "Open \(viewModel.speakerNameFrom(speakerID: speakerID))"

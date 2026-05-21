@@ -70,16 +70,13 @@ struct LocationDetailView: View {
             .clipShape(.rect(cornerRadius: 12))
             .padding(.horizontal)
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Map showing the location of \(location.name)")
+            .accessibilityLabel("Map showing \(location.name)")
             
             Text(location.placeDescription)
                 .dyslexiaReadingFont(.body, size: 17)
                 .foregroundStyle(.secondary)
                 .padding()
-                .accessibilityLabel { label in
-                    Text("About the venue:")
-                    label
-                }
+                .accessibilityLabel(Text(location.placeDescription))
             
             
             Spacer()
@@ -94,12 +91,12 @@ struct LocationDetailView: View {
                 }
                 .buttonStyle(.plain)
                 .contentShape(.rect)
-                .accessibilityLabel("Open \(location.name) in Maps for directions")
+                .accessibilityLabel("Open \(location.name) in Maps")
                 .accessibilityInputLabels([
                     "Open in Maps",
                     "Open \(location.name) in Maps"
                 ])
-                .accessibilityHint("Opens Apple Maps App for directions")
+                .accessibilityHint("Gets directions")
                 .accessibilityIdentifier("location.openInMaps")
                 .padding(.horizontal)
                 .padding(.bottom)

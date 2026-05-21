@@ -50,10 +50,7 @@ struct TalkSummaryView: View {
         }
         .padding(.top, 4)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel { label in
-            Text("Session:")
-            label
-        }
+        .accessibilityLabel(Text(viewModel.talkTitleFrom(talkID: talkID)))
         .accessibilityValue("\(session.accessibilityTimeRange(now: viewModel.currentDate)) \(viewModel.locationNameFrom(talkID: talkID))")
     }
 
@@ -78,10 +75,7 @@ struct TalkSummaryView: View {
         }
         .padding(.top, 4)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel { label in
-            Text("Session:")
-            label
-        }
+        .accessibilityLabel(Text(viewModel.talkTitleFrom(talkID: talkID)))
         .accessibilityValue("\(session.accessibilityTimeRange(now: viewModel.currentDate)) \(viewModel.locationNameFrom(talkID: talkID))")
     }
 

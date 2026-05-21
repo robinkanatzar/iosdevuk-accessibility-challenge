@@ -22,10 +22,7 @@ struct SpeakerDetailView: View {
                         Text(speaker.name)
                             .dyslexiaReadingFont(.title2, size: 22, weight: .bold)
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityLabel { label in
-                                Text("Speaker:")
-                                label
-                            }
+                            .accessibilityLabel(Text(speaker.name))
                         if !speaker.social.isEmpty {
                             SocialLinksView(social: speaker.social, speakerName: speaker.name)
                         }
@@ -41,10 +38,7 @@ struct SpeakerDetailView: View {
                 if !speaker.speakerInfo.isEmpty {
                     Text(speaker.speakerInfo)
                         .dyslexiaReadingFont(.body, size: 17)
-                        .accessibilityLabel { label in
-                            Text("Biography:")
-                            label
-                        }
+                        .accessibilityLabel(Text(speaker.speakerInfo))
                     Divider()
                         .padding(.vertical)
                 }
@@ -66,7 +60,7 @@ struct SpeakerDetailView: View {
                             TalkSummaryView(talkID: item.talkID, session: item.session)
                         }
                         .buttonStyle(.plain)
-                        .accessibilityLabel("Session: \(viewModel.talkTitleFrom(talkID: item.talkID))")
+                        .accessibilityLabel(viewModel.talkTitleFrom(talkID: item.talkID))
                         .accessibilityValue("\(item.session.accessibilityTimeRange(now: viewModel.currentDate)) \(viewModel.locationNameFrom(talkID: item.talkID))")
                         .accessibilityHint("Opens session details")
                     }

@@ -430,9 +430,22 @@ Manual verification:
 
 ### Settings VoiceOver Polish
 
-- The OpenDyslexic preview is grouped as one explicit font preview so VoiceOver users do not mistake the sample text for live conference content.
+- The OpenDyslexic preview is hidden from VoiceOver because it is a visual-only font sample. VoiceOver users get the actionable setting through the OpenDyslexic toggle instead.
+- Settings footer explanations are hidden from VoiceOver where the same practical information is already provided by the control label, value, and hint.
 - When VoiceOver is running, toggling OpenDyslexic announces whether the preview changed to OpenDyslexic or back to the system font.
 - Settings toggle hints were updated to describe the result of each action, including OpenDyslexic, favourite haptic feedback, and favourite sound feedback.
+
+### Accessibility Label Cleanup (Updated 2026-05-21)
+
+The app now keeps several custom VoiceOver labels closer to the visible text and avoids category prefixes that made announcements longer than needed.
+
+- Session Detail title and description labels now use the actual session title and description instead of prefixed labels such as `Session Title` or `Session Description`.
+- Session Detail location and speaker rows now use the location or speaker name as the primary label, with navigation context left to the control role and hint.
+- Speaker Detail names, biographies, and session links no longer add `Speaker`, `Biography`, or `Session` prefixes to the primary label.
+- Talk summary rows keep time and location in `accessibilityValue` while using the session title as the primary label.
+- Location Detail venue descriptions now use the visible venue text directly, the map label is shorter, and the Maps action reads `Open [location] in Maps` with a concise `Gets directions` hint.
+
+Manual verification: enable VoiceOver and spot-check Programme session details, Speaker detail session links, Location detail, and Settings. Confirm custom labels are concise, do not announce colon-prefixed categories, and still provide enough context through role, value, hint, or surrounding navigation title.
 
 ### Notification Test Reset
 
@@ -488,7 +501,7 @@ These items need manual review because static tools cannot fully validate real a
 - VoiceOver and Voice Control should make the relationship clear: favouriting a session adds it to the user's schedule, and unfavouriting removes it from the user's schedule.
 - Siri entity disambiguation when the spoken session phrase matches more than one session.
 - TipKit timing, placement, and dismissal behavior with VoiceOver, Voice Control, Switch Control, and large Dynamic Type.
-- OpenDyslexic setting with VoiceOver: confirm the Settings button, toggle, preview, and Done button announce clear labels, states, and hints.
+- OpenDyslexic setting with VoiceOver: confirm the Settings button, toggle, and Done button announce clear labels, states, and hints. Confirm the visual-only font preview is skipped by VoiceOver.
 - OpenDyslexic visual review: enable the setting and inspect Programme, Session Details, Speakers, Locations, and My Schedule at default and accessibility Dynamic Type sizes.
 - Confirm compact metadata such as times, dates, tabs, navigation titles, and status badges remain stable and readable when OpenDyslexic is enabled.
 - Reduce Motion: toggle a favourite with Reduce Motion off and confirm the star replacement transition appears, then enable Reduce Motion and confirm the star changes state without replacement motion.
