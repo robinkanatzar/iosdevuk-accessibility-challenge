@@ -21,6 +21,7 @@ struct SessionDetailView: View {
                 let layout = (horizontalSizeClass == .compact || UIDevice.current.userInterfaceIdiom == .pad) && dynamicTypeSize >= .accessibility3 ? AnyLayout(VStackLayout(alignment: .leading)) : AnyLayout(HStackLayout(alignment: .top))
                 layout {
                     Label(session.timeRange, systemImage: "clock")
+                        .accessibilityLabel(session.voiceOverTimeRange)
                     Spacer()
                     NavigationLink(value: LocationNavigationID(value: talk.locationID)) {
                         Label(viewModel.locationNameFrom(locationID: talk.locationID), systemImage: "mappin")
