@@ -15,15 +15,17 @@ struct ConfData: Codable {
     let sessions: [[Session]]
 
     /// Determines where we are in time relative to the conference schedule.
-    func whereInConf() -> ConfTimeType {
+    /// `now` defaults to the real wall clock but can be supplied so callers
+    /// (e.g. the in-app debug date override) can ask "what state would the
+    /// conference be in at this hypothetical moment?".
+    func whereInConf(now: Date = .now) -> ConfTimeType {
         guard let firstDay = sessions.first,
               let lastDay = sessions.last,
               let confStart = firstDay.first?.startTime,
               let confEnd = lastDay.last?.endTime else {
             return .beforeConf
         }
-        let now = Date.now
-        if now < confStart && !Calendar.current.isDateInToday(confStart) { return .beforeConf }
+        if now < confStart && !Calendar.current.isDate(now, inSameDayAs: confStart) { return .beforeConf }
         if now > confEnd { return .afterConf }
 
         for daySessions in sessions {
@@ -38,9 +40,20 @@ struct ConfData: Codable {
         return .dummy
     }
 
+    /// Returns the session that contains `now` within its `[startTime, endTime]`
+    /// range, regardless of conference day. Used by the Programme banner to
+    /// surface the currently-active session (talk slot or break).
+    func currentSession(now: Date = .now) -> Session? {
+        for daySessions in sessions {
+            for session in daySessions where now >= session.startTime && now <= session.endTime {
+                return session
+            }
+        }
+        return nil
+    }
+
     /// Returns the current session and (if present) the next one for the current day.
-    func nowAndNextSession(whereInDay: ConfTimeType) -> [Session] {
-        let now = Date.now
+    func nowAndNextSession(whereInDay: ConfTimeType, now: Date = .now) -> [Session] {
         for daySessions in sessions {
             guard let dayStart = daySessions.first?.startTime else { continue }
 

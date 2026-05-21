@@ -10,12 +10,21 @@ struct ParallelSessionsRowView: View {
     let session: Session
 
     var body: some View {
-        HStack(alignment: .top) {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+        AStack(hAlignment: .top, vAlignment: .leading, vSpacing: 8) {
+            TimeColumnView(
+                startTime: session.startTimeText,
+                endTime: session.endTimeText,
+                sessionCount: session.contentIDs.count
+            )
 
-            HStack(alignment: .top) {
-                ForEach(session.contentIDs, id: \.self) { talkID in
-                    ParallelTalkCardView(talkID: talkID, session: session)
+            AStack(hAlignment: .top, vAlignment: .leading, vSpacing: 8) {
+                ForEach(Array(session.contentIDs.enumerated()), id: \.element) { index, talkID in
+                    ParallelTalkCardView(
+                        talkID: talkID,
+                        session: session,
+                        positionIndex: index,
+                        positionTotal: session.contentIDs.count
+                    )
                 }
             }
         }

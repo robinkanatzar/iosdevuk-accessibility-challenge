@@ -9,14 +9,19 @@ struct SpeakerDetailView: View {
     @Environment(ViewModel.self) private var viewModel
     let speakerID: String
 
+    @State private var isInlinePhotoVisible = true
+
     private var speaker: Speaker { viewModel.speakerFrom(speakerID: speakerID) }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 // Header
-                HStack(alignment: .top) {
+                AStack(hAlignment: .top, vAlignment: .leading) {
                     SpeakerPhotoView(speaker: speaker, size: 80)
+                        .onScrollVisibilityChange(threshold: 0.1) { visible in
+                            isInlinePhotoVisible = visible
+                        }
 
                     VStack(alignment: .leading) {
                         Text(speaker.name)
@@ -26,8 +31,7 @@ struct SpeakerDetailView: View {
                             SocialLinksView(social: speaker.social)
                         }
                     }
-
-                    Spacer()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
                 Divider()
@@ -45,6 +49,7 @@ struct SpeakerDetailView: View {
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
                         .font(.headline)
+                        .accessibilityAddTraits(.isHeader)
 
                     ForEach(speakerTalks, id: \.talkID) { item in
                         NavigationLink(value: TalkReference(talkID: item.talkID, session: item.session)) {
@@ -56,8 +61,25 @@ struct SpeakerDetailView: View {
             }
             .padding()
         }
-        .navigationTitle(speaker.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if !isInlinePhotoVisible {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 6) {
+                        Image(UIImage(named: speaker.photoName) != nil ? speaker.photoName : "default")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 24, height: 24)
+                            .clipShape(.circle)
+                        Text(speaker.name)
+                            .font(.headline)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(speaker.name)
+                }
+            }
+        }
     }
 
     private func talksWithSessions() -> [(talkID: UUID, session: Session)] {

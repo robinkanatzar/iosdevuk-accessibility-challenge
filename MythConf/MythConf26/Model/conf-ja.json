@@ -1,0 +1,1106 @@
+{
+  "sessions" : [
+    [
+      {
+        "contentIDs" : [
+          "C1001001-C100-4100-8100-100000000001",
+          "C1001002-C100-4100-8100-100000000002"
+        ],
+        "startTime" : 810133200,
+        "id" : "B1001001-B100-4100-8100-100000000001",
+        "endTime" : 810140400,
+        "sessionCount" : 2,
+        "sessionType" : {
+          "workshop" : {}
+        }
+      },
+      {
+        "contentIDs" : [
+          "C1001003-C100-4100-8100-100000000003"
+        ],
+        "startTime" : 810140400,
+        "id" : "B1001002-B100-4100-8100-100000000002",
+        "endTime" : 810158400,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "social" : {}
+        }
+      }
+    ],
+    [
+      {
+        "contentIDs" : [
+          "C1001004-C100-4100-8100-100000000004"
+        ],
+        "startTime" : 810194400,
+        "id" : "B1001003-B100-4100-8100-100000000003",
+        "endTime" : 810196200,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "registration" : {}
+        }
+      },
+      {
+        "contentIDs" : [
+          "C1001005-C100-4100-8100-100000000005"
+        ],
+        "startTime" : 810196200,
+        "id" : "B1001004-B100-4100-8100-100000000004",
+        "endTime" : 810196800,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "talk" : {}
+        }
+      },
+      {
+        "contentIDs" : [
+          "C1001006-C100-4100-8100-100000000006"
+        ],
+        "startTime" : 810196800,
+        "id" : "B1001005-B100-4100-8100-100000000005",
+        "endTime" : 810199200,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "talk" : {}
+        }
+      },
+      {
+        "contentIDs" : [
+          "C1001007-C100-4100-8100-100000000007"
+        ],
+        "startTime" : 810199200,
+        "id" : "B1001006-B100-4100-8100-100000000006",
+        "endTime" : 810201600,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "talk" : {}
+        }
+      },
+      {
+        "contentIDs" : [
+          "C1001008-C100-4100-8100-100000000008"
+        ],
+        "startTime" : 810201600,
+        "id" : "B1001007-B100-4100-8100-100000000007",
+        "endTime" : 810203400,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "teaBreak" : {}
+        }
+      },
+      {
+        "contentIDs" : [
+          "C1001009-C100-4100-8100-100000000009"
+        ],
+        "startTime" : 810203400,
+        "id" : "B1001008-B100-4100-8100-100000000008",
+        "endTime" : 810205800,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "talk" : {}
+        }
+      },
+      {
+        "contentIDs" : [
+          "C1001010-C100-4100-8100-100000000010"
+        ],
+        "startTime" : 810205800,
+        "id" : "B1001009-B100-4100-8100-100000000009",
+        "endTime" : 810208200,
+        "sessionCount" : 1,
+        "sessionType" : {
+          "talk" : {}
+        }
+      },
+      {
+        "sessionType" : {
+          "lunch" : {}
+        },
+        "id" : "B1001010-B100-4100-8100-100000000010",
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001011-C100-4100-8100-100000000011"
+        ],
+        "startTime" : 810208200,
+        "endTime" : 810212400
+      },
+      {
+        "sessionType" : {
+          "talk" : {}
+        },
+        "id" : "B1001011-B100-4100-8100-100000000011",
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001012-C100-4100-8100-100000000012",
+          "C1001013-C100-4100-8100-100000000013"
+        ],
+        "startTime" : 810212400,
+        "endTime" : 810214800
+      },
+      {
+        "sessionType" : {
+          "talk" : {}
+        },
+        "id" : "B1001012-B100-4100-8100-100000000012",
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001014-C100-4100-8100-100000000014",
+          "C1001015-C100-4100-8100-100000000015"
+        ],
+        "startTime" : 810214800,
+        "endTime" : 810217200
+      },
+      {
+        "sessionType" : {
+          "talk" : {}
+        },
+        "id" : "B1001013-B100-4100-8100-100000000013",
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001016-C100-4100-8100-100000000016",
+          "C1001017-C100-4100-8100-100000000017"
+        ],
+        "startTime" : 810217200,
+        "endTime" : 810219600
+      },
+      {
+        "sessionType" : {
+          "teaBreak" : {}
+        },
+        "id" : "B1001014-B100-4100-8100-100000000014",
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001018-C100-4100-8100-100000000018"
+        ],
+        "startTime" : 810219600,
+        "endTime" : 810221400
+      },
+      {
+        "sessionType" : {
+          "talk" : {}
+        },
+        "id" : "B1001015-B100-4100-8100-100000000015",
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001019-C100-4100-8100-100000000019"
+        ],
+        "startTime" : 810221400,
+        "endTime" : 810223800
+      },
+      {
+        "sessionType" : {
+          "talk" : {}
+        },
+        "id" : "B1001016-B100-4100-8100-100000000016",
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001020-C100-4100-8100-100000000020"
+        ],
+        "startTime" : 810223800,
+        "endTime" : 810226200
+      },
+      {
+        "sessionType" : {
+          "confdinner" : {}
+        },
+        "id" : "B1001017-B100-4100-8100-100000000017",
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001021-C100-4100-8100-100000000021"
+        ],
+        "startTime" : 810229500,
+        "endTime" : 810241200
+      }
+    ],
+    [
+      {
+        "sessionCount" : 1,
+        "endTime" : 810285600,
+        "startTime" : 810282600,
+        "id" : "B1001018-B100-4100-8100-100000000018",
+        "sessionType" : {
+          "lightningtalks" : {}
+        },
+        "contentIDs" : [
+          "C1001022-C100-4100-8100-100000000022"
+        ]
+      },
+      {
+        "sessionCount" : 1,
+        "endTime" : 810288000,
+        "startTime" : 810285600,
+        "id" : "B1001019-B100-4100-8100-100000000019",
+        "sessionType" : {
+          "panel" : {}
+        },
+        "contentIDs" : [
+          "C1001023-C100-4100-8100-100000000023"
+        ]
+      },
+      {
+        "sessionCount" : 1,
+        "endTime" : 810289800,
+        "startTime" : 810288000,
+        "id" : "B1001020-B100-4100-8100-100000000020",
+        "sessionType" : {
+          "teaBreak" : {}
+        },
+        "contentIDs" : [
+          "C1001024-C100-4100-8100-100000000024"
+        ]
+      },
+      {
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001025-C100-4100-8100-100000000025",
+          "C1001026-C100-4100-8100-100000000026"
+        ],
+        "endTime" : 810292200,
+        "id" : "B1001021-B100-4100-8100-100000000021",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810289800
+      },
+      {
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001027-C100-4100-8100-100000000027",
+          "C1001028-C100-4100-8100-100000000028"
+        ],
+        "endTime" : 810294600,
+        "id" : "B1001022-B100-4100-8100-100000000022",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810292200
+      },
+      {
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001029-C100-4100-8100-100000000029"
+        ],
+        "endTime" : 810298800,
+        "id" : "B1001023-B100-4100-8100-100000000023",
+        "sessionType" : {
+          "lunch" : {}
+        },
+        "startTime" : 810294600
+      },
+      {
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001030-C100-4100-8100-100000000030",
+          "C1001031-C100-4100-8100-100000000031"
+        ],
+        "endTime" : 810301200,
+        "id" : "B1001024-B100-4100-8100-100000000024",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810298800
+      },
+      {
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001032-C100-4100-8100-100000000032",
+          "C1001033-C100-4100-8100-100000000033"
+        ],
+        "endTime" : 810303600,
+        "id" : "B1001025-B100-4100-8100-100000000025",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810301200
+      },
+      {
+        "sessionCount" : 2,
+        "contentIDs" : [
+          "C1001034-C100-4100-8100-100000000034",
+          "C1001035-C100-4100-8100-100000000035"
+        ],
+        "endTime" : 810306000,
+        "id" : "B1001026-B100-4100-8100-100000000026",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810303600
+      },
+      {
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001036-C100-4100-8100-100000000036"
+        ],
+        "endTime" : 810308400,
+        "id" : "B1001027-B100-4100-8100-100000000027",
+        "sessionType" : {
+          "teaBreak" : {}
+        },
+        "startTime" : 810306000
+      },
+      {
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001037-C100-4100-8100-100000000037"
+        ],
+        "endTime" : 810310800,
+        "id" : "B1001028-B100-4100-8100-100000000028",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810308400
+      },
+      {
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001038-C100-4100-8100-100000000038"
+        ],
+        "endTime" : 810313200,
+        "id" : "B1001029-B100-4100-8100-100000000029",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810310800
+      }
+    ],
+    [
+      {
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001039-C100-4100-8100-100000000039"
+        ],
+        "endTime" : 810370800,
+        "id" : "B1001030-B100-4100-8100-100000000030",
+        "sessionType" : {
+          "lightningtalks" : {}
+        },
+        "startTime" : 810369000
+      },
+      {
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001040-C100-4100-8100-100000000040"
+        ],
+        "endTime" : 810373200,
+        "id" : "B1001031-B100-4100-8100-100000000031",
+        "sessionType" : {
+          "talk" : {}
+        },
+        "startTime" : 810370800
+      },
+      {
+        "sessionCount" : 1,
+        "contentIDs" : [
+          "C1001041-C100-4100-8100-100000000041"
+        ],
+        "endTime" : 810375000,
+        "id" : "B1001032-B100-4100-8100-100000000032",
+        "sessionType" : {
+          "teaBreak" : {}
+        },
+        "startTime" : 810373200
+      },
+      {
+        "endTime" : 810377400,
+        "startTime" : 810375000,
+        "contentIDs" : [
+          "C1001042-C100-4100-8100-100000000042"
+        ],
+        "sessionType" : {
+          "talk" : {}
+        },
+        "id" : "B1001033-B100-4100-8100-100000000033",
+        "sessionCount" : 1
+      },
+      {
+        "endTime" : 810379800,
+        "startTime" : 810377400,
+        "contentIDs" : [
+          "C1001043-C100-4100-8100-100000000043"
+        ],
+        "sessionType" : {
+          "talk" : {}
+        },
+        "id" : "B1001034-B100-4100-8100-100000000034",
+        "sessionCount" : 1
+      },
+      {
+        "endTime" : 810381600,
+        "startTime" : 810379800,
+        "contentIDs" : [
+          "C1001044-C100-4100-8100-100000000044"
+        ],
+        "sessionType" : {
+          "teaBreak" : {}
+        },
+        "id" : "B1001035-B100-4100-8100-100000000035",
+        "sessionCount" : 1
+      },
+      {
+        "endTime" : 810388800,
+        "startTime" : 810381600,
+        "contentIDs" : [
+          "C1001045-C100-4100-8100-100000000045",
+          "C1001046-C100-4100-8100-100000000046"
+        ],
+        "sessionType" : {
+          "workshop" : {}
+        },
+        "id" : "B1001036-B100-4100-8100-100000000036",
+        "sessionCount" : 2
+      }
+    ]
+  ],
+  "speakers" : [
+    {
+      "social" : [
+        {
+          "socialLink" : "https://sarahthornton.dev\nhttps://github.com/sarahthornton\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Sarah Thornton",
+      "talkIDs" : [
+        "C1001001-C100-4100-8100-100000000001",
+        "C1001006-C100-4100-8100-100000000006",
+        "C1001031-C100-4100-8100-100000000031"
+      ],
+      "id" : "SarahThornton",
+      "speakerInfo" : "Sarah はエディンバラのフィンテック系スタートアップに勤めるシニア iOS エンジニアで、SwiftUI のリリース当初から SwiftUI アプリを作り続けています。宣言的 UI、`@Observable` マクロ、そして SwiftUI が時として予想外の判断で View を再描画する仕組みに情熱を注いでいます。フィンテックに移る前は 4 年間にわたって toC 向けアプリを開発しており、その経験から「実ユーザーの目の前で状態管理がコケた時に起こること」をよく知っています。\n\n仕事の外ではスコティッシュハイランドで山歩きをし、パブのクイズナイトで負け続け、本人が「絶対にデザインシステムとは呼ばない」と主張する SwiftUI コンポーネントのオープンソースライブラリをメンテナンスしています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://marcuschen.codes\nhttps://github.com/marcuschendev\nhttps://mastodon.social/@marcuschen\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Marcus Chen",
+      "talkIDs" : [
+        "C1001002-C100-4100-8100-100000000002",
+        "C1001007-C100-4100-8100-100000000007",
+        "C1001025-C100-4100-8100-100000000025",
+        "C1001040-C100-4100-8100-100000000040"
+      ],
+      "id" : "MarcusChen",
+      "speakerInfo" : "Marcus はロンドンの動画配信会社に勤めるプリンシパルエンジニアで、モバイルインフラチームを率いています。actor、task group、そして時として main actor が言うことを聞かなくなる理由について、業務時間の割に多くを考えている人物です。DispatchQueue 時代から並行処理に取り憑かれており、Swift Concurrency への移行はここ数年で Apple プラットフォームに起きた最大の改善の 1 つだと考えています。\n\n常連の Swift Forums コントリビューターで、ロンドンの月例 Swift ミートアップを共同主催。フォーラムの投稿が必要以上に長いことで知られています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://priyakapoor.io\nhttps://github.com/priyakapoor\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Priya Kapoor",
+      "talkIDs" : [
+        "C1001009-C100-4100-8100-100000000009",
+        "C1001026-C100-4100-8100-100000000026",
+        "C1001045-C100-4100-8100-100000000045"
+      ],
+      "id" : "PriyaKapoor",
+      "speakerInfo" : "Priya はブリストル拠点のソフトウェアエンジニアです。テスト専任エンジニアとしてキャリアをスタートしたものの、「テスト品質を上げるには自分でプロダクションコードを書くのが一番」と気付いて職種を変えました。その方針はいくつかの会社で良い結果を生んでいますが、本人がパラメータ化テストをわざわざ必要ないところまで足してくることに、同僚は今でもたまに気付きます。\n\nテスト文化の熱心な提唱者であり、Swift Testing フレームワークに関する Swift Forums のディスカッションにも貢献。自動テストを「形だけのチェック作業」ではなく「本当に役立つもの」にするためのトークを、複数の開発者カンファレンスで行っています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://jamesobrien.app\nhttps://twitter.com/jamesobriendev\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "James O'Brien",
+      "talkIDs" : [
+        "C1001010-C100-4100-8100-100000000010",
+        "C1001028-C100-4100-8100-100000000028",
+        "C1001037-C100-4100-8100-100000000037"
+      ],
+      "id" : "JamesOBrien",
+      "speakerInfo" : "James はアイルランド・コーク出身の個人開発者です。3 年前に銀行の安定した職を辞し、フルタイムでアプリ開発に転向しました。生産性アプリ Momentum は Apple のフィーチャー枠に 3 回掲載され、現在では家族 1 軒分の生活費を十分まかなえるサブスクリプション収益を生み出しています。それでも本人と家族は「これが本当に職業として成り立っていること」に未だ驚いています。\n\n優れたアプリは有料広告なしでも観客を見つけられると固く信じており、ほかの個人開発者が App Store / App Review、そして「完全に独りで働くことの心理的な特殊性」を乗り越えるのを手助けすることを楽しみにしています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://elenavazquez.dev\nhttps://github.com/elenavazquez\nhttps://bsky.app/profile/elenavazquez.dev\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Elena Vasquez",
+      "talkIDs" : [
+        "C1001012-C100-4100-8100-100000000012",
+        "C1001030-C100-4100-8100-100000000030"
+      ],
+      "id" : "ElenaVasquez",
+      "speakerInfo" : "Elena は 8 年にわたって企業のアプリを「あらゆる人が使える」状態にするのを支援してきた iOS アクセシビリティスペシャリストです。本人も全盲であり、iPhone 3GS の頃から VoiceOver を頼りに iPhone を使い続けてきた経験は、ドキュメントを読んだだけでは決して得られない視点を彼女に与えています。\n\n大手銀行、旅行会社、医療系プロバイダで働き、いつも「アクセシビリティは後付けではなく最初から設計に組み込むもの」という立場で社内を説得してきました。インクルーシブデザインに関する人気ニュースレターを執筆しており、オープンソースの iOS プロジェクトにも継続的に貢献しています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://tomnakamura.engineer\nhttps://github.com/tomnakamura\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Tom Nakamura",
+      "talkIDs" : [
+        "C1001014-C100-4100-8100-100000000014",
+        "C1001027-C100-4100-8100-100000000027"
+      ],
+      "id" : "TomNakamura",
+      "speakerInfo" : "Tom はアムステルダムのソーシャルメディア企業に勤めるパフォーマンスエンジニアで、仕事は「アプリを速くすること」のみ。Instruments には博識で、ハングとヒッチを体感だけで見分けられ、ディナーパーティで家族には説明しづらいレベルの熱量でフレームグラフに興奮します。\n\niPhone 4 時代から iOS 開発を続けており、「パフォーマンスは端末の世代に関係なくユーザーが享受すべき機能の 1 つだ」と信じています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://rachelhoffman.swift\nhttps://github.com/rachelhoffman\nhttps://mas.to/@rachelhoffman\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Rachel Hoffman",
+      "talkIDs" : [
+        "C1001013-C100-4100-8100-100000000013",
+        "C1001032-C100-4100-8100-100000000032",
+        "C1001043-C100-4100-8100-100000000043"
+      ],
+      "id" : "RachelHoffman",
+      "speakerInfo" : "Rachel は Ruby on Rails の世界から Swift に移り、一度も振り返らないまま今に至っています。サーバーサイド Swift を専門とする小規模なコンサルティング会社を運営し、iOS チームがアプリと同じ言語でバックエンドを出せるよう支援しています。Vapor フレームワークのコントリビューターであり、Swift Server Working Group のメンバー、ロンドンの Swift on Server コミュニティミートアップの共同主催者でもあります。\n\n型安全な DSL、構造の整った REST API、そして「もう専任のバックエンドチームは要りませんね」とクライアントが気付く瞬間に、説明しがたい愛着を持っています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://davidkowalski.dev\nhttps://github.com/dkowalskidev\nhttps://www.linkedin.com/in/davidkowalski-ios\nhttps://x.com/davidkowalskidev\nhttps://mastodon.social/@davidkowalski\nhttps://bsky.app/profile/davidkowalski.dev\nhttps://www.youtube.com/@davidkowalski\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "David Kowalski",
+      "talkIDs" : [
+        "C1001015-C100-4100-8100-100000000015",
+        "C1001033-C100-4100-8100-100000000033"
+      ],
+      "id" : "DavidKowalski",
+      "speakerInfo" : "David はワルシャワのヘルスケア系スタートアップに勤める iOS エンジニアで、厳格な規制要件のもと機微な患者データを扱うアプリを開発しています。その経験から、永続化・暗号化・スキーママイグレーション、そして「予想もしないタイミングでデータが消失する創造的な方法の数々」について、深い(そして時に望まずに身に付いた)専門性を持っています。\n\n9 年間にわたってプロとして iOS アプリを作り続け、最近は SwiftData に没頭しています。前任の Core Data スタックと格闘していた時間を本人は「不当に長すぎる」と表現します。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://zaraahmed.design\nhttps://github.com/zaraahmed\nhttps://www.linkedin.com/in/zaraahmed-ios\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Zara Ahmed",
+      "talkIDs" : [
+        "C1001016-C100-4100-8100-100000000016",
+        "C1001034-C100-4100-8100-100000000034"
+      ],
+      "id" : "ZaraAhmed",
+      "speakerInfo" : "Zara はバーミンガムの大手 EC 企業に勤める iOS 開発者で、元 UI デザイナーでもあります。そのバックグラウンドから常にエンジニアリングとデザインの中間領域に立ち、4 年かけて自社の iOS / iPadOS / macOS アプリ群を支えるデザインシステムを構築してきました。\n\nセマンティックカラー、Dynamic Type、そして「16 進カラーコードを書いた共有スプレッドシートに頼らずに、デザイナーとエンジニアの足並みを揃える」ための地道な仕事を、深く大切にしています。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://oliverfraser.dev\nhttps://github.com/oliverfraser\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Oliver Fraser",
+      "talkIDs" : [
+        "C1001017-C100-4100-8100-100000000017",
+        "C1001042-C100-4100-8100-100000000042",
+        "C1001046-C100-4100-8100-100000000046"
+      ],
+      "id" : "OliverFraser",
+      "speakerInfo" : "Oliver はマンチェスターのソフトウェアコンサルティング会社に勤めるシニアエンジニアで、本人いわく「公表したくないほど長い時間」をクラッシュログ、メモリグラフ、LLDB の出力を見つめることに費やしてきました。長年かけてデバッグ手法、カスタム LLDB コマンド、診断戦略を蓄積し、これまでに数百時間を節約してきています。\n\nまた「最高のデバッグセッションは、そもそも発生せずに済んだセッションだ」という考えの強い支持者でもあり、それゆえドキュメントを書き、`assert` を惜しまず置き、本セッションのようなタイトルでトークを行います。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://lucypemberton.co.uk\nhttps://github.com/lucypemberton\nhttps://www.linkedin.com/in/lucypemberton-spatial\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Lucy Pemberton",
+      "talkIDs" : [
+        "C1001019-C100-4100-8100-100000000019",
+        "C1001038-C100-4100-8100-100000000038"
+      ],
+      "id" : "LucyPemberton",
+      "speakerInfo" : "Lucy はブライトンのクリエイティブスタジオに勤める空間コンピューティング開発者で、文化施設・エンタメブランド・「フロアマップより面白いことをやりたい」博物館などに向けて visionOS と RealityKit の体験を制作しています。\n\nイギリスで最も早く開発用 Vision Pro を入手した iOS 開発者の 1 人で、それ以来「本当に役立つ空間体験とは何か」を探求し続けています。特に関心があるのは、現実世界とデジタル世界の境界、そして開発者ではない一般のオーディエンスに没入型テクノロジーを親しんでもらうことです。"
+    },
+    {
+      "social" : [
+        {
+          "socialLink" : "https://samwalsh.security\nhttps://github.com/samwalshmobile\nhttps://www.linkedin.com/in/sam-walsh-appsec\n",
+          "socialType" : "www"
+        }
+      ],
+      "name" : "Sam Walsh",
+      "talkIDs" : [
+        "C1001020-C100-4100-8100-100000000020",
+        "C1001035-C100-4100-8100-100000000035"
+      ],
+      "id" : "SamWalsh",
+      "speakerInfo" : "Sam はモバイルプラットフォームを専門とするアプリケーションセキュリティエンジニアです。5 年間 iOS 開発者として働いた後にセキュリティに転向し、現在は各社のアプリが直面する現実的な脅威と、それに対する具体的な対策を整理する仕事を行っています。\n\n複数のセキュリティ認定を保有し、OWASP Mobile Security Testing Guide にも貢献。実用的なモバイルセキュリティに関するニュースレターを運営しています。時には登壇中にライブで攻撃のデモを行うこともあり、これは「CVSS スコアのスライドでは届かないレベルで開発者の関心を引き寄せる」効果があります。"
+    },
+    {
+      "social" : [
+        {
+          "socialType" : "www",
+          "socialLink" : ""
+        }
+      ],
+      "name" : "Alex Morgan",
+      "talkIDs" : [
+        "C1001005-C100-4100-8100-100000000005"
+      ],
+      "id" : "AlexMorgan",
+      "speakerInfo" : "Alex は、架空の Northbridge 大学で開催される iOS / Swift 開発者向けカンファレンス「MythConf」のオーガナイザーの 1 人です。Swift の最初のリリース当初から Swift を書き続けてきました。「近場に参加できるカンファレンスがなかったから」という理由でコミュニティイベントの主催を始め、数年経った今、MythConf はこの地域で最も評価の高い Swift 開発者の集まりの 1 つとなっています。"
+    },
+    {
+      "speakerInfo" : "あなた。それぞれの経験、サイドプロジェクト、苦労して得た武勇伝を持ったあなたです。ライトニングトークのセッションは、最近驚いた発見、「もっと早く誰かに教えてほしかった」と思うこと、そして「不当なほど誇りに思っているのに普段は語らないもの」を共有する機会です。持ち時間は 5 分。フルに使ってください。",
+      "talkIDs" : [
+        "C1001022-C100-4100-8100-100000000022"
+      ],
+      "name" : "You",
+      "social" : [
+        {
+          "socialType" : "www",
+          "socialLink" : ""
+        }
+      ],
+      "id" : "You"
+    }
+  ],
+  "locations" : [
+    {
+      "latitude" : 52.95012,
+      "id" : "tyndallLecture",
+      "name" : "Tyndall Lecture Theatre",
+      "longitude" : -1.18234,
+      "placeDescription" : "MythConf のメイン会場です。基調講演、シングルトラックのセッション、最終日のセッションで使用されます。Tyndall ビル 1 階、Science Walk 側の正面入口からお入りください。"
+    },
+    {
+      "latitude" : 52.94988,
+      "id" : "faradayRoom",
+      "name" : "Faraday Seminar Room",
+      "longitude" : -1.18198,
+      "placeDescription" : "並行セッションが行われる午後の第 2 会場です。Tyndall ビルの 2 階、F201 号室にあります。1 階ロビーの案内表示に従ってお進みください。"
+    },
+    {
+      "latitude" : 52.95134,
+      "id" : "maxwellHall",
+      "name" : "Maxwell Hall of Residence",
+      "longitude" : -1.18512,
+      "placeDescription" : "カンファレンス用の宿泊施設です。正面玄関は Kelvin Avenue に面しています。チェックイン受付は日曜の 14:00 から開いています。"
+    },
+    {
+      "latitude" : 52.94801,
+      "id" : "cogwheel",
+      "name" : "The Cogwheel",
+      "longitude" : -1.18741,
+      "placeDescription" : "キャンパスから徒歩圏内にあるパブで、エンジニアや研究者に人気です。21:00 まで食事の提供があり、地元のエールも豊富に揃います。日曜夜のソーシャルイベントの会場です。"
+    },
+    {
+      "latitude" : 52.95067,
+      "id" : "victuallingRoom",
+      "name" : "Victualling Room",
+      "longitude" : -1.18345,
+      "placeDescription" : "カンファレンスの食事会場です。Northbridge 大学ユニオン棟の地下にあります。月曜夜のカンファレンスディナーはこちらで開催されます。"
+    },
+    {
+      "latitude" : 52.95012,
+      "id" : "tyndallFoyer",
+      "name" : "Tyndall Building Foyer",
+      "longitude" : -1.18234,
+      "placeDescription" : "休憩時間のドリンクとスナックを提供する場所です。Tyndall ビルの正面入口に隣接しています。会期中は終日、紅茶・コーヒー・軽食をご利用いただけます。"
+    }
+  ],
+  "talks" : [
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "プレカンファレンスワークショップ: 実践 SwiftUI アーキテクチャ",
+      "talkDescription" : "長期にわたって保守できる SwiftUI アプリの構成を、ハンズオン形式で 2 時間かけて探求するワークショップです。`@Observable` マクロを深掘りし、複雑な View 階層をまたいで状態を共有するパターンを確認したうえで、「あえて壊して学びを得る」一連のエクササイズを進めます。Xcode をインストール済みの Mac をご持参ください。SwiftUI の事前経験を前提とします。",
+      "speakerIDs" : [
+        "SarahThornton"
+      ],
+      "id" : "C1001001-C100-4100-8100-100000000001"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "プレカンファレンスワークショップ: Swift Concurrency をゼロから",
+      "talkDescription" : "`async/await` の基礎から、構造化された並行処理 (Structured Concurrency)、task group、actor までを順に習得するワークショップです。一緒に現実的なデータ取得レイヤーを実装し、よくある落とし穴に遭遇しつつ、DispatchQueue に頼らずに並行処理コードを論理的に組み立てる考え方を身につけます。「Swift Concurrency について読んだことはあるが、まだ本番投入はしていない」という開発者向けです。",
+      "speakerIDs" : [
+        "MarcusChen"
+      ],
+      "id" : "C1001002-C100-4100-8100-100000000002"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "The Cogwheel でのインフォーマル・ウェルカム・ソーシャル",
+      "id" : "C1001003-C100-4100-8100-100000000003",
+      "locationID" : "cogwheel"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "受付・参加バッジ受取",
+      "id" : "C1001004-C100-4100-8100-100000000004",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "MythConf 2026 へようこそ",
+      "talkDescription" : "オーガナイザーからのオープニング挨拶です。カンファレンス全体の流れを共有し、会場をご案内し、本イベントを支えてくださったスポンサーの皆さまへの感謝をお伝えします。",
+      "speakerIDs" : [
+        "AlexMorgan"
+      ],
+      "id" : "C1001005-C100-4100-8100-100000000005"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "@Observable 革命: SwiftUI における状態管理の再考",
+      "talkDescription" : "`@Observable` マクロは SwiftUI の状態管理を根本的に変えました。それにもかかわらず、多くの開発者は習慣で旧来の書き方を続けていたり、内部で何が変わったのかを十分理解しないまま導入してしまっていたりします。\n\n本セッションでは `@Observable` の仕組み、それが何を置き換えるのか、そしてこの変更がなぜ重要なのかを深く掘り下げます。観測トラッキングがオブジェクト単位ではなくプロパティ単位にスコープされる点、それが View 無効化に与える影響、そしてこれを最大限活かすためのモデル構成のしかたを取り上げます。\n\nさらに `ObservableObject` からの移行手順や、`@Observable` 導入から数か月の間に多くの開発者が踏むミス (特に「動作はするが微妙に間違っており、デバッグが極めて難しい」種類のミス) も整理します。",
+      "speakerIDs" : [
+        "SarahThornton"
+      ],
+      "id" : "C1001006-C100-4100-8100-100000000006"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "タスクツリーを飼いならす: 実アプリにおける Structured Concurrency",
+      "talkDescription" : "Swift Concurrency は非同期処理を管理するための、より優れたモデルとして Structured Concurrency を導入しました。しかし「理論を理解していること」と「本番アプリで正しく適用できること」の間には、ドキュメントが示唆する以上の隔たりがあります。\n\n本セッションでは Structured Concurrency を第一原理から組み立て直します。task tree とは何か、キャンセルがどのように伝播するか、子タスクのライフタイムがなぜ正しさにこれほど影響するのか — task group、`async let`、actor を、(作り物のデモではなく) 実アプリのコードに基づく具体例で取り上げます。\n\n終了時には、Swift の並行処理に対する信頼できるメンタルモデルと、すぐ適用できるパターン群、そして経験豊富な開発者でも踏むいくつかの典型的なミスを明確に理解できるはずです。",
+      "speakerIDs" : [
+        "MarcusChen"
+      ],
+      "id" : "C1001007-C100-4100-8100-100000000007"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "コーヒーブレイク",
+      "id" : "C1001008-C100-4100-8100-100000000008",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "Swift Testing 入門の先へ: パラメータ化テスト・タグ・カスタムマッチャ",
+      "talkDescription" : "Swift Testing は大きな期待とともに登場し、その期待は妥当なものでした。しかし多くの開発者はその機能のごく一部しか使っていません。`#expect` と `@Test` の基本を超えた先には、本当に強力なフレームワークが待っています。本セッションはその案内役です。\n\nパラメータ化テストを深掘りし、テストをタグで整理して選択的に実行する方法を確認し、失敗メッセージを実用的にするカスタムマッチャの書き方を探ります。Swift Testing と async コード / actor との統合、および「時間経過を伴う挙動」を検証するテストの扱い方も取り上げます。\n\n参加者は、すぐに適用できる実践的パターンと、このフレームワークで何ができるかをはっきり把握した状態で会場を後にできるはずです。",
+      "speakerIDs" : [
+        "PriyaKapoor"
+      ],
+      "id" : "C1001009-C100-4100-8100-100000000009"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "ゼロから星 5 つへ: マーケティング予算なしで個人開発アプリを育てる",
+      "talkDescription" : "App Store は混雑し、検索アルゴリズムは不透明です。それでも、優れたアプリは「正しいアプローチを取れば」いまだに観客を見つけることができます。Momentum を 3 年間ソロ開発した経験から、実際に効果のあった施策と「心地よい錯覚にすぎなかった施策」を整理しました。\n\n本セッションでは私にとって効果のあった戦略を紹介します。キーワード以上の領域に踏み込む App Store Optimisation、ユーザーを煩わせずにアプリ内でメールリストを育てる方法、App Review のフィードバックを落胆ではなく建設的に活用する方法、そして十分に準備していれば 1 件のプレス言及が全てを変えうるという話です。\n\nさらに「自分が間違えたこと」も共有します。誰にも刺さらなかった機能、逆効果だった価格実験、そしてプロダクト改善に使うべきだった 6 か月を SNS に注いでしまった話です。",
+      "speakerIDs" : [
+        "JamesOBrien"
+      ],
+      "id" : "C1001010-C100-4100-8100-100000000010"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "ランチ",
+      "id" : "C1001011-C100-4100-8100-100000000011",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "Accessible by Design: 初日からインクルーシブな SwiftUI アプリを作る",
+      "talkDescription" : "アクセシビリティは依然として「あとから検討するもの」として扱われがちで、その結果、潜在ユーザーの相当な割合に対して機能しないアプリが量産されています。本セッションでは「最初からアクセシビリティを組み込む」べき理由を示しつつ、SwiftUI でその実装を具体的に行います。\n\n現実的な SwiftUI の View を題材に、素朴な実装から VoiceOver、Dynamic Type、Switch Control、フルキーボードアクセスへの対応を段階的に進めます。コードの見た目だけではなく、ユーザー視点で「実際にどう聞こえ、どう感じるか」も合わせて見ていきます。\n\nゴールは単に「よりアクセシブルなコードを書けるようになること」ではなく、「これからのキャリア全体で意思決定が変わるレベルでアクセシビリティの重要性を理解してもらうこと」です。",
+      "speakerIDs" : [
+        "ElenaVasquez"
+      ],
+      "id" : "C1001012-C100-4100-8100-100000000012"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "フルスタック Swift: Vapor 5 で iOS アプリのバックエンドを作る",
+      "talkDescription" : "クライアントとサーバーで同じ言語を使うことは、単なる開発者の利便性にとどまりません。それは真にコードとモデルを共有可能にし、チーム間のフィードバックループを大きく短縮します。本セッションは Vapor 5 と Swift 6 を使った iOS アプリのバックエンド構築の実践的な入門です。\n\nルーティング、ミドルウェア、Fluent によるデータベース連携、認証までを取り上げて、ゼロから本物の API を組み立てます。iOS アプリとサーバー間で Swift の型を共有する方法、サイドプロジェクトではなくチーム開発を前提とした Vapor プロジェクトの構成、そして Linux サーバーへ「全てが壊れることなく」デプロイする方法も扱います。\n\nサーバーサイド Swift に触れたことのない参加者でも、終了後には実用的なものを作れるだけの知識を持ち帰れる構成です。",
+      "speakerIDs" : [
+        "RachelHoffman"
+      ],
+      "id" : "C1001013-C100-4100-8100-100000000013"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "フレーム単位で完璧に: SwiftUI パフォーマンス問題の診断と除去",
+      "talkDescription" : "SwiftUI はバターのように滑らかに感じることもあれば、説明のつかない重さを見せることもあります。その差は多くの場合、間違えやすい少数の判断に集約されます。本セッションは Instruments を用いて SwiftUI のパフォーマンス問題を体系的に発見し、修正するためのガイドです。\n\nXcode の SwiftUI Instrument が実際に何を測っているのかを理解し、それを使って実際のパフォーマンス問題を診断します。不要な View 更新、重い body 計算、アニメーションのヒッチ、そして「自分が持っていない古い端末でしか発生しない」種類の問題までを取り上げます。\n\n持ち帰っていただけるのは、再現可能な調査プロセス、問題発生を未然に防ぐパターン群、そして「SwiftUI が裏で何をしているか」に対する直感の大幅な改善です。",
+      "speakerIDs" : [
+        "TomNakamura"
+      ],
+      "id" : "C1001014-C100-4100-8100-100000000014"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "SwiftData 実戦投入: リレーション、スキーマ移行、誰も警告してくれない落とし穴",
+      "talkDescription" : "SwiftData のきれいな API は、実アプリで少しでも非自明なことをやろうとした瞬間まで「素直に書けるフレームワーク」に見えます。本セッションは「本番投入する前に誰かが教えてくれていたら助かったこと」を中心に構成しています。\n\nリレーションを正しくモデリングする方法 (および間違えた場合に何が起きるか)、スキーマ移行の仕組みとデータ消失を起こさず安全に行う手順、そして ModelContext 経由で引き継がれる SwiftData の並行処理要件への対処を取り上げます。さらに、SwiftData バックエンドのコードを本当に信頼できる形でテストする方法も扱います。\n\nチュートリアルを通過し、リリース済みアプリにおける永続データの「現実」と向き合っている開発者向けのセッションです。",
+      "speakerIDs" : [
+        "DavidKowalski"
+      ],
+      "id" : "C1001015-C100-4100-8100-100000000015"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "Tokens to Code: 重複ゼロで Swift にデザインシステムを実装する",
+      "talkDescription" : "デザイントークンは、色・タイポグラフィ・余白などの視覚的な判断における「単一の真実 (Source of Truth)」です。とはいえ、それらを Figma から Swift に落とし込みつつ、保守地獄を生まないためには、意図的な設計が必要です。\n\n本セッションではデザイントークンを Swift の型として実装する方法、デザイナーのツールとコードベースの間の橋渡し、そして複数アプリ・複数プラットフォームにスケールするデザインシステムの構成を取り上げます。セマンティックなカラー命名、Dynamic Type への統合、そして「デザインシステムのコードをプロジェクト内のどこに置くべきか」という見落とされがちな問いにも触れます。\n\n参加者は、ゼロから始める場合でも、既存コードベースを整理する場合でも、すぐ適用できる実践的な設計図を持ち帰れる構成です。",
+      "speakerIDs" : [
+        "ZaraAhmed"
+      ],
+      "id" : "C1001016-C100-4100-8100-100000000016"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "LLDB Unlocked: iOS 開発者が知っておくべき高度なデバッグテクニック",
+      "talkDescription" : "多くの iOS 開発者は Xcode の UI 越しに LLDB を使い、そこで止まっています。本セッションはその先に「何を逃しているか」を見せます。\n\nLLDB のコマンドラインを深掘りします。式評価、カスタムサマリー、ブレークポイント条件、ウォッチポイント、そしてデバッガの機能を拡張する Python スクリプトの書き方を取り上げます。SwiftUI 専用のデバッグ手法、クラッシュ発生前にメモリ問題を診断する手法、標準のスタックトレースでは追えない非同期コードのトレース手法も扱います。\n\nここで紹介する多くの技法はドキュメントが乏しかったり、何年も前のカンファレンストークに埋もれていたりします。本セッションはそれらを 1 か所に集める試みです。",
+      "speakerIDs" : [
+        "OliverFraser"
+      ],
+      "id" : "C1001017-C100-4100-8100-100000000017"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "コーヒーブレイク",
+      "id" : "C1001018-C100-4100-8100-100000000018",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "画面の向こうへ: RealityKit と visionOS で作る没入体験",
+      "talkDescription" : "visionOS は根本的に異なるプラットフォームであり、適切に開発するには「iOS で培った直感の一部を捨てて、新しい直感を育てる」必要があります。本セッションは、3 次元に引き伸ばしただけの iOS アプリではなく、本当にネイティブに感じられる空間体験を構築する実践ガイドです。\n\nRealityKit の Entity-Component モデル、現実世界へのコンテンツアンカリング、空間コンテキストにおける入力の扱い方、そして Window / Volume / 完全没入空間の関係性について整理します。本番アプリの具体例を取り上げ、「うまくいくこと」「まだ難しいこと」「プラットフォームが向かう先」を率直に共有します。\n\nvisionOS の事前経験は前提としません。",
+      "speakerIDs" : [
+        "LucyPemberton"
+      ],
+      "id" : "C1001019-C100-4100-8100-100000000019"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "iOS のための脅威モデリング: 現実の攻撃を理解し、防ぐ",
+      "talkDescription" : "iOS のセキュリティドキュメントは「何をすべきか」については豊富ですが、「なぜそうするか」の説明はやや手薄です。その結果、ガイダンスの文面には従っていても、本来の意図を取り逃してしまうことが起きがちです。\n\n本セッションは攻撃者の視点からスタートします。iOS アプリに対して実際に使われる攻撃手法 — 通信傍受、バイナリ解析、Keychain 抽出、メソッドスウィズリング — を取り上げ、そこから逆算して「本当に意味のある防御策」を整理していきます。脅威モデリングを実践として扱い、自分のアプリにおける最も価値の高い資産を特定し、机上の完全性ではなく現実のリスクに根ざした優先順位付きのセキュリティチェックリストを構築します。\n\n参加者は、自分のアプリにすぐ適用できる具体的なセキュリティレビュー手順を持ち帰れます。",
+      "speakerIDs" : [
+        "SamWalsh"
+      ],
+      "id" : "C1001020-C100-4100-8100-100000000020"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "Victualling Room でのカンファレンスディナー\nスポンサー: NorthCode Ltd",
+      "id" : "C1001021-C100-4100-8100-100000000021",
+      "locationID" : "victuallingRoom"
+    },
+    {
+      "speakerIDs" : [
+        "You"
+      ],
+      "talkDescription" : "参加者による 5 分間トークの連続枠です。共有する価値のあるもの — 学んだこと、自作したライブラリ、窮地を救ってくれたテクニック — があれば、ここがその出番です。受付デスクで申し込みできます。",
+      "talkTitle" : "ライトニングトーク: あなたの番です",
+      "id" : "C1001022-C100-4100-8100-100000000022",
+      "locationID" : "tyndallLecture"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "本カンファレンスの登壇者数名による、Swift と iOS 開発の現状、プラットフォームの行方、そして「Apple に変えてほしい点」を語るパネルディスカッションです。",
+      "talkTitle" : "パネル: 2026 年の Swift",
+      "id" : "C1001023-C100-4100-8100-100000000023",
+      "locationID" : "tyndallLecture"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "コーヒーブレイク",
+      "id" : "C1001024-C100-4100-8100-100000000024",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "Async Algorithms: Swift でリアクティブパイプラインを組み立てる",
+      "talkDescription" : "`swift-async-algorithms` パッケージは AsyncSequence を扱うための強力なオペレータ群を提供しますが、多くの iOS コードベースではまだ十分活用されていません。理由のひとつは、async sequence を組み合わせる際のメンタルモデルが Combine や RxSwift に比べてまだ馴染みが薄いことにあります。\n\n本セッションはそのメンタルモデルを第一原理から組み立てます。zip、merge、debounce、throttle などのコアオペレータを取り上げ、複数データソースの結合、レート制限のある API 呼び出しの扱い、異なるレートで値を出すシーケンスの調停など、実アプリで出会うリアクティブなロジックを現実的な例で構築します。\n\n習慣で Combine に手が伸びている方は、本セッションを聞いたあと「もう一度選択肢を見直す」きっかけが得られるはずです。",
+      "speakerIDs" : [
+        "MarcusChen"
+      ],
+      "id" : "C1001025-C100-4100-8100-100000000025"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "本物の Apple Watch アプリを出荷する: コンプリケーション、Always-On、現実的な限界",
+      "talkDescription" : "watchOS 開発は「扱いづらい」という評判があり、その評判の一部は事実です。しかしプラットフォームは大きく成熟しており、本気で取り組むアプリには確かなチャンスがあります。\n\n本セッションでは「使う価値のある Watch アプリ」を作るための現実的な手順を扱います。コンプリケーションと、それを支える WidgetKit ベースの API、Always-On Display と UI の対応方法、バックグラウンド実行の制限とその中で現実的に何ができるか、そして多くの Watch アプリが間違えるインタラクションモデルの制約を取り上げます。\n\nテストの話にも時間を割きます。watchOS のテストには固有の落とし穴があり、「シミュレータでは動くのに実機では動かない」を 3 時間悩む前に把握しておく価値があります。",
+      "speakerIDs" : [
+        "PriyaKapoor"
+      ],
+      "id" : "C1001026-C100-4100-8100-100000000026"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "オンデバイスのコンピュータビジョン: Core ML、Vision、2026 年のオンデバイスモデル",
+      "talkDescription" : "コンピュータビジョン向けのオンデバイス機械学習は、もはや専門用途だけのものではなく、日常的な iOS アプリでも本当に実用的になりました。Core ML、Vision フレームワーク、そして年々強力になる Apple の Neural Engine の組み合わせにより、ネットワーク接続もクラウド費用も無しで使える機能が現実的に手に入ります。\n\n本セッションでは実践的なランドスケープを取り上げます。一般的なタスクに対する組み込み Vision リクエスト型の使い方、カスタム Core ML モデルの統合、そしてユーザーが実際に持っている端末群の上で「モデルサイズ・精度・推論速度」のトレードオフをどう考えるかを扱います。オンデバイスの基盤モデル、vision-language タスクの位置付けにも触れます。\n\nライブデモ、現実的な事例、そして「現状の限界はどこにあるか」の率直な評価を含む構成です。",
+      "speakerIDs" : [
+        "TomNakamura"
+      ],
+      "id" : "C1001027-C100-4100-8100-100000000027"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "インタラクティブウィジェット: App Intents とウィジェットを次の段階へ",
+      "talkDescription" : "ウィジェットは登場以来かなり進化しており、App Intents によるインタラクティブ性の追加によって、それまで不可能だったユースケースが可能になりました。とはいえ、ネイティブに感じられ、かつ正しく動作するインタラクティブウィジェットを作るのは見た目以上に難しい作業です。\n\n本セッションではインタラクティブウィジェットの全体像を扱います。App Intents とウィジェットの設定・インタラクティブ性との統合、効率的に更新されるタイムライン設計、ウィジェット実行環境の制限への対処、そして「装飾ではなく本当に役立つウィジェット」の作り方を取り上げます。\n\n同時に、Live Activity、Dynamic Island、ウィジェットの関係性も整理し、それらを 3 つの別機能ではなく一貫したシステムとして考えるための視点を共有します。",
+      "speakerIDs" : [
+        "JamesOBrien"
+      ],
+      "id" : "C1001028-C100-4100-8100-100000000028"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "ランチ",
+      "id" : "C1001029-C100-4100-8100-100000000029",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "コードレビューの技法: チームをより強くするフィードバックの送受信",
+      "talkDescription" : "コードレビューはソフトウェア開発で最も価値のある実践の 1 つであり、同時に最も雑に行われがちな実践でもあります。表層的すぎるレビューは本物の問題を見逃します。攻撃的すぎるレビューはチームの関係を壊します。本質ではなくスタイルにフォーカスしたレビューは全員の時間を浪費します。\n\n本セッションは、レビュアー側・レビュイー側の双方にとってのコードレビュー上達術についてです。曖昧で士気を下げる代わりに、具体的で行動可能なフィードバックを送る方法、批判的なフィードバックを受け取った際に防御的にならない方法、そして「ゲートキーピングではなく学びの機会」としてレビュー文化を育てる方法を取り上げます。\n\nツールの話ではなく、ソフトウェア開発の「人間側」の話です。そして実は、その人間側こそが極めて大きな差を生みます。",
+      "speakerIDs" : [
+        "ElenaVasquez"
+      ],
+      "id" : "C1001030-C100-4100-8100-100000000030"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "SwiftUI レイアウト深掘り: Layout プロトコルとカスタムコンテナ",
+      "talkDescription" : "多くの SwiftUI 開発者は VStack、HStack、ZStack、Grid をレイアウトの第一選択にしており、ほとんどの場合それで十分です。しかし、これらのコンテナでは表現しきれないレイアウト問題があり、そこに Layout プロトコルが登場します。\n\n本セッションでは Layout プロトコルを第一原理から探求し、SwiftUI が裏側で行っている「サイズ提案と返答」のやり取りを丁寧に組み立てます。複雑さを徐々に上げながら複数のカスタムレイアウトを実装し、レイアウト間のアニメーション、そして多数の View で重複しがちなレイアウトロジックをカスタムコンテナでカプセル化する方法を扱います。\n\n参加者は、SwiftUI レイアウトの明確なメンタルモデル、Layout プロトコルを取り出すべきタイミングの判断軸、そして自分のアプリに応用できる具体例を持ち帰れます。",
+      "speakerIDs" : [
+        "SarahThornton"
+      ],
+      "id" : "C1001031-C100-4100-8100-100000000031"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "UIKit から SwiftUI へ: 実戦的な移行プレイブック",
+      "talkDescription" : "UIKit コードベースは自動的に SwiftUI に移行しませんし、「ゼロから書き直す」アプローチがうまくいくことは稀です。本セッションは、既存の UIKit アプリで働いていて、本番インシデントを起こさず、賢く段階的に SwiftUI を導入したい開発者向けです。\n\n相互運用ツール — `UIHostingController`、`UIViewRepresentable`、`UIViewControllerRepresentable` — とそれぞれの限界を取り上げます。移行プランの構成のしかた、早期移行に向いている部分とそうでない部分、UIKit と SwiftUI がデータを共有する際に必ず生じる「状態同期の課題」への対処を扱います。\n\n本セッションは実際の移行経験に基づいた実戦的な内容です。難しい部分や、現在の相互運用機能の限界について率直に話します。",
+      "speakerIDs" : [
+        "RachelHoffman"
+      ],
+      "id" : "C1001032-C100-4100-8100-100000000032"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "CloudKit Sync: 堅牢なクロスデバイス体験を作る",
+      "talkDescription" : "CloudKit は Apple の同期フレームワークですが、これを正しく使うのは WWDC セッションが示唆する以上に難易度が高い作業です。ドキュメントと本番現実のギャップは多く、しばしば痛みを伴います。\n\n本セッションは、CloudKit に依存するアプリを実際に出荷した経験に基づく実践ガイドです。レコードとゾーンのモデル、効率的に同期されるスキーマ構成、競合解決の実際の挙動、そして CloudKit 操作が黙って失敗するさまざまな経路への対処を取り上げます。CloudKit と SwiftData の関係、そしてフレームワークに同期を任せたときに何が変わるかも扱います。\n\n参加者は CloudKit モデルの確かな理解と、リリース前に押さえておくべきチェックリストを持ち帰れます。",
+      "speakerIDs" : [
+        "DavidKowalski"
+      ],
+      "id" : "C1001033-C100-4100-8100-100000000033"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "アダプティブ UI: あらゆる Apple デバイスで美しく動くアプリを作る",
+      "talkDescription" : "よく設計された iOS アプリは、iPhone SE でも、Split View 中の iPad Pro でも、Catalyst あるいはネイティブで動く Mac でも、そしてその間のあらゆる環境でも、それぞれの場所で「自然に馴染んでいる」と感じられるべきです。そこに到達するには、サイズクラスのチェックボックスを埋めるだけでは足りず、適応的設計への体系的なアプローチが必要です。\n\n本セッションでは SwiftUI でアダプティブレイアウトを実現するための道具一式を取り上げます。サイズクラス、Dynamic Type、safe area、`containerRelativeFrame`、そして利用可能な空間の形状に応答する新 API です。すべての端末を所有せずにアダプティブレイアウトを効率的にテストする方法、そしてデザイントークンシステムを活用してプラットフォームをまたいでもビジュアル判断がスケールするようにする方法も扱います。\n\n参加者は、端末ごとに別レイアウトを保守することなく、あらゆる Apple デバイスでネイティブに感じられるアプリを作るための実践的なフレームワークを持ち帰れます。",
+      "speakerIDs" : [
+        "ZaraAhmed"
+      ],
+      "id" : "C1001034-C100-4100-8100-100000000034"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "自分のアプリをリバースエンジニアリングする: 攻撃者がバイナリ越しに見ているもの",
+      "talkDescription" : "自分のアプリの守り方を理解する最良の方法は、外側からそのアプリがどう見えているかを理解することです。本セッションでは、iOS アプリを取り上げ、IPA から取り出し、バイナリを解析し、文字列を抽出し、通信を観察します。そして攻撃者が 1 時間未満で実装について何を学べるかを確認します。\n\n理論的な演習ではありません。class-dump、Hopper、mitmproxy、Frida といった実際のツールを用い、具体的な例を 1 つ 1 つ進めます。そのうえで各発見に立ち戻り、「開発者は分析コストを上げるためにどう違う実装ができたか」を問い直します。\n\nゴールはアプリを「絶対に解析不可能にすること」ではなく (それは現実的に不可能です)、脅威モデルを正しく理解し、何をどう守るかについて意図的な選択を行えるようになることです。",
+      "speakerIDs" : [
+        "SamWalsh"
+      ],
+      "id" : "C1001035-C100-4100-8100-100000000035"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "コーヒーブレイク",
+      "id" : "C1001036-C100-4100-8100-100000000036",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "素晴らしいものを作る: 個人開発 10 年で学んだこと",
+      "talkDescription" : "ソロ開発者として 10 年間 iOS アプリを作り、出荷し続けると、本にもカンファレンストークにも書かれていないことを学びます。重要なプロダクト判断と重要でない判断、品質と商業的成功の関係、そして「完全に独りで働くこと」の心理的現実です。\n\nこれは技術的なセッションというより、個人的なセッションです。自分が下した決断、何度も繰り返したミス、いまだに答えが出ない問い、そして長く続けてきたからこそ手に入った意外な報酬を共有します。\n\n「個人開発を考えたことがある」「すでに個人開発者だが正しくやれているか不安」「単に技術コンテンツから一息つきたい」 — そのどれかに当てはまる人のためのセッションです。",
+      "speakerIDs" : [
+        "JamesOBrien"
+      ],
+      "id" : "C1001037-C100-4100-8100-100000000037"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "visionOS と ARKit: アンカー、プレーン、デジタルオブジェクトを現実世界へ",
+      "talkDescription" : "visionOS の ARKit は、iOS では不可能だったレベルの「世界理解」を、モダンな Swift API 経由で提供します。プレーン検出、シーン再構築、ハンドトラッキング、画像アンカー — すべて手の届く範囲にあります。本セッションはこれらを活用して、物理空間に意味のある形で応答する空間体験を作るための実践ガイドです。\n\nARKit のセッションモデル、world-sensing データのリクエストと消費、検出した面や画像への RealityKit コンテンツのアンカリング、そして world understanding が失敗または不完全な場合の対処を取り上げます。これらのデータにアクセスすることのプライバシーへの影響、ユーザーに対してアプリの挙動を明確に伝える方法も扱います。\n\n動作するコード例を多く含むコードファーストなセッションです。",
+      "speakerIDs" : [
+        "LucyPemberton"
+      ],
+      "id" : "C1001038-C100-4100-8100-100000000038"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "3 日目のライトニングトーク枠。参加者による 5 分間トークの連続枠です。受付デスクまたはオーガナイザーまでお声がけください。",
+      "talkTitle" : "ライトニングトーク\n旬の話題を 5 分ずつ語る連続枠",
+      "id" : "C1001039-C100-4100-8100-100000000039",
+      "locationID" : "tyndallLecture"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "実戦 Swift Macros: チームが歓迎するコンパイル時コードを書く",
+      "talkDescription" : "Swift Macros は近年 Swift に追加された最強の機能の 1 つですが、「マクロが生成するコード」よりも「マクロ自体を書くこと」のほうがはるかに難しい作業です。設計の悪いマクロは保守の重荷、デバッグの悪夢、そして触れる人全員にとっての混乱の発生源です。\n\n本セッションは、使うのが純粋に気持ち良いマクロを書くために必要なことを取り上げます。マクロの型システム、誤用時に良いエラーメッセージを出すマクロの書き方、マクロを徹底的にテストする方法、そして「正しい使い方が自明であり、誤用も自明である」 API 表面の設計を扱います。\n\nさらに、マクロが適切な道具ではなく、より単純なアプローチのほうが良いケースについても触れます。",
+      "speakerIDs" : [
+        "MarcusChen"
+      ],
+      "id" : "C1001040-C100-4100-8100-100000000040"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "コーヒーブレイク",
+      "id" : "C1001041-C100-4100-8100-100000000041",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "メモリを理解する: ARC、循環参照、Instruments のメモリグラフ",
+      "talkDescription" : "Swift のメモリ管理はほぼ自動で行われ、それは素晴らしいことです — 問題が起きるまでは。循環参照や予期せぬメモリ増大は、即時にクラッシュを起こすわけではないため、診断の難しいバグの代表格です。アプリは時間をかけてゆっくり悪化し、誰かが気付いたときには既に厄介な状態になっています。\n\n本セッションでは ARC を第一原理から扱い、循環参照を生むパターンを整理し、Instruments のメモリグラフデバッガを使った発見と修正の手順を紹介します。クロージャ、デリゲート、NotificationCenter、Combine、async コードといった「定番容疑者」を取り上げ、現実的な例を「初期症状から確定修正まで」を通しで進めます。\n\n参加者は ARC の挙動の明確なモデル、自分のコードで監査すべきパターンのチェックリスト、そして Xcode のメモリデバッグツールを使う自信を持ち帰れます。",
+      "speakerIDs" : [
+        "OliverFraser"
+      ],
+      "id" : "C1001042-C100-4100-8100-100000000042"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "段階的移行: レガシーコードに Modern Concurrency を安全に導入する",
+      "talkDescription" : "ほとんどの iOS アプリはグリーンフィールドではなく、既存のコードベースで働く開発者の多くは並行処理レイヤーをゼロから書き直すことができません。本セッションは、GCD、completion handler、DispatchQueue ベースのコードから、何も壊さずに段階的に Swift Concurrency へ移行する方法についてです。\n\nブリッジングの仕組み — `withCheckedContinuation`、`withCheckedThrowingContinuation` — とそれぞれの使いどころを取り上げます。actor を念頭に置いていなかったコードベースへの actor 導入、Strict Concurrency Checking が表面化させるデータ競合への対処、そして機能開発と並行して進められる移行計画の立て方を扱います。\n\n現実的な制約を抱えた現場のコードベースで働く開発者向けの実戦的なセッションです。",
+      "speakerIDs" : [
+        "RachelHoffman"
+      ],
+      "id" : "C1001043-C100-4100-8100-100000000043"
+    },
+    {
+      "speakerIDs" : [],
+      "talkDescription" : "dummy",
+      "talkTitle" : "コーヒーブレイク",
+      "id" : "C1001044-C100-4100-8100-100000000044",
+      "locationID" : "tyndallFoyer"
+    },
+    {
+      "locationID" : "tyndallLecture",
+      "talkTitle" : "クロージングワークショップ: Swift Testing マスタークラス",
+      "talkDescription" : "Swift Testing を使って一連の実テスト課題を解いていくハンズオンワークショップです。パラメータ化テスト、非同期テストパターン、モッキング戦略、そして大規模プロジェクト向けテストスイートの構成を扱います。ラップトップをご持参ください — デモではなく、手を動かすセッションです。",
+      "speakerIDs" : [
+        "PriyaKapoor"
+      ],
+      "id" : "C1001045-C100-4100-8100-100000000045"
+    },
+    {
+      "locationID" : "faradayRoom",
+      "talkTitle" : "クロージングワークショップ: iOS パフォーマンスのための Instruments マスター",
+      "talkDescription" : "iOS 開発者にとって最も有用な Instruments ツール群 — Time Profiler、Allocations、SwiftUI、Hangs — を取り上げる実戦ワークショップです。意図的にパフォーマンスが悪いアプリを 1 つ題材に、Instruments の情報のみを根拠に 1 ステップずつ修正していきます。ラップトップをご持参ください。",
+      "speakerIDs" : [
+        "OliverFraser"
+      ],
+      "id" : "C1001046-C100-4100-8100-100000000046"
+    }
+  ],
+  "version" : 1
+}

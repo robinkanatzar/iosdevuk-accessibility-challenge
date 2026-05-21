@@ -19,6 +19,12 @@ class ViewModel {
         confData = loadConfData()
         loadFavourites()
     }
+
+    /// Reloads `confData` from disk. Called when the user toggles the in-app
+    /// language so the on-screen content matches the new locale.
+    func reload() {
+        confData = loadConfData()
+    }
     
     func saveConference(){
         let readListURL =  urlToFileInDocuments("conf.json")

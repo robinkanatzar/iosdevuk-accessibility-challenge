@@ -6,28 +6,24 @@
           "C1001001-C100-4100-8100-100000000001",
           "C1001002-C100-4100-8100-100000000002"
         ],
-        "startTime" : 841582800,
+        "startTime" : 810133200,
         "id" : "B1001001-B100-4100-8100-100000000001",
-        "endTime" : 841590000,
+        "endTime" : 810140400,
         "sessionCount" : 2,
         "sessionType" : {
-          "workshop" : {
-
-          }
+          "workshop" : {}
         }
       },
       {
         "contentIDs" : [
           "C1001003-C100-4100-8100-100000000003"
         ],
-        "startTime" : 841590000,
+        "startTime" : 810140400,
         "id" : "B1001002-B100-4100-8100-100000000002",
-        "endTime" : 841608000,
+        "endTime" : 810158400,
         "sessionCount" : 1,
         "sessionType" : {
-          "social" : {
-
-          }
+          "social" : {}
         }
       }
     ],
@@ -36,119 +32,101 @@
         "contentIDs" : [
           "C1001004-C100-4100-8100-100000000004"
         ],
-        "startTime" : 841644000,
+        "startTime" : 810194400,
         "id" : "B1001003-B100-4100-8100-100000000003",
-        "endTime" : 841645800,
+        "endTime" : 810196200,
         "sessionCount" : 1,
         "sessionType" : {
-          "registration" : {
-
-          }
+          "registration" : {}
         }
       },
       {
         "contentIDs" : [
           "C1001005-C100-4100-8100-100000000005"
         ],
-        "startTime" : 841645800,
+        "startTime" : 810196200,
         "id" : "B1001004-B100-4100-8100-100000000004",
-        "endTime" : 841646400,
+        "endTime" : 810196800,
         "sessionCount" : 1,
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         }
       },
       {
         "contentIDs" : [
           "C1001006-C100-4100-8100-100000000006"
         ],
-        "startTime" : 841646400,
+        "startTime" : 810196800,
         "id" : "B1001005-B100-4100-8100-100000000005",
-        "endTime" : 841648800,
+        "endTime" : 810199200,
         "sessionCount" : 1,
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         }
       },
       {
         "contentIDs" : [
           "C1001007-C100-4100-8100-100000000007"
         ],
-        "startTime" : 841648800,
+        "startTime" : 810199200,
         "id" : "B1001006-B100-4100-8100-100000000006",
-        "endTime" : 841651200,
+        "endTime" : 810201600,
         "sessionCount" : 1,
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         }
       },
       {
         "contentIDs" : [
           "C1001008-C100-4100-8100-100000000008"
         ],
-        "startTime" : 841651200,
+        "startTime" : 810201600,
         "id" : "B1001007-B100-4100-8100-100000000007",
-        "endTime" : 841653000,
+        "endTime" : 810203400,
         "sessionCount" : 1,
         "sessionType" : {
-          "teaBreak" : {
-
-          }
+          "teaBreak" : {}
         }
       },
       {
         "contentIDs" : [
           "C1001009-C100-4100-8100-100000000009"
         ],
-        "startTime" : 841653000,
+        "startTime" : 810203400,
         "id" : "B1001008-B100-4100-8100-100000000008",
-        "endTime" : 841655400,
+        "endTime" : 810205800,
         "sessionCount" : 1,
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         }
       },
       {
         "contentIDs" : [
           "C1001010-C100-4100-8100-100000000010"
         ],
-        "startTime" : 841655400,
+        "startTime" : 810205800,
         "id" : "B1001009-B100-4100-8100-100000000009",
-        "endTime" : 841657800,
+        "endTime" : 810208200,
         "sessionCount" : 1,
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         }
       },
       {
         "sessionType" : {
-          "lunch" : {
-
-          }
+          "lunch" : {}
         },
         "id" : "B1001010-B100-4100-8100-100000000010",
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001011-C100-4100-8100-100000000011"
         ],
-        "startTime" : 841657800,
-        "endTime" : 841662000
+        "startTime" : 810208200,
+        "endTime" : 810212400
       },
       {
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
         "id" : "B1001011-B100-4100-8100-100000000011",
         "sessionCount" : 2,
@@ -156,14 +134,12 @@
           "C1001012-C100-4100-8100-100000000012",
           "C1001013-C100-4100-8100-100000000013"
         ],
-        "startTime" : 841662000,
-        "endTime" : 841664400
+        "startTime" : 810212400,
+        "endTime" : 810214800
       },
       {
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
         "id" : "B1001012-B100-4100-8100-100000000012",
         "sessionCount" : 2,
@@ -171,14 +147,12 @@
           "C1001014-C100-4100-8100-100000000014",
           "C1001015-C100-4100-8100-100000000015"
         ],
-        "startTime" : 841664400,
-        "endTime" : 841666800
+        "startTime" : 810214800,
+        "endTime" : 810217200
       },
       {
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
         "id" : "B1001013-B100-4100-8100-100000000013",
         "sessionCount" : 2,
@@ -186,76 +160,66 @@
           "C1001016-C100-4100-8100-100000000016",
           "C1001017-C100-4100-8100-100000000017"
         ],
-        "startTime" : 841666800,
-        "endTime" : 841669200
+        "startTime" : 810217200,
+        "endTime" : 810219600
       },
       {
         "sessionType" : {
-          "teaBreak" : {
-
-          }
+          "teaBreak" : {}
         },
         "id" : "B1001014-B100-4100-8100-100000000014",
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001018-C100-4100-8100-100000000018"
         ],
-        "startTime" : 841669200,
-        "endTime" : 841671000
+        "startTime" : 810219600,
+        "endTime" : 810221400
       },
       {
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
         "id" : "B1001015-B100-4100-8100-100000000015",
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001019-C100-4100-8100-100000000019"
         ],
-        "startTime" : 841671000,
-        "endTime" : 841673400
+        "startTime" : 810221400,
+        "endTime" : 810223800
       },
       {
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
         "id" : "B1001016-B100-4100-8100-100000000016",
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001020-C100-4100-8100-100000000020"
         ],
-        "startTime" : 841673400,
-        "endTime" : 841675800
+        "startTime" : 810223800,
+        "endTime" : 810226200
       },
       {
         "sessionType" : {
-          "confdinner" : {
-
-          }
+          "confdinner" : {}
         },
         "id" : "B1001017-B100-4100-8100-100000000017",
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001021-C100-4100-8100-100000000021"
         ],
-        "startTime" : 841679100,
-        "endTime" : 841690800
+        "startTime" : 810229500,
+        "endTime" : 810241200
       }
     ],
     [
       {
         "sessionCount" : 1,
-        "endTime" : 841735200,
-        "startTime" : 841732200,
+        "endTime" : 810285600,
+        "startTime" : 810282600,
         "id" : "B1001018-B100-4100-8100-100000000018",
         "sessionType" : {
-          "lightningtalks" : {
-
-          }
+          "lightningtalks" : {}
         },
         "contentIDs" : [
           "C1001022-C100-4100-8100-100000000022"
@@ -263,13 +227,11 @@
       },
       {
         "sessionCount" : 1,
-        "endTime" : 841737600,
-        "startTime" : 841735200,
+        "endTime" : 810288000,
+        "startTime" : 810285600,
         "id" : "B1001019-B100-4100-8100-100000000019",
         "sessionType" : {
-          "panel" : {
-
-          }
+          "panel" : {}
         },
         "contentIDs" : [
           "C1001023-C100-4100-8100-100000000023"
@@ -277,13 +239,11 @@
       },
       {
         "sessionCount" : 1,
-        "endTime" : 841739400,
-        "startTime" : 841737600,
+        "endTime" : 810289800,
+        "startTime" : 810288000,
         "id" : "B1001020-B100-4100-8100-100000000020",
         "sessionType" : {
-          "teaBreak" : {
-
-          }
+          "teaBreak" : {}
         },
         "contentIDs" : [
           "C1001024-C100-4100-8100-100000000024"
@@ -295,14 +255,12 @@
           "C1001025-C100-4100-8100-100000000025",
           "C1001026-C100-4100-8100-100000000026"
         ],
-        "endTime" : 841741800,
+        "endTime" : 810292200,
         "id" : "B1001021-B100-4100-8100-100000000021",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841739400
+        "startTime" : 810289800
       },
       {
         "sessionCount" : 2,
@@ -310,28 +268,24 @@
           "C1001027-C100-4100-8100-100000000027",
           "C1001028-C100-4100-8100-100000000028"
         ],
-        "endTime" : 841744200,
+        "endTime" : 810294600,
         "id" : "B1001022-B100-4100-8100-100000000022",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841741800
+        "startTime" : 810292200
       },
       {
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001029-C100-4100-8100-100000000029"
         ],
-        "endTime" : 841748400,
+        "endTime" : 810298800,
         "id" : "B1001023-B100-4100-8100-100000000023",
         "sessionType" : {
-          "lunch" : {
-
-          }
+          "lunch" : {}
         },
-        "startTime" : 841744200
+        "startTime" : 810294600
       },
       {
         "sessionCount" : 2,
@@ -339,14 +293,12 @@
           "C1001030-C100-4100-8100-100000000030",
           "C1001031-C100-4100-8100-100000000031"
         ],
-        "endTime" : 841750800,
+        "endTime" : 810301200,
         "id" : "B1001024-B100-4100-8100-100000000024",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841748400
+        "startTime" : 810298800
       },
       {
         "sessionCount" : 2,
@@ -354,14 +306,12 @@
           "C1001032-C100-4100-8100-100000000032",
           "C1001033-C100-4100-8100-100000000033"
         ],
-        "endTime" : 841753200,
+        "endTime" : 810303600,
         "id" : "B1001025-B100-4100-8100-100000000025",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841750800
+        "startTime" : 810301200
       },
       {
         "sessionCount" : 2,
@@ -369,56 +319,48 @@
           "C1001034-C100-4100-8100-100000000034",
           "C1001035-C100-4100-8100-100000000035"
         ],
-        "endTime" : 841755600,
+        "endTime" : 810306000,
         "id" : "B1001026-B100-4100-8100-100000000026",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841753200
+        "startTime" : 810303600
       },
       {
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001036-C100-4100-8100-100000000036"
         ],
-        "endTime" : 841758000,
+        "endTime" : 810308400,
         "id" : "B1001027-B100-4100-8100-100000000027",
         "sessionType" : {
-          "teaBreak" : {
-
-          }
+          "teaBreak" : {}
         },
-        "startTime" : 841755600
+        "startTime" : 810306000
       },
       {
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001037-C100-4100-8100-100000000037"
         ],
-        "endTime" : 841760400,
+        "endTime" : 810310800,
         "id" : "B1001028-B100-4100-8100-100000000028",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841758000
+        "startTime" : 810308400
       },
       {
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001038-C100-4100-8100-100000000038"
         ],
-        "endTime" : 841762800,
+        "endTime" : 810313200,
         "id" : "B1001029-B100-4100-8100-100000000029",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841760400
+        "startTime" : 810310800
       }
     ],
     [
@@ -427,96 +369,82 @@
         "contentIDs" : [
           "C1001039-C100-4100-8100-100000000039"
         ],
-        "endTime" : 841820400,
+        "endTime" : 810370800,
         "id" : "B1001030-B100-4100-8100-100000000030",
         "sessionType" : {
-          "lightningtalks" : {
-
-          }
+          "lightningtalks" : {}
         },
-        "startTime" : 841818600
+        "startTime" : 810369000
       },
       {
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001040-C100-4100-8100-100000000040"
         ],
-        "endTime" : 841822800,
+        "endTime" : 810373200,
         "id" : "B1001031-B100-4100-8100-100000000031",
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
-        "startTime" : 841820400
+        "startTime" : 810370800
       },
       {
         "sessionCount" : 1,
         "contentIDs" : [
           "C1001041-C100-4100-8100-100000000041"
         ],
-        "endTime" : 841824600,
+        "endTime" : 810375000,
         "id" : "B1001032-B100-4100-8100-100000000032",
         "sessionType" : {
-          "teaBreak" : {
-
-          }
+          "teaBreak" : {}
         },
-        "startTime" : 841822800
+        "startTime" : 810373200
       },
       {
-        "endTime" : 841827000,
-        "startTime" : 841824600,
+        "endTime" : 810377400,
+        "startTime" : 810375000,
         "contentIDs" : [
           "C1001042-C100-4100-8100-100000000042"
         ],
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
         "id" : "B1001033-B100-4100-8100-100000000033",
         "sessionCount" : 1
       },
       {
-        "endTime" : 841829400,
-        "startTime" : 841827000,
+        "endTime" : 810379800,
+        "startTime" : 810377400,
         "contentIDs" : [
           "C1001043-C100-4100-8100-100000000043"
         ],
         "sessionType" : {
-          "talk" : {
-
-          }
+          "talk" : {}
         },
         "id" : "B1001034-B100-4100-8100-100000000034",
         "sessionCount" : 1
       },
       {
-        "endTime" : 841831200,
-        "startTime" : 841829400,
+        "endTime" : 810381600,
+        "startTime" : 810379800,
         "contentIDs" : [
           "C1001044-C100-4100-8100-100000000044"
         ],
         "sessionType" : {
-          "teaBreak" : {
-
-          }
+          "teaBreak" : {}
         },
         "id" : "B1001035-B100-4100-8100-100000000035",
         "sessionCount" : 1
       },
       {
-        "endTime" : 841838400,
-        "startTime" : 841831200,
+        "endTime" : 810388800,
+        "startTime" : 810381600,
         "contentIDs" : [
           "C1001045-C100-4100-8100-100000000045",
           "C1001046-C100-4100-8100-100000000046"
         ],
         "sessionType" : {
-          "workshop" : {
-
-          }
+          "workshop" : {}
         },
         "id" : "B1001036-B100-4100-8100-100000000036",
         "sessionCount" : 2
@@ -638,7 +566,7 @@
     {
       "social" : [
         {
-          "socialLink" : "https://www.linkedin.com/in/davidkowalski-ios\nhttps://github.com/dkowalskidev\n",
+          "socialLink" : "https://davidkowalski.dev\nhttps://github.com/dkowalskidev\nhttps://www.linkedin.com/in/davidkowalski-ios\nhttps://x.com/davidkowalskidev\nhttps://mastodon.social/@davidkowalski\nhttps://bsky.app/profile/davidkowalski.dev\nhttps://www.youtube.com/@davidkowalski\n",
           "socialType" : "www"
         }
       ],
@@ -819,7 +747,7 @@
     },
     {
       "locationID" : "tyndallLecture",
-      "talkTitle" : "Welcome to MythConf 2027",
+      "talkTitle" : "Welcome to MythConf 2026",
       "talkDescription" : "A brief welcome from the organisers to set the scene for the conference, introduce the venue, and thank the sponsors who made this all possible.",
       "speakerIDs" : [
         "AlexMorgan"
@@ -974,7 +902,7 @@
     {
       "speakerIDs" : [],
       "talkDescription" : "A panel discussion with several of the conference speakers on the current state of Swift and iOS development, where the platform is heading, and what they wish Apple would do differently.",
-      "talkTitle" : "Panel: The State of Swift in 2027",
+      "talkTitle" : "Panel: The State of Swift in 2026",
       "id" : "C1001023-C100-4100-8100-100000000023",
       "locationID" : "tyndallLecture"
     },
@@ -1005,7 +933,7 @@
     },
     {
       "locationID" : "tyndallLecture",
-      "talkTitle" : "Computer Vision on Device: Core ML, Vision, and On-Device Models in 2027",
+      "talkTitle" : "Computer Vision on Device: Core ML, Vision, and On-Device Models in 2026",
       "talkDescription" : "On-device machine learning for computer vision has become genuinely practical for everyday iOS apps, not just specialist use cases. The combination of Core ML, the Vision framework, and Apple's increasingly powerful Neural Engine means there are real capabilities available without a network connection or a cloud bill.\n\nThis talk covers the practical landscape: how to use built-in Vision request types for common tasks, how to integrate custom Core ML models, and how to think about the tradeoffs between model size, accuracy, and inference speed on the range of devices your users actually have. We will also look at on-device foundation models and where vision-language tasks fit into the picture.\n\nExpect live demos, realistic examples, and an honest assessment of where the current limitations lie.",
       "speakerIDs" : [
         "TomNakamura"

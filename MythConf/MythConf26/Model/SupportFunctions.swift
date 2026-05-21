@@ -7,28 +7,39 @@
 
 import Foundation
 
-func loadConfData() -> ConfData{
+func loadConfData() -> ConfData {
+    let baseName = bundledConfFileName()
     var result = ConfData(version: 0, speakers: [], talks: [], locations: [], sessions: [])
-    let filename = "conf.json"
-    var filePath = urlToFileInDocuments(filename)
-    print("File in docs is \(filePath)")
-    
-    if !fileExistsInDocuments(filename) {
-        guard let bundlePath = pathToFileInBundle(fileName: "conf", ending: ".json")  else {
-            print("Failed to find speaker file in bundle")
-            return result
-        }
-        filePath = bundlePath
-    }
-    if let dataFromFile = try? Data(contentsOf: filePath) {
-        // Decode the JSON back to state of program
-        let decoder = JSONDecoder()
-        if let confInfo = try? decoder.decode(ConfData.self, from: dataFromFile) {
-            result = confInfo
+    // The Documents copy only applies to the original English `conf.json` (it
+    // is written by `saveConference()`). Localised variants always come from
+    // the bundle so translations stay in sync with the app build.
+    if baseName == "conf", fileExistsInDocuments("conf.json") {
+        let filePath = urlToFileInDocuments("conf.json")
+        if let dataFromFile = try? Data(contentsOf: filePath),
+           let confInfo = try? JSONDecoder().decode(ConfData.self, from: dataFromFile) {
+            return confInfo
         }
     }
-    
+    guard let bundlePath = pathToFileInBundle(fileName: baseName, ending: ".json") else {
+        print("Failed to find \(baseName).json in bundle")
+        return result
+    }
+    if let dataFromFile = try? Data(contentsOf: bundlePath),
+       let confInfo = try? JSONDecoder().decode(ConfData.self, from: dataFromFile) {
+        result = confInfo
+    }
     return result
+}
+
+/// Picks the conf JSON file name based on the effective content language.
+/// Falls back to the default English `conf` file when a localised variant is
+/// not bundled, so the schedule never appears empty.
+private func bundledConfFileName() -> String {
+    let override = UserDefaults.standard.string(forKey: "languageOverride") ?? ""
+    let effective = override.isEmpty ? (Locale.current.language.languageCode?.identifier ?? "en") : override
+    let candidate = effective == "ja" ? "conf-ja" : "conf"
+    guard candidate != "conf" else { return "conf" }
+    return Bundle.main.url(forResource: candidate, withExtension: "json") != nil ? candidate : "conf"
 }
 
 func pathToFileInBundle(fileName: String, ending: String) -> URL? {

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "yt_icon_red_digital.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

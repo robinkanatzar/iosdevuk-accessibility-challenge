@@ -15,13 +15,24 @@ struct TalkSummaryView: View {
         VStack(alignment: .leading) {
             Text(viewModel.talkTitleFrom(talkID: talkID))
                 .bold()
-            HStack {
+            AStack(vAlignment: .leading) {
                 Label(session.timeRange, systemImage: "clock")
                 Label(viewModel.locationNameFrom(talkID: talkID), systemImage: "mappin")
             }
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .secondaryTextStyle()
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityDescription)
+        .accessibilityInputLabels([viewModel.talkTitleFrom(talkID: talkID)])
+    }
+
+    private var accessibilityDescription: String {
+        let title = viewModel.talkTitleFrom(talkID: talkID)
+        let start = session.startTimeText
+        let end = session.endTimeText
+        let location = viewModel.locationNameFrom(talkID: talkID)
+        return String(localized: "\(title), from \(start) to \(end), at \(location)")
     }
 }
