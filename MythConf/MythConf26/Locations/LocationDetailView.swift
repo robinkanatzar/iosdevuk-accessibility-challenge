@@ -98,6 +98,11 @@ struct LocationDetailView: View {
                 ])
                 .accessibilityHint("Gets directions")
                 .accessibilityIdentifier("location.openInMaps")
+                // VoiceOver gets the same Maps handoff through the custom
+                // action on the page, so this visible button stays available
+                // for touch, Switch Control, and keyboard users without
+                // creating a duplicate VoiceOver stop.
+                .accessibilityHiddenFromVoiceOver()
                 .padding(.horizontal)
                 .padding(.bottom)
                 .popoverTip(openInMapsTip, arrowEdge: .bottom)
