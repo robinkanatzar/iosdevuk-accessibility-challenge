@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "%@" : {
 
     },
@@ -357,9 +354,6 @@
     "Turns vibration on or off when adding or removing a favourite." : {
 
     },
-    "Unfavourite ${session}" : {
-
-    },
     "Use Apple Maps for directions" : {
 
     },
@@ -374,26 +368,6 @@
     },
     "Which session do you want directions to?" : {
 
-    },
-    "You have %@ in your schedule. %@." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "You have %1$@ in your schedule. %2$@."
-          }
-        }
-      }
-    },
-    "You have %@ in your schedule. %@. There are %@ in the app." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "You have %1$@ in your schedule. %2$@. There are %3$@ in the app."
-          }
-        }
-      }
     },
     "Your Schedule" : {
 

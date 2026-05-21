@@ -67,17 +67,9 @@ The Programme and My Schedule screens keep a recognisable conference schedule la
 - Session category, favourite state, and live/upcoming/ended status are not colour-only. They are expressed through visible text, symbols, shape, accessibility values, and custom content.
 - Cards adapt for Reduce Transparency by using opaque system surfaces instead of low-opacity tinted backgrounds.
 
-> TODO: Add before/after screenshots of Programme cards at default text size and large accessibility text size.
->
-> Suggested files:
->
-> - `submission-media/programme-before.png`
-> - `submission-media/programme-after.png`
-> - `submission-media/programme-large-text.gif`
-
-| Before                                                                           | After                                                                          |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| ![TODO: Before Programme card screenshot](submission-media/programme-before.png) | ![TODO: After Programme card screenshot](submission-media/programme-after.png) |
+| Before                                                                     | After                                                                    |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| ![Before Programme card screenshot](submission-media/programme-before.png) | ![After Programme card screenshot](submission-media/programme-after.png) |
 
 ### 2. Session Details That Answer The Attendee's Questions
 
@@ -92,11 +84,7 @@ The Session Details screen was redesigned around the most important real-world c
 - Full-width Add/Remove Favourite button gives a clear action for users who do not recognise the star icon.
 - VoiceOver Magic Tap toggles favourite state from anywhere on the detail screen.
 
-> TODO: Add a GIF showing Session Details, toolbar star, full-width favourite button, and Magic Tap result.
->
-> Suggested file: `submission-media/session-detail-favourite.gif`
-
-![TODO: Session detail redesigned screen](submission-media/session-detail-favourite.gif)
+![Session detail redesigned screen](submission-media/session-detail-favourite.gif)
 
 ### 3. Less Mental Math For Time-Sensitive Navigation
 
@@ -115,17 +103,9 @@ Conference schedules are time-sensitive. This PR gives multiple time anchors wit
 - Reminder timing is user-controlled: Off, 5 minutes, 10 minutes, or 15 minutes.
 - The app can be launched with injected conference dates, so judges can see the exact mix a real attendee would see during the event: ended sessions, the live session, upcoming sessions, countdowns, Now/Next chips, and reminders.
 
-> TODO: Add GIF using `-TestingDate` to show status changing from Starting Soon -> Starting in Xm -> Live -> Ended.
->
-> Suggested file: `submission-media/session-status-timeline.gif`
+![Status badge and Now/Next chips](submission-media/session-status-timeline.gif)
 
-![TODO: Status badge and Now/Next chips](submission-media/session-status-timeline.gif)
-
-> TODO: Add the Xcode launch arguments screenshot showing the saved `-TestingDate` presets, with the second conference day preset selected.
->
-> Suggested file: `submission-media/testing-date-launch-arguments.png`
-
-![TODO: Xcode launch arguments for injected conference dates](submission-media/testing-date-launch-arguments.png)
+![Xcode launch arguments for injected conference dates](submission-media/testing-date-launch-arguments.png)
 
 ### 4. VoiceOver Navigation That Scales To A Dense Programme
 
@@ -148,11 +128,7 @@ This work goes beyond adding labels. It improves how VoiceOver users move, inspe
 - Speaker detail headings now include context, for example "Sessions by Alex Morgan".
 - Decorative images are hidden and meaningful speaker photos have contextual labels.
 
-> TODO: Add short VoiceOver screen recording showing rotor navigation and custom content.
->
-> Suggested file: `submission-media/voiceover-rotors-and-custom-content.gif`
-
-![TODO: VoiceOver rotor demo](submission-media/voiceover-rotors-and-custom-content.gif)
+![VoiceOver rotor demo](submission-media/voiceover-rotors-and-custom-content.gif)
 
 ### 5. Speech Access For Core Conference Tasks
 
@@ -189,24 +165,11 @@ The session-specific Siri actions are picker-driven: the initial phrase does not
 
 Siri responses are designed for voice-only use and visual glanceability. `Read Schedule` and `Session Details` use full spoken dialog for no-display contexts and compact snippet views when a display is available. Spoken times use clear phrases like "Start time 09:30. End time 09:40." instead of compact visual punctuation.
 
-> TODO: Add screenshots from Shortcuts showing iOSDevUK actions and Siri result cards.
->
-> Suggested files:
->
-> - `submission-media/shortcuts-iosdevuk-actions.png`
-> - `submission-media/siri-read-schedule.png`
-> - `submission-media/siri-session-details.png`
-> - `submission-media/siri-directions.png`
+| Shortcuts                                                                      | Siri                                                                  |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| ![Shortcuts iOSDevUK actions](submission-media/shortcuts-iosdevuk-actions.gif) | ![Siri read schedule result](submission-media/siri-read-schedule.gif) |
 
-| Shortcuts                                                                            | Siri                                                                        |
-| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| ![TODO: Shortcuts iOSDevUK actions](submission-media/shortcuts-iosdevuk-actions.png) | ![TODO: Siri read schedule result](submission-media/siri-read-schedule.png) |
-
-> TODO: Add a Spotlight/system search GIF showing a search for "Observable" or "SwiftData", then tapping the result and landing on Session Details.
->
-> Suggested file: `submission-media/search-session-open-detail.gif`
-
-![TODO: System search result opening Session Details](submission-media/search-session-open-detail.gif)
+![System search result opening Session Details](submission-media/search-session-open-detail.gif)
 
 ### 6. Lower Reading Friction For Long Text
 
@@ -223,16 +186,9 @@ The implementation is intentionally targeted:
 - Announces preview updates to VoiceOver users when the setting changes.
 - Leaves the setting off by default so users opt in only if it helps them.
 
-> TODO: Add before/after screenshots of Session Details and Speaker Details with OpenDyslexic off/on.
->
-> Suggested files:
->
-> - `submission-media/opendyslexic-off.png`
-> - `submission-media/opendyslexic-on.png`
-
-| System Font                                                      | OpenDyslexic Reading Mode                                      |
-| ---------------------------------------------------------------- | -------------------------------------------------------------- |
-| ![TODO: OpenDyslexic off](submission-media/opendyslexic-off.png) | ![TODO: OpenDyslexic on](submission-media/opendyslexic-on.png) |
+| System Font                                                | OpenDyslexic Reading Mode                                |
+| ---------------------------------------------------------- | -------------------------------------------------------- |
+| ![OpenDyslexic off](submission-media/opendyslexic-off.png) | ![OpenDyslexic on](submission-media/opendyslexic-on.png) |
 
 ### 7. Confirmation That Does Not Depend On One Sense
 
@@ -253,11 +209,7 @@ Favouriting a session provides feedback through multiple channels:
 
 This supports users who may not perceive one feedback channel reliably, while still allowing users with sensory sensitivity to disable feedback.
 
-> TODO: Add Settings screenshot showing favourite feedback toggles.
->
-> Suggested file: `submission-media/settings-feedback-controls.png`
-
-![TODO: Settings feedback controls](submission-media/settings-feedback-controls.png)
+![Settings feedback controls](submission-media/settings-feedback-controls.gif)
 
 ### 8. User-Controlled Reminders Instead Of One-Size-Fits-All Alerts
 
@@ -278,16 +230,9 @@ Accessibility benefits:
 - Never schedules reminders for past sessions.
 - Notification taps deep-link back to the relevant session.
 
-> TODO: Add GIF or screenshots showing the reminder setting and resulting local notification.
->
-> Suggested files:
->
-> - `submission-media/reminder-setting.png`
-> - `submission-media/local-notification.png`
-
-| Reminder Setting                                                 | Local Notification                                                   |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------- |
-| ![TODO: Reminder setting](submission-media/reminder-setting.png) | ![TODO: Local notification](submission-media/local-notification.png) |
+| Reminder Setting                                           | Local Notification                                             |
+| ---------------------------------------------------------- | -------------------------------------------------------------- |
+| ![Reminder setting](submission-media/reminder-setting.gif) | ![Local notification](submission-media/local-notification.gif) |
 
 ### 9. More Predictable Room Navigation
 
@@ -302,14 +247,7 @@ Location detail screens include a visible Open in Maps button.
 - A Copy Link action is also available through the toolbar and VoiceOver Actions rotor, giving users a non-navigation alternative for sharing or opening the location URL elsewhere.
 - The design uses a compact button so the action is discoverable without overwhelming the location page.
 
-> TODO: Add Location Detail screenshot and Maps handoff GIF.
->
-> Suggested files:
->
-> - `submission-media/location-detail-maps-button.png`
-> - `submission-media/maps-handoff.gif`
-
-![TODO: Location detail Maps button](submission-media/location-detail-maps-button.png)
+![Location detail Maps button](submission-media/maps-handoff.gif)
 
 ### 10. Discoverability Without A Tutorial Wall
 
@@ -324,14 +262,13 @@ The app teaches non-obvious features in context:
 
 Tips are invalidated after the taught action is used, and hidden during UI tests so they do not destabilise automation.
 
-> TODO: Add screenshots of each TipKit tip.
->
-> Suggested files:
->
-> - `submission-media/tip-save-sessions.png`
-> - `submission-media/tip-switch-days.png`
-> - `submission-media/tip-find-speaker.png`
-> - `submission-media/tip-open-maps.png`
+| Save Sessions                                                                                   | Switch Days                                                                                       |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| ![TipKit Save Sessions tip shown on the favourite star](submission-media/tip-save-sessions.png) | ![TipKit Switch Days tip shown on the Programme day picker](submission-media/tip-switch-days.png) |
+
+| Find A Speaker                                                                                   | Open In Maps                                                                                     |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| ![TipKit Find a Speaker tip shown on the Speakers screen](submission-media/tip-find-speaker.png) | ![TipKit Open in Maps tip shown on a Location Detail screen](submission-media/tip-open-maps.png) |
 
 ## Smaller Changes With Practical Benefits
 
@@ -488,13 +425,9 @@ These checks show that the app respects user display preferences rather than rel
 5. Enable **Reduce Motion** and confirm favourite state changes without symbol replacement or button state animation.
 6. Enable a grayscale colour filter or Differentiate Without Color and confirm favourite state, session category, Now/Next, Live, Starting, and Ended states remain understandable through text, symbols, shape, and accessibility state.
 
-> TODO: Add a comparison grid showing Button Shapes, Reduce Transparency, and grayscale/Differentiate Without Color.
->
-> Suggested files:
->
-> - `submission-media/button-shapes-settings.png`
-> - `submission-media/reduce-transparency-programme.png`
-> - `submission-media/grayscale-status-cards.png`
+| Button Shapes Demo                                                          | Reduce Transparency Demo                                                                 |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| ![Demonstrating Button Shapes](submission-media/button-shapes-settings.gif) | ![Demonstrating Reduce Transparency](submission-media/reduce-transparency-programme.gif) |
 
 ## Automated Verification
 
@@ -573,36 +506,6 @@ Some XCTest audit checks remain manual because current simulator tooling is nois
 - Siri on device.
 - Haptics and sounds on physical hardware.
 - Switch Control and Full Keyboard Access scan/order passes.
-
-## Media Checklist Before Submitting The PR
-
-- [ ] `submission-media/hero-programme-to-my-schedule.gif`
-- [ ] `submission-media/programme-before.png`
-- [ ] `submission-media/programme-after.png`
-- [ ] `submission-media/programme-large-text.gif`
-- [ ] `submission-media/session-detail-favourite.gif`
-- [ ] `submission-media/session-status-timeline.gif`
-- [ ] `submission-media/testing-date-launch-arguments.png`
-- [ ] `submission-media/voiceover-rotors-and-custom-content.gif`
-- [ ] `submission-media/shortcuts-iosdevuk-actions.png`
-- [ ] `submission-media/siri-read-schedule.png`
-- [ ] `submission-media/siri-session-details.png`
-- [ ] `submission-media/siri-directions.png`
-- [ ] `submission-media/search-session-open-detail.gif`
-- [ ] `submission-media/opendyslexic-off.png`
-- [ ] `submission-media/opendyslexic-on.png`
-- [ ] `submission-media/settings-feedback-controls.png`
-- [ ] `submission-media/reminder-setting.png`
-- [ ] `submission-media/local-notification.png`
-- [ ] `submission-media/location-detail-maps-button.png`
-- [ ] `submission-media/maps-handoff.gif`
-- [ ] `submission-media/button-shapes-settings.png`
-- [ ] `submission-media/reduce-transparency-programme.png`
-- [ ] `submission-media/grayscale-status-cards.png`
-- [ ] `submission-media/tip-save-sessions.png`
-- [ ] `submission-media/tip-switch-days.png`
-- [ ] `submission-media/tip-find-speaker.png`
-- [ ] `submission-media/tip-open-maps.png`
 
 ## Final Note
 
