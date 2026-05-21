@@ -37,18 +37,22 @@ struct SocialLinksView: View {
     }
 
     var body: some View {
-        if dynamicTypeSize.isAccessibilitySize {
-            VStack(alignment: .center, spacing: 8) {
-                socialLinkButtons
-            }
-        } else {
-            ScrollView(.horizontal) {
-                HStack(spacing: 8) {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .center, spacing: 8) {
                     socialLinkButtons
                 }
+            } else {
+                ScrollView(.horizontal) {
+                    HStack(spacing: 8) {
+                        socialLinkButtons
+                    }
+                }
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Social links")
     }
 
     @ViewBuilder
