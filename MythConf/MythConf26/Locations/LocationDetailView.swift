@@ -37,9 +37,30 @@ struct LocationDetailView: View {
             Button("Open in Maps") { // a11y-check:disable button-used-as-link
                 openInMaps()
             }
+
+            Button("Copy Link") {
+                copyLocationLink()
+            }
         }
         .navigationTitle("Location Details")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button {
+                        copyLocationLink()
+                    } label: {
+                        Label("Copy Link", systemImage: "doc.on.doc")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .accessibilityHidden(true)
+                }
+                // VoiceOver gets this action from the page-level Actions
+                // rotor, so the visible menu does not add a duplicate stop.
+                .accessibilityHiddenFromVoiceOver()
+            }
+        }
         .onAppear {
             OpenInMapsTip.hasViewedLocationDetail = true
         }
@@ -114,6 +135,13 @@ struct LocationDetailView: View {
         let message = "One moment, opening Apple Maps for directions to \(location.name)"
         AccessibilityNotification.Announcement(message).post()
         openURL(mapsURL)
+    }
+
+    private func copyLocationLink() {
+        guard let mapsURL else { return }
+
+        UIPasteboard.general.string = mapsURL.absoluteString
+        AccessibilityNotification.Announcement("Location link copied").post()
     }
 
     private var mapsButtonLabel: some View {

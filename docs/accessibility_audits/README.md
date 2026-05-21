@@ -134,6 +134,8 @@ Remaining low-opacity accent fills in badges and icon backgrounds are decorative
 - Summarized the map as a single accessible element with label, value, and hint.
 - Added a visible "Open in Maps" button to provide feature parity with VoiceOver users. While VoiceOver users can access the map action via the custom accessibility rotor, this visible button ensures that all users—regardless of assistive technology usage—have the same accessible shortcut for external navigation.
 - Restyled the Maps handoff as a compact full-width button while preserving the explicit "Open [location] in Maps" accessibility label.
+- Added a copy-link option on Location Detail so users are not locked into one navigation path. The toolbar menu item lets touch, Switch Control, and keyboard users copy the Apple Maps URL for use in another maps app, notes, messages, or a browser without adding another large action button to the page.
+- Added `Copy Link` as a page-level VoiceOver custom action alongside `Open in Maps`. The visible toolbar menu is hidden from VoiceOver to avoid duplicate swipe stops while preserving equivalent functionality through the Actions rotor.
 - Improved location row grouping and Dynamic Type behavior.
 
 ### Images
@@ -283,6 +285,8 @@ Magic Tap is designed to trigger the most important contextual action on a scree
 
 For the **Location Detail** screen, I chose **custom accessibility actions** instead of Magic Tap for opening **Apple Maps**.
 Since launching another app is a higher-impact action, exposing it through the **VoiceOver Actions rotor** provides a more predictable and intentional experience. VoiceOver users are explicitly informed that additional actions are available, making the feature easier to discover while also reducing the risk of accidental navigation away from the app.
+
+The same Actions rotor also exposes **Copy Link**. This gives VoiceOver users a non-navigation alternative: they can copy the location URL and paste it into another maps app, a message, notes, or a browser. The visible toolbar menu is intentionally hidden from VoiceOver because it duplicates the rotor action, while still keeping the copy option discoverable for touch, Switch Control, and keyboard users.
 
 ## High-Fidelity Accessibility Notifications (iOS 26+)
 
