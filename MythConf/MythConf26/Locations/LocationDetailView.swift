@@ -94,6 +94,7 @@ struct LocationDetailView: View {
                 Text(location.placeDescription)
                     .foregroundStyle(.secondary)
                     .padding()
+                    .accessibilityAddTraits(.isHeader)
             }
         }
         .navigationBarBackButtonHidden(true)
