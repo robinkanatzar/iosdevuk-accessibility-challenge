@@ -9,6 +9,7 @@ import SwiftUI
 struct TimeColumnView: View {
     let startTime: String
     let endTime: String
+    @ScaledMetric(relativeTo: .caption) private var width: CGFloat = 44
 
     var body: some View {
         VStack(alignment: .trailing) {
@@ -20,7 +21,7 @@ struct TimeColumnView: View {
                 .monospacedDigit()
         }
         .font(.caption)
-        .frame(width: 44, alignment: .trailing)
+        .frame(width: width, alignment: .trailing)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
     }

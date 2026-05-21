@@ -6,6 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		61F21314B0D65E2436D51AB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECE8E9061A1262D3E4B3049 /* Foundation.framework */; };
+		A1F78CE25E49EF7B18CA3193 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECE8E9061A1262D3E4B3049 /* Foundation.framework */; };
+		B17DF216E0FF1809D2B80FA0 /* MythConf26UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F907E84D32AD33121D552F /* MythConf26UITests.swift */; };
+		FB9A09DAC7DF6861DA49E392 /* MythConf26Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7144BDBDEBFBFFC46073750B /* MythConf26Tests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6386AF52E29E67BEAAF72571 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B2918AE2F73EA8B008A369D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B2918B52F73EA8B008A369D;
+			remoteInfo = MythConf26;
+		};
+		6C7BCF98E39ED33F0ACA3260 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B2918AE2F73EA8B008A369D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B2918B52F73EA8B008A369D;
+			remoteInfo = MythConf26;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		1B2919CA2F74454F008A369D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,8 +44,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07D14DFB699179187020D564 /* MythConf26UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2918B62F73EA8B008A369D /* MythConf26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MythConf26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2919B72F74454E008A369D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		1B72B5DC5C7CEBB9A2345D60 /* MythConf26Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5ECE8E9061A1262D3E4B3049 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7144BDBDEBFBFFC46073750B /* MythConf26Tests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MythConf26Tests.swift; sourceTree = "<group>"; };
+		A1F907E84D32AD33121D552F /* MythConf26UITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MythConf26UITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,10 +62,26 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		026D60E1BED3E4771B8AFA2A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61F21314B0D65E2436D51AB5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1B2918B32F73EA8B008A369D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3278074FA2A1416F074D865 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F78CE25E49EF7B18CA3193 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +94,8 @@
 				1B2918B82F73EA8B008A369D /* MythConf26 */,
 				1B2919B42F74454E008A369D /* Frameworks */,
 				1B2918B72F73EA8B008A369D /* Products */,
+				E3D48F9CFA6E65774B6D5E72 /* MythConf26Tests */,
+				E4F8D77B18A980E048ACD482 /* MythConf26UITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				1B2918B62F73EA8B008A369D /* MythConf26.app */,
+				1B72B5DC5C7CEBB9A2345D60 /* MythConf26Tests.xctest */,
+				07D14DFB699179187020D564 /* MythConf26UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,8 +113,33 @@
 			isa = PBXGroup;
 			children = (
 				1B2919B72F74454E008A369D /* SwiftUI.framework */,
+				F4EDA42D0FD163C19D5ADD1E /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E3D48F9CFA6E65774B6D5E72 /* MythConf26Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7144BDBDEBFBFFC46073750B /* MythConf26Tests.swift */,
+			);
+			path = MythConf26Tests;
+			sourceTree = "<group>";
+		};
+		E4F8D77B18A980E048ACD482 /* MythConf26UITests */ = {
+			isa = PBXGroup;
+			children = (
+				A1F907E84D32AD33121D552F /* MythConf26UITests.swift */,
+			);
+			path = MythConf26UITests;
+			sourceTree = "<group>";
+		};
+		F4EDA42D0FD163C19D5ADD1E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5ECE8E9061A1262D3E4B3049 /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,11 +162,45 @@
 				1B2918B82F73EA8B008A369D /* MythConf26 */,
 			);
 			name = MythConf26;
-			packageProductDependencies = (
-			);
 			productName = IOSDevuk26;
 			productReference = 1B2918B62F73EA8B008A369D /* MythConf26.app */;
 			productType = "com.apple.product-type.application";
+		};
+		76F34A492DCAE2E83F7A1517 /* MythConf26UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FD536CCEB3A2F6E449C0187 /* Build configuration list for PBXNativeTarget "MythConf26UITests" */;
+			buildPhases = (
+				D2A7C897DB387B9F62220921 /* Sources */,
+				E3278074FA2A1416F074D865 /* Frameworks */,
+				AC1F7654D869E9FC0E496F10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A56C70FE9C9AB5076D15CF9 /* PBXTargetDependency */,
+			);
+			name = MythConf26UITests;
+			productName = MythConf26UITests;
+			productReference = 07D14DFB699179187020D564 /* MythConf26UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		ABBDF77764E81130145C868C /* MythConf26Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 182BBCF5146F01E0141BB3A8 /* Build configuration list for PBXNativeTarget "MythConf26Tests" */;
+			buildPhases = (
+				9EDEDCA5AB4685F01019D585 /* Sources */,
+				026D60E1BED3E4771B8AFA2A /* Frameworks */,
+				F53CC4589839BFC91D2D7BCB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BAE2967DD513A375454FDF9E /* PBXTargetDependency */,
+			);
+			name = MythConf26Tests;
+			productName = MythConf26Tests;
+			productReference = 1B72B5DC5C7CEBB9A2345D60 /* MythConf26Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -118,20 +226,34 @@
 			);
 			mainGroup = 1B2918AD2F73EA8B008A369D;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1B2918B72F73EA8B008A369D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				1B2918B52F73EA8B008A369D /* MythConf26 */,
+				ABBDF77764E81130145C868C /* MythConf26Tests */,
+				76F34A492DCAE2E83F7A1517 /* MythConf26UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1B2918B42F73EA8B008A369D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC1F7654D869E9FC0E496F10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F53CC4589839BFC91D2D7BCB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -148,7 +270,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9EDEDCA5AB4685F01019D585 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB9A09DAC7DF6861DA49E392 /* MythConf26Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2A7C897DB387B9F62220921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B17DF216E0FF1809D2B80FA0 /* MythConf26UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5A56C70FE9C9AB5076D15CF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MythConf26;
+			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
+			targetProxy = 6386AF52E29E67BEAAF72571 /* PBXContainerItemProxy */;
+		};
+		BAE2967DD513A375454FDF9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MythConf26;
+			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
+			targetProxy = 6C7BCF98E39ED33F0ACA3260 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1B2918BF2F73EA8B008A369D /* Debug */ = {
@@ -281,7 +434,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				DEVELOPMENT_TEAM = MXF9VN8K24;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
@@ -297,7 +450,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26;
+				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf261;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -316,7 +469,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				DEVELOPMENT_TEAM = MXF9VN8K24;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
@@ -332,7 +485,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26;
+				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf261;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -344,9 +497,98 @@
 			};
 			name = Release;
 		};
+		38444EABB38BBC6B5127E280 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26UITests;
+				PRODUCT_MODULE_NAME = MythConf26UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MythConf26;
+			};
+			name = Debug;
+		};
+		507AF7C67DA1FC53B1AB2E87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26Tests;
+				PRODUCT_MODULE_NAME = MythConf26Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MythConf26.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MythConf26";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEA3EC12D908473898D7D8AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26Tests;
+				PRODUCT_MODULE_NAME = MythConf26Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MythConf26.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MythConf26";
+			};
+			name = Debug;
+		};
+		C2DBC0314D88103C7E0A8504 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26UITests;
+				PRODUCT_MODULE_NAME = MythConf26UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MythConf26;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		182BBCF5146F01E0141BB3A8 /* Build configuration list for PBXNativeTarget "MythConf26Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				507AF7C67DA1FC53B1AB2E87 /* Release */,
+				BEA3EC12D908473898D7D8AD /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1B2918B12F73EA8B008A369D /* Build configuration list for PBXProject "MythConf26" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -361,6 +603,15 @@
 			buildConfigurations = (
 				1B2918C22F73EA8B008A369D /* Debug */,
 				1B2918C32F73EA8B008A369D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7FD536CCEB3A2F6E449C0187 /* Build configuration list for PBXNativeTarget "MythConf26UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2DBC0314D88103C7E0A8504 /* Release */,
+				38444EABB38BBC6B5127E280 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

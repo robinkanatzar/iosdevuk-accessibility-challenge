@@ -31,6 +31,13 @@ struct LocationDetailView: View {
                 .frame(height: 400)
                 .clipShape(.rect(cornerRadius: 12))
                 .padding(.horizontal)
+                .accessibilityLabel("Map showing \(location.name), \(location.placeDescription)")
+                .accessibilityHint("Shows a map of the venue location. Use actions to open in Maps app.")
+                .accessibilityAction(named: "Open in Maps") {
+                    let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
+                    mapItem.name = location.name
+                    mapItem.openInMaps()
+                }
 
                 Text(location.placeDescription)
                     .foregroundStyle(.secondary)

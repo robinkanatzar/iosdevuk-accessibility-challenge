@@ -14,11 +14,12 @@ struct SocialLinksView: View {
             ForEach(social, id: \.self) { item in
                 if let url = URL(string: item.socialLink) {
                     Link(destination: url) {
-                        Label(item.socialType.capitalized, systemImage: iconName(for: item.socialType))
+                        Label("Visit \(item.socialType.capitalized) profile", systemImage: iconName(for: item.socialType))
                             .font(.subheadline)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 4)
                     }
+                    .frame(minHeight: 44)
                     .contentShape(.rect)
                 }
             }

@@ -45,6 +45,8 @@ struct SessionDetailView: View {
         }
         .navigationTitle(talk.talkTitle)
         .navigationBarTitleDisplayMode(.inline)
+        .accessibilityCustomContent("Time", Text(session.timeRange))
+        .accessibilityCustomContent("Location", Text(viewModel.locationNameFrom(locationID: talk.locationID)))
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 FavouriteButtonView(talk: talk)

@@ -8,6 +8,7 @@ import SwiftUI
 /// A full-width row for non-session slots such as breaks, lunch, and social events.
 struct BreakRowView: View {
     @Environment(ViewModel.self) private var viewModel
+    @Environment(\.colorSchemeContrast) private var contrast
     let session: Session
 
     var body: some View {
@@ -15,7 +16,7 @@ struct BreakRowView: View {
             TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
 
             VStack(alignment: .leading) {
-                Text(session.sessionType.displayName)
+                Label(session.sessionType.displayName, systemImage: session.sessionType.iconName)
                     .italic()
                     .foregroundStyle(.primary)
                 if let talkID = session.contentIDs.first {
@@ -29,6 +30,14 @@ struct BreakRowView: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(session.sessionType.color.opacity(0.12))
+        .background(contrast == .increased ? Color(.tertiarySystemBackground) : session.sessionType.color.opacity(0.12))
+        .overlay {
+            if contrast == .increased {
+                Rectangle()
+                    .stroke(Color.primary.opacity(0.3), lineWidth: 0.5)
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(session.startTimeAccessibilityText) to \(session.endTimeAccessibilityText), \(session.sessionType.displayName)")
     }
 }

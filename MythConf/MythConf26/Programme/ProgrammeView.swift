@@ -8,12 +8,22 @@ import SwiftUI
 struct ProgrammeView: View {
     @Environment(ViewModel.self) private var viewModel
     @State private var selectedDayIndex = 0
+    @AppStorage("useDyslexiaFont") private var useDyslexiaFont = false
 
     private var days: [[Session]] { viewModel.confData.sessions }
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                let phase = viewModel.confData.whereInConf()
+                if !phase.displayName.isEmpty {
+                    Text(phase.displayName)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .padding(.top, 4)
+                        .accessibilityAddTraits(.isHeader)
+                }
+
                 Picker("Conference day", selection: $selectedDayIndex) {
                     ForEach(days.indices, id: \.self) { index in
                         Text(dayLabel(for: days[index]))
@@ -42,6 +52,30 @@ struct ProgrammeView: View {
                 }
             }
             .conferenceNavigationDestinations()
+            .onChange(of: selectedDayIndex) { _, newValue in
+                let label = dayLabel(for: days[newValue])
+                UIAccessibility.post(notification: .announcement, argument: "Showing \(label)")
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack(spacing: 12) {
+                        Button {
+                            AppLocalization.shared.isHindi.toggle()
+                        } label: {
+                            Image(systemName: "globe")
+                        }
+                        .accessibilityLabel(AppLocalization.shared.isHindi ? "Switch to English" : "हिंदी में बदलें")
+
+                        Button {
+                            useDyslexiaFont.toggle()
+                        } label: {
+                            Image(systemName: useDyslexiaFont ? "textformat.alt" : "textformat")
+                        }
+                        .accessibilityLabel(useDyslexiaFont ? "Disable reading-friendly font" : "Enable reading-friendly font")
+                        .accessibilityHint("Switches to a rounded font design that may improve readability")
+                    }
+                }
+            }
         }
     }
 

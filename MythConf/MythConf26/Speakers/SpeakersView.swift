@@ -22,7 +22,18 @@ struct SpeakersView: View {
                     SpeakerRowView(speakerID: speaker.id)
                 }
             }
+            .overlay {
+                if !searchText.isEmpty && filteredSpeakers.isEmpty {
+                    ContentUnavailableView.search(text: searchText)
+                }
+            }
             .searchable(text: $searchText, prompt: "Search speakers")
+            .onChange(of: searchText) { _, newValue in
+                if !newValue.isEmpty {
+                    let count = filteredSpeakers.count
+                    UIAccessibility.post(notification: .announcement, argument: "\(count) speaker\(count == 1 ? "" : "s") found")
+                }
+            }
             .navigationTitle("Speakers")
             .conferenceNavigationDestinations()
         }

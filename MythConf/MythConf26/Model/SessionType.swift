@@ -38,6 +38,23 @@ enum SessionType: Codable {
         }
     }
 
+    var iconName: String {
+        switch self {
+        case .talk: return "mic.fill"
+        case .panel: return "person.3.fill"
+        case .workshop: return "hammer.fill"
+        case .lightningtalks: return "bolt.fill"
+        case .teaBreak: return "cup.and.saucer.fill"
+        case .lunch: return "fork.knife"
+        case .dinner: return "fork.knife"
+        case .confdinner: return "fork.knife"
+        case .social: return "bubbles.and.sparkles.fill"
+        case .registration: return "person.badge.key.fill"
+        case .railtrip: return "tram.fill"
+        case .dummy: return ""
+        }
+    }
+
     var color: Color {
         switch self {
         case .talk:          return .blue
