@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Session: Codable, Identifiable, Hashable {
+nonisolated struct Session: Codable, Identifiable, Hashable {
     var id = UUID()
     let startTime: Date
     let endTime: Date
@@ -53,12 +53,12 @@ struct Session: Codable, Identifiable, Hashable {
 
 extension Session {
 
-    enum LiveStatus {
+    nonisolated enum LiveStatus {
         case upcoming
         case live
         case ended
 
-        var title: String {
+        nonisolated var title: String {
             switch self {
             case .upcoming:
                 return "Starting Soon"
@@ -69,7 +69,7 @@ extension Session {
             }
         }
 
-        var symbolName: String {
+        nonisolated var symbolName: String {
             switch self {
             case .upcoming:
                 return "clock.badge"
@@ -81,7 +81,7 @@ extension Session {
         }
     }
 
-    struct StatusDisplay {
+    nonisolated struct StatusDisplay {
         let status: LiveStatus
         let title: String
         let accessibilityLabel: String
@@ -89,10 +89,10 @@ extension Session {
         let isVisible: Bool
     }
 
-    private static let statusVisibilityThreshold: TimeInterval = 20 * 60
-    private static let countdownThreshold: TimeInterval = 15 * 60
+    nonisolated private static let statusVisibilityThreshold: TimeInterval = 20 * 60
+    nonisolated private static let countdownThreshold: TimeInterval = 15 * 60
 
-    func liveStatus(now: Date) -> LiveStatus {
+    nonisolated func liveStatus(now: Date) -> LiveStatus {
         if now >= startTime && now <= endTime {
             return .live
         }
@@ -102,7 +102,7 @@ extension Session {
         return .ended
     }
 
-    func statusDisplay(now: Date) -> StatusDisplay {
+    nonisolated func statusDisplay(now: Date) -> StatusDisplay {
         let status = liveStatus(now: now)
 
         guard status == .upcoming else {
@@ -157,7 +157,7 @@ extension Session {
         )
     }
 
-    var isLive: Bool {
+    nonisolated var isLive: Bool {
         liveStatus(now: Date()) == .live
     }
 }

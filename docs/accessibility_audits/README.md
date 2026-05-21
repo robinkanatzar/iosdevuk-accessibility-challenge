@@ -180,18 +180,26 @@ Remaining grayscale verification should focus on luminance contrast rather than 
 
 ### Siri and Voice-First Shortcuts (Updated 2026-05-21)
 
-- Simplified App Intents to one reliable voice-first workflow: **Read Schedule**.
-- Removed Siri session-title entity resolution, Siri favourite, Siri unfavourite, and Siri session-detail shortcuts because spoken session names were fragile and made the shortcut surface harder for Shortcuts/Siri to register and resolve reliably.
-- Users still favourite sessions through the visual app, VoiceOver, Magic Tap, Voice Control, or custom actions. Siri then reads the already-saved/favourited schedule aloud.
-- Returned spoken `IntentDialog` responses for voice-only use, including an empty-schedule state and a saved-sessions summary.
+- Kept Siri actions aligned with existing app functionality: reading saved sessions, getting session details, and getting directions to the session location.
+- Kept Siri favourite/unfavourite removed because spoken session-title matching was fragile. Users still favourite sessions through the visual app, VoiceOver, Magic Tap, Voice Control, or custom actions.
+- Enhanced **Read Schedule** with `IntentDialog(full:supporting:)` and a snippet view. Siri can now speak the full saved schedule when no useful display is available, while showing a compact visual card when a display is available.
+- Added picker-driven **Session Details** and **Directions** shortcuts. The phrase does not include the session title; Siri asks which session, then uses a searchable session picker. This avoids relying on Siri correctly hearing long random talk titles.
+- Added a session detail snippet so users can see the title, speaker, time, location, and summary without being forced into the app.
+- Added a directions intent that uses the selected session's existing location data and opens Apple Maps to that room/building.
 - Updated Siri spoken times to use clear phrases such as `Start time 09:30. End time 09:40.` while keeping compact time ranges in visual display subtitles.
 - Used user-facing Siri wording such as "your schedule" so responses sound natural when Siri is addressing the user.
-- Kept the Siri action aligned with existing app functionality: it mirrors the My Schedule tab rather than adding a new workflow.
-- Kept easier app names such as `Myth Con`, `Myth Conference`, and `iOSDevUK` so users do not have to pronounce `MythConf` exactly.
+- Documented all recommended Siri examples with `iOSDevUK` because `MythConf`, `Myth Con`, and similar pronunciations were unreliable in testing. Use `iOSDevUK` for judge/user Siri verification.
+
+Accessibility benefits:
+
+- Voice-only users get enough spoken information from the `full` dialog on HomePod, CarPlay, or when they do not want to look at the screen.
+- Low-vision and cognitive users get a concise visual Siri snippet instead of a long wall of spoken-only text.
+- Mobility users can request details or directions with fewer taps and swipes.
+- Users with speech differences do not need to say a full talk title in the initial shortcut phrase.
 
 ### Searchable Sessions App Entity (Updated 2026-05-21)
 
-- Added searchable session App Entities for system search while keeping **Read Schedule** as the only visible Siri/Shortcuts action.
+- Added searchable session App Entities for system search while keeping Siri/Shortcuts actions picker-driven rather than title-in-phrase driven.
 - Indexed talk sessions with title, speaker, location, day, and time metadata so users can search for a session without visually scanning the full Programme.
 - Added a hidden `OpenSessionIntent` for search results. Tapping a session result opens the app and routes through the existing Programme navigation to the matching Session Details screen.
 - Kept this separate from spoken Siri session-title commands. Search/open supports users who prefer typing, keyboard search, Voice Control search workflows, or Spotlight-style discovery without reintroducing fragile spoken title matching.
@@ -207,19 +215,24 @@ Search/open manual verification:
 4. Tap the MythConf/iOSDevUK session result.
 5. Confirm the app opens directly to the matching Session Details screen.
 
-Manual verification:
+Siri manual verification:
 
 1. Build and run the app.
-2. Open Shortcuts and search for `iOSDevUK`, `Myth Con`, or `MythConf`.
-3. Confirm only `Read Schedule` appears for the app.
+2. Open Shortcuts and search for `iOSDevUK`.
+3. Confirm `Read Schedule`, `Session Details`, and `Directions` appear for the app.
 4. With no favourites, run `Read Schedule` and confirm Siri says the schedule is empty.
 5. Favourite one or more sessions in the app.
-6. Run `Read Schedule` again and confirm Siri reads the saved sessions.
-7. Test phrases:
+6. Run `Read Schedule` again and confirm Siri reads the saved sessions and shows a compact snippet.
+7. Run `Session Details` and confirm Siri asks which session, then speaks full details and shows the session snippet.
+8. Run `Directions` and confirm Siri asks which session, then opens Apple Maps for that session location.
+9. Test phrases:
    - `Read my schedule in iOSDevUK`
-   - `Read my schedule in Myth Con`
    - `What is on my schedule in iOSDevUK`
    - `Read saved sessions in iOSDevUK`
+   - `Get session details in iOSDevUK`
+   - `Tell me about a session in iOSDevUK`
+   - `Get directions to a session in iOSDevUK`
+   - `Show directions to a session in iOSDevUK`
 
 ### TipKit Feature Discovery (Updated 2026-05-17)
 

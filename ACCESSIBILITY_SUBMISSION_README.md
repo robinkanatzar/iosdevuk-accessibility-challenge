@@ -163,7 +163,7 @@ Users can target visible controls with natural phrases such as:
 - "Tap Speakers"
 - "Tap My Schedule"
 
-Siri is intentionally scoped to one reliable voice-first workflow: reading the user's saved schedule aloud. Users favourite sessions in the visual app, with VoiceOver, Magic Tap, or Voice Control. Siri then provides a hands-free way to hear what has been saved.
+Siri focuses on reliable conference workflows: reading the user's saved schedule aloud, getting details for a selected session, and opening directions to a selected session location. Users favourite sessions in the visual app, with VoiceOver, Magic Tap, or Voice Control. Siri then provides hands-free ways to hear what has been saved or ask for the next piece of conference information.
 
 Separately, sessions are indexed as searchable App Entities. A user can search by title, speaker, location, or day in system search, then tap a session result to open the matching Session Details screen. This helps users who know what they want but do not want to visually scan the full programme. It is useful for VoiceOver users, Voice Control users using system search, keyboard users, and users with cognitive fatigue who remember a talk title or speaker name.
 
@@ -173,12 +173,14 @@ Example phrases:
 - "Hey Siri, read my schedule in iOSDevUK"
 - "Hey Siri, what is on my schedule in iOSDevUK"
 - "Hey Siri, read saved sessions in iOSDevUK"
+- "Hey Siri, get session details in iOSDevUK"
+- "Hey Siri, get directions to a session in iOSDevUK"
 
 Siri can struggle with the consonant cluster in "MythConf", so the app declares easier alternate app names: "Myth Con", "Myth Conference", and "iOSDevUK".
 
-This reduced Siri surface avoids fragile spoken session-title entity resolution while preserving the main accessibility value: users can hear their saved schedule without looking at or touching the screen.
+The session-specific Siri actions are picker-driven: the initial phrase does not contain a session title. Siri asks which session and presents searchable options. This avoids fragile spoken title matching while still letting users hear details or get directions with fewer taps.
 
-Siri responses are designed for voice-only use. For example, spoken times use clear phrases like "Start time 09:30. End time 09:40." instead of compact visual punctuation.
+Siri responses are designed for voice-only use and visual glanceability. `Read Schedule` and `Session Details` use full spoken dialog for no-display contexts and compact snippet views when a display is available. Spoken times use clear phrases like "Start time 09:30. End time 09:40." instead of compact visual punctuation.
 
 > TODO: Add screenshots from Shortcuts showing MythConf actions and a Siri result card.
 >
@@ -432,13 +434,17 @@ Use launch arguments to test time-based states without waiting for the real conf
 1. Build and run the app.
 2. Open Shortcuts.
 3. Search for MythConf.
-4. Confirm only `Read Schedule` appears for the app.
+4. Confirm `Read Schedule`, `Session Details`, and `Directions` appear for the app.
 5. Run `Read Schedule`.
-6. Try the same action through Siri:
+6. Run `Session Details` and confirm Siri asks which session before showing and speaking details.
+7. Run `Directions` and confirm Siri asks which session before opening Apple Maps.
+8. Try the same actions through Siri:
    - "Read my schedule in iOSDevUK"
    - "Read my schedule in Myth Con"
    - "What is on my schedule in iOSDevUK"
    - "Read saved sessions in iOSDevUK"
+   - "Get session details in iOSDevUK"
+   - "Get directions to a session in iOSDevUK"
 
 ### System Search For Sessions
 

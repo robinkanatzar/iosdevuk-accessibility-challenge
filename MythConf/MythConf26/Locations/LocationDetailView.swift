@@ -23,8 +23,11 @@ struct LocationDetailView: View {
     }
     
     private var mapsURL: URL? {
-        let query = location.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? location.name
-        return URL(string: "http://maps.apple.com/?ll=\(location.latitude),\(location.longitude)&q=\(query)")
+        MapsURLBuilder.url(
+            locationName: location.name,
+            latitude: location.latitude,
+            longitude: location.longitude
+        )
     }
     
     var body: some View {

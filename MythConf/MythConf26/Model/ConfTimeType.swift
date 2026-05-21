@@ -5,7 +5,7 @@
 //  Created by Chris Price on 27/03/2026.
 //
 
-enum ConfTimeType {
+nonisolated enum ConfTimeType {
     case beforeConf
     case afterConf
     case beforeConfDayStart

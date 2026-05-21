@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum SessionType: Codable {
+nonisolated enum SessionType: Codable {
     case talk
     case panel
     case workshop

@@ -61,6 +61,8 @@ enum ConferenceSessionStore {
                         sessionType: session.sessionType.displayName,
                         speakerNames: formattedList(speakerNames),
                         locationName: location.name,
+                        latitude: location.latitude,
+                        longitude: location.longitude,
                         dayAndDate: session.dayAndDate,
                         timeRange: session.timeRange,
                         spokenTimeRange: session.accessibilityTimeRange,
@@ -86,8 +88,16 @@ enum ConferenceSessionStore {
         allSessions().filter(\.isFavourite)
     }
 
+    nonisolated static func session(for id: UUID) -> ConferenceSessionEntity? {
+        allSessions().first { $0.id == id }
+    }
+
     nonisolated static func searchableSessions() -> [SearchableSessionEntity] {
         allSessions().map(SearchableSessionEntity.init(session:))
+    }
+
+    nonisolated static func searchableSession(for id: UUID) -> SearchableSessionEntity? {
+        session(for: id).map(SearchableSessionEntity.init(session:))
     }
 
     nonisolated static func searchableSessions(matching searchText: String) -> [SearchableSessionEntity] {

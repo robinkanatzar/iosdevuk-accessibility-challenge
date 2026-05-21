@@ -7,7 +7,7 @@
 
 import Foundation
 
-func loadConfData() -> ConfData{
+nonisolated func loadConfData() -> ConfData{
     var result = ConfData(version: 0, speakers: [], talks: [], locations: [], sessions: [])
     let filename = "conf.json"
     var filePath = urlToFileInDocuments(filename)
@@ -31,7 +31,7 @@ func loadConfData() -> ConfData{
     return result
 }
 
-func pathToFileInBundle(fileName: String, ending: String) -> URL? {
+nonisolated func pathToFileInBundle(fileName: String, ending: String) -> URL? {
     //Set up path to default DB, and open
     let bundle = Bundle.main
     guard let bundlePath = bundle.url( forResource: fileName, withExtension: ending)
@@ -43,13 +43,13 @@ func pathToFileInBundle(fileName: String, ending: String) -> URL? {
     return bundlePath
 }
 
-func urlToFileInDocuments( _ fileName: String ) -> URL {
+nonisolated func urlToFileInDocuments( _ fileName: String ) -> URL {
     let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     let fileURL = docDirectory.appendingPathComponent(fileName)
     return fileURL
 }
 
-func fileExistsInDocuments( _ fileName: String ) -> Bool {
+nonisolated func fileExistsInDocuments( _ fileName: String ) -> Bool {
     let fileManager = FileManager.default
     let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
     let docsDir = dirPaths[0]
@@ -69,5 +69,4 @@ extension Locale {
         }
     }
 }
-
 

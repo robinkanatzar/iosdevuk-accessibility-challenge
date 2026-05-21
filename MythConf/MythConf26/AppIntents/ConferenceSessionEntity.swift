@@ -11,6 +11,8 @@ nonisolated struct ConferenceSessionEntity: Identifiable, Sendable {
     let sessionType: String
     let speakerNames: String
     let locationName: String
+    let latitude: Double
+    let longitude: Double
     let dayAndDate: String
     let timeRange: String
     let spokenTimeRange: String
@@ -30,6 +32,8 @@ nonisolated struct ConferenceSessionEntity: Identifiable, Sendable {
             sessionType: sessionType,
             speakerNames: speakerNames,
             locationName: locationName,
+            latitude: latitude,
+            longitude: longitude,
             dayAndDate: dayAndDate,
             timeRange: timeRange,
             spokenTimeRange: spokenTimeRange,

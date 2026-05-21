@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ConfData: Codable {
+nonisolated struct ConfData: Codable {
     let version: Int
     let speakers: [Speaker]
     let talks: [Talk]

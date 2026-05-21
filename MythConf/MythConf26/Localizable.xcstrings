@@ -17,19 +17,6 @@
         }
       }
     },
-    "%@ is already favourited and in your schedule. It is on %@. %@ In %@." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ is already favourited and in your schedule. It is on %2$@. %3$@ In %4$@."
-          }
-        }
-      }
-    },
-    "%@ was not favourited." : {
-
-    },
     "%@, %@" : {
       "localizations" : {
         "en" : {
@@ -60,22 +47,16 @@
         }
       }
     },
+    "%lld sessions" : {
+
+    },
     "A brief welcome from the organisers to set the scene for the conference." : {
-
-    },
-    "Add ${session} to your schedule" : {
-
-    },
-    "Add an existing MythConf session to your schedule." : {
 
     },
     "Add talk to favourites" : {
 
     },
     "Add to favourites" : {
-
-    },
-    "Add to Schedule" : {
 
     },
     "Adds this session to your favourites" : {
@@ -105,7 +86,13 @@
     "Conference day" : {
 
     },
-    "Conference Session" : {
+    "Copy Link" : {
+
+    },
+    "Day" : {
+
+    },
+    "Directions" : {
 
     },
     "Done" : {
@@ -129,23 +116,16 @@
     "Favourited" : {
 
     },
-    "Favourited %@. It is now in your schedule. It is on %@. %@ In %@." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Favourited %1$@. It is now in your schedule. It is on %2$@. %3$@ In %4$@."
-          }
-        }
-      }
-    },
-    "Favourited Session" : {
-
-    },
     "Find a Speaker" : {
 
     },
     "Get details for ${session}" : {
+
+    },
+    "Get directions to ${session}" : {
+
+    },
+    "Get Directions to Session" : {
 
     },
     "Get Session Details" : {
@@ -160,7 +140,16 @@
     "Hear a summary of the sessions currently saved in your schedule." : {
 
     },
-    "Hear the time, speaker, location, and summary for a MythConf session." : {
+    "Hear and view details for a conference session." : {
+
+    },
+    "Here's the session information." : {
+
+    },
+    "I could not find that session." : {
+
+    },
+    "I could not open directions for that session." : {
 
     },
     "Location" : {
@@ -184,6 +173,9 @@
     "No Favourites Yet" : {
 
     },
+    "No saved sessions yet." : {
+
+    },
     "No Speakers Found" : {
 
     },
@@ -196,7 +188,16 @@
     "Open %@ in Maps" : {
 
     },
+    "Open ${target}" : {
+
+    },
+    "Open Apple Maps directions for a conference session location." : {
+
+    },
     "Open in Maps" : {
+
+    },
+    "Open Session" : {
 
     },
     "Open this venue in Maps for directions around campus." : {
@@ -206,6 +207,19 @@
 
     },
     "OpenDyslexic Reading Font" : {
+
+    },
+    "Opening Apple Maps for directions to %@, where %@ is taking place." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Opening Apple Maps for directions to %1$@, where %2$@ is taking place."
+          }
+        }
+      }
+    },
+    "Opening directions to %@." : {
 
     },
     "Opens an external link" : {
@@ -250,9 +264,6 @@
     "Reminder Timing" : {
 
     },
-    "Remove an existing MythConf session from favourites and your schedule." : {
-
-    },
     "Remove from favourites" : {
 
     },
@@ -260,9 +271,6 @@
 
     },
     "Remove talk from favourites" : {
-
-    },
-    "Removed %@ from favourites. It is no longer in your schedule." : {
 
     },
     "Removes this session from your favourites" : {
@@ -301,6 +309,9 @@
     "Settings" : {
 
     },
+    "Social links" : {
+
+    },
     "Sound Feedback" : {
 
     },
@@ -325,10 +336,19 @@
     "Tap the star to favourite sessions and keep them in your schedule." : {
 
     },
+    "The session to get details for." : {
+
+    },
+    "The session to get directions to." : {
+
+    },
     "Time" : {
 
     },
     "Time: %@" : {
+
+    },
+    "Title" : {
 
     },
     "Turns sound on or off when adding or removing a favourite." : {
@@ -337,13 +357,7 @@
     "Turns vibration on or off when adding or removing a favourite." : {
 
     },
-    "Unfavorite" : {
-
-    },
     "Unfavourite ${session}" : {
-
-    },
-    "Unfavourite Session" : {
 
     },
     "Use Apple Maps for directions" : {
@@ -355,13 +369,10 @@
     "Welcome to MythConf 2027" : {
 
     },
-    "Which MythConf session do you want details for?" : {
+    "Which session do you want details for?" : {
 
     },
-    "Which MythConf session should I add to your schedule?" : {
-
-    },
-    "Which MythConf session should I unfavourite?" : {
+    "Which session do you want directions to?" : {
 
     },
     "You have %@ in your schedule. %@." : {
@@ -384,7 +395,13 @@
         }
       }
     },
-    "Your schedule is empty. Favourite sessions from the Programme, or ask me to favourite a session." : {
+    "Your Schedule" : {
+
+    },
+    "Your schedule is empty." : {
+
+    },
+    "Your schedule is empty. Favourite sessions from the Programme, then ask me to read your schedule." : {
 
     }
   },
