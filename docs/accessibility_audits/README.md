@@ -100,6 +100,9 @@ Follow-up contrast audit findings were addressed in schedule cards, My Schedule 
 - Updated parallel talk card title, metadata, chip text, and link tint to use explicit label foregrounds so NavigationLink styling does not reduce text contrast.
 - Changed My Schedule pinned day headers from translucent material to an opaque semantic background with explicit label-coloured text.
 - Strengthened the time column by applying label colour across both time labels and using semibold weight for the end time, which prevents caption-size time text from falling below contrast thresholds.
+- Updated speaker detail talk summary metadata to use label-coloured text for time and location on secondary system backgrounds.
+- Updated Location Detail's Maps helper text to use label-coloured text so caption-size directions copy remains readable.
+- Updated Session Detail section headings, session info labels, and favourite action helper text to avoid low-contrast secondary gray at caption and subheadline sizes.
 
 Manual verification: rerun the Accessibility Inspector contrast audit on Programme, My Schedule, Settings, Speakers, and Locations in light mode. Confirm previously reported `#8A8A8E` on white and near-white-on-near-white failures no longer appear.
 

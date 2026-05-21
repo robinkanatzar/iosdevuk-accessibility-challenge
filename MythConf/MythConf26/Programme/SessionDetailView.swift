@@ -246,7 +246,7 @@ struct SessionDetailView: View {
 
                     Text(isFavourite ? "Remove from your schedule" : "Save to your schedule")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(.label))
                         .fixedSize(horizontal: false, vertical: true)
                 }
             } else {
@@ -268,7 +268,7 @@ struct SessionDetailView: View {
 
                         Text(isFavourite ? "Remove from your schedule" : "Save to your schedule")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color(.label))
                             .fixedSize(horizontal: false, vertical: true)
                     }
 
@@ -296,7 +296,7 @@ struct SessionDetailView: View {
         Text(title.uppercased())
             .font(.caption)
             .fontWeight(.bold)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Color(.label))
             .tracking(1.2)
             .accessibilityLabel(title)
             .accessibilityAddTraits(.isHeader)
@@ -329,7 +329,7 @@ struct SessionDetailView: View {
                 Text(title)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color(.label))
                     .accessibilityAddTraits(.isHeader)
 
                 Text(value)

@@ -31,7 +31,7 @@ struct TalkSummaryView: View {
                     locationLabel
                 }
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color(.label))
             }
 
             Spacer(minLength: 8)
@@ -64,7 +64,7 @@ struct TalkSummaryView: View {
                 locationLabel
             }
             .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Color(.label))
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)

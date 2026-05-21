@@ -174,7 +174,7 @@ struct LocationDetailView: View {
 
                     Text("Use Apple Maps for directions")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(.label))
                 }
             } else {
                 HStack(alignment: .center) {
@@ -194,7 +194,7 @@ struct LocationDetailView: View {
 
                         Text("Use Apple Maps for directions")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color(.label))
                             .lineLimit(2)
                     }
 
