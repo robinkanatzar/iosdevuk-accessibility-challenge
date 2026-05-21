@@ -134,7 +134,7 @@ struct BreakRowView: View {
             if let locationName {
                 Text(locationName)
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color(.label))
             }
         }
     }

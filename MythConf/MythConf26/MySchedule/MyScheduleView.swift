@@ -6,7 +6,6 @@
 import SwiftUI
 
 struct MyScheduleView: View {
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedTab: Int
     @State private var isShowingSettings = false
@@ -14,7 +13,7 @@ struct MyScheduleView: View {
     @Namespace private var scheduleRotorNamespace
 
     private var headerBackground: AnyShapeStyle {
-        reduceTransparency ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(.regularMaterial)
+        AnyShapeStyle(Color(.secondarySystemBackground))
     }
 
     private var visibleFavouriteSessions: [Session] {
@@ -82,6 +81,7 @@ struct MyScheduleView: View {
                                     Text(dayHeader(for: daySessions))
                                         .font(.headline)
                                         .bold()
+                                        .foregroundStyle(Color(.label))
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal)
                                         .padding(.vertical, 8)

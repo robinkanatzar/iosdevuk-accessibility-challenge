@@ -16,9 +16,10 @@ struct TimeColumnView: View {
                 .bold()
                 .monospacedDigit()
             Text(endTime)
-                .foregroundStyle(.secondary)
+                .fontWeight(.semibold)
                 .monospacedDigit()
         }
+        .foregroundStyle(Color(.label))
         .font(.caption)
         .frame(minWidth: 44, alignment: .trailing)
         .fixedSize(horizontal: true, vertical: false)

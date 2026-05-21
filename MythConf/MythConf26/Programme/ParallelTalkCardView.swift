@@ -49,14 +49,12 @@ struct ParallelTalkCardView: View {
     }
 
     private var cardBackground: AnyShapeStyle {
-        if reduceTransparency {
-            return AnyShapeStyle(Color(.secondarySystemBackground))
-        } else if colorScheme == .dark {
-            return AnyShapeStyle(Color(.secondarySystemBackground))
-        } else if colorSchemeContrast == .increased {
+        if colorSchemeContrast == .increased {
             return AnyShapeStyle(Color(.systemBackground))
+        } else if colorScheme == .dark || reduceTransparency {
+            return AnyShapeStyle(Color(.secondarySystemBackground))
         } else {
-            return AnyShapeStyle(session.sessionType.color.opacity(0.08))
+            return AnyShapeStyle(Color(.systemBackground))
         }
     }
 
@@ -90,6 +88,7 @@ struct ParallelTalkCardView: View {
             NavigationLink(value: TalkReference(talkID: talkID, session: session)) {
                 cardContent
             }
+            .tint(Color(.label))
             .accessibilityIdentifier("programme.card.\(talk.id.uuidString)")
             .accessibilityLabel { _ in
                 Text("\(session.sessionType.displayName): \(talk.talkTitle)")
@@ -169,7 +168,7 @@ struct ParallelTalkCardView: View {
                         size: 17,
                         weight: legibilityWeight == .bold ? .black : .bold
                     )
-                    .foregroundStyle(.primary)
+                    .foregroundColor(Color(.label))
                     .multilineTextAlignment(.leading)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 4)
                     .fixedSize(horizontal: false, vertical: true)
@@ -202,7 +201,7 @@ struct ParallelTalkCardView: View {
             .fontWeight(.black)
             .dynamicTypeSize(...DynamicTypeSize.accessibility3)
             .tracking(1.8)
-            .foregroundStyle(session.sessionType.color)
+            .foregroundColor(Color(.label))
             .padding(.horizontal, 12)
             .padding(.vertical, 7)
             .background(
@@ -229,13 +228,13 @@ struct ParallelTalkCardView: View {
             Text(text)
                 .font(isPrimary ? .callout : .caption)
                 .fontWeight(isPrimary ? .semibold : .regular)
-                .foregroundStyle(isPrimary ? .primary : .secondary)
+                .foregroundColor(Color(.label))
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 .fixedSize(horizontal: false, vertical: true)
         } icon: {
             Image(systemName: systemImage)
                 .font(.body)
-                .foregroundStyle(isPrimary ? session.sessionType.color : .secondary)
+                .foregroundColor(isPrimary ? session.sessionType.color : Color(.label))
                 .accessibilityHidden(true)
         }
         .labelStyle(.titleAndIcon)

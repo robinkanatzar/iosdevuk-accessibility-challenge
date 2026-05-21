@@ -32,7 +32,7 @@ struct SettingsView: View {
 
                         Text("A brief welcome from the organisers to set the scene for the conference.")
                             .dyslexiaReadingFont(.body, size: 17)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color(.label))
                     }
                 }
                 .accessibilityIdentifier("settings.openDyslexicPreview")

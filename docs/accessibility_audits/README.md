@@ -91,6 +91,18 @@ The app avoids relying on blurred or translucent surfaces for core schedule cont
 
 Remaining low-opacity accent fills in badges and icon backgrounds are decorative or secondary. Manual verification should confirm that these do not reduce readability when Reduce Transparency is enabled.
 
+### Sufficient Contrast Follow-up (Updated 2026-05-22)
+
+Follow-up contrast audit findings were addressed in schedule cards, My Schedule headers, speaker rows, location rows, and Settings preview text.
+
+- Replaced low-contrast `.secondary` text on white or pale backgrounds with semantic `Color(.label)` for body-size reading text in Settings, speaker summaries, location summaries, break locations, and programme card metadata.
+- Removed the low-opacity session tint from the main readable surface of parallel talk cards in standard light mode. Session identity remains visible through the top accent strip, border, and chip text rather than a pale tinted reading background.
+- Updated parallel talk card title, metadata, chip text, and link tint to use explicit label foregrounds so NavigationLink styling does not reduce text contrast.
+- Changed My Schedule pinned day headers from translucent material to an opaque semantic background with explicit label-coloured text.
+- Strengthened the time column by applying label colour across both time labels and using semibold weight for the end time, which prevents caption-size time text from falling below contrast thresholds.
+
+Manual verification: rerun the Accessibility Inspector contrast audit on Programme, My Schedule, Settings, Speakers, and Locations in light mode. Confirm previously reported `#8A8A8E` on white and near-white-on-near-white failures no longer appear.
+
 ### Dyslexia Reading Mode (Updated 2026-05-17)
 
 - Added an optional OpenDyslexic reading mode for users with dyslexia.

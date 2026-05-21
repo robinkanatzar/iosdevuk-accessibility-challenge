@@ -21,7 +21,7 @@ struct LocationsView: View {
                             .foregroundStyle(Color(.label))
                         Text(location.placeDescription)
                             .dyslexiaReadingFont(.body, size: 17)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color(.label))
                             .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     }
                 }
