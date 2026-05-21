@@ -28,5 +28,6 @@ struct SpeakerPhotoView: View {
                         lineWidth: 2
                     )
             )
+            .accessibilityHidden(true)
     }
 }
