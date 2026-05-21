@@ -32,5 +32,15 @@ struct Session: Codable, Identifiable, Hashable {
     }
 
     var timeRange: String { "\(startTimeText) – \(endTimeText)" }
+    
+    var voiceOverTimeRange: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        let startSpoken = formatter.string(from: startTime)
+        let endSpoken = formatter.string(from: endTime)
+        return "Session start time \(startSpoken), session end time \(endSpoken)"
+    }
 }
 

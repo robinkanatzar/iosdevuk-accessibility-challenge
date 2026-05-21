@@ -14,7 +14,7 @@ struct ParallelSessionsRowView: View {
     var body: some View {
         HStack {
             VStack {
-                TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+                TimeColumnView(startTimeText: session.startTimeText, endTimeText: session.endTimeText, spokenTimeRange: session.voiceOverTimeRange)
                 let layout = horizontalSizeClass == .compact && dynamicTypeSize >= .xxxLarge ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout())
                 layout {
                     ForEach(session.contentIDs, id: \.self) { talkID in

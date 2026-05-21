@@ -12,7 +12,7 @@ struct BreakRowView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
+            TimeColumnView(startTimeText: session.startTimeText, endTimeText: session.endTimeText, spokenTimeRange: session.voiceOverTimeRange)
             Text(session.sessionType.displayName)
                 .italic()
             if let talkID = session.contentIDs.first {
