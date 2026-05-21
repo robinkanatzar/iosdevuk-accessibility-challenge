@@ -527,8 +527,12 @@
     {
       "social" : [
         {
-          "socialLink" : "https://sarahthornton.dev\nhttps://github.com/sarahthornton\n",
-          "socialType" : "www"
+          "socialLink" : "https://sarahthornton.dev",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/sarahthornton\n",
+          "socialType" : "github"
         }
       ],
       "name" : "Sarah Thornton",
@@ -543,8 +547,16 @@
     {
       "social" : [
         {
-          "socialLink" : "https://marcuschen.codes\nhttps://github.com/marcuschendev\nhttps://mastodon.social/@marcuschen\n",
-          "socialType" : "www"
+          "socialLink" : "https://marcuschen.codes",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/marcuschendev",
+          "socialType" : "github"
+        },
+        {
+          "socialLink" : "https://mastodon.social/@marcuschen",
+          "socialType" : "mastodon"
         }
       ],
       "name" : "Marcus Chen",
@@ -560,8 +572,12 @@
     {
       "social" : [
         {
-          "socialLink" : "https://priyakapoor.io\nhttps://github.com/priyakapoor\n",
-          "socialType" : "www"
+          "socialLink" : "https://priyakapoor.io",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/priyakapoor",
+          "socialType" : "github"
         }
       ],
       "name" : "Priya Kapoor",
@@ -576,8 +592,12 @@
     {
       "social" : [
         {
-          "socialLink" : "https://jamesobrien.app\nhttps://twitter.com/jamesobriendev\n",
-          "socialType" : "www"
+          "socialLink" : "https://jamesobrien.app",
+          "socialType" : "dev"
+        },
+        {
+          "socialLink" : "https://twitter.com/jamesobriendev",
+          "socialType" : "twitter"
         }
       ],
       "name" : "James O'Brien",
@@ -592,8 +612,16 @@
     {
       "social" : [
         {
-          "socialLink" : "https://elenavazquez.dev\nhttps://github.com/elenavazquez\nhttps://bsky.app/profile/elenavazquez.dev\n",
-          "socialType" : "www"
+          "socialLink" : "https://elenavazquez.dev",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/elenavazquez",
+          "socialType" : "github"
+        },
+        {
+          "socialLink" : "https://bsky.app/profile/elenavazquez.dev",
+          "socialType" : "bsky"
         }
       ],
       "name" : "Elena Vasquez",
@@ -607,8 +635,12 @@
     {
       "social" : [
         {
-          "socialLink" : "https://tomnakamura.engineer\nhttps://github.com/tomnakamura\n",
-          "socialType" : "www"
+          "socialLink" : "https://tomnakamura.engineer",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/tomnakamura",
+          "socialType" : "github"
         }
       ],
       "name" : "Tom Nakamura",
@@ -621,10 +653,18 @@
     },
     {
       "social" : [
-        {
-          "socialLink" : "https://rachelhoffman.swift\nhttps://github.com/rachelhoffman\nhttps://mas.to/@rachelhoffman\n",
-          "socialType" : "www"
-        }
+          {
+              "socialType" : "web",
+              "socialLink" : "https://rachelhoffman.swift"
+          },
+          {
+              "socialType" : "github",
+              "socialLink" : "https://github.com/rachelhoffman"
+        },
+          {
+              "socialType" : "mastodon",
+              "socialLink" : "https://mas.to/@rachelhoffman"
+          }
       ],
       "name" : "Rachel Hoffman",
       "talkIDs" : [
@@ -636,12 +676,16 @@
       "speakerInfo" : "Rachel came to Swift from the Ruby on Rails world and has never looked back. She runs a boutique consultancy specialising in server-side Swift, helping iOS teams ship their backends in the same language as their apps. She is a contributor to the Vapor framework, sits on the Swift Server Working Group, and co-organises the Swift on Server community meetups in London.\n\nShe has an inexplicable fondness for type-safe DSLs, well-structured REST APIs, and the moment a client realises they no longer need a separate backend team."
     },
     {
-      "social" : [
-        {
-          "socialLink" : "https://www.linkedin.com/in/davidkowalski-ios\nhttps://github.com/dkowalskidev\n",
-          "socialType" : "www"
-        }
-      ],
+        "social" : [
+            {
+                "socialType" : "linkedin",
+                "socialLink" : "https://www.linkedin.com/in/davidkowalski-ios"
+            },
+            {
+                "socialType" : "github",
+                "socialLink" : "https://github.com/dkowalskidev"
+            }
+        ],
       "name" : "David Kowalski",
       "talkIDs" : [
         "C1001015-C100-4100-8100-100000000015",
@@ -653,8 +697,16 @@
     {
       "social" : [
         {
-          "socialLink" : "https://zaraahmed.design\nhttps://github.com/zaraahmed\nhttps://www.linkedin.com/in/zaraahmed-ios\n",
-          "socialType" : "www"
+          "socialLink" : "https://zaraahmed.design",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/zaraahmed",
+          "socialType" : "github"
+        },
+        {
+          "socialLink" : "https://www.linkedin.com/in/zaraahmed-ios",
+          "socialType" : "linkedin"
         }
       ],
       "name" : "Zara Ahmed",
@@ -668,8 +720,12 @@
     {
       "social" : [
         {
-          "socialLink" : "https://oliverfraser.dev\nhttps://github.com/oliverfraser\n",
-          "socialType" : "www"
+          "socialLink" : "https://oliverfraser.dev",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/oliverfraser",
+          "socialType" : "github"
         }
       ],
       "name" : "Oliver Fraser",
@@ -684,8 +740,16 @@
     {
       "social" : [
         {
-          "socialLink" : "https://lucypemberton.co.uk\nhttps://github.com/lucypemberton\nhttps://www.linkedin.com/in/lucypemberton-spatial\n",
-          "socialType" : "www"
+          "socialLink" : "https://lucypemberton.co.uk",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/lucypemberton",
+          "socialType" : "github"
+        },
+        {
+          "socialLink" : "https://www.linkedin.com/in/lucypemberton-spatial\n",
+          "socialType" : "linkedin"
         }
       ],
       "name" : "Lucy Pemberton",
@@ -699,8 +763,16 @@
     {
       "social" : [
         {
-          "socialLink" : "https://samwalsh.security\nhttps://github.com/samwalshmobile\nhttps://www.linkedin.com/in/sam-walsh-appsec\n",
-          "socialType" : "www"
+          "socialLink" : "https://samwalsh.security",
+          "socialType" : "web"
+        },
+        {
+          "socialLink" : "https://github.com/samwalshmobile",
+          "socialType" : "github"
+        },
+        {
+          "socialLink" : "https://www.linkedin.com/in/sam-walsh-appsec",
+          "socialType" : "linkedin"
         }
       ],
       "name" : "Sam Walsh",

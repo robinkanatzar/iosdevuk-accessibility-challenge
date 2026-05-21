@@ -45,7 +45,7 @@ struct SpeakerDetailView: View {
                 if !speakerTalks.isEmpty {
                     Text("Sessions")
                         .font(.headline)
-
+                        .accessibilityAddTraits(.isHeader)
                     ForEach(speakerTalks, id: \.talkID) { item in
                         NavigationLink(value: TalkReference(talkID: item.talkID, session: item.session)) {
                             TalkSummaryView(talkID: item.talkID, session: item.session)

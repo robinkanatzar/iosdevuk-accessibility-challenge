@@ -9,26 +9,21 @@ import SwiftUI
 struct BreakRowView: View {
     @Environment(ViewModel.self) private var viewModel
     let session: Session
-
+    
     var body: some View {
-        HStack {
-            TimeColumnView(startTime: session.startTimeText, endTime: session.endTimeText)
-
-            VStack(alignment: .leading) {
-                Text(session.sessionType.displayName)
-                    .italic()
-                    .foregroundStyle(.primary)
-                if let talkID = session.contentIDs.first {
-                    Text(viewModel.locationNameFrom(talkID: talkID))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+        VStack(alignment: .leading) {
+            TimeColumnView(startTimeText: session.startTimeText, endTimeText: session.endTimeText, spokenTimeRange: session.voiceOverTimeRange)
+            Text(session.sessionType.displayName)
+                .italic()
+            if let talkID = session.contentIDs.first {
+                Text(viewModel.locationNameFrom(talkID: talkID))
+                    .font(.caption).opacity(0.6)
             }
-
             Spacer()
         }
         .padding()
         .frame(maxWidth: .infinity)
+        .foregroundStyle(.primary)
         .background(session.sessionType.color.opacity(0.12))
     }
 }

@@ -7,21 +7,22 @@ import SwiftUI
 
 /// A fixed-width column showing a session's start and end times.
 struct TimeColumnView: View {
-    let startTime: String
-    let endTime: String
-
+//    let startTime: Date
+//    let endTime: Date
+    let startTimeText: String
+    let endTimeText: String
+    let spokenTimeRange: String
+    
     var body: some View {
-        VStack(alignment: .trailing) {
-            Text(startTime)
+        HStack {
+            Text("\(startTimeText) - \(endTimeText)")
                 .bold()
                 .monospacedDigit()
-            Text(endTime)
-                .foregroundStyle(.secondary)
-                .monospacedDigit()
+            Spacer()
         }
         .font(.caption)
-        .frame(width: 44, alignment: .trailing)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Session start time \(startTime), session end time \(endTime)")
+        .accessibilityLabel(spokenTimeRange)
+        .accessibilityAddTraits(.isHeader)
     }
 }

@@ -7,6 +7,7 @@ import SwiftUI
 
 struct ProgrammeView: View {
     @Environment(ViewModel.self) private var viewModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var selectedDayIndex = 0
 
     private var days: [[Session]] { viewModel.confData.sessions }
@@ -21,7 +22,7 @@ struct ProgrammeView: View {
                             .accessibilityLabel("Day \(index + 1), \(dayLabel(for: days[index]))")
                     }
                 }
-                .pickerStyle(.segmented)
+                .adaptivePickerStyle(isAccessibilitySize: dynamicTypeSize.isAccessibilitySize)
                 .padding(.horizontal)
                 .padding(.vertical, 8)
 
@@ -47,7 +48,7 @@ struct ProgrammeView: View {
 
     private func dayLabel(for sessions: [Session]) -> String {
         guard let first = sessions.first else { return "" }
-        return first.startTime.formatted(.dateTime.weekday(.abbreviated))
+        return first.startTime.formatted(.dateTime.weekday(.wide))
     }
 }
 

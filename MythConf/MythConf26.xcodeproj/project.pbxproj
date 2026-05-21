@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		5B5EED6D2FBB09EE00B9B5EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B2918AE2F73EA8B008A369D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B2918B52F73EA8B008A369D;
+			remoteInfo = MythConf26;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		1B2919CA2F74454F008A369D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -22,18 +32,44 @@
 /* Begin PBXFileReference section */
 		1B2918B62F73EA8B008A369D /* MythConf26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MythConf26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2919B72F74454E008A369D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		5B5EED672FBB09EE00B9B5EE /* MythConf26UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5B5EF0D82FBB212000B9B5EE /* Exceptions for "MythConf26" folder in "MythConf26UITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Constants/LaunchArguments.swift,
+			);
+			target = 5B5EED662FBB09EE00B9B5EE /* MythConf26UITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1B2918B82F73EA8B008A369D /* MythConf26 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5B5EF0D82FBB212000B9B5EE /* Exceptions for "MythConf26" folder in "MythConf26UITests" target */,
+			);
 			path = MythConf26;
+			sourceTree = "<group>";
+		};
+		5B5EED682FBB09EE00B9B5EE /* MythConf26UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MythConf26UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1B2918B32F73EA8B008A369D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B5EED642FBB09EE00B9B5EE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				1B2918B82F73EA8B008A369D /* MythConf26 */,
+				5B5EED682FBB09EE00B9B5EE /* MythConf26UITests */,
 				1B2919B42F74454E008A369D /* Frameworks */,
 				1B2918B72F73EA8B008A369D /* Products */,
 			);
@@ -56,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				1B2918B62F73EA8B008A369D /* MythConf26.app */,
+				5B5EED672FBB09EE00B9B5EE /* MythConf26UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +132,29 @@
 			productReference = 1B2918B62F73EA8B008A369D /* MythConf26.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5B5EED662FBB09EE00B9B5EE /* MythConf26UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B5EED712FBB09EE00B9B5EE /* Build configuration list for PBXNativeTarget "MythConf26UITests" */;
+			buildPhases = (
+				5B5EED632FBB09EE00B9B5EE /* Sources */,
+				5B5EED642FBB09EE00B9B5EE /* Frameworks */,
+				5B5EED652FBB09EE00B9B5EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B5EED6E2FBB09EE00B9B5EE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				5B5EED682FBB09EE00B9B5EE /* MythConf26UITests */,
+			);
+			name = MythConf26UITests;
+			packageProductDependencies = (
+			);
+			productName = MythConf26UITests;
+			productReference = 5B5EED672FBB09EE00B9B5EE /* MythConf26UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -101,11 +162,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2630;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					1B2918B52F73EA8B008A369D = {
 						CreatedOnToolsVersion = 26.3;
+					};
+					5B5EED662FBB09EE00B9B5EE = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 1B2918B52F73EA8B008A369D;
 					};
 				};
 			};
@@ -126,12 +191,20 @@
 			projectRoot = "";
 			targets = (
 				1B2918B52F73EA8B008A369D /* MythConf26 */,
+				5B5EED662FBB09EE00B9B5EE /* MythConf26UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1B2918B42F73EA8B008A369D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B5EED652FBB09EE00B9B5EE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -148,7 +221,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5B5EED632FBB09EE00B9B5EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5B5EED6E2FBB09EE00B9B5EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B2918B52F73EA8B008A369D /* MythConf26 */;
+			targetProxy = 5B5EED6D2FBB09EE00B9B5EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1B2918BF2F73EA8B008A369D /* Debug */ = {
@@ -281,7 +369,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				DEVELOPMENT_TEAM = N233W54Z6G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
@@ -316,7 +404,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y48AZMY2V2;
+				DEVELOPMENT_TEAM = N233W54Z6G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = MythConf26;
@@ -344,6 +432,48 @@
 			};
 			name = Release;
 		};
+		5B5EED6F2FBB09EE00B9B5EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N233W54Z6G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHill.MythConf26UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MythConf26;
+			};
+			name = Debug;
+		};
+		5B5EED702FBB09EE00B9B5EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N233W54Z6G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHill.MythConf26UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MythConf26;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -361,6 +491,15 @@
 			buildConfigurations = (
 				1B2918C22F73EA8B008A369D /* Debug */,
 				1B2918C32F73EA8B008A369D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B5EED712FBB09EE00B9B5EE /* Build configuration list for PBXNativeTarget "MythConf26UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B5EED6F2FBB09EE00B9B5EE /* Debug */,
+				5B5EED702FBB09EE00B9B5EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

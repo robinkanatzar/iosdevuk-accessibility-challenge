@@ -7,10 +7,12 @@ import SwiftUI
 
 /// A horizontal row of tappable social/web links for a speaker.
 struct SocialLinksView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     let social: [SocialItem]
 
     var body: some View {
-        HStack {
+        let layout = horizontalSizeClass == .compact ? AnyLayout(VStackLayout(alignment: .leading)) : AnyLayout(HStackLayout(alignment: .top))
+        layout {
             ForEach(social, id: \.self) { item in
                 if let url = URL(string: item.socialLink) {
                     Link(destination: url) {
