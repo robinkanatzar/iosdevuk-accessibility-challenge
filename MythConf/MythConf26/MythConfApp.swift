@@ -8,12 +8,17 @@
 import SwiftUI
 import TipKit
 import Dependencies
+import AppIntents
+import CoreSpotlight
 
 @main
 struct MythConf: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var viewModel = MythConf.makeViewModel()
     @State private var appSettings = AppSettings()
+    @State private var appIntentNavigationRouter = AppIntentNavigationRouter.shared
+    @State private var didUpdateAppShortcuts = false
+    @State private var didIndexSearchableSessions = false
 
     init() {
         UIImageView.appearance().accessibilityIgnoresInvertColors = true
@@ -80,11 +85,38 @@ struct MythConf: App {
             HomeView()
                 .environment(viewModel)
                 .environment(\.appSettings, appSettings)
+                .environment(appIntentNavigationRouter)
                 .foregroundStyle(.primary, .secondary, .tertiary)
+                .task {
+                    updateAppShortcutsOnce()
+                    await indexSearchableSessionsOnce()
+                }
                 .onChange(of: scenePhase) { _, newPhase in
                     guard newPhase == .active else { return }
+                    updateAppShortcutsOnce()
                     viewModel.loadFavourites()
                 }
+        }
+    }
+
+    @MainActor
+    private func updateAppShortcutsOnce() {
+        guard !didUpdateAppShortcuts else { return }
+        didUpdateAppShortcuts = true
+        MythConfShortcutsProvider.updateAppShortcutParameters()
+    }
+
+    @MainActor
+    private func indexSearchableSessionsOnce() async {
+        guard !didIndexSearchableSessions else { return }
+        didIndexSearchableSessions = true
+
+        do {
+            try await CSSearchableIndex
+                .default()
+                .indexAppEntities(ConferenceSessionStore.searchableSessions())
+        } catch {
+            print("Unable to index searchable sessions: \(error.localizedDescription)")
         }
     }
 }

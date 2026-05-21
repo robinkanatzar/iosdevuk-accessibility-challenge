@@ -5,12 +5,41 @@
 
 import Foundation
 
-enum ConferenceSessionStore {
-    private static let favouritesFileName = "favourites.json"
+private final class ConferenceSessionCache: @unchecked Sendable {
+    private let lock = NSLock()
+    nonisolated(unsafe) private var cachedSessions: [ConferenceSessionEntity]?
 
-    static func allSessions() -> [ConferenceSessionEntity] {
-        let confData = loadConfData()
+    nonisolated func sessions(load: () -> [ConferenceSessionEntity]) -> [ConferenceSessionEntity] {
+        lock.lock()
+        defer { lock.unlock() }
+
+        if let cachedSessions {
+            return cachedSessions
+        }
+
+        let loadedSessions = load()
+        cachedSessions = loadedSessions
+        return loadedSessions
+    }
+}
+
+enum ConferenceSessionStore {
+    nonisolated private static let favouritesFileName = "favourites.json"
+    nonisolated private static let cache = ConferenceSessionCache()
+
+    nonisolated static func allSessions() -> [ConferenceSessionEntity] {
+        let baseSessions = cache.sessions {
+            loadBaseSessions()
+        }
         let favourites = Set(favouriteIDs())
+
+        return baseSessions.map { session in
+            session.withFavouriteState(favourites.contains(session.id))
+        }
+    }
+
+    nonisolated private static func loadBaseSessions() -> [ConferenceSessionEntity] {
+        let confData = loadConfData()
         let speakersByID = Dictionary(uniqueKeysWithValues: confData.speakers.map { ($0.id, $0) })
         let locationsByID = Dictionary(uniqueKeysWithValues: confData.locations.map { ($0.id, $0) })
         let talksByID = Dictionary(uniqueKeysWithValues: confData.talks.map { ($0.id, $0) })
@@ -38,49 +67,52 @@ enum ConferenceSessionStore {
                         startDate: session.startTime,
                         summary: firstSentence(from: talk.talkDescription),
                         details: talk.talkDescription,
-                        isFavourite: favourites.contains(talk.id)
+                        isFavourite: false
                     )
                 }
             }
         }
 
-        return entities.sorted { lhs, rhs in
+        let sortedEntities = entities.sorted { lhs, rhs in
             if lhs.startDate == rhs.startDate {
                 return lhs.title.localizedStandardCompare(rhs.title) == .orderedAscending
             }
             return lhs.startDate < rhs.startDate
         }
+        return sortedEntities
     }
 
-    static func sessions(matching searchText: String) -> [ConferenceSessionEntity] {
+    nonisolated static func favouriteSessions() -> [ConferenceSessionEntity] {
+        allSessions().filter(\.isFavourite)
+    }
+
+    nonisolated static func searchableSessions() -> [SearchableSessionEntity] {
+        allSessions().map(SearchableSessionEntity.init(session:))
+    }
+
+    nonisolated static func searchableSessions(matching searchText: String) -> [SearchableSessionEntity] {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
-            return Array(allSessions().prefix(8))
+            return searchableSessions()
         }
 
-        return allSessions().filter { session in
-            [
-                session.title,
-                session.sessionType,
-                session.speakerNames,
-                session.locationName,
-                session.dayAndDate
-            ]
-            .joined(separator: " ")
-            .localizedCaseInsensitiveContains(trimmed)
-        }
+        return allSessions()
+            .filter { session in
+                [
+                    session.title,
+                    session.sessionType,
+                    session.speakerNames,
+                    session.locationName,
+                    session.dayAndDate,
+                    session.timeRange
+                ]
+                .joined(separator: " ")
+                .localizedCaseInsensitiveContains(trimmed)
+            }
+            .map(SearchableSessionEntity.init(session:))
     }
 
-    static func session(for id: UUID) -> ConferenceSessionEntity? {
-        allSessions().first { $0.id == id }
-    }
-
-    static func favouriteSessions() -> [ConferenceSessionEntity] {
-        let favourites = Set(favouriteIDs())
-        return allSessions().filter { favourites.contains($0.id) }
-    }
-
-    static func favouriteIDs() -> [UUID] {
+    nonisolated static func favouriteIDs() -> [UUID] {
         let url = urlToFileInDocuments(favouritesFileName)
         guard let data = try? Data(contentsOf: url),
               let ids = try? JSONDecoder().decode([UUID].self, from: data) else {
@@ -89,30 +121,7 @@ enum ConferenceSessionStore {
         return ids
     }
 
-    @discardableResult
-    static func addFavourite(_ id: UUID) throws -> Bool {
-        var ids = favouriteIDs()
-        guard !ids.contains(id) else { return false }
-        ids.append(id)
-        try saveFavouriteIDs(ids)
-        return true
-    }
-
-    @discardableResult
-    static func removeFavourite(_ id: UUID) throws -> Bool {
-        let ids = favouriteIDs()
-        let updated = ids.filter { $0 != id }
-        guard updated.count != ids.count else { return false }
-        try saveFavouriteIDs(updated)
-        return true
-    }
-
-    private static func saveFavouriteIDs(_ ids: [UUID]) throws {
-        let data = try JSONEncoder().encode(ids)
-        try data.write(to: urlToFileInDocuments(favouritesFileName), options: [.atomic])
-    }
-
-    private static func formattedList(_ values: [String]) -> String {
+    nonisolated private static func formattedList(_ values: [String]) -> String {
         switch values.count {
         case 0:
             return "Unknown speaker"
@@ -126,7 +135,7 @@ enum ConferenceSessionStore {
         }
     }
 
-    private static func firstSentence(from text: String) -> String {
+    nonisolated private static func firstSentence(from text: String) -> String {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let sentenceEnd = trimmed.firstIndex(where: { ".!?".contains($0) }) else {
             return trimmed

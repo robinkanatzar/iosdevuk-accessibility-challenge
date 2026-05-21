@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(ViewModel.self) private var viewModel
+    @Environment(AppIntentNavigationRouter.self) private var appIntentNavigationRouter
     @State private var selectedTab = 0
 
     var body: some View {
@@ -70,10 +71,25 @@ struct HomeView: View {
             viewModel.pendingDeepLinkTalkID = talkID
             print("🔗 [DeepLink] pendingDeepLinkTalkID set to: \(talkID)")
         }
+        .onAppear {
+            openPendingAppIntentSession()
+        }
+        .onChange(of: appIntentNavigationRouter.pendingTalkID) { _, talkID in
+            guard talkID != nil else { return }
+            openPendingAppIntentSession()
+        }
+    }
+
+    private func openPendingAppIntentSession() {
+        guard let talkID = appIntentNavigationRouter.pendingTalkID else { return }
+        selectedTab = 0
+        viewModel.pendingDeepLinkTalkID = talkID
+        appIntentNavigationRouter.pendingTalkID = nil
     }
 }
 
 #Preview {
     HomeView()
         .environment(ViewModel())
+        .environment(AppIntentNavigationRouter.shared)
 }

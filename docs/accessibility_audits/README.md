@@ -178,16 +178,48 @@ The app's primary states remain understandable when the display is converted to 
 
 Remaining grayscale verification should focus on luminance contrast rather than meaning: check filled favourite stars, status badges, low-opacity card accents, and accent-colour icon backgrounds with the grayscale colour filter enabled.
 
-### Siri and Voice-First Shortcuts (Updated 2026-05-17)
+### Siri and Voice-First Shortcuts (Updated 2026-05-21)
 
-- Added App Intents so users can perform existing favourite actions without navigating the visual UI.
-- Exposed conference sessions as Siri-resolvable entities using session title, speaker names, location, day, and time so voice input can find the right session.
-- Added Siri actions to hear session details, favourite a session, unfavourite a session, and hear a short summary of My Schedule.
-- Returned spoken `IntentDialog` responses for voice-only use, including clear confirmations, already-saved states, empty-schedule states, and update errors.
+- Simplified App Intents to one reliable voice-first workflow: **Read Schedule**.
+- Removed Siri session-title entity resolution, Siri favourite, Siri unfavourite, and Siri session-detail shortcuts because spoken session names were fragile and made the shortcut surface harder for Shortcuts/Siri to register and resolve reliably.
+- Users still favourite sessions through the visual app, VoiceOver, Magic Tap, Voice Control, or custom actions. Siri then reads the already-saved/favourited schedule aloud.
+- Returned spoken `IntentDialog` responses for voice-only use, including an empty-schedule state and a saved-sessions summary.
 - Updated Siri spoken times to use clear phrases such as `Start time 09:30. End time 09:40.` while keeping compact time ranges in visual display subtitles.
-- Used user-facing Siri wording such as "your schedule" in spoken prompts and confirmations so responses sound natural when Siri is addressing the user.
-- Kept the Siri actions aligned with existing app functionality: they mirror the session detail screen, favourite toggle, and My Schedule tab rather than adding a new workflow.
-- Reloaded favourites when the app becomes active so changes made through Siri are reflected when the user returns to the visual app.
+- Used user-facing Siri wording such as "your schedule" so responses sound natural when Siri is addressing the user.
+- Kept the Siri action aligned with existing app functionality: it mirrors the My Schedule tab rather than adding a new workflow.
+- Kept easier app names such as `Myth Con`, `Myth Conference`, and `iOSDevUK` so users do not have to pronounce `MythConf` exactly.
+
+### Searchable Sessions App Entity (Updated 2026-05-21)
+
+- Added searchable session App Entities for system search while keeping **Read Schedule** as the only visible Siri/Shortcuts action.
+- Indexed talk sessions with title, speaker, location, day, and time metadata so users can search for a session without visually scanning the full Programme.
+- Added a hidden `OpenSessionIntent` for search results. Tapping a session result opens the app and routes through the existing Programme navigation to the matching Session Details screen.
+- Kept this separate from spoken Siri session-title commands. Search/open supports users who prefer typing, keyboard search, Voice Control search workflows, or Spotlight-style discovery without reintroducing fragile spoken title matching.
+- Accessibility benefit: helps VoiceOver users, Voice Control users, keyboard users, and users with cognitive fatigue jump directly to a known talk by remembering any useful detail such as title, speaker, location, or day.
+- Mobility benefit: reduces repeated taps and swipes through a dense multi-day schedule. A user can use system search, select the result, and land on the correct detail screen in one navigation jump.
+- Cognitive benefit: supports recognition-based navigation. Users can search for the one detail they remember, such as `SwiftData`, `Alex Morgan`, or `Tyndall Lecture Theatre`, instead of holding the day, time, and room structure in memory while browsing.
+
+Search/open manual verification:
+
+1. Fresh install and run the app so the search index is populated.
+2. Open system search.
+3. Search for `Observable`, `SwiftData`, or `LLDB`.
+4. Tap the MythConf/iOSDevUK session result.
+5. Confirm the app opens directly to the matching Session Details screen.
+
+Manual verification:
+
+1. Build and run the app.
+2. Open Shortcuts and search for `iOSDevUK`, `Myth Con`, or `MythConf`.
+3. Confirm only `Read Schedule` appears for the app.
+4. With no favourites, run `Read Schedule` and confirm Siri says the schedule is empty.
+5. Favourite one or more sessions in the app.
+6. Run `Read Schedule` again and confirm Siri reads the saved sessions.
+7. Test phrases:
+   - `Read my schedule in iOSDevUK`
+   - `Read my schedule in Myth Con`
+   - `What is on my schedule in iOSDevUK`
+   - `Read saved sessions in iOSDevUK`
 
 ### TipKit Feature Discovery (Updated 2026-05-17)
 
@@ -501,9 +533,8 @@ These items need manual review because static tools cannot fully validate real a
     - **"Tap [Day Name]"**: In the Programme, verify you can switch days by saying the visible day name (e.g., "Tap Wednesday").
     - **"Tap Star" / "Tap Favourite"**: Verify you can toggle a favourite by saying "Tap Star" or "Tap Favourite".
 - Voice Control "Show Names" on Programme and My Schedule should expose favourite controls with usable star and session-specific names; on a detail screen, "Tap Star" should target the current session's favourite control.
-- Siri and Shortcuts spoken responses for session details, favourite/unfavourite actions, empty schedule, duplicate favourite, and missing/not-favourited states.
+- Siri and Shortcuts spoken responses for empty schedule and populated saved schedule.
 - VoiceOver and Voice Control should make the relationship clear: favouriting a session adds it to the user's schedule, and unfavouriting removes it from the user's schedule.
-- Siri entity disambiguation when the spoken session phrase matches more than one session.
 - TipKit timing, placement, and dismissal behavior with VoiceOver, Voice Control, Switch Control, and large Dynamic Type.
 - OpenDyslexic setting with VoiceOver: confirm the Settings button, toggle, and Done button announce clear labels, states, and hints. Confirm the visual-only font preview is skipped by VoiceOver.
 - OpenDyslexic visual review: enable the setting and inspect Programme, Session Details, Speakers, Locations, and My Schedule at default and accessibility Dynamic Type sizes.

@@ -3,13 +3,9 @@
 //  MythConf26
 //
 
-import AppIntents
 import Foundation
 
-struct ConferenceSessionEntity: AppEntity, Identifiable, Sendable {
-    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Conference Session")
-    static var defaultQuery = ConferenceSessionQuery()
-
+nonisolated struct ConferenceSessionEntity: Identifiable, Sendable {
     let id: UUID
     let title: String
     let sessionType: String
@@ -23,38 +19,24 @@ struct ConferenceSessionEntity: AppEntity, Identifiable, Sendable {
     let details: String
     let isFavourite: Bool
 
-    var displayRepresentation: DisplayRepresentation {
-        DisplayRepresentation(
-            title: "\(title)",
-            subtitle: "\(dayAndDate), \(timeRange) - \(locationName)"
+    nonisolated var shortScheduleLine: String {
+        "\(title). \(dayAndDate), \(spokenTimeRange) In \(locationName)"
+    }
+
+    nonisolated func withFavouriteState(_ isFavourite: Bool) -> ConferenceSessionEntity {
+        ConferenceSessionEntity(
+            id: id,
+            title: title,
+            sessionType: sessionType,
+            speakerNames: speakerNames,
+            locationName: locationName,
+            dayAndDate: dayAndDate,
+            timeRange: timeRange,
+            spokenTimeRange: spokenTimeRange,
+            startDate: startDate,
+            summary: summary,
+            details: details,
+            isFavourite: isFavourite
         )
-    }
-
-    var spokenDetails: String {
-        "\(title) is a \(sessionType.lowercased()) by \(speakerNames), on \(dayAndDate). \(spokenTimeRange) In \(locationName). \(summary)"
-    }
-
-    var shortScheduleLine: String {
-        "\(title). \(spokenTimeRange) In \(locationName)"
-    }
-}
-
-struct ConferenceSessionQuery: EntityStringQuery {
-    func entities(for identifiers: [ConferenceSessionEntity.ID]) async throws -> [ConferenceSessionEntity] {
-        let sessions = await ConferenceSessionStore.allSessions()
-        return sessions.filter { identifiers.contains($0.id) }
-    }
-
-    func entities(matching string: String) async throws -> [ConferenceSessionEntity] {
-        await ConferenceSessionStore.sessions(matching: string)
-    }
-
-    func suggestedEntities() async throws -> [ConferenceSessionEntity] {
-        let sessions = await ConferenceSessionStore.allSessions()
-        return Array(sessions.prefix(12))
-    }
-
-    func defaultResult() async -> ConferenceSessionEntity? {
-        await ConferenceSessionStore.allSessions().first
     }
 }
