@@ -36,6 +36,7 @@ struct ProgrammeView: View {
                 .pickerStyle(.segmented)
                 .background(RoundedRectangle(cornerRadius:15).fill(Color(.systemBlue)))
                 .accessibilityIdentifier("programme.dayPicker")
+                .accessibilityElement(children: .contain)
                 .padding(.horizontal)
                 .padding(.vertical, 8)
                 .popoverTip(dayPickerTip, arrowEdge: .top)
