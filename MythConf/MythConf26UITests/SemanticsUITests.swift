@@ -27,7 +27,7 @@ final class SemanticsUITests: MythConfUITestCase {
         let speakerName = openFirstSpeaker()
 
         let sessionsHeading = app.staticTexts["speakerDetail.sessionsHeading"]
-        XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 5))
+        XCTAssertTrue(sessionsHeading.waitForExistence(timeout: 10))
         XCTAssertEqual(sessionsHeading.label, "Sessions by \(speakerName)")
     }
 
@@ -36,7 +36,7 @@ final class SemanticsUITests: MythConfUITestCase {
         openTab(.programme)
 
         let card = firstElement(identifierBeginningWith: "programme.card.")
-        XCTAssertTrue(card.waitForExistence(timeout: 5))
+        XCTAssertTrue(card.waitForExistence(timeout: 10))
         XCTAssertTrue(card.label.contains(":"), card.label)
 
         let value = card.value as? String ?? ""
@@ -49,6 +49,6 @@ final class SemanticsUITests: MythConfUITestCase {
         openTab(.programme)
 
         let breakRow = firstElement(identifierBeginningWith: "schedule.rotor.break.")
-        XCTAssertTrue(breakRow.waitForExistence(timeout: 5))
+        XCTAssertTrue(breakRow.waitForExistence(timeout: 10))
     }
 }

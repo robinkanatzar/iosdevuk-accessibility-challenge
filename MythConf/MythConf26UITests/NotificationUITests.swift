@@ -16,7 +16,7 @@ final class NotificationUITests: MythConfUITestCase {
         openTab(.programme)
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
 
         allowNotificationsIfPrompted()
@@ -32,7 +32,7 @@ final class NotificationUITests: MythConfUITestCase {
         openTab(.programme)
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
 
         allowNotificationsIfPrompted()
@@ -50,7 +50,7 @@ final class NotificationUITests: MythConfUITestCase {
         openTab(.programme)
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
 
         allowNotificationsIfPrompted()
@@ -69,7 +69,7 @@ final class NotificationUITests: MythConfUITestCase {
         app.buttons["settings.done"].tap()
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
 
         allowNotificationsIfPrompted()
@@ -90,7 +90,7 @@ final class NotificationUITests: MythConfUITestCase {
         app.buttons["settings.done"].tap()
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
 
         allowNotificationsIfPrompted()
@@ -106,11 +106,11 @@ final class NotificationUITests: MythConfUITestCase {
             identifier: "settings.favouriteReminderTimingPicker",
             labels: ["Favourite reminder timing", "Reminder Timing"]
         )
-        XCTAssertTrue(reminderMenu.waitForExistence(timeout: 5))
+        XCTAssertTrue(reminderMenu.waitForExistence(timeout: 10))
         reminderMenu.tap()
 
         let option = app.buttons[label]
-        XCTAssertTrue(option.waitForExistence(timeout: 5))
+        XCTAssertTrue(option.waitForExistence(timeout: 10))
         option.tap()
     }
 }

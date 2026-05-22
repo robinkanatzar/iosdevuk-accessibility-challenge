@@ -52,12 +52,11 @@ struct SpeakerRowView: View {
                 .dyslexiaReadingFont(.body, size: 17, weight: .bold)
                 .foregroundStyle(Color(.label))
 
-//            if !speakerSummary.isEmpty && !dynamicTypeSize.isAccessibilitySize {
             if !speakerSummary.isEmpty {
                 Text(speakerSummary)
                     .dyslexiaReadingFont(.body, size: 17)
                     .foregroundStyle(Color(.label))
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }

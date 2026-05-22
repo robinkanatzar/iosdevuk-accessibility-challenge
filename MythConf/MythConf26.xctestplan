@@ -1,0 +1,62 @@
+{
+  "configurations" : [
+    {
+      "id" : "02A7852D-68B6-486A-8A20-8D4CF7232D7D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-TestingDate 841581860",
+        "enabled" : false
+      },
+      {
+        "argument" : "-TestingDate 841582680",
+        "enabled" : false
+      },
+      {
+        "argument" : "-TestingDate 841582200",
+        "enabled" : false
+      },
+      {
+        "argument" : "-TestingDate 841582150",
+        "enabled" : false
+      },
+      {
+        "argument" : "-TestingDate 841582175",
+        "enabled" : false
+      },
+      {
+        "argument" : "-TestingDate 841582460",
+        "enabled" : false
+      },
+      {
+        "argument" : "-TestingDate 841582860",
+        "enabled" : false
+      },
+      {
+        "argument" : "-TestingDate 841646100"
+      }
+    ],
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MythConf26.xcodeproj",
+      "identifier" : "1B2918B52F73EA8B008A369D",
+      "name" : "MythConf26"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:MythConf26.xcodeproj",
+        "identifier" : "C8D617162FAF5EE500CDFC39",
+        "name" : "MythConf26UITests"
+      }
+    }
+  ],
+  "version" : 1
+}

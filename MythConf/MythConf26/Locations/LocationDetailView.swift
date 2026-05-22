@@ -59,6 +59,10 @@ struct LocationDetailView: View {
                     Image(systemName: "ellipsis.circle")
                         .accessibilityHidden(true)
                 }
+                // The menu is hidden from VoiceOver below because its actions are
+                // exposed through the page-level Actions rotor, but XCTest's
+                // accessibility audit still needs a description for the control.
+                .accessibilityLabel("More location actions")
                 // VoiceOver gets this action from the page-level Actions
                 // rotor, so the visible menu does not add a duplicate stop.
                 .accessibilityHiddenFromVoiceOver()

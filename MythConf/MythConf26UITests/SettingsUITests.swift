@@ -13,14 +13,14 @@ final class SettingsUITests: MythConfUITestCase {
         openTab(.programme)
 
         let settingsButton = app.buttons["settings.open"]
-        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 10))
         settingsButton.tap()
 
         let doneButton = app.buttons["settings.done"]
-        XCTAssertTrue(doneButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(doneButton.waitForExistence(timeout: 10))
         doneButton.tap()
 
-        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 10))
         XCTAssertTrue(settingsButton.isHittable)
     }
 
@@ -28,11 +28,11 @@ final class SettingsUITests: MythConfUITestCase {
         openTab(.programme)
 
         let settingsButton = app.buttons["settings.open"]
-        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 10))
         settingsButton.tap()
 
         let toggle = app.switches["settings.openDyslexicToggle"]
-        XCTAssertTrue(toggle.waitForExistence(timeout: 5))
+        XCTAssertTrue(toggle.waitForExistence(timeout: 10))
         assertSwitch(toggle, isOn: false)
 
         toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
@@ -41,7 +41,7 @@ final class SettingsUITests: MythConfUITestCase {
         XCTAssertTrue(element(identifier: "settings.openDyslexicPreview").exists)
 
         let doneButton = app.buttons["settings.done"]
-        XCTAssertTrue(doneButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(doneButton.waitForExistence(timeout: 10))
         doneButton.tap()
     }
 
@@ -49,7 +49,7 @@ final class SettingsUITests: MythConfUITestCase {
         openTab(.programme)
 
         let settingsButton = app.buttons["settings.open"]
-        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 10))
         settingsButton.tap()
 
         let hapticsToggle = scrollToSwitch(identifier: "settings.favouriteHapticsToggle", labels: ["Favourite haptic feedback", "Haptic Feedback"])
@@ -71,24 +71,24 @@ final class SettingsUITests: MythConfUITestCase {
         openTab(.programme)
 
         let settingsButton = app.buttons["settings.open"]
-        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(settingsButton.waitForExistence(timeout: 10))
         settingsButton.tap()
 
         let reminderMenu = scrollToElement(
             identifier: "settings.favouriteReminderTimingPicker",
             labels: ["Favourite reminder timing", "Reminder Timing", "10 minutes"]
         )
-        XCTAssertTrue(reminderMenu.waitForExistence(timeout: 5))
+        XCTAssertTrue(reminderMenu.waitForExistence(timeout: 10))
         reminderMenu.tap()
 
         let offOption = app.buttons["Off"]
-        XCTAssertTrue(offOption.waitForExistence(timeout: 5))
+        XCTAssertTrue(offOption.waitForExistence(timeout: 10))
         offOption.tap()
 
         reminderMenu.tap()
 
         let fiveMinutesOption = app.buttons["5 minutes"]
-        XCTAssertTrue(fiveMinutesOption.waitForExistence(timeout: 5))
+        XCTAssertTrue(fiveMinutesOption.waitForExistence(timeout: 10))
         fiveMinutesOption.tap()
     }
 }

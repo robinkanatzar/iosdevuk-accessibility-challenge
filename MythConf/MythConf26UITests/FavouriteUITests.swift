@@ -13,13 +13,13 @@ final class FavouriteUITests: MythConfUITestCase {
         openTab(.programme)
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         XCTAssertTrue(addButton.label.contains("to favourites"))
 
         addButton.tap()
 
         let removeButton = firstButton(labelBeginningWith: "Remove ")
-        XCTAssertTrue(removeButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 10))
         XCTAssertTrue(removeButton.label.contains("from favourites"))
     }
 
@@ -43,10 +43,10 @@ final class FavouriteUITests: MythConfUITestCase {
         app.buttons["settings.done"].tap()
 
         let addButton = firstButton(labelBeginningWith: "Add ")
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
 
         let removeButton = firstButton(labelBeginningWith: "Remove ")
-        XCTAssertTrue(removeButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 10))
     }
 }

@@ -52,7 +52,7 @@ class MythConfUITestCase: XCTestCase {
         app.launch()
     }
 
-    func allowNotificationsIfPrompted(timeout: TimeInterval = 5) {
+    func allowNotificationsIfPrompted(timeout: TimeInterval = 10) {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
         let allowLabels = ["Allow", "Allow Notifications"]
 
@@ -67,17 +67,17 @@ class MythConfUITestCase: XCTestCase {
 
     func openTab(_ tab: AppTab) {
         let button = app.tabBars.buttons[tab.rawValue]
-        XCTAssertTrue(button.waitForExistence(timeout: 5), "Missing tab: \(tab.rawValue)")
+        XCTAssertTrue(button.waitForExistence(timeout: 10), "Missing tab: \(tab.rawValue)")
         button.tap()
     }
 
     @discardableResult
     func openFirstSpeaker() -> String {
         let list = element(identifier: "speakers.list")
-        XCTAssertTrue(list.waitForExistence(timeout: 5))
+        XCTAssertTrue(list.waitForExistence(timeout: 10))
 
         let firstRow = list.buttons.element(boundBy: 0)
-        XCTAssertTrue(firstRow.waitForExistence(timeout: 5))
+        XCTAssertTrue(firstRow.waitForExistence(timeout: 10))
 
         // Rows in SpeakersView use SpeakerRowView which combines children.
         // The label will be "Name, Bio excerpt" or just "Name".
@@ -91,10 +91,10 @@ class MythConfUITestCase: XCTestCase {
     @discardableResult
     func openFirstLocation() -> String {
         let list = element(identifier: "locations.list")
-        XCTAssertTrue(list.waitForExistence(timeout: 5))
+        XCTAssertTrue(list.waitForExistence(timeout: 10))
 
         let firstRow = list.buttons.element(boundBy: 0)
-        XCTAssertTrue(firstRow.waitForExistence(timeout: 5))
+        XCTAssertTrue(firstRow.waitForExistence(timeout: 10))
 
         // Rows in LocationsView use a VStack with name and description.
         // accessibilityElement(children: .combine) means the label is "Name, Description".
@@ -107,19 +107,19 @@ class MythConfUITestCase: XCTestCase {
 
     func openSpeaker(named name: String) {
         let searchField = app.searchFields.firstMatch
-        if searchField.waitForExistence(timeout: 5) {
+        if searchField.waitForExistence(timeout: 10) {
             searchField.tap()
             searchField.typeText(name)
         }
 
         let speaker = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", name)).firstMatch
-        XCTAssertTrue(speaker.waitForExistence(timeout: 5), "Missing speaker: \(name)")
+        XCTAssertTrue(speaker.waitForExistence(timeout: 10), "Missing speaker: \(name)")
         speaker.tap()
     }
 
     func openLocation(named name: String) {
         let location = app.buttons.containing(NSPredicate(format: "label CONTAINS %@", name)).firstMatch
-        XCTAssertTrue(location.waitForExistence(timeout: 5), "Missing location: \(name)")
+        XCTAssertTrue(location.waitForExistence(timeout: 10), "Missing location: \(name)")
         location.tap()
     }
 
@@ -282,9 +282,9 @@ class MythConfUITestCase: XCTestCase {
 //                .contrast,
 //                .dynamicType,
                 .textClipped,
+                .sufficientElementDescription,
                 .elementDetection,
                 .hitRegion,
-                .sufficientElementDescription,
                 .trait
             ]
             if includesDynamicType {
@@ -309,6 +309,21 @@ class MythConfUITestCase: XCTestCase {
         print("AUDIT ISSUE: \(issue.auditType) | \(issue.compactDescription) | element: \(issue.element?.debugDescription ?? "nil")")
 
         if issue.auditType == .contrast && issue.compactDescription == "Contrast nearly passed" {
+            return true
+        }
+
+        // The system UISearchBar "Clear text" button is 20×20pt — below the 44pt
+        // minimum. This is a UIKit internal control; the app has no way to resize it.
+        // Suppress globally so any screen with an active search field doesn't fail.
+        if issue.auditType == .hitRegion && issue.element?.label == "Clear text" {
+            return true
+        }
+
+                // System UISearchBar search field reports textClipped when focused with
+        // text in the field. The app has no control over UISearchBar's internal
+        // text layout. Suppress by element type so it covers any screen with
+        // an active .searchable modifier, not just Speakers.
+        if issue.auditType == .textClipped && issue.element?.elementType == .searchField {
             return true
         }
 

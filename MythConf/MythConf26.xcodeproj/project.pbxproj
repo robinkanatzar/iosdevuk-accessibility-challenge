@@ -39,6 +39,7 @@
 /* Begin PBXFileReference section */
 		1B2918B62F73EA8B008A369D /* MythConf26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MythConf26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2919B72F74454E008A369D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C85CF9C52FC079EA003A8B60 /* MythConf26.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MythConf26.xctestplan; sourceTree = "<group>"; };
 		C8D617172FAF5EE500CDFC39 /* MythConf26UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MythConf26UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,6 +94,7 @@
 		1B2918AD2F73EA8B008A369D = {
 			isa = PBXGroup;
 			children = (
+				C85CF9C52FC079EA003A8B60 /* MythConf26.xctestplan */,
 				1B2918B82F73EA8B008A369D /* MythConf26 */,
 				C8D617182FAF5EE500CDFC39 /* MythConf26UITests */,
 				1B2919B42F74454E008A369D /* Frameworks */,
@@ -497,7 +499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -517,7 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cjp.com.MythConf26UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
